@@ -1,114 +1,105 @@
-import { SnapConfig } from "@chainsafe/filsnap-types";
-import chai, { expect } from "chai";
-import sinonChai from "sinon-chai";
-import { filecoinTestnetConfiguration } from "../../../src/configuration/predefined";
-import { EmptyMetamaskState } from "../../../src/interfaces";
-import { configure } from "../../../src/rpc/configure";
-import { mockSnapProvider } from "../wallet.mock.test";
+import { expect } from '../../utils.js'
+import { configure } from '../../../src/rpc/configure.js'
+import { mockSnapProvider } from '../wallet.mock.test.js'
+import * as Constants from '../../../src/constants.js'
 
-chai.use(sinonChai);
-
-describe("Test rpc handler function: configure", function () {
-  const walletStub = mockSnapProvider();
+describe('Test rpc handler function: configure', function () {
+  const walletStub = mockSnapProvider()
 
   afterEach(function () {
-    walletStub.reset();
-  });
+    walletStub.reset()
+  })
 
-  it("should set predefined filecoin configuration based on network", async function () {
+  it('should set predefined filecoin configuration based on network', async function () {
+    this.retries(3)
     walletStub.rpcStubs.snap_manageState
       .withArgs({ operation: 'get' })
-      .resolves(EmptyMetamaskState());
+      .resolves(Constants.initialState)
 
     walletStub.rpcStubs.snap_manageState
-      .withArgs(
-        {
-          newState: {
-            filecoin: { config: filecoinTestnetConfiguration, messages: [] },
-          }, operation: 'update'
-        }
-      )
-      .resolves();
+      .withArgs({
+        newState: {
+          filecoin: { config: Constants.testnetConfig, messages: [] },
+        },
+        operation: 'update',
+      })
+      .resolves()
 
-    const result = await configure(walletStub, "t");
+    const result = await configure(walletStub, 't')
 
-    expect(result.snapConfig).to.be.deep.eq(filecoinTestnetConfiguration);
+    expect(result.snapConfig).to.be.deep.eq(Constants.testnetConfig)
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
-          filecoin: { config: filecoinTestnetConfiguration, messages: [] },
-        }, operation: 'update'
+          filecoin: { config: Constants.testnetConfig, messages: [] },
+        },
+        operation: 'update',
       }
-    );
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice;
-  });
+    )
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice()
+  })
 
-  it("should set predefined filecoin configuration with additional property override", async function () {
-    const customConfiguration = filecoinTestnetConfiguration;
-    customConfiguration.unit.symbol = "xFIL";
+  it('should set predefined filecoin configuration with additional property override', async function () {
+    this.retries(3)
+    const customConfiguration = Constants.testnetConfig
+    customConfiguration.unit = {
+      ...customConfiguration.unit,
+      symbol: 'xFIL',
+      decimals: 6,
+    }
 
     walletStub.rpcStubs.snap_manageState
       .withArgs({ operation: 'get' })
-      .resolves(EmptyMetamaskState());
+      .resolves(Constants.initialState)
 
     walletStub.rpcStubs.snap_manageState
-      .withArgs(
-        {
-          newState: {
-            filecoin: { config: customConfiguration, messages: [] },
-          }, operation: 'update'
-        }
-      )
-      .resolves();
+      .withArgs({
+        newState: {
+          filecoin: { config: customConfiguration, messages: [] },
+        },
+        operation: 'update',
+      })
+      .resolves()
 
-    const result = await configure(walletStub, "t", {
-      unit: { symbol: "xFIL" },
-    } as SnapConfig);
+    const result = await configure(walletStub, 't', {
+      unit: { symbol: 'xFIL', decimals: 6 },
+    })
 
-    expect(result.snapConfig).to.be.deep.eq(customConfiguration);
+    expect(result.snapConfig).to.be.deep.eq(customConfiguration)
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
           filecoin: { config: customConfiguration, messages: [] },
-        }, operation: 'update'
+        },
+        operation: 'update',
       }
-    );
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice;
-  });
+    )
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice()
+  })
 
-  it("should throw error if wrong derivation path on mainet", async function () {
+  it('should throw error if wrong derivation path on mainet', async function () {
+    this.retries(3)
     walletStub.rpcStubs.snap_manageState
       .withArgs({ operation: 'get' })
-      .resolves(EmptyMetamaskState());
+      .resolves(Constants.initialState)
 
-    let err = null;
-    try {
-      await configure(walletStub, "f", {
+    await expect(
+      configure(walletStub, 'f', {
         derivationPath: "m/44'/1'/0'/0/0",
-      } as SnapConfig);
-    } catch (e) {
-      err = e;
-    }
+      })
+    ).rejectedWith(Error, 'Wrong CoinType in derivation path')
+  })
 
-    expect(err).to.be.an("Error");
-    expect(err.message).to.be.equal("Wrong CoinType in derivation path");
-  });
-
-  it("should throw error if wrong derivation path on testnet", async function () {
+  it('should throw error if wrong derivation path on testnet', async function () {
+    this.retries(3)
     walletStub.rpcStubs.snap_manageState
       .withArgs({ operation: 'get' })
-      .resolves(EmptyMetamaskState());
+      .resolves(Constants.initialState)
 
-    let err = null;
-    try {
-      await configure(walletStub, "t", {
+    await expect(
+      configure(walletStub, 't', {
         derivationPath: "m/44'/461'/0'/0/0",
-      } as SnapConfig);
-    } catch (e) {
-      err = e;
-    }
-
-    expect(err).to.be.an("Error");
-    expect(err.message).to.be.equal("Wrong CoinType in derivation path");
-  });
-});
+      })
+    ).rejectedWith(Error, 'Wrong CoinType in derivation path')
+  })
+})

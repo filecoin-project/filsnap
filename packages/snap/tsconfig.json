@@ -1,17 +1,19 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true,
-    "outDir": "./build",
-    "typeRoots": [
-      "./node_modules/@types",
-      "../../node_modules/@types",
-      "./@types"
-    ]
+    "outDir": "dist"
   },
-  "include": [
-    "src/**/*.ts",
-    "test/**/*ts"
-  ],
-  "files": ["../../node_modules/@metamask/snaps-types/global.d.ts"],
+  "include": ["src", "scripts", "test", "package.json"],
+  "exclude": ["node_modules", "dist", "out"],
+  "typedocOptions": {
+    "entryPoints": ["src/index.ts"],
+    "includeVersion": true,
+    "excludeExternals": true,
+    "internalModule": "<internal>"
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "experimentalResolver": true
+  }
 }

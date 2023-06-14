@@ -1,13 +1,20 @@
-import { MessageStatus } from "@chainsafe/filsnap-types";
-import { SnapsGlobalObject } from "@metamask/snaps-types";
-import { MetamaskState } from "../interfaces";
+import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import * as Schemas from '../schemas.js'
 
+/**
+ * Get the messages from the state
+ *
+ *  @param snap - The snap itself
+ */
 export async function getMessages(
   snap: SnapsGlobalObject
-): Promise<MessageStatus[]> {
-  const state = (await snap.request({
-    method: "snap_manageState",
-    params: { operation: "get" },
-  })) as MetamaskState;
-  return state?.filecoin?.messages;
+): Promise<Schemas.MessageStatus[]> {
+  const _state = await snap.request({
+    method: 'snap_manageState',
+    params: { operation: 'get' },
+  })
+
+  const state = Schemas.metamaskState.parse(_state)
+
+  return state.filecoin.messages
 }

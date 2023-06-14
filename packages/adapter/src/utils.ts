@@ -1,30 +1,30 @@
 export function hasMetaMask(): boolean {
   if (!window.ethereum) {
-    return false;
+    return false
   }
-  return window.ethereum.isMetaMask;
+  return window.ethereum.isMetaMask
 }
 
 export type GetSnapsResponse = {
   [k: string]: {
-    permissionName?: string;
-    id?: string;
-    version?: string;
-    initialPermissions?: { [k: string]: unknown };
-  };
-};
+    permissionName?: string
+    id?: string
+    version?: string
+    initialPermissions?: { [k: string]: unknown }
+  }
+}
 async function getWalletSnaps(): Promise<GetSnapsResponse> {
   return await window.ethereum.request({
-    method: "wallet_getSnaps",
-  });
+    method: 'wallet_getSnaps',
+  })
 }
 
 export async function isMetamaskSnapsSupported(): Promise<boolean> {
   try {
-    await getWalletSnaps();
-    return true;
+    await getWalletSnaps()
+    return true
   } catch (e) {
-    return false;
+    return false
   }
 }
 
@@ -36,15 +36,15 @@ export async function isSnapInstalled(
   snapOrigin: string,
   version?: string
 ): Promise<boolean> {
-  console.log(await getWalletSnaps());
+  console.log(await getWalletSnaps())
   try {
     return !!Object.values(await getWalletSnaps()).find(
       (permission) =>
         permission.id === snapOrigin &&
         (!version || permission.version === version)
-    );
+    )
   } catch (e) {
-    console.log("Failed to obtain installed snaps", e);
-    return false;
+    console.log('Failed to obtain installed snaps', e)
+    return false
   }
 }

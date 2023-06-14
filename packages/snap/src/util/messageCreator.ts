@@ -1,9 +1,7 @@
 interface Message {
-  message: string;
-  value: unknown | undefined;
+  message: string
+  value: unknown | undefined
 }
 
 export const messageCreator = (messages: Message[]): string =>
-  messages
-    .map(({ message, value }) => message + " " + String(value))
-    .join("\n");
+  messages.map(({ message, value }) => message + ' ' + String(value)).join('\n')

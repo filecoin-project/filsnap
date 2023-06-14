@@ -1,21 +1,13 @@
-import { SnapConfig } from "@chainsafe/filsnap-types";
-import {
-  hasMetaMask,
-  isMetamaskSnapsSupported,
-  isSnapInstalled,
-} from "./utils";
-import { MetamaskFilecoinSnap } from "./snap";
+import { SnapConfig } from '@chainsafe/filsnap-types'
+import { hasMetaMask, isMetamaskSnapsSupported, isSnapInstalled } from './utils'
+import { MetamaskFilecoinSnap } from './snap'
 
-const defaultSnapOrigin = "npm:@chainsafe/polkadot-snap";
+const defaultSnapOrigin = 'npm:@chainsafe/polkadot-snap'
 
-export { MetamaskFilecoinSnap } from "./snap";
-export {
-  hasMetaMask,
-  isMetamaskSnapsSupported,
-  isSnapInstalled,
-} from "./utils";
+export { MetamaskFilecoinSnap } from './snap'
+export { hasMetaMask, isMetamaskSnapsSupported, isSnapInstalled } from './utils'
 
-export type SnapInstallationParamNames = "version" | string;
+export type SnapInstallationParamNames = 'version' | string
 
 /**
  * Install and enable Filecoin snap
@@ -35,37 +27,37 @@ export async function enableFilecoinSnap(
   snapOrigin?: string,
   snapInstallationParams: Record<SnapInstallationParamNames, unknown> = {}
 ): Promise<MetamaskFilecoinSnap> {
-  const snapId = snapOrigin ?? defaultSnapOrigin;
+  const snapId = snapOrigin ?? defaultSnapOrigin
 
   // check all conditions
   if (!hasMetaMask()) {
-    throw new Error("Metamask is not installed");
+    throw new Error('Metamask is not installed')
   }
   if (!(await isMetamaskSnapsSupported())) {
-    throw new Error("Current Metamask version doesn't support snaps");
+    throw new Error("Current Metamask version doesn't support snaps")
   }
   if (!config.network) {
-    throw new Error("Configuration must at least define network type");
+    throw new Error('Configuration must at least define network type')
   }
 
-  const isInstalled = await isSnapInstalled(snapId);
+  const isInstalled = await isSnapInstalled(snapId)
 
   if (!isInstalled) {
     // // enable snap
     await window.ethereum.request({
-      method: "wallet_requestSnaps",
+      method: 'wallet_requestSnaps',
       params: {
         [snapId]: { ...snapInstallationParams },
       },
-    });
+    })
   }
 
   //await unlockMetamask();
 
   // create snap describer
-  const snap = new MetamaskFilecoinSnap(snapOrigin || defaultSnapOrigin);
+  const snap = new MetamaskFilecoinSnap(snapOrigin || defaultSnapOrigin)
   // set initial configuration
-  await (await snap.getFilecoinSnapApi()).configure(config);
+  await (await snap.getFilecoinSnapApi()).configure(config)
   // return snap object
-  return snap;
+  return snap
 }
