@@ -1,121 +1,123 @@
-import { Message, MessageStatus } from "@chainsafe/filsnap-types";
-import chai, { expect } from "chai";
-import sinonChai from "sinon-chai";
-import { updateMessageInState } from "../../../src/filecoin/message";
-import { testAddress } from "../rpc/keyPairTestConstants";
-import { mockSnapProvider } from "../wallet.mock.test";
+import { type Message, type MessageStatus } from '../../../src/types'
+import { expect } from '../../utils'
+import * as Constants from '../../../src/constants'
+import { updateMessageInState } from '../../../src/filecoin/message'
+import { testAddress } from '../rpc/keyPairTestConstants'
+import { mockSnapProvider } from '../wallet-mock'
 
-chai.use(sinonChai);
-
-describe("Test saving transactions in state", function () {
-  const walletStub = mockSnapProvider();
+describe('Test saving transactions in state', function () {
+  const walletStub = mockSnapProvider()
 
   const message = {
-    cid: "a1b2c3ee",
+    cid: 'a1b2c3ee',
     message: {
       from: testAddress,
-      gasfeecap: "10",
+      gasfeecap: '10',
       gaslimit: 1000,
-      gaspremium: "10",
+      gaspremium: '10',
       method: 0,
       nonce: 1,
       to: testAddress,
-      value: "100",
-    } as Message,
-  } as MessageStatus;
+      value: '100',
+    } satisfies Message,
+  } satisfies MessageStatus
 
   afterEach(function () {
-    walletStub.reset();
-  });
+    walletStub.reset()
+  })
 
-  it("should add transaction to state if empty state", async function () {
+  it('should add transaction to state if empty state', async function () {
     walletStub.rpcStubs.snap_manageState
       .withArgs({ operation: 'get' })
-      .resolves({ filecoin: { config: { network: "f" }, messages: [] } });
+      .resolves({ filecoin: { config: Constants.mainnetConfig, messages: [] } })
 
     walletStub.rpcStubs.snap_manageState
-      .withArgs(
-        {
-          newState: {
-            filecoin: { config: { network: "f" }, messages: [message] },
-          }, operation: 'update'
-        }
-      )
-      .resolves();
+      .withArgs({
+        newState: {
+          filecoin: { config: Constants.mainnetConfig, messages: [message] },
+        },
+        operation: 'update',
+      })
+      .resolves()
 
-    await updateMessageInState(walletStub, message);
+    await updateMessageInState(walletStub, message)
 
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
-          filecoin: { config: { network: "f" }, messages: [message] },
-        }, operation: 'update'
+          filecoin: { config: Constants.mainnetConfig, messages: [message] },
+        },
+        operation: 'update',
       }
-    );
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice;
-  });
+    )
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice()
+  })
 
-  it("should add transaction to state if same hash transaction is not saved", async function () {
-    const differentTx = { ...message, cid: "abc123" };
-
-    walletStub.rpcStubs.snap_manageState.withArgs({ operation: 'get' }).resolves({
-      filecoin: { config: { network: "f" }, messages: [differentTx] },
-    });
+  it('should add transaction to state if same hash transaction is not saved', async function () {
+    const differentTx = { ...message, cid: 'abc123' }
 
     walletStub.rpcStubs.snap_manageState
-      .withArgs(
-        {
-          newState: {
-            filecoin: {
-              config: { network: "f" },
-              messages: [differentTx, message],
-            },
-          }, operation: 'update'
-        }
-      )
-      .resolves();
+      .withArgs({ operation: 'get' })
+      .resolves({
+        filecoin: { config: Constants.mainnetConfig, messages: [differentTx] },
+      })
 
-    await updateMessageInState(walletStub, message);
+    walletStub.rpcStubs.snap_manageState
+      .withArgs({
+        newState: {
+          filecoin: {
+            config: Constants.mainnetConfig,
+            messages: [differentTx, message],
+          },
+        },
+        operation: 'update',
+      })
+      .resolves()
+
+    await updateMessageInState(walletStub, message)
 
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
           filecoin: {
-            config: { network: "f" },
+            config: Constants.mainnetConfig,
             messages: [differentTx, message],
           },
-        }, operation: 'update'
+        },
+        operation: 'update',
       }
-    );
-  });
+    )
+  })
 
-  it("should update transaction if same hash transaction already in state", async function () {
-    const updatedTx = { ...message };
-    updatedTx.message.nonce = 2;
-
-    walletStub.rpcStubs.snap_manageState.withArgs({ operation: 'get' }).resolves({
-      filecoin: { config: { network: "f" }, messages: [message] },
-    });
+  it('should update transaction if same hash transaction already in state', async function () {
+    const updatedTx = { ...message }
+    updatedTx.message.nonce = 2
 
     walletStub.rpcStubs.snap_manageState
-      .withArgs(
-        {
-          newState: {
-            filecoin: { config: { network: "f" }, messages: [updatedTx] },
-          }, operation: 'update'
-        }
-      )
-      .resolves();
+      .withArgs({ operation: 'get' })
+      .resolves({
+        filecoin: { config: Constants.mainnetConfig, messages: [message] },
+      })
 
-    await updateMessageInState(walletStub, updatedTx);
+    walletStub.rpcStubs.snap_manageState
+      .withArgs({
+        newState: {
+          filecoin: { config: Constants.mainnetConfig, messages: [updatedTx] },
+        },
+        operation: 'update',
+      })
+      .resolves()
 
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice;
+    await updateMessageInState(walletStub, updatedTx)
+
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledTwice()
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
-          filecoin: { config: { network: "f" }, messages: [updatedTx] },
-        }, operation: 'update'
+          filecoin: { config: Constants.mainnetConfig, messages: [updatedTx] },
+        },
+        operation: 'update',
       }
-    );
-  });
-});
+    )
+  })
+})

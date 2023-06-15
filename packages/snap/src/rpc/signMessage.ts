@@ -1,45 +1,53 @@
-import {
+import type {
+  Message,
+  SignedMessage,
   MessageRequest,
   SignMessageResponse,
   SignRawMessageResponse,
-} from "@chainsafe/filsnap-types";
-import { FilecoinNumber } from "@glif/filecoin-number/dist";
-import { SnapsGlobalObject } from "@metamask/snaps-types";
+} from '../types'
+import { FilecoinNumber } from '@glif/filecoin-number/dist'
+import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import {
-  Message,
-  SignedMessage,
   transactionSign,
   transactionSignRaw,
-} from "@zondax/filecoin-signing-tools/js";
-import { getKeyPair } from "../filecoin/account";
-import { LotusRpcApi } from "../filecoin/types";
-import { showConfirmationDialog } from "../util/confirmation";
-import { messageCreator } from "../util/messageCreator";
+  // @ts-expect-error - no types
+} from '@zondax/filecoin-signing-tools/js'
+import { getKeyPair } from '../filecoin/account'
+import { type LotusRpcApi } from '../filecoin/types'
+import { showConfirmationDialog } from '../util/confirmation'
+import { messageCreator } from '../util/messageCreator'
 
+/**
+ * Sign a message
+ *
+ * @param snap - The snap itself
+ * @param api - The Lotus RPC API
+ * @param messageRequest - The message request
+ */
 export async function signMessage(
   snap: SnapsGlobalObject,
   api: LotusRpcApi,
   messageRequest: MessageRequest
 ): Promise<SignMessageResponse> {
   try {
-    const keypair = await getKeyPair(snap);
+    const keypair = await getKeyPair(snap)
     // extract gas params
     const gl =
-      messageRequest.gaslimit && messageRequest.gaslimit !== 0
+      messageRequest.gaslimit != null && messageRequest.gaslimit !== 0
         ? messageRequest.gaslimit
-        : 0;
+        : 0
     const gp =
-      messageRequest.gaspremium && messageRequest.gaspremium !== "0"
+      messageRequest.gaspremium != null && messageRequest.gaspremium !== '0'
         ? messageRequest.gaspremium
-        : "0";
+        : '0'
     const gfc =
-      messageRequest.gasfeecap && messageRequest.gasfeecap !== "0"
+      messageRequest.gasfeecap != null && messageRequest.gasfeecap !== '0'
         ? messageRequest.gasfeecap
-        : "0";
+        : '0'
     const nonce =
-      messageRequest.nonce ?? Number(await api.mpoolGetNonce(keypair.address));
-    const params = messageRequest.params || "";
-    const method = messageRequest.method || 0;
+      messageRequest.nonce ?? Number(await api.mpoolGetNonce(keypair.address))
+    const params = messageRequest.params ?? ''
+    const method = messageRequest.method ?? 0
 
     // create message object
     const message: Message = {
@@ -52,21 +60,21 @@ export async function signMessage(
       params,
       to: messageRequest.to,
       value: messageRequest.value,
-    };
+    }
     // estimate gas usage if gas params not provided
     if (
       message.gaslimit === 0 &&
-      message.gasfeecap === "0" &&
-      message.gaspremium === "0"
+      message.gasfeecap === '0' &&
+      message.gaspremium === '0'
     ) {
       const messageEstimate = await api.gasEstimateMessageGas(
         message,
-        { MaxFee: "0" },
+        { MaxFee: '0' },
         null
-      );
-      message.gaslimit = messageEstimate.GasLimit;
-      message.gaspremium = messageEstimate.GasPremium;
-      message.gasfeecap = messageEstimate.GasFeeCap;
+      )
+      message.gaslimit = messageEstimate.GasLimit
+      message.gaspremium = messageEstimate.GasPremium
+      message.gasfeecap = messageEstimate.GasFeeCap
     }
 
     // show confirmation
@@ -74,52 +82,68 @@ export async function signMessage(
       description: `It will be signed with address: ${message.from}`,
       prompt: `Do you want to sign this message?`,
       textAreaContent: messageCreator([
-        { message: "to:", value: message.to },
-        { message: "from:", value: message.from },
+        { message: 'to:', value: message.to },
+        { message: 'from:', value: message.from },
         {
-          message: "value:",
-          value: `${new FilecoinNumber(message.value, "attofil").toFil()} FIL`,
+          message: 'value:',
+          value: `${new FilecoinNumber(message.value, 'attofil').toFil()} FIL`,
         },
-        { message: "method:", value: message.method },
-        { message: "params:", value: message.params },
-        { message: "gas limit:", value: `${message.gaslimit} aFIL` },
-        { message: "gas fee cap:", value: `${message.gasfeecap} aFIL` },
-        { message: "gas premium:", value: `${message.gaspremium} aFIL` },
+        { message: 'method:', value: message.method },
+        { message: 'params:', value: message.params },
+        { message: 'gas limit:', value: `${message.gaslimit} aFIL` },
+        { message: 'gas fee cap:', value: `${message.gasfeecap} aFIL` },
+        { message: 'gas premium:', value: `${message.gaspremium} aFIL` },
       ]),
-    });
+    })
 
-    let sig: SignedMessage = null;
+    let sig: SignedMessage
     if (confirmation) {
-      sig = transactionSign(message, keypair.privateKey);
+      sig = transactionSign(message, keypair.privateKey)
+      return { confirmed: confirmation, error: undefined, signedMessage: sig }
     }
-
-    return { confirmed: confirmation, error: null, signedMessage: sig };
-  } catch (e: unknown) {
-    return { confirmed: false, error: e as Error, signedMessage: null };
+    return {
+      confirmed: confirmation,
+      error: new Error('Confirmation failed.'),
+      signedMessage: undefined,
+    }
+  } catch (error: unknown) {
+    return { confirmed: false, error: error as Error, signedMessage: undefined }
   }
 }
 
+/**
+ * Sign a raw message
+ *
+ * @param snap - The snap itself
+ * @param rawMessage - The raw message
+ */
 export async function signMessageRaw(
   snap: SnapsGlobalObject,
   rawMessage: string
 ): Promise<SignRawMessageResponse> {
   try {
-    const keypair = await getKeyPair(snap);
+    const keypair = await getKeyPair(snap)
+
     const confirmation = await showConfirmationDialog(snap, {
       description: `It will be signed with address: ${keypair.address}`,
       prompt: `Do you want to sign this message?`,
       textAreaContent: rawMessage,
-    });
+    })
 
-    let sig: string = null;
+    let sig: string
     if (confirmation) {
       sig = transactionSignRaw(rawMessage, keypair.privateKey).toString(
-        "base64"
-      );
+        'base64'
+      )
+      return { confirmed: confirmation, error: undefined, signature: sig }
     }
 
-    return { confirmed: confirmation, error: null, signature: sig };
-  } catch (e: unknown) {
-    return { confirmed: false, error: e as Error, signature: null };
+    return {
+      confirmed: false,
+      error: new Error('Confirmation failed.'),
+      signature: undefined,
+    }
+  } catch (error: unknown) {
+    return { confirmed: false, error: error as Error, signature: undefined }
   }
 }

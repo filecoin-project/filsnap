@@ -1,13 +1,9 @@
-import {
-  MessageRequest,
-  SignedMessage,
-  SnapConfig,
-} from "@chainsafe/filsnap-types";
+import type { MessageRequest, SignedMessage, SnapConfig } from '../types'
 
-type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
+type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
 
 export interface ConfigureRequest {
-  configuration: WithRequired<SnapConfig, "network">;
+  configuration: WithRequired<SnapConfig, 'network'>
 }
 
 export function isValidConfigureRequest(
@@ -16,13 +12,13 @@ export function isValidConfigureRequest(
   if (
     !(
       params != null &&
-      typeof params == "object" &&
-      "configuration" in params &&
-      // @ts-expect-error
-      "network" in params.configuration
+      typeof params === 'object' &&
+      'configuration' in params &&
+      // @ts-expect-error - validation
+      'network' in params.configuration
     )
   ) {
-    throw new Error("Invalid configure request");
+    throw new Error('Invalid configure request')
   }
 }
 
@@ -32,15 +28,14 @@ export function isValidSignRequest(
   if (
     !(
       params != null &&
-      typeof params == "object" &&
-      "message" in params &&
-      // @ts-expect-error
-      "to" in params.message &&
-      // @ts-expect-error
-      "value" in params.message
+      typeof params === 'object' &&
+      'message' in params &&
+      // @ts-expect-error - validation
+      'to' in params.message &&
+      'value' in params.message
     )
   ) {
-    throw new Error("Invalid sign request");
+    throw new Error('Invalid sign request')
   }
 }
 
@@ -50,15 +45,14 @@ export function isValidSendRequest(
   if (
     !(
       params != null &&
-      typeof params == "object" &&
-      "signedMessage" in params &&
-      // @ts-expect-error
-      "message" in params.signedMessage &&
-      // @ts-expect-error
-      "signature" in params.signedMessage
+      typeof params === 'object' &&
+      'signedMessage' in params &&
+      // @ts-expect-error - validation
+      'message' in params.signedMessage &&
+      'signature' in params.signedMessage
     )
   ) {
-    throw new Error("Invalid send request");
+    throw new Error('Invalid send request')
   }
 }
 
@@ -68,14 +62,13 @@ export function isValidEstimateGasRequest(
   if (
     !(
       params != null &&
-      typeof params == "object" &&
-      "message" in params &&
-      // @ts-expect-error
-      "to" in params.message &&
-      // @ts-expect-error
-      "value" in params.message
+      typeof params === 'object' &&
+      'message' in params &&
+      // @ts-expect-error - validation
+      'to' in params.message &&
+      'value' in params.message
     )
   ) {
-    throw new Error("Invalid send request");
+    throw new Error('Invalid send request')
   }
 }

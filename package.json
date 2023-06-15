@@ -1,9 +1,9 @@
 {
   "name": "root",
   "private": true,
-  "author": "ChainSafe <info@chainsafe.io>",
+  "author": "Protocol Labs, Inc.",
   "license": "(Apache-2.0 AND MIT)",
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "pnpm@8.6.1",
   "workspaces": [
     "packages/*"
   ],
@@ -11,33 +11,30 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "manifest": "yarn workspace @chainsafe/filsnap manifest",
-    "build:snap": "yarn workspace @chainsafe/filsnap build",
-    "build:adapter": "yarn workspace @chainsafe/filsnap-adapter build",
-    "start:snap": "yarn workspace @chainsafe/filsnap serve",
-    "start:example": "REACT_APP_SNAP=local yarn workspace example start",
-    "predemo": "yarn run build:snap && yarn run build:adapter",
-    "build": "yarn workspaces foreach -vpt run build",
-    "test": "yarn workspaces foreach -vp run test",
-    "lint": "yarn workspaces foreach -vp run lint",
-    "lint:style:fix": "yarn workspaces foreach -vp run lint:style:fix",
-    "demo": "yarn run demo:local",
-    "demo:local": "concurrently  --raw --kill-others \"yarn run start:snap\" \"yarn run start:example\""
+    "format": "prettier --write '**/*.{js,ts,yml,json}' --ignore-path .gitignore",
+    "format:check": "prettier --check '**/*.{js,ts,yml,json}' --ignore-path .gitignore",
+    "clean": "rm -rf docs node_modules pnpm-lock.yaml packages/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules} examples/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules}",
+    "build": "pnpm -r --if-present run build",
+    "lint": "pnpm -r --if-present run lint",
+    "test": "pnpm -r --if-present run test",
+    "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports"
   },
   "devDependencies": {
-    "@chainsafe/eslint-config": "^1.0.0",
-    "@rushstack/eslint-patch": "^1.1.4",
-    "@types/eslint": "^7",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^12.12.35",
-    "concurrently": "^7.1.0",
-    "eslint": "7",
-    "mocha": "^10.0.0",
-    "ts-node": "^10.8.0",
-    "typescript": "4.6.4"
+    "depcheck": "^1.4.3",
+    "hd-scripts": "^7.0.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
+    "simple-git-hooks": "^2.8.1",
+    "typedoc": "^0.24.8",
+    "typedoc-plugin-missing-exports": "^2.0.0",
+    "typescript": "5.1.3"
   },
-  "resolutions": {
-    "web3/bignumber.js": "2.0.8",
-    "ethereumjs-abi": "0.6.8"
-  }
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,yml,json}": "prettier --write",
+    "*.js": "eslint --fix"
+  },
+  "prettier": "hd-scripts/prettier.config.js"
 }

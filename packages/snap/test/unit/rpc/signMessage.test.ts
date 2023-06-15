@@ -1,172 +1,198 @@
-import chai, { expect } from "chai";
-import sinonChai from "sinon-chai";
-import { MessageRequest } from "@chainsafe/filsnap-types";
-import { Message } from "@zondax/filecoin-signing-tools/js";
-import { signMessage } from "../../../src/rpc/signMessage";
-import { LotusApiMock } from "../lotusapi.mock.test";
-import { mockSnapProvider } from "../wallet.mock.test";
+import { expect } from '../../utils'
+import { signMessage } from '../../../src/rpc/signMessage'
+import type { Message, MessageRequest } from '../../../src/types'
+import { LotusApiMock } from '../lotusapi-mock'
+import { mockSnapProvider } from '../wallet-mock'
 
-chai.use(sinonChai);
-
-describe("Test rpc handler function: signMessage", function () {
-  const walletStub = mockSnapProvider();
-  const apiStub = new LotusApiMock();
+describe('Test rpc handler function: signMessage', function () {
+  const walletStub = mockSnapProvider()
+  const apiStub = new LotusApiMock()
 
   const messageRequest: MessageRequest = {
-    to: "t12flyjpedjjqlrr2dmlnrtbh62qav3b3h7o7lohy",
-    value: "5000000000000000",
-  };
+    to: 't12flyjpedjjqlrr2dmlnrtbh62qav3b3h7o7lohy',
+    value: '5000000000000000',
+  }
 
   const fullMessage: Message = {
     ...messageRequest,
-    from: "f1ekszptik2ognlx24xz7zubejtw3cyidv4t4ibyy",
-    gasfeecap: "10",
+    from: 'f1ekszptik2ognlx24xz7zubejtw3cyidv4t4ibyy',
+    gasfeecap: '10',
     gaslimit: 1000,
-    gaspremium: "10",
+    gaspremium: '10',
     method: 0,
     nonce: 0,
-    params: "",
-  };
+    params: '',
+  }
 
   const paramsMessage: Message = {
     ...messageRequest,
-    from: "f1ekszptik2ognlx24xz7zubejtw3cyidv4t4ibyy",
-    gasfeecap: "10",
+    from: 'f1ekszptik2ognlx24xz7zubejtw3cyidv4t4ibyy',
+    gasfeecap: '10',
     gaslimit: 1000,
-    gaspremium: "10",
+    gaspremium: '10',
     method: 0,
     nonce: 0,
-    params: "bugugugu",
-  };
+    params: 'bugugugu',
+  }
 
   afterEach(function () {
-    walletStub.reset();
-    apiStub.reset();
-  });
+    walletStub.reset()
+    apiStub.reset()
+  })
 
-  it("should successfully sign valid message without gas params on positive prompt", async function () {
-    walletStub.rpcStubs.snap_confirm.resolves(true);
-    walletStub.prepareFoKeyPair();
+  it('should successfully sign valid message without gas params on positive prompt', async function () {
+    walletStub.rpcStubs.snap_dialog.resolves(true)
+    walletStub.prepareFoKeyPair()
 
-    apiStub.mpoolGetNonce.returns("0");
+    apiStub.mpoolGetNonce.returns('0')
     apiStub.gasEstimateMessageGas.returns({
-      GasPremium: "10",
-      GasFeeCap: "10",
+      GasPremium: '10',
+      GasFeeCap: '10',
       GasLimit: 1000,
-    });
+    })
 
-    const response = await signMessage(walletStub, apiStub, messageRequest);
+    const response = await signMessage(walletStub, apiStub, messageRequest)
 
-    expect(walletStub.rpcStubs.snap_confirm).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce;
-    expect(apiStub.mpoolGetNonce).to.have.been.calledOnce;
-    expect(apiStub.gasEstimateMessageGas).to.have.been.calledOnce;
-    expect(response.signedMessage.message).to.be.deep.eq(fullMessage);
-    expect(response.signedMessage.signature.data).to.not.be.empty;
-    expect(response.signedMessage.signature.type).to.be.eq(1);
-  });
+    expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
+    expect(apiStub.mpoolGetNonce).to.have.been.calledOnce()
+    expect(apiStub.gasEstimateMessageGas).to.have.been.calledOnce()
 
-  it("should successfully sign valid message with gas params on positive prompt", async function () {
-    walletStub.rpcStubs.snap_confirm.resolves(true);
-    walletStub.prepareFoKeyPair();
+    expect(response).to.containSubset({
+      confirmed: true,
+      error: undefined,
+      signedMessage: {
+        message: fullMessage,
+        signature: {
+          type: 1,
+          data: (expected: string) => typeof expected === 'string',
+        },
+      },
+    })
+  })
 
-    apiStub.mpoolGetNonce.returns("0");
+  it('should successfully sign valid message with gas params on positive prompt', async function () {
+    walletStub.rpcStubs.snap_dialog.resolves(true)
+    walletStub.prepareFoKeyPair()
+
+    apiStub.mpoolGetNonce.returns('0')
 
     const messageRequestWithGasParams: MessageRequest = {
       ...messageRequest,
-      gasfeecap: "10",
+      gasfeecap: '10',
       gaslimit: 1000,
-      gaspremium: "10",
+      gaspremium: '10',
       nonce: 1,
-    };
+    }
     const response = await signMessage(
       walletStub,
       apiStub,
       messageRequestWithGasParams
-    );
+    )
 
-    expect(walletStub.rpcStubs.snap_confirm).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce;
-    expect(response.signedMessage.message).to.be.deep.eq({
-      ...fullMessage,
-      nonce: 1,
-    });
-    expect(apiStub.mpoolGetNonce).to.have.not.been.called;
-    expect(response.signedMessage.signature.data).to.not.be.empty;
-    expect(response.signedMessage.signature.type).to.be.eq(1);
-  });
+    expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
+    expect(apiStub.mpoolGetNonce).to.have.not.been.called()
 
-  it("should successfully sign valid message with custom params on positive prompt", async function () {
-    walletStub.rpcStubs.snap_confirm.resolves(true);
-    walletStub.prepareFoKeyPair();
-    apiStub.mpoolGetNonce.returns("0");
+    expect(response).to.containSubset({
+      confirmed: true,
+      error: undefined,
+      signedMessage: {
+        message: {
+          ...fullMessage,
+          nonce: 1,
+        },
+        signature: {
+          type: 1,
+          data: (expected: string) => typeof expected === 'string',
+        },
+      },
+    })
+  })
+
+  it('should successfully sign valid message with custom params on positive prompt', async function () {
+    walletStub.rpcStubs.snap_dialog.resolves(true)
+    walletStub.prepareFoKeyPair()
+    apiStub.mpoolGetNonce.returns('0')
     apiStub.gasEstimateMessageGas.returns({
-      GasFeeCap: "10",
-      GasPremium: "10",
+      GasFeeCap: '10',
+      GasPremium: '10',
       GasLimit: 1000,
-    });
+    })
 
     const messageRequestWithCustomParams: MessageRequest = {
       ...messageRequest,
-      params: "bugugugu",
-    };
+      params: 'bugugugu',
+    }
     const response = await signMessage(
       walletStub,
       apiStub,
       messageRequestWithCustomParams
-    );
+    )
 
-    expect(walletStub.rpcStubs.snap_confirm).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce;
-    expect(apiStub.mpoolGetNonce).to.have.been.calledOnce;
-    expect(apiStub.gasEstimateMessageGas).to.have.been.calledOnce;
-    expect(response.signedMessage.message).to.be.deep.eq(paramsMessage);
-    expect(response.signedMessage.signature.data).to.not.be.empty;
-    expect(response.signedMessage.signature.type).to.be.eq(1);
-  });
+    expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
+    expect(apiStub.mpoolGetNonce).to.have.been.calledOnce()
+    expect(apiStub.gasEstimateMessageGas).to.have.been.calledOnce()
 
-  it("should cancel signing on negative prompt", async function () {
-    walletStub.rpcStubs.snap_confirm.resolves(false);
-    walletStub.prepareFoKeyPair();
+    expect(response).to.containSubset({
+      confirmed: true,
+      error: undefined,
+      signedMessage: {
+        message: paramsMessage,
+        signature: {
+          type: 1,
+          data: (expected: string) => typeof expected === 'string',
+        },
+      },
+    })
+  })
 
-    apiStub.mpoolGetNonce.returns("0");
+  it('should cancel signing on negative prompt', async function () {
+    walletStub.rpcStubs.snap_dialog.resolves(false)
+    walletStub.prepareFoKeyPair()
+
+    apiStub.mpoolGetNonce.returns('0')
     const messageRequestWithGasParams: MessageRequest = {
       ...messageRequest,
-      gasfeecap: "10",
+      gasfeecap: '10',
       gaslimit: 1000,
-      gaspremium: "10",
-    };
+      gaspremium: '10',
+    }
 
     const response = await signMessage(
       walletStub,
       apiStub,
       messageRequestWithGasParams
-    );
+    )
 
-    expect(walletStub.rpcStubs.snap_confirm).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce;
-    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce;
-    expect(response.signedMessage).to.be.null;
-    expect(response.error).to.be.null;
-    expect(response.confirmed).to.be.false;
-  });
+    expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
+    expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
 
-  it("should fail signing on invalid message ", async function () {
-    walletStub.rpcStubs.snap_confirm.resolves(true);
-    walletStub.prepareFoKeyPair();
+    expect(response).to.containSubset({
+      confirmed: false,
+      error: (expected: Error) => expected instanceof Error,
+      signedMessage: undefined,
+    })
+  })
 
-    const invalidMessage = messageRequest;
-    invalidMessage.value = "-5000000000000000";
+  it('should fail signing on invalid message ', async function () {
+    walletStub.rpcStubs.snap_dialog.resolves(true)
+    walletStub.prepareFoKeyPair()
 
-    apiStub.mpoolGetNonce.returns("0");
+    const invalidMessage = messageRequest
+    invalidMessage.value = '-5000000000000000'
 
-    const response = await signMessage(walletStub, apiStub, invalidMessage);
+    apiStub.mpoolGetNonce.returns('0')
 
-    expect(response.signedMessage).to.be.null;
-    expect(response.error).to.not.be.null;
-    expect(response.confirmed).to.be.false;
-  });
-});
+    const response = await signMessage(walletStub, apiStub, invalidMessage)
+
+    expect(response.signedMessage).to.be.undefined()
+    expect(response.error).to.not.be.null()
+    expect(response.confirmed).to.be.false()
+  })
+})

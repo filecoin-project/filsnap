@@ -1,23 +1,45 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": [
-      "dom",
-      "ES2017"
-    ],
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2017",
-    "noImplicitAny": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
+    "strict": true,
+    "outDir": "dist",
+    // project options
+    "allowJs": true,
+    "checkJs": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "noEmit": false,
+    "noEmitOnError": true,
+    "emitDeclarationOnly": false,
     "sourceMap": true,
-    "outDir": "./build",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./@types"
-    ]
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+    "composite": true,
+    "isolatedModules": true,
+    "removeComments": false,
+    // module resolution
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    // linter checks
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    // advanced
+    "importsNotUsedAsValues": "remove",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "resolveJsonModule": true
+  },
+  "typedocOptions": {
+    "entryPointStrategy": "packages",
+    "entryPoints": ["packages/adapter", "packages/snap"],
+    "excludeExternals": true,
+    "darkHighlightTheme": "github-dark",
+    "navigationLinks": {
+      "Github": "https://github.com/filecoin-project/filsnap"
+    }
   }
 }
