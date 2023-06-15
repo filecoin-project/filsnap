@@ -1,7 +1,7 @@
-import { FilecoinNumber } from '@glif/filecoin-number'
+import { FilecoinNumber } from '@glif/filecoin-number/dist'
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { getKeyPair } from '../filecoin/account.js'
-import { type LotusRpcApi } from '../filecoin/types.js'
+import { getKeyPair } from '../filecoin/account'
+import { type LotusRpcApi } from '../filecoin/types'
 
 /**
  * Get the balance of the current account

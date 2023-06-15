@@ -1,8 +1,8 @@
-import { expect } from '../../utils.js'
-import { signMessage } from '../../../src/rpc/signMessage.js'
-import type { Message, MessageRequest } from '../../../src/types.js'
-import { LotusApiMock } from '../lotusapi.mock.test.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
+import { expect } from '../../utils'
+import { signMessage } from '../../../src/rpc/signMessage'
+import type { Message, MessageRequest } from '../../../src/types'
+import { LotusApiMock } from '../lotusapi-mock'
+import { mockSnapProvider } from '../wallet-mock'
 
 describe('Test rpc handler function: signMessage', function () {
   const walletStub = mockSnapProvider()

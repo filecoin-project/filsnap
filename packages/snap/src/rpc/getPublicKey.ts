@@ -1,5 +1,5 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { getKeyPair } from '../filecoin/account.js'
+import { getKeyPair } from '../filecoin/account'
 
 /**
  * Get the public key from the state

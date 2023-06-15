@@ -1,8 +1,8 @@
 import { FilecoinNumber } from '@glif/filecoin-number/dist'
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
-import { getKeyPair } from '../filecoin/account.js'
+import { getKeyPair } from '../filecoin/account'
 import type { LotusRpcApi } from '../filecoin/types'
-import type { Message, MessageGasEstimate, MessageRequest } from '../types.js'
+import type { Message, MessageGasEstimate, MessageRequest } from '../types'
 
 /**
  * Get the gas estimate for a message

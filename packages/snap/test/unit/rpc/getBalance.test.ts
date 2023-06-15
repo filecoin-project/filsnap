@@ -1,8 +1,8 @@
 import chai, { expect } from 'chai'
 import sinonChai from 'sinon-chai'
-import { getBalance } from '../../../src/rpc/getBalance.js'
-import { LotusApiMock } from '../lotusapi.mock.test.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
+import { getBalance } from '../../../src/rpc/getBalance'
+import { LotusApiMock } from '../lotusapi-mock'
+import { mockSnapProvider } from '../wallet-mock'
 
 chai.use(sinonChai)
 

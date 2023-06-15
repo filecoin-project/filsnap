@@ -1,7 +1,7 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import sinon from 'sinon'
-import { testBip44Entropy } from './rpc/keyPairTestConstants.js'
-import * as Constants from '../../src/constants.js'
+import { testBip44Entropy } from './rpc/keyPairTestConstants'
+import * as Constants from '../../src/constants'
 
 class WalletMock implements SnapsGlobalObject {
   public readonly registerRpcMessageHandler = sinon.stub()

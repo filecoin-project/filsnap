@@ -1,7 +1,7 @@
-import { expect } from '../../utils.js'
-import { getPublicKey } from '../../../src/rpc/getPublicKey.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
-import { testPublicKey } from './keyPairTestConstants.js'
+import { expect } from '../../utils'
+import { getPublicKey } from '../../../src/rpc/getPublicKey'
+import { mockSnapProvider } from '../wallet-mock'
+import { testPublicKey } from './keyPairTestConstants'
 
 describe('Test rpc handler function: getPublicKey', function () {
   const walletStub = mockSnapProvider()

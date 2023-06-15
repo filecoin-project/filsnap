@@ -1,17 +1,17 @@
 {
-  "version": "2.3.13",
-  "proposedName": "Filsnap",
+  "version": "0.0.1",
   "description": "The Filecoin snap.",
+  "proposedName": "Filsnap",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Chainsafe/filsnap.git"
+    "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "Z7lh6iD1yjfKES/WutUyxepg5Dgp8Xjo3kivsz9vpwc=",
+    "shasum": "kmFqBiN0hAxlTLWtmDdQe/Sf0XkoDi0+yahHLGsfFkE=",
     "location": {
       "npm": {
-        "filePath": "dist/bundle.js",
-        "packageName": "@chainsafe/filsnap",
+        "filePath": "out/bundle.js",
+        "packageName": "filsnap",
         "registry": "https://registry.npmjs.org/"
       }
     }
@@ -22,7 +22,7 @@
       "dapps": true,
       "snaps": true
     },
-    "snap_confirm": {},
+    "snap_dialog": {},
     "snap_getBip44Entropy": [
       {
         "coinType": 1

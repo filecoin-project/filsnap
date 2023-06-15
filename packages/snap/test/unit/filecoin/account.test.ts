@@ -1,13 +1,13 @@
 import chai, { expect } from 'chai'
 import sinonChai from 'sinon-chai'
-import { getKeyPair } from '../../../src/filecoin/account.js'
+import { getKeyPair } from '../../../src/filecoin/account'
 import {
   testAddress,
   testBip44Entropy,
   testPrivateKeyBase64,
   testPublicKey,
-} from '../rpc/keyPairTestConstants.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
+} from '../rpc/keyPairTestConstants'
+import { mockSnapProvider } from '../wallet-mock'
 
 chai.use(sinonChai)
 

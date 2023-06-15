@@ -4,18 +4,18 @@ import type {
   MessageRequest,
   SignMessageResponse,
   SignRawMessageResponse,
-} from '../types.js'
-import { FilecoinNumber } from '@glif/filecoin-number'
+} from '../types'
+import { FilecoinNumber } from '@glif/filecoin-number/dist'
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import {
   transactionSign,
   transactionSignRaw,
   // @ts-expect-error - no types
 } from '@zondax/filecoin-signing-tools/js'
-import { getKeyPair } from '../filecoin/account.js'
-import { type LotusRpcApi } from '../filecoin/types.js'
-import { showConfirmationDialog } from '../util/confirmation.js'
-import { messageCreator } from '../util/messageCreator.js'
+import { getKeyPair } from '../filecoin/account'
+import { type LotusRpcApi } from '../filecoin/types'
+import { showConfirmationDialog } from '../util/confirmation'
+import { messageCreator } from '../util/messageCreator'
 
 /**
  * Sign a message

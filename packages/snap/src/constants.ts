@@ -1,5 +1,5 @@
-import type { MetamaskState } from './schemas.js'
-import type { SnapConfig } from './types.js'
+import type { MetamaskState } from './schemas'
+import type { SnapConfig } from './types'
 
 export const mainnetConfig: SnapConfig = {
   derivationPath: "m/44'/461'/0'/0/0",

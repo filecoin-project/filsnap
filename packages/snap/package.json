@@ -4,11 +4,9 @@
   "description": "Filsnap - Metamask snap to interact with Filecoin dapps.",
   "license": "(Apache-2.0 AND MIT)",
   "author": "Protocol Labs",
-  "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/filecoin-project/filsnap.git",
-    "directory": "packages/snap"
+    "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "homepage": "https://github.com/filecoin-project/filsnap/tree/master/packages/snap",
   "bugs": {
@@ -22,45 +20,35 @@
     "wallet",
     "plugin"
   ],
-  "main": "build/index.js",
+  "files": [
+    "out",
+    "snap.manifest.json"
+  ],
+  "type": "module",
+  "main": "dist/src/index.js",
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
     "test": "mocha --colors \"test/unit/**/*.test.ts\" -n loader=ts-node/esm",
-    "snap": "mm-snap",
-    "manifest": "mm-snap manifest",
-    "start": "pnpm run build && pnpm run serve",
-    "prebuild": "rm -rf build && rm -rf dist",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "build": "pnpm run build:snap",
-    "build:snap": "pnpm build:snap:bundle && pnpm build:snap:postprocess && pnpm build:snap:eval",
-    "build:snap:bundle": "mm-snap build --src src/index.ts --writeManifest false --manifest false --verboseErrors  --stripComments --eval false",
-    "build:snap:postprocess": "node ./post-process.js && mm-snap manifest --fix",
-    "build:snap:eval": "mm-snap eval -b dist/bundle.js --verboseErrors",
-    "watch": "concurrently  --raw --kill-others \"pnpm run watch:tsc\" \"pnpm run watch:snap\" \"pnpm run serve\"",
-    "watch:tsc": "pnpm run build:tsc --watch",
-    "watch:snap": "mm-snap watch --sourceMaps",
-    "serve": "mm-snap serve",
-    "eval:snap": "mm-snap eval -b dist/bundle.js --verboseErrors",
-    "prepublish": "pnpm run build"
+    "test:e2e": "pnpm run build && pnpm exec playwright test",
+    "build": "mm-snap build",
+    "serve": "mm-snap serve"
   },
   "devDependencies": {
     "@metamask/providers": "^11.0.0",
     "@metamask/snaps-cli": "^0.32.2",
-    "@types/bn.js": "^5.1.1",
+    "@playwright/test": "^1.35.0",
     "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.5",
     "@types/chai-subset": "^1.3.3",
     "@types/mocha": "^10.0.1",
     "@types/sinon": "^10.0.15",
     "@types/sinon-chai": "^3.2.9",
-    "babelify": "^10.0.0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "chai-parentheses": "^0.0.2",
     "chai-subset": "^1.6.0",
     "concurrently": "^8.2.0",
-    "esbuild-register": "^3.4.2",
+    "metamask-testing-tools": "^1.0.0",
     "mocha": "^10.2.0",
     "sinon": "^15.1.2",
     "sinon-chai": "^3.7.0",
@@ -76,9 +64,9 @@
     "@metamask/snaps-types": "^0.32.2",
     "@metamask/snaps-ui": "^0.32.2",
     "@zondax/filecoin-signing-tools": "^0.20.0",
-    "bn.js": "^5.2.1",
-    "deepmerge": "^4.3.1",
+    "buffer": "^6.0.3",
     "merge-options": "^3.0.4",
+    "through2": "^4.0.2",
     "zod": "^3.21.4"
   },
   "eslintConfig": {
@@ -88,7 +76,11 @@
     ],
     "rules": {
       "unicorn/filename-case": "off",
-      "unicorn/no-null": "off"
+      "unicorn/no-null": "off",
+      "import/extensions": [
+        "error",
+        "never"
+      ]
     },
     "parserOptions": {
       "project": "./tsconfig.json"
@@ -97,7 +89,9 @@
       "mocha": true
     },
     "ignorePatterns": [
-      "dist"
+      "dist",
+      "out",
+      "snap.config.cjs"
     ]
   }
 }

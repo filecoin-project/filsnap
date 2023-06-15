@@ -1,8 +1,8 @@
 import chai, { expect } from 'chai'
 import sinonChai from 'sinon-chai'
-import { exportPrivateKey } from '../../../src/rpc/exportPrivateKey.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
-import { testPrivateKeyBase64 } from './keyPairTestConstants.js'
+import { exportPrivateKey } from '../../../src/rpc/exportPrivateKey'
+import { mockSnapProvider } from '../wallet-mock'
+import { testPrivateKeyBase64 } from './keyPairTestConstants'
 
 chai.use(sinonChai)
 

@@ -1,10 +1,10 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { getApiFromConfig } from '../filecoin/api.js'
-import { type LotusRpcApi } from '../filecoin/types.js'
-import { type SnapConfig } from '../types.js'
+import { getApiFromConfig } from '../filecoin/api'
+import { type LotusRpcApi } from '../filecoin/types'
+import { type SnapConfig } from '../types'
 import merge from 'merge-options'
-import type { MetamaskState } from '../schemas.js'
-import { configFromNetwork } from '../utils.js'
+import type { MetamaskState } from '../schemas'
+import { configFromNetwork } from '../utils'
 
 export interface ConfigureResponse {
   api: LotusRpcApi

@@ -1,4 +1,4 @@
-import type { Message, SignedMessage } from '../types.js'
+import type { Message, SignedMessage } from '../types'
 
 export interface LotusRpcApi {
   version: () => Promise<VersionResponse>

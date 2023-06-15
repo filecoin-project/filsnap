@@ -1,6 +1,6 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { getKeyPair } from '../filecoin/account.js'
-import { showConfirmationDialog } from '../util/confirmation.js'
+import { getKeyPair } from '../filecoin/account'
+import { showConfirmationDialog } from '../util/confirmation'
 
 /**
  * Export the private key of the current account

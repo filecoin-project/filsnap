@@ -1,5 +1,5 @@
 import sinon from 'sinon'
-import type { LotusRpcApi } from '../../src/filecoin/types.js'
+import type { LotusRpcApi } from '../../src/filecoin/types'
 
 export class LotusApiMock implements LotusRpcApi {
   public version = sinon.stub()

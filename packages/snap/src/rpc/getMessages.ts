@@ -1,5 +1,5 @@
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
-import * as Schemas from '../schemas.js'
+import * as Schemas from '../schemas'
 
 /**
  * Get the messages from the state

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { type SnapConfig } from './types.js'
-import * as Constants from './constants.js'
-import * as Schemas from './schemas.js'
+import { type SnapConfig } from './types'
+import * as Constants from './constants'
+import * as Schemas from './schemas'
 
 /**
  * Get default configuration by network name

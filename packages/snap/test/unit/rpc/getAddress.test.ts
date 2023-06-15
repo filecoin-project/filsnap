@@ -1,8 +1,8 @@
-import { getAddress } from '../../../src/rpc/getAddress.js'
-import { expect } from '../../utils.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
-import { testAddress, testBip44Entropy } from './keyPairTestConstants.js'
-import * as Constants from '../../../src/constants.js'
+import { getAddress } from '../../../src/rpc/getAddress'
+import { expect } from '../../utils'
+import { mockSnapProvider } from '../wallet-mock'
+import { testAddress, testBip44Entropy } from './keyPairTestConstants'
+import * as Constants from '../../../src/constants'
 
 describe('Test rpc handler function: getAddress', function () {
   const walletStub = mockSnapProvider()

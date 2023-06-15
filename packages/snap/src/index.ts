@@ -1,21 +1,21 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types'
-import { getApiFromConfig } from './filecoin/api.js'
-import { configure } from './rpc/configure.js'
-import { estimateMessageGas } from './rpc/estimateMessageGas.js'
-import { exportPrivateKey } from './rpc/exportPrivateKey.js'
-import { getAddress } from './rpc/getAddress.js'
-import { getBalance } from './rpc/getBalance.js'
-import { getMessages } from './rpc/getMessages.js'
-import { getPublicKey } from './rpc/getPublicKey.js'
-import { sendMessage } from './rpc/sendMessage.js'
-import { signMessage, signMessageRaw } from './rpc/signMessage.js'
+import { getApiFromConfig } from './filecoin/api'
+import { configure } from './rpc/configure'
+import { estimateMessageGas } from './rpc/estimateMessageGas'
+import { exportPrivateKey } from './rpc/exportPrivateKey'
+import { getAddress } from './rpc/getAddress'
+import { getBalance } from './rpc/getBalance'
+import { getMessages } from './rpc/getMessages'
+import { getPublicKey } from './rpc/getPublicKey'
+import { sendMessage } from './rpc/sendMessage'
+import { signMessage, signMessageRaw } from './rpc/signMessage'
 import {
   isValidConfigureRequest,
   isValidEstimateGasRequest,
   isValidSendRequest,
   isValidSignRequest,
-} from './util/params.js'
-import { configFromSnap } from './utils.js'
+} from './util/params'
+import { configFromSnap } from './utils'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   const config = await configFromSnap(snap)

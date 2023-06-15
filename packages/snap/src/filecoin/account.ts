@@ -1,10 +1,10 @@
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import type { KeyPair } from '../types.js'
+import type { KeyPair } from '../types'
 // @ts-expect-error - no types
 import { keyRecover } from '@zondax/filecoin-signing-tools/js'
 import { Buffer } from 'buffer'
-import { parseDerivationPath, configFromSnap } from '../utils.js'
+import { parseDerivationPath, configFromSnap } from '../utils'
 
 /**
  * Return derived KeyPair from seed.

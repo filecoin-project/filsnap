@@ -1,5 +1,5 @@
-import { parseDerivationPath } from '../../src/utils.js'
-import { expect } from '../utils.js'
+import { parseDerivationPath } from '../../src/utils'
+import { expect } from '../utils'
 
 describe('Utils', function () {
   it('should parse testnet bip44 derivation path', async function () {

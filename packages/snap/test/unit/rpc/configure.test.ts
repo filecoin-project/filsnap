@@ -1,7 +1,7 @@
-import { expect } from '../../utils.js'
-import { configure } from '../../../src/rpc/configure.js'
-import { mockSnapProvider } from '../wallet.mock.test.js'
-import * as Constants from '../../../src/constants.js'
+import { expect } from '../../utils'
+import { configure } from '../../../src/rpc/configure'
+import { mockSnapProvider } from '../wallet-mock'
+import * as Constants from '../../../src/constants'
 
 describe('Test rpc handler function: configure', function () {
   const walletStub = mockSnapProvider()

@@ -1,4 +1,4 @@
-import type { MessageRequest, SignedMessage, SnapConfig } from '../types.js'
+import type { MessageRequest, SignedMessage, SnapConfig } from '../types'
 
 type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
 
