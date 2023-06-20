@@ -1,0 +1,89 @@
+{
+  "name": "iso-rpc",
+  "version": "0.3.0",
+  "description": "Isomorphic Utils",
+  "author": "Hugo Dias <hugomrdias@gmail.com> (hugodias.me)",
+  "license": "MIT",
+  "repository": {
+    "url": "hugomrdias/iso-repo",
+    "directory": "packages/iso-base"
+  },
+  "keywords": [
+    "utf8",
+    "base",
+    "crypto",
+    "rfc4648",
+    "uint8array"
+  ],
+  "type": "module",
+  "main": "src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./message": {
+      "types": "./dist/src/message.d.ts",
+      "import": "./src/message.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "message": [
+        "dist/src/message"
+      ],
+      "types": [
+        "dist/src/types"
+      ]
+    }
+  },
+  "files": [
+    "src",
+    "dist/src/*.d.ts",
+    "dist/src/*.d.ts.map"
+  ],
+  "scripts": {
+    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "test": "tsc --build && pnpm run test:node && pnpm run test:browser",
+    "test:node": "mocha 'test/**/!(*.browser).test.js'",
+    "test:browser": "playwright-test 'test/**/!(*.node).test.js'"
+  },
+  "devDependencies": {
+    "@types/assert": "^1.5.6",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.3.1",
+    "assert": "^2.0.0",
+    "hd-scripts": "^7.0.0",
+    "mocha": "^10.2.0",
+    "playwright-test": "^9.2.0",
+    "typescript": "5.1.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../node_modules/hd-scripts/eslint/index.js"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "env": {
+      "mocha": true
+    },
+    "ignorePatterns": [
+      "dist"
+    ]
+  },
+  "depcheck": {
+    "specials": [
+      "bin"
+    ],
+    "ignores": [
+      "@types/*",
+      "hd-scripts",
+      "assert"
+    ]
+  },
+  "dependencies": {
+    "zod": "^3.21.4"
+  }
+}

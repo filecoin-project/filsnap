@@ -4,6 +4,7 @@ module.exports = {
   cliOptions: {
     src: './src/index.ts',
     dist: 'out',
+    transpilationMode: 'localAndDeps',
   },
   bundlerCustomizer: (bundler) => {
     bundler.transform(function () {

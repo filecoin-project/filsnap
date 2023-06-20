@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { MessageSchema } from 'iso-rpc'
+import type { Json } from './types'
 
 const unitConfiguration = z.object({
   decimals: z.number(),
@@ -7,8 +9,7 @@ const unitConfiguration = z.object({
   customViewUrl: z.string().optional(),
 })
 
-export const network = z.enum(['f', 't'])
-export type Network = z.infer<typeof network>
+export const network = z.enum(['mainnet', 'testnet'])
 
 export const snapConfig = z.object({
   derivationPath: z.string(),
@@ -19,27 +20,11 @@ export const snapConfig = z.object({
   network,
   unit: unitConfiguration.optional(),
 })
-export type SnapConfig = z.infer<typeof snapConfig>
-
-export const message = z.object({
-  from: z.string(),
-  gasfeecap: z.string(),
-  gaslimit: z.number(),
-  gaspremium: z.string(),
-  method: z.number(),
-  nonce: z.number(),
-  params: z.string().optional(),
-  to: z.string(),
-  value: z.string(),
-})
-export type Message = z.infer<typeof message>
 
 export const messageStatus = z.object({
   cid: z.string(),
-  message,
+  message: MessageSchema,
 })
-
-export type MessageStatus = z.infer<typeof messageStatus>
 
 export const metamaskState = z.object({
   filecoin: z.object({
@@ -48,4 +33,8 @@ export const metamaskState = z.object({
   }),
 })
 
-export type MetamaskState = z.infer<typeof metamaskState>
+export const literal = z.union([z.string(), z.number(), z.boolean(), z.null()])
+
+export const json: z.ZodType<Json> = z.lazy(() =>
+  z.union([literal, z.array(json), z.record(json)])
+)

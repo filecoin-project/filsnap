@@ -3,6 +3,11 @@
   "compilerOptions": {
     "outDir": "dist"
   },
+  "references": [
+    {
+      "path": "../rpc"
+    }
+  ],
   "include": ["src", "test"],
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {
@@ -11,6 +16,7 @@
     "excludeExternals": true,
     "internalModule": "<internal>"
   },
+
   "ts-node": {
     "transpileOnly": true,
     "files": true,

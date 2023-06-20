@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["ESNext", "DOM"],
+    "emitDeclarationOnly": true
+  },
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist", "out"],
+  "typedocOptions": {
+    "entryPoints": ["src/index.js"],
+    "includeVersion": true,
+    "excludeExternals": true,
+    "internalModule": "<internal>"
+  }
+}

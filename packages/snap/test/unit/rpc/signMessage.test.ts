@@ -191,7 +191,7 @@ describe('Test rpc handler function: signMessage', function () {
 
     const response = await signMessage(walletStub, apiStub, invalidMessage)
 
-    expect(response.signedMessage).to.be.undefined()
+    expect(response.result).to.be.undefined()
     expect(response.error).to.not.be.null()
     expect(response.confirmed).to.be.false()
   })

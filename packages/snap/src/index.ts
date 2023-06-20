@@ -1,88 +1,93 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types'
-import { getApiFromConfig } from './filecoin/api'
+import { RPC } from 'iso-rpc'
 import { configure } from './rpc/configure'
-import { estimateMessageGas } from './rpc/estimateMessageGas'
+import {
+  estimateMessageGas,
+  type EstimateParams,
+} from './rpc/estimateMessageGas'
 import { exportPrivateKey } from './rpc/exportPrivateKey'
-import { getAddress } from './rpc/getAddress'
 import { getBalance } from './rpc/getBalance'
 import { getMessages } from './rpc/getMessages'
-import { getPublicKey } from './rpc/getPublicKey'
 import { sendMessage } from './rpc/sendMessage'
 import { signMessage, signMessageRaw } from './rpc/signMessage'
-import {
-  isValidConfigureRequest,
-  isValidEstimateGasRequest,
-  isValidSendRequest,
-  isValidSignRequest,
-} from './util/params'
-import { configFromSnap } from './utils'
+import type { SignMessageParams, SignMessageRawParams } from './rpc/signMessage'
+import type { SnapConfig, SnapContext, SnapResponse } from './types'
+import { configFromSnap, serializeError } from './utils'
+import { getKeyPair } from './filecoin/account'
+
+export type * from './rpc/configure'
+export type * from './rpc/estimateMessageGas'
+export type * from './rpc/exportPrivateKey'
+export type * from './rpc/getBalance'
+export type * from './rpc/getMessages'
+export type * from './rpc/sendMessage'
+export type * from './rpc/signMessage'
+
+export type GetAddressResponse = SnapResponse<string>
+export type GetPublicResponse = SnapResponse<string>
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
-  const config = await configFromSnap(snap)
+  try {
+    const config = await configFromSnap(snap)
+    const rpc = new RPC({
+      api: config.rpc.url,
+      network: config.network,
+    })
+    const keypair = await getKeyPair(snap)
 
-  switch (request.method) {
-    case 'fil_configure': {
-      isValidConfigureRequest(request.params)
-      const resp = await configure(
-        snap,
-        request.params.configuration.network,
-        request.params.configuration
-      )
-      return resp.snapConfig
+    const context: SnapContext = {
+      config,
+      rpc,
+      keypair,
+      snap,
     }
-    case 'fil_getAddress': {
-      return await getAddress(snap)
-    }
-    case 'fil_getPublicKey': {
-      return await getPublicKey(snap)
-    }
-    case 'fil_exportPrivateKey': {
-      return await exportPrivateKey(snap)
-    }
-    case 'fil_getBalance': {
-      const balance = await getBalance(snap, getApiFromConfig(config))
-      return balance
-    }
-    case 'fil_getMessages': {
-      return await getMessages(snap)
-    }
-    case 'fil_signMessage': {
-      isValidSignRequest(request.params)
-      return await signMessage(
-        snap,
-        getApiFromConfig(config),
-        request.params.message
-      )
-    }
-    case 'fil_signMessageRaw': {
-      if (
-        'message' in request.params &&
-        typeof request.params.message === 'string'
-      ) {
-        return await signMessageRaw(snap, request.params.message)
-      } else {
-        throw new Error('Invalid raw message signing request')
+
+    switch (request.method) {
+      case 'fil_configure': {
+        return await configure(snap, request.params as Partial<SnapConfig>)
+      }
+      case 'fil_getAddress': {
+        return { result: keypair.address }
+      }
+      case 'fil_getPublicKey': {
+        return { result: keypair.publicKey }
+      }
+      case 'fil_exportPrivateKey': {
+        return await exportPrivateKey(context)
+      }
+      case 'fil_getBalance': {
+        return await getBalance(context)
+      }
+      case 'fil_getMessages': {
+        return await getMessages(context)
+      }
+      case 'fil_signMessage': {
+        return await signMessage(context, request.params as SignMessageParams)
+      }
+      case 'fil_signMessageRaw': {
+        return await signMessageRaw(
+          context,
+          request.params as SignMessageRawParams
+        )
+      }
+      case 'fil_sendMessage': {
+        return await sendMessage(snap, rpc, request.params as any)
+      }
+      case 'fil_getGasForMessage': {
+        return await estimateMessageGas(
+          context,
+          request.params as EstimateParams
+        )
+      }
+      default: {
+        return serializeError(
+          `Unsupported RPC method: "${request.method}" failed`
+        )
       }
     }
-    case 'fil_sendMessage': {
-      isValidSendRequest(request.params)
-      return await sendMessage(
-        snap,
-        getApiFromConfig(config),
-        request.params.signedMessage
-      )
-    }
-    case 'fil_getGasForMessage': {
-      isValidEstimateGasRequest(request.params)
-      return await estimateMessageGas(
-        snap,
-        getApiFromConfig(config),
-        request.params.message,
-        request.params.maxFee
-      )
-    }
-    default: {
-      throw new Error('Unsupported RPC method')
-    }
+  } catch (error) {
+    const err = error as Error
+
+    return serializeError(`RPC method "${request.method}" failed`, err)
   }
 }

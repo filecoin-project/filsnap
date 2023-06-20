@@ -33,10 +33,26 @@
     "build": "mm-snap build",
     "serve": "mm-snap serve"
   },
+  "dependencies": {
+    "@filecoin-shipyard/lotus-client-provider-nodejs": "1.1.1",
+    "@filecoin-shipyard/lotus-client-rpc": "^0.2.0",
+    "@filecoin-shipyard/lotus-client-schema": "^0.0.14",
+    "@glif/filecoin-number": "^2.0.0-beta.0",
+    "@metamask/key-tree": "^7.0.0",
+    "@metamask/rpc-errors": "^5.1.1",
+    "@metamask/snaps-types": "^0.32.2",
+    "@metamask/snaps-ui": "^0.32.2",
+    "@zondax/filecoin-signing-tools": "^0.20.0",
+    "buffer": "^6.0.3",
+    "iso-rpc": "workspace:^",
+    "merge-options": "^3.0.4",
+    "through2": "^4.0.2",
+    "zod": "^3.21.4"
+  },
   "devDependencies": {
     "@metamask/providers": "^11.0.0",
     "@metamask/snaps-cli": "^0.32.2",
-    "@playwright/test": "^1.35.0",
+    "@playwright/test": "^1.35.1",
     "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.5",
     "@types/chai-subset": "^1.3.3",
@@ -48,26 +64,13 @@
     "chai-parentheses": "^0.0.2",
     "chai-subset": "^1.6.0",
     "concurrently": "^8.2.0",
-    "metamask-testing-tools": "^1.0.0",
+    "metamask-testing-tools": "^1.0.1",
     "mocha": "^10.2.0",
     "sinon": "^15.1.2",
     "sinon-chai": "^3.7.0",
     "ts-node": "^10.9.1",
+    "type-fest": "^3.12.0",
     "typescript": "5.1.3"
-  },
-  "dependencies": {
-    "@filecoin-shipyard/lotus-client-provider-nodejs": "1.1.1",
-    "@filecoin-shipyard/lotus-client-rpc": "^0.2.0",
-    "@filecoin-shipyard/lotus-client-schema": "^0.0.14",
-    "@glif/filecoin-number": "^2.0.0-beta.0",
-    "@metamask/key-tree": "^7.0.0",
-    "@metamask/snaps-types": "^0.32.2",
-    "@metamask/snaps-ui": "^0.32.2",
-    "@zondax/filecoin-signing-tools": "^0.20.0",
-    "buffer": "^6.0.3",
-    "merge-options": "^3.0.4",
-    "through2": "^4.0.2",
-    "zod": "^3.21.4"
   },
   "eslintConfig": {
     "extends": [
@@ -77,6 +80,7 @@
     "rules": {
       "unicorn/filename-case": "off",
       "unicorn/no-null": "off",
+      "jsdoc/require-returns": "off",
       "import/extensions": [
         "error",
         "never"

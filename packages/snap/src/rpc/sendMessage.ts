@@ -1,7 +1,6 @@
-import type { MessageStatus, SignedMessage } from '../types'
+import type { SignedMessage } from '../types'
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
 import { updateMessageInState } from '../filecoin/message'
-import type { LotusRpcApi } from '../filecoin/types'
 
 /**
  * Send a message to the network

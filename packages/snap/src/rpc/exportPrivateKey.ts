@@ -1,24 +1,26 @@
-import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { getKeyPair } from '../filecoin/account'
 import { showConfirmationDialog } from '../util/confirmation'
+import type { SnapContext, SnapResponse } from '../types'
+import { serializeError } from '../utils'
+
+// Types
+export type ExportPrivateKeyResponse = SnapResponse<string>
 
 /**
  * Export the private key of the current account
  *
- * @param snap - Snaps object
+ * @param ctx - Snaps context
  * @returns Private key of the current account
  */
 export async function exportPrivateKey(
-  snap: SnapsGlobalObject
-): Promise<string | null> {
+  ctx: SnapContext
+): Promise<ExportPrivateKeyResponse> {
   // ask for confirmation
   const confirmation = await showConfirmationDialog(snap, {
     prompt: 'Do you want to export your private key?',
   })
   // return private key if user confirmed actions
   if (confirmation) {
-    const keypair = await getKeyPair(snap)
-    return keypair.privateKey
+    return { result: ctx.keypair.privateKey }
   }
-  return null
+  return serializeError('User denied private key export')
 }
