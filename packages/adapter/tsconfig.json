@@ -1,14 +1,27 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "allowImportingTsExtensions": true
   },
-  "include": ["src", "scripts", "test", "package.json"],
+  "references": [
+    {
+      "path": "../snap"
+    }
+  ],
+  "include": ["src"],
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],
     "includeVersion": true,
     "excludeExternals": true,
     "internalModule": "<internal>"
+  },
+
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    // "experimentalResolver": true
+    "experimentalSpecifierResolution": "node"
   }
 }

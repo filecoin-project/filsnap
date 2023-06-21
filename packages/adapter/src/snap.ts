@@ -1,4 +1,4 @@
-import { FilecoinSnapApi } from '@chainsafe/filsnap-types'
+import type { FilecoinSnapApi } from 'filsnap'
 import {
   calculateGasForMessage,
   configure,

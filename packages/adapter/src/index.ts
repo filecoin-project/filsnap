@@ -1,11 +1,19 @@
-import { SnapConfig } from '@chainsafe/filsnap-types'
-import { hasMetaMask, isMetamaskSnapsSupported, isSnapInstalled } from './utils'
-import { MetamaskFilecoinSnap } from './snap'
+import type { SnapConfig } from '../../snap/src/types.ts'
+import {
+  hasMetaMask,
+  isMetamaskSnapsSupported,
+  isSnapInstalled,
+} from './utils.ts'
+import { MetamaskFilecoinSnap } from './snap.ts'
 
-const defaultSnapOrigin = 'npm:@chainsafe/polkadot-snap'
+const defaultSnapOrigin = 'npm:filsnap'
 
-export { MetamaskFilecoinSnap } from './snap'
-export { hasMetaMask, isMetamaskSnapsSupported, isSnapInstalled } from './utils'
+export { MetamaskFilecoinSnap } from './snap.ts'
+export {
+  hasMetaMask,
+  isMetamaskSnapsSupported,
+  isSnapInstalled,
+} from './utils.ts'
 
 export type SnapInstallationParamNames = 'version' | string
 
@@ -20,7 +28,8 @@ export type SnapInstallationParamNames = 'version' | string
  * @param config - SnapConfig
  * @param snapOrigin
  *
- * @return MetamaskFilecoinSnap - adapter object that exposes snap API
+ * @param snapInstallationParams
+ * @returns MetamaskFilecoinSnap - adapter object that exposes snap API
  */
 export async function enableFilecoinSnap(
   config: Partial<SnapConfig>,
@@ -36,7 +45,7 @@ export async function enableFilecoinSnap(
   if (!(await isMetamaskSnapsSupported())) {
     throw new Error("Current Metamask version doesn't support snaps")
   }
-  if (!config.network) {
+  if (config?.network === null || config?.network === undefined) {
     throw new Error('Configuration must at least define network type')
   }
 
@@ -52,12 +61,15 @@ export async function enableFilecoinSnap(
     })
   }
 
-  //await unlockMetamask();
+  // await unlockMetamask();
 
   // create snap describer
-  const snap = new MetamaskFilecoinSnap(snapOrigin || defaultSnapOrigin)
+  const snap = new MetamaskFilecoinSnap(snapId)
+
   // set initial configuration
-  await (await snap.getFilecoinSnapApi()).configure(config)
+  const filecoinSnapApi = await snap.getFilecoinSnapApi()
+  await filecoinSnapApi.configure(config)
+
   // return snap object
   return snap
 }

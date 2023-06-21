@@ -1,4 +1,4 @@
-import { SnapRpcMethodRequest } from '@chainsafe/filsnap-types'
+import type { SnapRpcMethodRequest } from 'filsnap/types'
 
 declare global {
   interface Window {
