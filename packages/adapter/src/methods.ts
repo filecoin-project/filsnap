@@ -7,14 +7,16 @@ import type {
   SignMessageRawResponse,
   SnapConfig,
   MessageGasEstimate,
-} from '../../snap/src/types.ts'
+} from 'filsnap/src/types.ts'
 
 import type { MetamaskFilecoinSnap } from './snap.ts'
 
 /**
+ * Invoke a snap method
  *
  * @param request
  * @param snapId
+ * @returns snapMethodResponse
  */
 async function sendSnapMethod<T>(
   request: MetamaskFilecoinRpcRequest,
@@ -30,14 +32,18 @@ async function sendSnapMethod<T>(
 }
 
 /**
+ * Get the account's address
  *
+ * @returns address
  */
 export async function getAddress(this: MetamaskFilecoinSnap): Promise<string> {
   return await sendSnapMethod({ method: 'fil_getAddress' }, this.snapId)
 }
 
 /**
+ * Get the account's public key
  *
+ * @returns publicKey
  */
 export async function getPublicKey(
   this: MetamaskFilecoinSnap
@@ -46,14 +52,18 @@ export async function getPublicKey(
 }
 
 /**
+ * Get the account's balance
  *
+ * @returns balance
  */
 export async function getBalance(this: MetamaskFilecoinSnap): Promise<string> {
   return await sendSnapMethod({ method: 'fil_getBalance' }, this.snapId)
 }
 
 /**
+ * Export the account's private key
  *
+ * @returns privateKey
  */
 export async function exportPrivateKey(
   this: MetamaskFilecoinSnap
@@ -64,20 +74,23 @@ export async function exportPrivateKey(
 /**
  *
  * @param configuration
+ * @returns void
  */
 export async function configure(
   this: MetamaskFilecoinSnap,
   configuration: SnapConfig
 ): Promise<void> {
   await sendSnapMethod(
-    { method: 'fil_configure', params: { configuration } },
+    { method: 'fil_configure', params: { ...configuration } },
     this.snapId
   )
 }
 
 /**
+ * Sign a message
  *
  * @param message
+ * @returns signMessageResponse
  */
 export async function signMessage(
   this: MetamaskFilecoinSnap,
@@ -90,8 +103,10 @@ export async function signMessage(
 }
 
 /**
+ * Sign a raw message
  *
  * @param rawMessage
+ * @returns signMessageRawResponse
  */
 export async function signMessageRaw(
   this: MetamaskFilecoinSnap,
@@ -104,8 +119,10 @@ export async function signMessageRaw(
 }
 
 /**
+ * Send a message
  *
  * @param signedMessage
+ * @returns messageStatus
  */
 export async function sendMessage(
   this: MetamaskFilecoinSnap,
@@ -118,7 +135,9 @@ export async function sendMessage(
 }
 
 /**
+ * Get the messages from the state
  *
+ * @returns messages
  */
 export async function getMessages(
   this: MetamaskFilecoinSnap
@@ -127,9 +146,11 @@ export async function getMessages(
 }
 
 /**
+ * Get the gas estimate for a message
  *
  * @param message
  * @param maxFee
+ * @returns messageGasEstimate
  */
 export async function calculateGasForMessage(
   this: MetamaskFilecoinSnap,

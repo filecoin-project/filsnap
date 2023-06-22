@@ -66,3 +66,39 @@ export interface SnapContext {
   rpc: RPC
   account: Account
 }
+
+export interface GetAddressRequest {
+  method: 'fil_getAddress'
+}
+
+export interface GetPublicKeyRequest {
+  method: 'fil_getPublicKey'
+}
+
+export type MetamaskFilecoinRpcRequest =
+  | ConfigureRequest
+  | ExportPrivateKeyRequest
+  | GetPublicKeyRequest
+  | GetAddressRequest
+  | GetBalanceRequest
+  | GetMessagesRequest
+  | SignMessageRequest
+  | SignMessageRawRequest
+  // | SendMessageRequest
+  | EstimateMessageGasRequest
+
+export interface FilecoinSnapApi {
+  getPublicKey: () => Promise<string>
+  getAddress: () => Promise<string>
+  getBalance: () => Promise<string>
+  exportPrivateKey: () => Promise<string>
+  configure: (configuration: Partial<SnapConfig>) => Promise<void>
+  signMessage: (message: SignMessageRequest) => Promise<SignMessageResponse>
+  signMessageRaw: (message: string) => Promise<SignMessageRawResponse>
+  sendMessage: (signedMessage: SignedMessage) => Promise<MessageStatus>
+  getMessages: () => Promise<MessageStatus[]>
+  calculateGasForMessage: (
+    message: SignMessageRequest,
+    maxFee?: string
+  ) => Promise<MessageGasEstimate>
+}

@@ -1,4 +1,4 @@
-import type { SnapRpcMethodRequest } from 'filsnap/types'
+import type { SnapRpcMethodRequest } from 'filsnap/src/types.ts'
 
 declare global {
   interface Window {

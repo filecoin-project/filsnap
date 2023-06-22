@@ -1,4 +1,4 @@
-import type { FilecoinSnapApi } from 'filsnap'
+import type { FilecoinSnapApi } from 'filsnap/src/types.ts'
 import {
   calculateGasForMessage,
   configure,

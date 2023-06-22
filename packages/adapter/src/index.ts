@@ -1,4 +1,4 @@
-import type { SnapConfig } from '../../snap/src/types.ts'
+import type { SnapConfig } from 'filsnap/src/types.ts'
 import {
   hasMetaMask,
   isMetamaskSnapsSupported,

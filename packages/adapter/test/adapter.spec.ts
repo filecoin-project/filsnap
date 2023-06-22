@@ -1,12 +1,13 @@
 import { createFixture } from 'metamask-testing-tools'
 
-const SNAP_ID = process.env.METAMASK_SNAP_ID || 'npm:/filsnap'
+const SNAP_ID = 'npm:/filsnap'
 let fixture = createFixture({
   download: {
     flask: true,
   },
   snap: {
     snapId: SNAP_ID,
+    version: '*',
   },
 })
 
@@ -18,9 +19,7 @@ fixture.test.describe('filsnap adapter', () => {
 
       await fixture
         .expect(page.getByTestId('output'))
-        .toHaveText(
-          '{"snapOrigin":"npm:@chainsafe/filsnap","snapId":"npm:@chainsafe/filsnap"}'
-        )
+        .toHaveText(`{"snapOrigin":"${SNAP_ID}","snapId":"${SNAP_ID}"}`)
     }
   )
 
