@@ -10,7 +10,7 @@ import {
   sendMessage,
   signMessage,
   signMessageRaw,
-} from './methods.js'
+} from './methods.ts'
 
 export class MetamaskFilecoinSnap {
   // snap parameters
