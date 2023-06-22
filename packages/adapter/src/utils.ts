@@ -11,14 +11,15 @@ export function hasMetaMask(): boolean {
   return window.ethereum.isMetaMask
 }
 
-export type GetSnapsResponse = {
-  [k: string]: {
+export type GetSnapsResponse = Record<
+  string,
+  {
     permissionName?: string
     id?: string
     version?: string
-    initialPermissions?: { [k: string]: unknown }
+    initialPermissions?: Record<string, unknown>
   }
-}
+>
 
 /**
  * Get wallet snaps
