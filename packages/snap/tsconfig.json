@@ -3,11 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "references": [
-    {
-      "path": "../rpc"
-    }
-  ],
   "include": ["src", "test"],
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {

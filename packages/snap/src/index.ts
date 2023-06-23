@@ -1,5 +1,5 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types'
-import { RPC } from 'iso-rpc'
+import { RPC } from 'iso-filecoin/rpc'
 import { configure } from './rpc/configure'
 import {
   estimateMessageGas,
@@ -14,6 +14,7 @@ import type { SignMessageParams, SignMessageRawParams } from './rpc/signMessage'
 import type { SnapConfig, SnapContext, SnapResponse } from './types'
 import { configFromSnap, serializeError } from './utils'
 import { getKeyPair } from './filecoin/account'
+import { hex } from 'iso-base/rfc4648'
 
 export type * from './rpc/configure'
 export type * from './rpc/estimateMessageGas'
@@ -33,12 +34,12 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       api: config.rpc.url,
       network: config.network,
     })
-    const keypair = await getKeyPair(snap)
+    const account = await getKeyPair(snap)
 
     const context: SnapContext = {
       config,
       rpc,
-      keypair,
+      account,
       snap,
     }
 
@@ -47,10 +48,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         return await configure(snap, request.params as Partial<SnapConfig>)
       }
       case 'fil_getAddress': {
-        return { result: keypair.address }
+        return { result: account.address.toString() }
       }
       case 'fil_getPublicKey': {
-        return { result: keypair.publicKey }
+        return { result: hex.encode(account.pubKey) }
       }
       case 'fil_exportPrivateKey': {
         return await exportPrivateKey(context)
@@ -71,7 +72,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         )
       }
       case 'fil_sendMessage': {
-        return await sendMessage(snap, rpc, request.params as any)
+        return await sendMessage(context, request.params as any)
       }
       case 'fil_getGasForMessage': {
         return await estimateMessageGas(

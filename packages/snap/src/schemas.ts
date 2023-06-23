@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { MessageSchema } from 'iso-rpc'
+import { Schemas } from 'iso-filecoin/message'
 import type { Json } from './types'
 
 const unitConfiguration = z.object({
@@ -23,7 +23,7 @@ export const snapConfig = z.object({
 
 export const messageStatus = z.object({
   cid: z.string(),
-  message: MessageSchema,
+  message: Schemas.message,
 })
 
 export const metamaskState = z.object({

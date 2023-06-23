@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { FilecoinNumber } from '@glif/filecoin-number/dist'
 import { z } from 'zod'
-import {
-  transactionSign,
-  transactionSignRaw,
-  // @ts-expect-error - TODO: fix types
-} from '@zondax/filecoin-signing-tools/js'
-import { Message, MessageSchemaPartial } from 'iso-rpc'
+import { Message, Schemas } from 'iso-filecoin/message'
+import { Token } from 'iso-filecoin/token'
+import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
 import { showConfirmationDialog } from '../util/confirmation'
 import { messageCreator } from '../util/messageCreator'
 import { serializeError } from '../utils'
+import { base64pad } from 'iso-base/rfc4648'
 
 // Schemas
-export const signMessageParams = MessageSchemaPartial.omit({ from: true })
+export const signMessageParams = Schemas.messagePartial.omit({
+  from: true,
+})
 export const signMessageRawParams = z.object({
   message: z.string(),
 })
@@ -44,24 +43,25 @@ export async function signMessage(
   params: SignMessageParams
 ): Promise<SignMessageResponse> {
   const _params = signMessageParams.safeParse(params)
-  if (_params.success === false) {
+  if (!_params.success) {
     return serializeError(
       `Invalid params ${_params.error.message}`,
       _params.error
     )
   }
 
-  // create message object
-  const message = new Message({
+  // create Message
+  const message = await new Message({
     to: _params.data.to,
-    from: ctx.keypair.address,
+    from: ctx.account.address.toString(),
     value: _params.data.value,
+    nonce: _params.data.nonce,
     gasFeeCap: _params.data.gasFeeCap,
     gasLimit: _params.data.gasLimit,
     gasPremium: _params.data.gasPremium,
-  })
-
-  await message.prepare(ctx.rpc)
+    params: _params.data.params,
+    method: _params.data.method,
+  }).prepare(ctx.rpc)
 
   // show confirmation
   const confirmation = await showConfirmationDialog(ctx.snap, {
@@ -72,7 +72,7 @@ export async function signMessage(
       { message: 'from:', value: message.from },
       {
         message: 'value:',
-        value: `${new FilecoinNumber(message.value, 'attofil').toFil()} FIL`,
+        value: `${Token.fromAttoFIL(message.value).toFIL()} FIL`,
       },
       { message: 'method:', value: message.method },
       { message: 'params:', value: message.params },
@@ -82,10 +82,17 @@ export async function signMessage(
     ]),
   })
 
-  let sig: SignedMessage
   if (confirmation) {
-    sig = transactionSign(message, ctx.keypair.privateKey)
-    return { result: sig }
+    const sig = filSignMessage(ctx.account.privateKey, 'SECP256K1', message)
+    return {
+      result: {
+        message,
+        signature: {
+          data: base64pad.encode(sig),
+          type: 'SECP256K1',
+        },
+      },
+    }
   }
   return serializeError('User denied message signing')
 }
@@ -111,15 +118,16 @@ export async function signMessageRaw(
 
   const { message } = _params.data
   const confirmation = await showConfirmationDialog(ctx.snap, {
-    description: `It will be signed with address: ${ctx.keypair.address}`,
+    description: `It will be signed with address: ${ctx.account.address}`,
     prompt: `Do you want to sign this message?`,
     textAreaContent: message,
   })
 
-  let sig: string
   if (confirmation) {
-    sig = transactionSignRaw(message, ctx.keypair.privateKey).toString('base64')
-    return { result: sig }
+    const sig = sign(ctx.account.privateKey, 'SECP256K1', message)
+    return {
+      result: base64pad.encode(sig),
+    }
   }
 
   return serializeError('User denied message signing')

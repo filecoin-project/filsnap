@@ -1,38 +1,32 @@
+import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import type { RPC } from 'iso-filecoin/rpc'
+import type { MessageObj } from 'iso-filecoin/types'
 import type { z } from 'zod'
 import type {
   literal,
   messageStatus,
   metamaskState,
-  network,
   snapConfig,
 } from './schemas'
-import type { MessageSchema, RPC } from 'iso-rpc'
-import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
+
+export type { MessageObj, Network } from 'iso-filecoin/types'
 
 // Schema types
 export type Literal = z.infer<typeof literal>
 export type Json = Literal | { [key: string]: Json } | Json[]
-export type Message = z.infer<typeof MessageSchema>
-export type Network = z.infer<typeof network>
 export type SnapConfig = z.infer<typeof snapConfig>
 export type MessageStatus = z.infer<typeof messageStatus>
 export type MetamaskState = z.infer<typeof metamaskState>
+export type Account = ReturnType<typeof accountFromPrivateKey>
 
 // Filecoin types
 export interface SignedMessage {
-  message: Message
-  signature: MessageSignature
-}
-
-export interface MessageSignature {
-  data: string
-  type: number
-}
-
-export interface KeyPair {
-  address: string
-  privateKey: string
-  publicKey: string
+  message: MessageObj
+  signature: {
+    type: 'SECP256K1'
+    data: string
+  }
 }
 
 // Snap types
@@ -70,5 +64,5 @@ export interface SnapContext {
   config: SnapConfig
   snap: SnapsGlobalObject
   rpc: RPC
-  keypair: KeyPair
+  account: Account
 }

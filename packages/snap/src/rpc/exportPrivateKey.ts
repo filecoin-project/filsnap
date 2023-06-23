@@ -1,6 +1,7 @@
 import { showConfirmationDialog } from '../util/confirmation'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
+import { base64pad } from 'iso-base/rfc4648'
 
 // Types
 export type ExportPrivateKeyResponse = SnapResponse<string>
@@ -15,12 +16,12 @@ export async function exportPrivateKey(
   ctx: SnapContext
 ): Promise<ExportPrivateKeyResponse> {
   // ask for confirmation
-  const confirmation = await showConfirmationDialog(snap, {
+  const confirmation = await showConfirmationDialog(ctx.snap, {
     prompt: 'Do you want to export your private key?',
   })
   // return private key if user confirmed actions
   if (confirmation) {
-    return { result: ctx.keypair.privateKey }
+    return { result: base64pad.encode(ctx.account.privateKey) }
   }
   return serializeError('User denied private key export')
 }

@@ -1,12 +1,9 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import merge from 'merge-options'
 import { snapConfig } from '../schemas'
-import {
-  configFromNetwork,
-  parseDerivationPath,
-  serializeError,
-} from '../utils'
-import { RPC } from 'iso-rpc'
+import { configFromNetwork, serializeError } from '../utils'
+import { RPC } from 'iso-filecoin/rpc'
+import { parseDerivationPath } from 'iso-filecoin/utils'
 import type { MetamaskState, SnapConfig, SnapResponse } from '../types'
 
 // Types

@@ -1,14 +1,16 @@
 import { createFixture } from 'metamask-testing-tools'
-import type {
-  GetBalanceResponse,
-  ExportPrivateKeyResponse,
-  GetAddressResponse,
-  GetMessagesResponse,
-  GetPublicResponse,
-  SignMessageRawResponse,
-  SignMessageRawRequest,
-  SignMessageResponse,
-  SignMessageRequest,
+import {
+  type GetBalanceResponse,
+  type ExportPrivateKeyResponse,
+  type GetAddressResponse,
+  type GetMessagesResponse,
+  type GetPublicResponse,
+  type SignMessageRawResponse,
+  type SignMessageRawRequest,
+  type SignMessageResponse,
+  type SignMessageRequest,
+  type SendMessageResponse,
+  type SendMessageRequest,
 } from '../../src/index'
 
 const { test, expect } = createFixture({
@@ -109,7 +111,7 @@ test.describe('filsnap testnet', () => {
     })
 
     expect(result).toStrictEqual(
-      'qwM8IkldjEZqTSy8dRiuxHkieagJCjRrVOJPHzPdrrYMxRvhJcjZUslGjslVSz8aOQEmdh8BznPGBUlz9dPPBgE='
+      'BjNeqpqxb9CdnxVbE3J8YGHMg9kZjAz95mnnlASUSGgluIhTvaNRB5/Qx5/dKXqzBvpSclOXQfkeeRvqvo3jqAA='
     )
   })
 
@@ -145,6 +147,10 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
+    if (result == null) {
+      throw new Error('Failed to sign message')
+    }
+
     expect(result).toMatchObject({
       message: {
         to,
@@ -154,7 +160,58 @@ test.describe('filsnap testnet', () => {
         value: '1',
       },
       signature: {
-        type: 1,
+        type: 'SECP256K1',
+      },
+    })
+  })
+
+  test('should send message', async ({ metamask, page }) => {
+    const from = 't1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna'
+    const to = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
+
+    metamask.on('notification', (page) => {
+      void page.getByRole('button').filter({ hasText: 'Approve' }).click()
+    })
+
+    const message = {
+      to,
+      value: '1',
+    }
+    const signedMessageResponse =
+      await metamask.invokeSnap<SignMessageResponse>({
+        request: {
+          method: 'fil_signMessage',
+          params: message,
+        } satisfies SignMessageRequest,
+        page,
+      })
+
+    if (signedMessageResponse.error != null) {
+      throw new Error('Failed to sign message')
+    }
+
+    const sendResponse = await metamask.invokeSnap<SendMessageResponse>({
+      request: {
+        method: 'fil_sendMessage',
+        params: {
+          message: signedMessageResponse.result.message,
+          signature: signedMessageResponse.result.signature,
+        },
+      } satisfies SendMessageRequest,
+      page,
+    })
+
+    if (sendResponse.error != null) {
+      throw new Error(sendResponse.error.message)
+    }
+
+    expect(sendResponse.result).toMatchObject({
+      message: {
+        from,
+        method: 0,
+        params: '',
+        to,
+        value: '1',
       },
     })
   })

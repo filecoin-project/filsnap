@@ -1,4 +1,4 @@
-import { Message, MessageSchemaPartial } from 'iso-rpc'
+import { Schemas } from 'iso-filecoin/message'
 import { z } from 'zod'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
@@ -7,7 +7,7 @@ import { serializeError } from '../utils'
 const DEFAULT_MAX_FEE = '100000000000000000'
 // Schemas
 export const estimateParams = z.object({
-  message: MessageSchemaPartial.omit({ from: true }),
+  message: Schemas.messagePartial.omit({ from: true }),
   maxFee: z.string().optional(),
 })
 
@@ -34,7 +34,7 @@ export async function estimateMessageGas(
   ctx: SnapContext,
   params: EstimateParams
 ): Promise<EstimateMessageGasResponse> {
-  const { rpc, keypair } = ctx
+  const { rpc, account: keypair } = ctx
   const _params = estimateParams.safeParse(params)
   if (!_params.success) {
     return serializeError(
@@ -44,11 +44,11 @@ export async function estimateMessageGas(
   }
 
   const { message, maxFee } = _params.data
-  const msg = new Message({
+  const msg = {
     to: message.to,
-    from: keypair.address,
+    from: keypair.address.toString(),
     value: message.value,
-  })
+  }
   const { error, result } = await rpc.gasEstimate(
     msg,
     maxFee == null ? DEFAULT_MAX_FEE : maxFee

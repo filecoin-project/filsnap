@@ -17,7 +17,7 @@ export const mainnetConfig: SnapConfig = {
 // devnet configuration replaces testnet for now
 export const testnetConfig: SnapConfig = {
   derivationPath: "m/44'/1'/0'/0/0",
-  network: 'mainnet',
+  network: 'testnet',
   rpc: {
     token: '',
     url: `https://api.calibration.node.glif.io`,

@@ -1,4 +1,4 @@
-import { getAddress } from '../../../src/rpc/getAddress'
+import { getKeyPair } from '../../../src/filecoin/account'
 import { expect } from '../../utils'
 import { mockSnapProvider } from '../wallet-mock'
 import { testAddress, testBip44Entropy } from './keyPairTestConstants'
@@ -14,9 +14,9 @@ describe('Test rpc handler function: getAddress', function () {
   it('should return valid address', async function () {
     walletStub.prepareFoKeyPair()
 
-    const result = await getAddress(walletStub)
+    const result = await getKeyPair(walletStub)
 
-    expect(result).to.be.eq(testAddress)
+    expect(result.address.toString()).to.be.eq(testAddress)
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
   })
@@ -35,8 +35,8 @@ describe('Test rpc handler function: getAddress', function () {
           messages: [],
         },
       })
-    let result = await getAddress(walletStub)
-    expect(result).to.not.be.eq(testAddress)
+    let result = await getKeyPair(walletStub)
+    expect(result.address).to.not.be.eq(testAddress)
     expect(result).to.not.be.null()
 
     walletStub.rpcStubs.snap_manageState
@@ -51,8 +51,8 @@ describe('Test rpc handler function: getAddress', function () {
           messages: [],
         },
       })
-    result = await getAddress(walletStub)
-    expect(result).to.not.be.eq(testAddress)
+    result = await getKeyPair(walletStub)
+    expect(result.address).to.not.be.eq(testAddress)
     expect(result).to.not.be.null()
 
     walletStub.rpcStubs.snap_manageState
@@ -67,8 +67,8 @@ describe('Test rpc handler function: getAddress', function () {
           messages: [],
         },
       })
-    result = await getAddress(walletStub)
-    expect(result).to.not.be.eq(testAddress)
+    result = await getKeyPair(walletStub)
+    expect(result.address).to.not.be.eq(testAddress)
     expect(result).to.not.be.null()
   })
 })
