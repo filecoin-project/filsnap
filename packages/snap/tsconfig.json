@@ -8,7 +8,7 @@
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],
     "includeVersion": true,
-    "excludeExternals": true,
+    "excludeExternals": false,
     "internalModule": "<internal>"
   },
 

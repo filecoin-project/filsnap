@@ -1,4 +1,4 @@
-name: Testing
+name: Snap
 env:
   CI: true
   FORCE_COLOR: 1

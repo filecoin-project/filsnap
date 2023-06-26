@@ -13,7 +13,7 @@ export const estimateParams = z.object({
 
 // Types
 export type EstimateParams = z.infer<typeof estimateParams>
-export interface EstimateMessageGasRequest {
+export interface GasForMessageRequest {
   method: 'fil_getGasForMessage'
   params: EstimateParams
 }
@@ -22,7 +22,7 @@ export interface MessageGasEstimate {
   gaslimit: number
   gaspremium: string
 }
-export type EstimateMessageGasResponse = SnapResponse<MessageGasEstimate>
+export type GasForMessageResponse = SnapResponse<MessageGasEstimate>
 
 /**
  * Get the gas estimate for a message
@@ -30,10 +30,10 @@ export type EstimateMessageGasResponse = SnapResponse<MessageGasEstimate>
  * @param ctx - Snap context
  * @param params - Estimate params
  */
-export async function estimateMessageGas(
+export async function gasForMessage(
   ctx: SnapContext,
   params: EstimateParams
-): Promise<EstimateMessageGasResponse> {
+): Promise<GasForMessageResponse> {
   const { rpc, account: keypair } = ctx
   const _params = estimateParams.safeParse(params)
   if (!_params.success) {

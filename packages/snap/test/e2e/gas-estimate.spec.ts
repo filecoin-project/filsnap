@@ -1,7 +1,7 @@
 import { createFixture } from 'metamask-testing-tools'
 import type {
-  EstimateMessageGasRequest,
-  EstimateMessageGasResponse,
+  GasForMessageRequest,
+  GasForMessageResponse,
 } from '../../src/rpc/gas-for-message'
 
 const TARGET_ADDRESS = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
@@ -33,7 +33,7 @@ test.describe('fil_getGasForMessage', () => {
       value: '0',
     }
 
-    const estimate = await metamask.invokeSnap<EstimateMessageGasResponse>({
+    const estimate = await metamask.invokeSnap<GasForMessageResponse>({
       request: {
         method: 'fil_getGasForMessage',
         params: { message },
@@ -57,7 +57,7 @@ test.describe('fil_getGasForMessage', () => {
       value: '0',
     }
 
-    const estimate = await metamask.invokeSnap<EstimateMessageGasResponse>({
+    const estimate = await metamask.invokeSnap<GasForMessageResponse>({
       request: {
         method: 'fil_getGasForMessage',
         params: { message, maxFee: '200000000000000000' },
@@ -81,7 +81,7 @@ test.describe('fil_getGasForMessage', () => {
       value: '100000000000000000',
     }
 
-    const estimate = await metamask.invokeSnap<EstimateMessageGasResponse>({
+    const estimate = await metamask.invokeSnap<GasForMessageResponse>({
       request: {
         method: 'fil_getGasForMessage',
         params: { message },
@@ -102,12 +102,12 @@ test.describe('fil_getGasForMessage', () => {
       value: 100,
     }
 
-    const estimate = await metamask.invokeSnap<EstimateMessageGasResponse>({
+    const estimate = await metamask.invokeSnap<GasForMessageResponse>({
       request: {
         method: 'fil_getGasForMessage',
         // @ts-expect-error - Invalid params
         params: { message },
-      } satisfies EstimateMessageGasRequest,
+      } satisfies GasForMessageRequest,
       page,
     })
 
