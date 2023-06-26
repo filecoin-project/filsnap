@@ -4,7 +4,6 @@ import commonjs from '@rollup/plugin-commonjs'
 import snaps from '@metamask/snaps-rollup-plugin'
 import sucrase from '@rollup/plugin-sucrase'
 import terser from '@rollup/plugin-terser'
-// import sizes from 'rollup-plugin-sizes'
 
 export default defineConfig({
   input: 'src/index.ts',
@@ -31,6 +30,5 @@ export default defineConfig({
       writeManifest: true,
     }),
     terser(),
-    // sizes(),
   ],
 })

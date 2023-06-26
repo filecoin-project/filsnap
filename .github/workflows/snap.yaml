@@ -1,0 +1,76 @@
+name: Testing
+env:
+  CI: true
+  FORCE_COLOR: 1
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/snap/**'
+      - '.github/workflows/snap.yml'
+      - 'pnpm-lock.yaml'
+  pull_request:
+    paths:
+      - 'packages/snap/**'
+      - '.github/workflows/snap.yml'
+      - 'pnpm-lock.yaml'
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm dlx playwright install chromium --with-deps
+      - run: pnpm -r --filter filsnap run lint
+      - run: pnpm -r --filter filsnap exec depcheck
+      - id: tests
+        run: pnpm -r --filter filsnap run test
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: packages/snap/playwright-report/
+          retention-days: 30
+      - name: Check for playwright-report
+        id: check_report
+        if: always()
+        uses: andstor/file-existence-action@v2
+        with:
+          files: packages/snap/playwright-report
+      - name: Add report to web3.storage
+        if: always() && steps.check_report.outputs.files_exists == 'true'
+        uses: web3-storage/add-to-web3@v2
+        id: add_to_web3_storage
+        with:
+          path_to_add: packages/snap/playwright-report
+          web3_token: ${{ secrets.WEB3_TOKEN }}
+      - name: Add url to GITHUB_STEP_SUMMARY
+        if: always() && steps.add_to_web3_storage.outputs.cid
+        run: |
+          echo "
+          ### playwright-report
+          * url: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
+          " >> $GITHUB_STEP_SUMMARY
+      - uses: mshick/add-pr-comment@v2
+        if: always() && steps.tests.outcome != 'success' && github.event_name == 'pull_request'
+        with:
+          message: |
+            ### Tests failed 🤷🏻‍♂️
+            Check report and traces: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
+      - uses: mshick/add-pr-comment@v2
+        if: always() && steps.tests.outcome == 'success' && github.event_name == 'pull_request'
+        with:
+          message: |
+            ### Tests passed 🎉

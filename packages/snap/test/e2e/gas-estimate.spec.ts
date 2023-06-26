@@ -2,7 +2,7 @@ import { createFixture } from 'metamask-testing-tools'
 import type {
   EstimateMessageGasRequest,
   EstimateMessageGasResponse,
-} from '../../src/rpc/estimateMessageGas'
+} from '../../src/rpc/gas-for-message'
 
 const TARGET_ADDRESS = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 const { test, expect } = createFixture({

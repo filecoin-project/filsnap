@@ -1,6 +1,6 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import sinon from 'sinon'
-import { testBip44Entropy } from './rpc/keyPairTestConstants'
+import { testBip44Entropy } from './rpc/fixtures'
 import * as Constants from '../../src/constants'
 
 class WalletMock implements SnapsGlobalObject {

@@ -1,7 +1,7 @@
 import { expect } from '../../utils'
-import { exportPrivateKey } from '../../../src/rpc/exportPrivateKey'
+import { exportPrivateKey } from '../../../src/rpc/export-private-key'
 import { mockSnapProvider } from '../wallet-mock'
-import { testPrivateKeyBase64 } from './keyPairTestConstants'
+import { testPrivateKeyBase64 } from './fixtures'
 import { getKeyPair } from '../../../src/keypair'
 
 describe('Test rpc handler function: exportSeed', function () {

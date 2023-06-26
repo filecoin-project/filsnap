@@ -5,7 +5,7 @@ import {
   testBip44Entropy,
   testPrivateKeyBase64,
   testPublicKey,
-} from '../rpc/keyPairTestConstants'
+} from '../rpc/fixtures'
 import { mockSnapProvider } from '../wallet-mock'
 import { base16, base64pad } from 'iso-base/rfc4648'
 
