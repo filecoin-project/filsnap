@@ -7,9 +7,9 @@ import type {
   SignMessageRawResponse,
   SnapConfig,
   MessageGasEstimate,
-} from 'filsnap/src/types.ts'
+} from 'filsnap/src/types'
 
-import type { MetamaskFilecoinSnap } from './snap.ts'
+import type { MetamaskFilecoinSnap } from './snap'
 
 /**
  * Invoke a snap method

@@ -1,4 +1,4 @@
-import type { FilecoinSnapApi } from 'filsnap/src/types.ts'
+import type { FilecoinSnapApi } from 'filsnap/src/types'
 import {
   calculateGasForMessage,
   configure,
@@ -10,7 +10,7 @@ import {
   sendMessage,
   signMessage,
   signMessageRaw,
-} from './methods.ts'
+} from './methods'
 
 export class MetamaskFilecoinSnap {
   // snap parameters

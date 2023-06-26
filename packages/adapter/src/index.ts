@@ -1,19 +1,11 @@
-import type { SnapConfig } from 'filsnap/src/types.ts'
-import {
-  hasMetaMask,
-  isMetamaskSnapsSupported,
-  isSnapInstalled,
-} from './utils.ts'
-import { MetamaskFilecoinSnap } from './snap.ts'
+import type { SnapConfig } from 'filsnap/src/types'
+import { hasMetaMask, isMetamaskSnapsSupported, isSnapInstalled } from './utils'
+import { MetamaskFilecoinSnap } from './snap'
 
 const defaultSnapOrigin = 'npm:filsnap'
 
-export { MetamaskFilecoinSnap } from './snap.ts'
-export {
-  hasMetaMask,
-  isMetamaskSnapsSupported,
-  isSnapInstalled,
-} from './utils.ts'
+export { MetamaskFilecoinSnap } from './snap'
+export { hasMetaMask, isMetamaskSnapsSupported, isSnapInstalled } from './utils'
 
 export type SnapInstallationParamNames = 'version' | string
 
