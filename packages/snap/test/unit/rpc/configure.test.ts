@@ -25,9 +25,11 @@ describe('Test rpc handler function: configure', function () {
       })
       .resolves()
 
-    const result = await configure(walletStub, 't')
+    const result = await configure(walletStub, {
+      network: 'testnet',
+    })
 
-    expect(result.snapConfig).to.be.deep.eq(Constants.testnetConfig)
+    expect(result.result).to.be.deep.eq(Constants.testnetConfig)
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
@@ -61,11 +63,12 @@ describe('Test rpc handler function: configure', function () {
       })
       .resolves()
 
-    const result = await configure(walletStub, 't', {
+    const result = await configure(walletStub, {
+      network: 'testnet',
       unit: { symbol: 'xFIL', decimals: 6 },
     })
 
-    expect(result.snapConfig).to.be.deep.eq(customConfiguration)
+    expect(result.result).to.be.deep.eq(customConfiguration)
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledWithExactly(
       {
         newState: {
@@ -83,11 +86,14 @@ describe('Test rpc handler function: configure', function () {
       .withArgs({ operation: 'get' })
       .resolves(Constants.initialState)
 
-    await expect(
-      configure(walletStub, 'f', {
-        derivationPath: "m/44'/1'/0'/0/0",
-      })
-    ).rejectedWith(Error, 'Wrong CoinType in derivation path')
+    const { error } = await configure(walletStub, {
+      network: 'mainnet',
+      derivationPath: "m/44'/1'/0'/0/0",
+    })
+
+    expect(error?.message).to.be.eq(
+      'For mainnet, CoinType must be 461 but got 1'
+    )
   })
 
   it('should throw error if wrong derivation path on testnet', async function () {
@@ -96,10 +102,13 @@ describe('Test rpc handler function: configure', function () {
       .withArgs({ operation: 'get' })
       .resolves(Constants.initialState)
 
-    await expect(
-      configure(walletStub, 't', {
-        derivationPath: "m/44'/461'/0'/0/0",
-      })
-    ).rejectedWith(Error, 'Wrong CoinType in derivation path')
+    const { error } = await configure(walletStub, {
+      network: 'testnet',
+      derivationPath: "m/44'/461'/0'/0/0",
+    })
+
+    expect(error?.message).to.be.eq(
+      'For testnet, CoinType must be 1 but got 461'
+    )
   })
 })

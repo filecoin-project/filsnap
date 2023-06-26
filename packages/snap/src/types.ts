@@ -1,205 +1,68 @@
-export interface GetPublicKeyRequest {
-  method: 'fil_getPublicKey'
-}
+import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import type { RPC } from 'iso-filecoin/rpc'
+import type { MessageObj } from 'iso-filecoin/types'
+import type { z } from 'zod'
+import type {
+  literal,
+  messageStatus,
+  metamaskState,
+  snapConfig,
+} from './schemas'
+import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 
-export interface GetAddressRequest {
-  method: 'fil_getAddress'
-}
+export type { MessageObj, Network } from 'iso-filecoin/types'
 
-export interface ExportSeedRequest {
-  method: 'fil_exportPrivateKey'
-}
-
-export interface ConfigureRequest {
-  method: 'fil_configure'
-  params: {
-    configuration: SnapConfig
-  }
-}
-
-export interface SignMessageRequest {
-  method: 'fil_signMessage'
-  params: {
-    message: MessageRequest
-  }
-}
-
-export interface SignMessageRawRequest {
-  method: 'fil_signMessageRaw'
-  params: {
-    message: string
-  }
-}
-
-export interface SendMessageRequest {
-  method: 'fil_sendMessage'
-  params: {
-    signedMessage: SignedMessage
-  }
-}
-
-export interface GetBalanceRequest {
-  method: 'fil_getBalance'
-}
-
-export interface GetMessagesRequest {
-  method: 'fil_getMessages'
-}
-
-export interface GetGasForMessageRequest {
-  method: 'fil_getGasForMessage'
-  params: {
-    message: MessageRequest
-    maxFee?: string
-  }
-}
-
-export type MetamaskFilecoinRpcRequest =
-  | GetPublicKeyRequest
-  | GetAddressRequest
-  | ExportSeedRequest
-  | ConfigureRequest
-  | GetBalanceRequest
-  | GetMessagesRequest
-  | SignMessageRequest
-  | SignMessageRawRequest
-  | SendMessageRequest
-  | GetGasForMessageRequest
-
-// type Method = MetamaskFilecoinRpcRequest['method']
-
-export interface WalletRequestSnapsRequest {
-  method: 'wallet_requestSnaps'
-  params: object
-}
-
-export interface GetSnapsRequest {
-  method: 'wallet_getSnaps'
-}
-
-export interface SnapRpcMethodRequest {
-  method: string
-  params: MetamaskFilecoinRpcRequest
-}
-
-export type MetamaskRpcRequest =
-  | WalletRequestSnapsRequest
-  | GetSnapsRequest
-  | SnapRpcMethodRequest
-
-export interface UnitConfiguration {
-  symbol: string
-  decimals: number
-  image?: string
-  customViewUrl?: string
-}
-
-export interface SnapConfig {
-  derivationPath: string
-  network: FilecoinNetwork
-  rpc: {
-    token: string
-    url: string
-  }
-  unit?: UnitConfiguration
-}
-
-export type Callback<T> = (arg: T) => void
+// Schema types
+export type Literal = z.infer<typeof literal>
+export type Json = Literal | { [key: string]: Json } | Json[]
+export type SnapConfig = z.infer<typeof snapConfig>
+export type MessageStatus = z.infer<typeof messageStatus>
+export type MetamaskState = z.infer<typeof metamaskState>
+export type Account = ReturnType<typeof accountFromPrivateKey>
 
 // Filecoin types
-
-export interface Message {
-  to: string
-  from: string
-  nonce: number
-  value: string
-  gasfeecap: string
-  gaspremium: string
-  gaslimit: number
-  method: number
-  params?: string
-}
-
 export interface SignedMessage {
-  message: Message
-  signature: MessageSignature
+  message: MessageObj
+  signature: {
+    type: 'SECP256K1'
+    data: string
+  }
 }
 
-export interface MessageSignature {
-  data: string
-  type: number
-}
-
-export type SignMessageResponse =
+// Snap types
+export type SnapErrorData =
+  | Json
   | {
-      confirmed: true
-      error: undefined
-      signedMessage: SignedMessage
-    }
-  | {
-      confirmed: false
-      error: Error
-      signedMessage: undefined
+      [key: string]: unknown
+      cause: unknown
     }
 
-export type SignRawMessageResponse =
+/**
+ * Error returned from a snap request
+ */
+export interface SnapError {
+  message: string
+  data?: SnapErrorData
+}
+
+export interface SnapResponseError {
+  error: SnapError
+  result?: null
+}
+
+/**
+ * Response from a snap request
+ */
+export type SnapResponse<R> =
   | {
-      confirmed: true
-      error: undefined
-      signature: string
+      error?: null
+      result: R
     }
-  | {
-      confirmed: false
-      error: Error
-      signature: undefined
-    }
+  | SnapResponseError
 
-export interface MessageRequest {
-  to: string
-  value: string
-  gaslimit?: number
-  gasfeecap?: string
-  gaspremium?: string
-  nonce?: number
-  method?: number
-  params?: string
-}
-
-export interface MessageGasEstimate {
-  gaslimit: number
-  gasfeecap: string
-  gaspremium: string
-  maxfee: string
-}
-
-export interface MessageStatus {
-  message: Message
-  cid: string
-}
-
-export type FilecoinNetwork = 'f' | 't'
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface FilecoinEventApi {}
-
-export interface FilecoinSnapApi {
-  getPublicKey: () => Promise<string>
-  getAddress: () => Promise<string>
-  getBalance: () => Promise<string>
-  exportPrivateKey: () => Promise<string>
-  configure: (configuration: Partial<SnapConfig>) => Promise<void>
-  signMessage: (message: MessageRequest) => Promise<SignMessageResponse>
-  signMessageRaw: (message: string) => Promise<SignRawMessageResponse>
-  sendMessage: (signedMessage: SignedMessage) => Promise<MessageStatus>
-  getMessages: () => Promise<MessageStatus[]>
-  calculateGasForMessage: (
-    message: MessageRequest,
-    maxFee?: string
-  ) => Promise<MessageGasEstimate>
-}
-
-export interface KeyPair {
-  address: string
-  privateKey: string
-  publicKey: string
+export interface SnapContext {
+  config: SnapConfig
+  snap: SnapsGlobalObject
+  rpc: RPC
+  account: Account
 }

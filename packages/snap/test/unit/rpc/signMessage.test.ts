@@ -1,35 +1,36 @@
 import { expect } from '../../utils'
 import { signMessage } from '../../../src/rpc/signMessage'
-import type { Message, MessageRequest } from '../../../src/types'
 import { LotusApiMock } from '../lotusapi-mock'
 import { mockSnapProvider } from '../wallet-mock'
+import { getKeyPair } from '../../../src/filecoin/account'
 
 describe('Test rpc handler function: signMessage', function () {
   const walletStub = mockSnapProvider()
   const apiStub = new LotusApiMock()
 
-  const messageRequest: MessageRequest = {
+  const messageRequest = {
+    version: 0,
     to: 't12flyjpedjjqlrr2dmlnrtbh62qav3b3h7o7lohy',
     value: '5000000000000000',
   }
 
-  const fullMessage: Message = {
+  const fullMessage = {
     ...messageRequest,
     from: 'f1ekszptik2ognlx24xz7zubejtw3cyidv4t4ibyy',
-    gasfeecap: '10',
-    gaslimit: 1000,
-    gaspremium: '10',
+    gasFeeCap: '10',
+    gasLimit: 1000,
+    gasPremium: '10',
     method: 0,
     nonce: 0,
     params: '',
   }
 
-  const paramsMessage: Message = {
+  const paramsMessage = {
     ...messageRequest,
     from: 'f1ekszptik2ognlx24xz7zubejtw3cyidv4t4ibyy',
-    gasfeecap: '10',
-    gaslimit: 1000,
-    gaspremium: '10',
+    gasFeeCap: '10',
+    gasLimit: 1000,
+    gasPremium: '10',
     method: 0,
     nonce: 0,
     params: 'bugugugu',
@@ -43,29 +44,35 @@ describe('Test rpc handler function: signMessage', function () {
   it('should successfully sign valid message without gas params on positive prompt', async function () {
     walletStub.rpcStubs.snap_dialog.resolves(true)
     walletStub.prepareFoKeyPair()
+    const account = await getKeyPair(walletStub)
 
-    apiStub.mpoolGetNonce.returns('0')
-    apiStub.gasEstimateMessageGas.returns({
-      GasPremium: '10',
-      GasFeeCap: '10',
-      GasLimit: 1000,
+    apiStub.nonce.returns({ result: 0 })
+    apiStub.gasEstimate.returns({
+      result: {
+        GasPremium: '10',
+        GasFeeCap: '10',
+        GasLimit: 1000,
+      },
     })
 
-    const response = await signMessage(walletStub, apiStub, messageRequest)
+    const response = await signMessage(
+      // @ts-expect-error - test code
+      { snap: walletStub, rpc: apiStub, account },
+      messageRequest
+    )
 
     expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
-    expect(apiStub.mpoolGetNonce).to.have.been.calledOnce()
-    expect(apiStub.gasEstimateMessageGas).to.have.been.calledOnce()
+    expect(apiStub.nonce).to.have.been.calledOnce()
+    expect(apiStub.gasEstimate).to.have.been.calledOnce()
 
     expect(response).to.containSubset({
-      confirmed: true,
       error: undefined,
-      signedMessage: {
+      result: {
         message: fullMessage,
         signature: {
-          type: 1,
+          type: 'SECP256K1',
           data: (expected: string) => typeof expected === 'string',
         },
       },
@@ -75,37 +82,44 @@ describe('Test rpc handler function: signMessage', function () {
   it('should successfully sign valid message with gas params on positive prompt', async function () {
     walletStub.rpcStubs.snap_dialog.resolves(true)
     walletStub.prepareFoKeyPair()
+    const account = await getKeyPair(walletStub)
 
-    apiStub.mpoolGetNonce.returns('0')
+    apiStub.nonce.returns({ result: 0 })
+    apiStub.gasEstimate.returns({
+      result: {
+        GasPremium: '10',
+        GasFeeCap: '10',
+        GasLimit: 1000,
+      },
+    })
 
-    const messageRequestWithGasParams: MessageRequest = {
+    const messageRequestWithGasParams = {
       ...messageRequest,
-      gasfeecap: '10',
-      gaslimit: 1000,
-      gaspremium: '10',
+      gasFeeCap: '10',
+      gasLimit: 1000,
+      gasPremium: '10',
       nonce: 1,
     }
     const response = await signMessage(
-      walletStub,
-      apiStub,
+      // @ts-expect-error - test code
+      { snap: walletStub, rpc: apiStub, account },
       messageRequestWithGasParams
     )
 
     expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
-    expect(apiStub.mpoolGetNonce).to.have.not.been.called()
+    expect(apiStub.nonce).to.have.not.been.called()
 
     expect(response).to.containSubset({
-      confirmed: true,
       error: undefined,
-      signedMessage: {
+      result: {
         message: {
           ...fullMessage,
           nonce: 1,
         },
         signature: {
-          type: 1,
+          type: 'SECP256K1',
           data: (expected: string) => typeof expected === 'string',
         },
       },
@@ -115,36 +129,38 @@ describe('Test rpc handler function: signMessage', function () {
   it('should successfully sign valid message with custom params on positive prompt', async function () {
     walletStub.rpcStubs.snap_dialog.resolves(true)
     walletStub.prepareFoKeyPair()
-    apiStub.mpoolGetNonce.returns('0')
-    apiStub.gasEstimateMessageGas.returns({
-      GasFeeCap: '10',
-      GasPremium: '10',
-      GasLimit: 1000,
+    const account = await getKeyPair(walletStub)
+    apiStub.nonce.returns({ result: 0 })
+    apiStub.gasEstimate.returns({
+      result: {
+        GasFeeCap: '10',
+        GasPremium: '10',
+        GasLimit: 1000,
+      },
     })
 
-    const messageRequestWithCustomParams: MessageRequest = {
+    const messageRequestWithCustomParams = {
       ...messageRequest,
       params: 'bugugugu',
     }
     const response = await signMessage(
-      walletStub,
-      apiStub,
+      // @ts-expect-error - test code
+      { snap: walletStub, rpc: apiStub, account },
       messageRequestWithCustomParams
     )
 
     expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
-    expect(apiStub.mpoolGetNonce).to.have.been.calledOnce()
-    expect(apiStub.gasEstimateMessageGas).to.have.been.calledOnce()
+    expect(apiStub.nonce).to.have.been.calledOnce()
+    expect(apiStub.gasEstimate).to.have.been.calledOnce()
 
     expect(response).to.containSubset({
-      confirmed: true,
       error: undefined,
-      signedMessage: {
+      result: {
         message: paramsMessage,
         signature: {
-          type: 1,
+          type: 'SECP256K1',
           data: (expected: string) => typeof expected === 'string',
         },
       },
@@ -154,18 +170,19 @@ describe('Test rpc handler function: signMessage', function () {
   it('should cancel signing on negative prompt', async function () {
     walletStub.rpcStubs.snap_dialog.resolves(false)
     walletStub.prepareFoKeyPair()
+    const account = await getKeyPair(walletStub)
 
-    apiStub.mpoolGetNonce.returns('0')
-    const messageRequestWithGasParams: MessageRequest = {
+    apiStub.nonce.returns('0')
+    const messageRequestWithGasParams = {
       ...messageRequest,
-      gasfeecap: '10',
-      gaslimit: 1000,
-      gaspremium: '10',
+      gasFeeCap: '10',
+      gasLimit: 1000,
+      gasPremium: '10',
     }
 
     const response = await signMessage(
-      walletStub,
-      apiStub,
+      // @ts-expect-error - test code
+      { snap: walletStub, rpc: apiStub, account },
       messageRequestWithGasParams
     )
 
@@ -174,25 +191,30 @@ describe('Test rpc handler function: signMessage', function () {
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
 
     expect(response).to.containSubset({
-      confirmed: false,
-      error: (expected: Error) => expected instanceof Error,
-      signedMessage: undefined,
+      error: {
+        message: 'User denied message signing',
+      },
+      result: undefined,
     })
   })
 
   it('should fail signing on invalid message ', async function () {
     walletStub.rpcStubs.snap_dialog.resolves(true)
     walletStub.prepareFoKeyPair()
+    const account = await getKeyPair(walletStub)
 
     const invalidMessage = messageRequest
     invalidMessage.value = '-5000000000000000'
 
-    apiStub.mpoolGetNonce.returns('0')
+    apiStub.nonce.returns('0')
 
-    const response = await signMessage(walletStub, apiStub, invalidMessage)
+    const response = await signMessage(
+      // @ts-expect-error - test code
+      { snap: walletStub, rpc: apiStub, account },
+      invalidMessage
+    )
 
-    expect(response.signedMessage).to.be.undefined()
+    expect(response.result).to.be.undefined()
     expect(response.error).to.not.be.null()
-    expect(response.confirmed).to.be.false()
   })
 })

@@ -1,20 +1,27 @@
-import type { SnapsGlobalObject } from '@metamask/snaps-types'
 import * as Schemas from '../schemas'
+import type { MessageStatus, SnapContext, SnapResponse } from '../types'
+import { serializeError } from '../utils'
+
+export type GetMessagesResponse = SnapResponse<MessageStatus[]>
 
 /**
  * Get the messages from the state
  *
- *  @param snap - The snap itself
+ *  @param ctx - Snaps context
  */
 export async function getMessages(
-  snap: SnapsGlobalObject
-): Promise<Schemas.MessageStatus[]> {
-  const _state = await snap.request({
+  ctx: SnapContext
+): Promise<GetMessagesResponse> {
+  const _state = await ctx.snap.request({
     method: 'snap_manageState',
     params: { operation: 'get' },
   })
 
-  const state = Schemas.metamaskState.parse(_state)
+  const state = Schemas.metamaskState.safeParse(_state)
 
-  return state.filecoin.messages
+  if (!state.success) {
+    return serializeError(`Invalid messages in snap state`, state.error)
+  }
+
+  return { result: state.data.filecoin.messages }
 }

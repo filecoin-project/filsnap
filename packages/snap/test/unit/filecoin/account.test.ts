@@ -1,5 +1,4 @@
-import chai, { expect } from 'chai'
-import sinonChai from 'sinon-chai'
+import { expect } from '../../utils'
 import { getKeyPair } from '../../../src/filecoin/account'
 import {
   testAddress,
@@ -8,8 +7,7 @@ import {
   testPublicKey,
 } from '../rpc/keyPairTestConstants'
 import { mockSnapProvider } from '../wallet-mock'
-
-chai.use(sinonChai)
+import { base16, base64pad } from 'iso-base/rfc4648'
 
 describe('Test account function: getKeyPair', function () {
   const walletStub = mockSnapProvider()
@@ -36,8 +34,8 @@ describe('Test account function: getKeyPair', function () {
 
     const result = await getKeyPair(walletStub)
 
-    expect(result.publicKey).to.be.eq(testPublicKey)
-    expect(result.address).to.be.eq(testAddress)
-    expect(result.privateKey).to.be.eq(testPrivateKeyBase64)
+    expect(base16.encode(result.pubKey).toLowerCase()).to.be.eq(testPublicKey)
+    expect(result.address.toString()).to.be.eq(testAddress)
+    expect(base64pad.encode(result.privateKey)).to.be.eq(testPrivateKeyBase64)
   })
 })

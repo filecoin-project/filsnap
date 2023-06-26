@@ -1,25 +1,42 @@
-import type { MessageStatus, SignedMessage } from '../types'
-import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import type {
+  MessageStatus,
+  SignedMessage,
+  SnapContext,
+  SnapResponse,
+} from '../types'
 import { updateMessageInState } from '../filecoin/message'
-import type { LotusRpcApi } from '../filecoin/types'
+import { serializeError } from '../utils'
+import { base64pad } from 'iso-base/rfc4648'
+
+// Types
+export interface SendMessageRequest {
+  method: 'fil_sendMessage'
+  params: SignedMessage
+}
+export type SendMessageResponse = SnapResponse<MessageStatus>
 
 /**
  * Send a message to the network
  *
- * @param snap - The snap itself
- * @param api - The Lotus RPC API
- * @param signedMessage - The signed message
+ * @param ctx - Snap context
+ * @param params - The signed message
  */
 export async function sendMessage(
-  snap: SnapsGlobalObject,
-  api: LotusRpcApi,
-  signedMessage: SignedMessage
-): Promise<MessageStatus> {
-  const response = await api.mpoolPush(signedMessage)
+  ctx: SnapContext,
+  params: SignedMessage
+): Promise<SendMessageResponse> {
+  const response = await ctx.rpc.pushMessage(params.message, {
+    type: params.signature.type,
+    data: base64pad.decode(params.signature.data),
+  })
+
+  if (response.error != null) {
+    return serializeError('RPC call to "MpoolPush" failed', response.error)
+  }
   const messageStatus = {
-    cid: response['/'],
-    message: signedMessage.message,
+    cid: response.result['/'],
+    message: params.message,
   }
   await updateMessageInState(snap, messageStatus)
-  return messageStatus
+  return { result: messageStatus }
 }

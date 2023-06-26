@@ -1,17 +1,15 @@
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import type { KeyPair } from '../types'
-// @ts-expect-error - no types
-import { keyRecover } from '@zondax/filecoin-signing-tools/js'
-import { Buffer } from 'buffer'
-import { parseDerivationPath, configFromSnap } from '../utils'
-
+import { accountFromPrivateKey } from 'iso-filecoin/wallet'
+import { parseDerivationPath } from 'iso-filecoin/utils'
+import type { Account } from '../types'
+import { configFromSnap } from '../utils'
 /**
  * Return derived KeyPair from seed.
  *
  * @param snap - Snaps object
  */
-export async function getKeyPair(snap: SnapsGlobalObject): Promise<KeyPair> {
+export async function getKeyPair(snap: SnapsGlobalObject): Promise<Account> {
   const config = await configFromSnap(snap)
   const { derivationPath } = config
   const { coinType, account, change, addressIndex } =
@@ -36,15 +34,9 @@ export async function getKeyPair(snap: SnapsGlobalObject): Promise<KeyPair> {
   }
   const privateKeyBuffer = privateKey.subarray(0, 32)
 
-  // TODO - remove dependency on filecoin-signing-tools and Buffer
-  const extendedKey = keyRecover(
-    Buffer.from(privateKeyBuffer),
-    !isFilecoinMainnet
+  return accountFromPrivateKey(
+    privateKeyBuffer,
+    'SECP256K1',
+    isFilecoinMainnet ? 'mainnet' : 'testnet'
   )
-
-  return {
-    address: extendedKey.address,
-    privateKey: extendedKey.private_base64,
-    publicKey: extendedKey.public_hexstring,
-  }
 }

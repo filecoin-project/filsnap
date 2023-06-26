@@ -1,9 +1,8 @@
-import type { MetamaskState } from './schemas'
-import type { SnapConfig } from './types'
+import type { MetamaskState, SnapConfig } from './types'
 
 export const mainnetConfig: SnapConfig = {
   derivationPath: "m/44'/461'/0'/0/0",
-  network: 'f',
+  network: 'mainnet',
   rpc: {
     token: '',
     url: 'https://api.node.glif.io',
@@ -18,7 +17,7 @@ export const mainnetConfig: SnapConfig = {
 // devnet configuration replaces testnet for now
 export const testnetConfig: SnapConfig = {
   derivationPath: "m/44'/1'/0'/0/0",
-  network: 't',
+  network: 'testnet',
   rpc: {
     token: '',
     url: `https://api.calibration.node.glif.io`,

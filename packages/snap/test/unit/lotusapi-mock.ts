@@ -1,26 +1,28 @@
 import sinon from 'sinon'
-import type { LotusRpcApi } from '../../src/filecoin/types'
+import type { RPC } from 'iso-filecoin/rpc'
+import type { Network } from 'iso-filecoin/types'
 
-export class LotusApiMock implements LotusRpcApi {
+// @ts-expect-error - test code
+export class LotusApiMock implements RPC {
   public version = sinon.stub()
-  public walletBalance = sinon.stub()
-  public mpoolGetNonce = sinon.stub()
-  public stateCall = sinon.stub()
-  public mpoolPush = sinon.stub()
-  public gasEstimateMessageGas = sinon.stub()
-  public gasEstimateFeeCap = sinon.stub()
-  public gasEstimateGasLimit = sinon.stub()
-  public stateNetworkName = sinon.stub()
+  public balance = sinon.stub()
+  public nonce = sinon.stub()
+  public pushMessage = sinon.stub()
+  public gasEstimate = sinon.stub()
+  public networkName = sinon.stub()
+  public fetch = globalThis.fetch
+  public network: Network = 'mainnet'
+  public api = new URL('http://localhost:1234/rpc/v0')
+  public headers = {
+    'Content-Type': 'application/json',
+  }
 
   public reset(): void {
     this.version.reset()
-    this.walletBalance.reset()
-    this.mpoolGetNonce.reset()
-    this.stateCall.reset()
-    this.mpoolPush.reset()
-    this.gasEstimateFeeCap.reset()
-    this.gasEstimateGasLimit.reset()
-    this.gasEstimateMessageGas.reset()
-    this.stateNetworkName.reset()
+    this.balance.reset()
+    this.nonce.reset()
+    this.pushMessage.reset()
+    this.gasEstimate.reset()
+    this.networkName.reset()
   }
 }

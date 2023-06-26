@@ -1,30 +1,29 @@
-import chai, { expect } from 'chai'
-import sinonChai from 'sinon-chai'
+import { expect } from '../../utils'
 import { getBalance } from '../../../src/rpc/getBalance'
 import { LotusApiMock } from '../lotusapi-mock'
 import { mockSnapProvider } from '../wallet-mock'
-
-chai.use(sinonChai)
+import { getKeyPair } from '../../../src/filecoin/account'
 
 describe('Test rpc handler function: getBalance', function () {
   const walletStub = mockSnapProvider()
-  const apiStub = new LotusApiMock()
+  const rpcStub = new LotusApiMock()
 
   afterEach(function () {
     walletStub.reset()
-    apiStub.reset()
+    rpcStub.reset()
   })
 
   it('should return balance on saved keyring in state', async function () {
     // prepare stubs
     walletStub.prepareFoKeyPair()
-
-    apiStub.walletBalance.returns('30000000')
+    const account = await getKeyPair(walletStub)
+    rpcStub.balance.returns('30000000')
     // call getBalance
-    const result = await getBalance(walletStub, apiStub)
+    // @ts-expect-error - test code
+    const result = await getBalance({ snap: walletStub, rpc: rpcStub, account })
     // assertions
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
-    expect(result).to.be.eq('0.00000000003')
+    expect(result).to.be.eq('30000000')
   })
 })

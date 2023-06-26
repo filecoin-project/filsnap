@@ -1,49 +1,67 @@
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
-import { getApiFromConfig } from '../filecoin/api'
-import { type LotusRpcApi } from '../filecoin/types'
-import { type SnapConfig } from '../types'
 import merge from 'merge-options'
-import type { MetamaskState } from '../schemas'
-import { configFromNetwork } from '../utils'
+import { snapConfig } from '../schemas'
+import { configFromNetwork, serializeError } from '../utils'
+import { RPC } from 'iso-filecoin/rpc'
+import { parseDerivationPath } from 'iso-filecoin/utils'
+import type { MetamaskState, SnapConfig, SnapResponse } from '../types'
 
-export interface ConfigureResponse {
-  api: LotusRpcApi
-  snapConfig: SnapConfig
+// Types
+export type ConfigureParams = Partial<SnapConfig>
+export interface ConfigureRequest {
+  method: 'fil_configure'
+  params: ConfigureParams
 }
+export type ConfigureResponse = SnapResponse<SnapConfig>
 
 /**
  * Configures the snap with the provided configuration
  *
  * @param snap - Snaps global object
- * @param networkName - name of the network to configure
- * @param overrides - overrides for the default configuration
+ * @param params - overrides for the default configuration
  */
 export async function configure(
   snap: SnapsGlobalObject,
-  networkName: string,
-  overrides: Partial<SnapConfig> = {}
+  params: ConfigureParams
 ): Promise<ConfigureResponse> {
-  const configuration = merge(
-    configFromNetwork(networkName),
-    overrides
-  ) as SnapConfig
-  const coinType = configuration.derivationPath.split('/')[2]
-  const bip44Code = coinType.replace("'", '')
-  // instatiate new api
-  const api = getApiFromConfig(configuration)
-  const apiNetworkName = await api.stateNetworkName()
-  // check if derivation path is valid
-  if (configuration.network === 'f' && apiNetworkName === 'mainnet') {
-    // if on mainet, coin type needs to be 461
-    if (bip44Code !== '461') {
-      throw new Error('Wrong CoinType in derivation path')
-    }
-  } else if (configuration.network === 't' && apiNetworkName !== 'mainnet') {
-    if (bip44Code !== '1') {
-      throw new Error('Wrong CoinType in derivation path')
-    }
-  } else {
-    throw new Error(
+  const _params = snapConfig.safeParse(
+    merge(configFromNetwork(params.network), params)
+  )
+  if (!_params.success) {
+    return serializeError(
+      `Invalid params ${_params.error.message}`,
+      _params.error
+    )
+  }
+
+  const {
+    derivationPath,
+    rpc: { url },
+    network,
+  } = _params.data
+
+  const { coinType } = parseDerivationPath(derivationPath)
+  const rpc = new RPC({
+    api: url,
+    network,
+  })
+  const { error, result: rpcNetwork } = await rpc.networkName()
+  if (error != null) {
+    return serializeError('RPC call to "StateNetworkName" failed', error)
+  }
+
+  if (network === 'mainnet' && rpcNetwork === 'mainnet' && coinType !== 461) {
+    return serializeError(
+      `For mainnet, CoinType must be 461 but got ${coinType}`
+    )
+  }
+
+  if (network === 'testnet' && rpcNetwork !== 'mainnet' && coinType !== 1) {
+    return serializeError(`For testnet, CoinType must be 1 but got ${coinType}`)
+  }
+
+  if (network !== 'mainnet' && rpcNetwork === 'mainnet') {
+    return serializeError(
       'Mismatch between configured network and network provided by RPC'
     )
   }
@@ -51,11 +69,11 @@ export async function configure(
     method: 'snap_manageState',
     params: { operation: 'get' },
   })) as unknown as MetamaskState
-  state.filecoin.config = configuration
+  state.filecoin.config = _params.data
 
   await snap.request({
     method: 'snap_manageState',
     params: { newState: state, operation: 'update' },
   })
-  return { api, snapConfig: configuration }
+  return { result: _params.data }
 }

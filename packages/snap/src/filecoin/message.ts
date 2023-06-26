@@ -1,5 +1,6 @@
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
 import * as Schemas from '../schemas'
+import type { MessageStatus } from '../types'
 
 // TODO - should this update the message or just add a new one? if it the same CID it should be the same message
 
@@ -11,7 +12,7 @@ import * as Schemas from '../schemas'
  */
 export async function updateMessageInState(
   snap: SnapsGlobalObject,
-  message: Schemas.MessageStatus
+  message: MessageStatus
 ): Promise<void> {
   const _state = await snap.request({
     method: 'snap_manageState',

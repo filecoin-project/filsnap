@@ -1,4 +1,4 @@
-import { type Message, type MessageStatus } from '../../../src/types'
+import { type MessageStatus } from '../../../src/types'
 import { expect } from '../../utils'
 import * as Constants from '../../../src/constants'
 import { updateMessageInState } from '../../../src/filecoin/message'
@@ -12,14 +12,16 @@ describe('Test saving transactions in state', function () {
     cid: 'a1b2c3ee',
     message: {
       from: testAddress,
-      gasfeecap: '10',
-      gaslimit: 1000,
-      gaspremium: '10',
+      gasFeeCap: '10',
+      gasLimit: 1000,
+      gasPremium: '10',
       method: 0,
       nonce: 1,
       to: testAddress,
       value: '100',
-    } satisfies Message,
+      params: '',
+      version: 0,
+    },
   } satisfies MessageStatus
 
   afterEach(function () {

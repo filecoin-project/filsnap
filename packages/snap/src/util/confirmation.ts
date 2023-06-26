@@ -1,5 +1,4 @@
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
-
 import { panel, text, heading, copyable } from '@metamask/snaps-ui'
 
 interface ConfirmationDialogContent {

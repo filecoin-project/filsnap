@@ -6,3 +6,4 @@ node_modules
 docs
 out
 test-results
+.rollup.cache
