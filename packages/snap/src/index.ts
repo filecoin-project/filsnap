@@ -16,24 +16,14 @@ import { configFromSnap, serializeError } from './utils'
 import { getKeyPair } from './keypair'
 import { hex } from 'iso-base/rfc4648'
 
-export type { ConfigureRequest, ConfigureResponse } from './rpc/configure'
-export type {
-  GasForMessageRequest,
-  GasForMessageResponse,
-} from './rpc/gas-for-message'
-export type { ExportPrivateKeyResponse } from './rpc/export-private-key'
-export type { GetBalanceResponse } from './rpc/get-balance'
-export type { GetMessagesResponse } from './rpc/get-messages'
-export type {
-  SendMessageRequest,
-  SendMessageResponse,
-} from './rpc/send-message'
-export type {
-  SignMessageRawRequest,
-  SignMessageRawResponse,
-  SignMessageRequest,
-  SignMessageResponse,
-} from './rpc/sign-message'
+export type * from './rpc/configure'
+export type * from './rpc/estimateMessageGas'
+export type * from './rpc/exportPrivateKey'
+export type * from './rpc/getBalance'
+export type * from './rpc/getMessages'
+export type * from './rpc/sendMessage'
+export type * from './rpc/signMessage'
+export type * from './types'
 
 export type GetAddressResponse = SnapResponse<string>
 export type GetPublicResponse = SnapResponse<string>

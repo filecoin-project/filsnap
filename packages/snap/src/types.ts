@@ -9,7 +9,28 @@ import type {
   snapConfig,
 } from './schemas'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
+import type { ConfigureRequest } from './rpc/configure'
+import type {
+  EstimateMessageGasRequest,
+  MessageGasEstimate,
+} from './rpc/estimateMessageGas'
+import type { ExportPrivateKeyRequest } from './rpc/exportPrivateKey'
+import type { GetMessagesRequest } from './rpc/getMessages'
+import type { GetBalanceRequest } from './rpc/getBalance'
+import type { SendMessageRequest } from './rpc/sendMessage'
+import type {
+  SignMessageRequest,
+  SignMessageRawRequest,
+  SignMessageResponse,
+  SignMessageRawResponse,
+} from './rpc/signMessage'
 
+export type { MessageGasEstimate } from './rpc/estimateMessageGas'
+export type {
+  SignMessageRequest,
+  SignMessageResponse,
+  SignMessageRawResponse,
+} from './rpc/signMessage'
 export type { MessageObj, Network } from 'iso-filecoin/types'
 
 // Schema types
@@ -84,7 +105,7 @@ export type MetamaskFilecoinRpcRequest =
   | GetMessagesRequest
   | SignMessageRequest
   | SignMessageRawRequest
-  // | SendMessageRequest
+  | SendMessageRequest
   | EstimateMessageGasRequest
 
 export interface FilecoinSnapApi {
