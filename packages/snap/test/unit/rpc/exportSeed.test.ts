@@ -2,7 +2,7 @@ import { expect } from '../../utils'
 import { exportPrivateKey } from '../../../src/rpc/exportPrivateKey'
 import { mockSnapProvider } from '../wallet-mock'
 import { testPrivateKeyBase64 } from './keyPairTestConstants'
-import { getKeyPair } from '../../../src/filecoin/account'
+import { getKeyPair } from '../../../src/keypair'
 
 describe('Test rpc handler function: exportSeed', function () {
   const walletStub = mockSnapProvider()

@@ -1,4 +1,4 @@
-import { getKeyPair } from '../../../src/filecoin/account'
+import { getKeyPair } from '../../../src/keypair'
 import { expect } from '../../utils'
 import { mockSnapProvider } from '../wallet-mock'
 import { testAddress, testBip44Entropy } from './keyPairTestConstants'

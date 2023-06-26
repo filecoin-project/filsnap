@@ -1,5 +1,5 @@
 import { expect } from '../../utils'
-import { getKeyPair } from '../../../src/filecoin/account'
+import { getKeyPair } from '../../../src/keypair'
 import { mockSnapProvider } from '../wallet-mock'
 import { testPublicKey } from './keyPairTestConstants'
 import { base16 } from 'iso-base/rfc4648'

@@ -1,8 +1,15 @@
 /* eslint-disable no-console */
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import { copyable, heading, panel, text } from '@metamask/snaps-ui'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
-import type { Json, Network, SnapConfig, SnapResponseError } from './types'
+import type {
+  Json,
+  MessageStatus,
+  Network,
+  SnapConfig,
+  SnapResponseError,
+} from './types'
 
 /**
  * Get default configuration by network name
@@ -108,4 +115,82 @@ export function serializeError(msg: string, data?: unknown): SnapResponseError {
       data: _data,
     },
   }
+}
+
+interface Message {
+  message: string
+  value: unknown | undefined
+}
+
+/**
+ * Create a UI message from an array of messages
+ *
+ * @param messages - Array of messages
+ * @returns A string containing all the messages
+ */
+export function createUIMessage(messages: Message[]): string {
+  return messages
+    .map(({ message, value }) => message + ' ' + String(value))
+    .join('\n')
+}
+
+interface ConfirmationDialogContent {
+  prompt: string
+  description?: string
+  textAreaContent?: string
+}
+
+/**
+ * Show a confirmation dialog to the user
+ *
+ * @see https://docs.metamask.io/snaps/reference/rpc-api/#confirmation-dialog
+ * @param snap - The snap itself
+ * @param message - The message to show
+ */
+export async function showConfirmationDialog(
+  snap: SnapsGlobalObject,
+  message: ConfirmationDialogContent
+): Promise<boolean> {
+  return (await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: panel([
+        heading(message.prompt),
+        text(message.description ?? ''),
+        copyable(message.textAreaContent ?? ''),
+      ]),
+    },
+  })) as boolean
+}
+
+/**
+ * Update the messages in the state
+ *
+ * @param snap - The snap itself
+ * @param message - The message to update
+ */
+export async function updateMessageInState(
+  snap: SnapsGlobalObject,
+  message: MessageStatus
+): Promise<void> {
+  const _state = await snap.request({
+    method: 'snap_manageState',
+    params: { operation: 'get' },
+  })
+
+  const state = Schemas.metamaskState.parse(_state)
+
+  const index = state.filecoin.messages.findIndex(
+    (msg) => msg.cid === message.cid
+  )
+  if (index >= 0) {
+    state.filecoin.messages[index] = message
+  } else {
+    state.filecoin.messages.push(message)
+  }
+  await snap.request({
+    method: 'snap_manageState',
+    params: { newState: state, operation: 'update' },
+  })
 }

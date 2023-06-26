@@ -2,8 +2,8 @@ import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import { parseDerivationPath } from 'iso-filecoin/utils'
-import type { Account } from '../types'
-import { configFromSnap } from '../utils'
+import type { Account } from './types'
+import { configFromSnap } from './utils'
 /**
  * Return derived KeyPair from seed.
  *

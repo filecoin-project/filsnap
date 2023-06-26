@@ -1,6 +1,5 @@
-import { showConfirmationDialog } from '../util/confirmation'
 import type { SnapContext, SnapResponse } from '../types'
-import { serializeError } from '../utils'
+import { serializeError, showConfirmationDialog } from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
 
 // Types

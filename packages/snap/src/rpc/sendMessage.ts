@@ -4,8 +4,7 @@ import type {
   SnapContext,
   SnapResponse,
 } from '../types'
-import { updateMessageInState } from '../filecoin/message'
-import { serializeError } from '../utils'
+import { serializeError, updateMessageInState } from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
 
 // Types

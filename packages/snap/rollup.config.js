@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import snaps from '@metamask/snaps-rollup-plugin'
 import sucrase from '@rollup/plugin-sucrase'
+import terser from '@rollup/plugin-terser'
 // import sizes from 'rollup-plugin-sizes'
 
 export default defineConfig({
@@ -29,6 +30,7 @@ export default defineConfig({
       manifestPath: './snap.manifest.json',
       writeManifest: true,
     }),
+    terser(),
     // sizes(),
   ],
 })

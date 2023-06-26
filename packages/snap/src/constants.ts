@@ -14,7 +14,6 @@ export const mainnetConfig: SnapConfig = {
   },
 }
 
-// devnet configuration replaces testnet for now
 export const testnetConfig: SnapConfig = {
   derivationPath: "m/44'/1'/0'/0/0",
   network: 'testnet',

@@ -1,5 +1,5 @@
 import { expect } from '../../utils'
-import { getKeyPair } from '../../../src/filecoin/account'
+import { getKeyPair } from '../../../src/keypair'
 import {
   testAddress,
   testBip44Entropy,

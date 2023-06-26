@@ -4,9 +4,11 @@ import { Message, Schemas } from 'iso-filecoin/message'
 import { Token } from 'iso-filecoin/token'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
-import { showConfirmationDialog } from '../util/confirmation'
-import { messageCreator } from '../util/messageCreator'
-import { serializeError } from '../utils'
+import {
+  createUIMessage,
+  serializeError,
+  showConfirmationDialog,
+} from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
 
 // Schemas
@@ -67,7 +69,7 @@ export async function signMessage(
   const confirmation = await showConfirmationDialog(ctx.snap, {
     description: `It will be signed with address: **${message.from}**`,
     prompt: `Do you want to sign this message?`,
-    textAreaContent: messageCreator([
+    textAreaContent: createUIMessage([
       { message: 'to:', value: message.to },
       { message: 'from:', value: message.from },
       {

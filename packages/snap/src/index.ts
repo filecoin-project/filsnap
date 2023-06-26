@@ -13,7 +13,7 @@ import { signMessage, signMessageRaw } from './rpc/signMessage'
 import type { SignMessageParams, SignMessageRawParams } from './rpc/signMessage'
 import type { SnapConfig, SnapContext, SnapResponse } from './types'
 import { configFromSnap, serializeError } from './utils'
-import { getKeyPair } from './filecoin/account'
+import { getKeyPair } from './keypair'
 import { hex } from 'iso-base/rfc4648'
 
 export type * from './rpc/configure'

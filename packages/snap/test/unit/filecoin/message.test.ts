@@ -1,9 +1,9 @@
 import { type MessageStatus } from '../../../src/types'
 import { expect } from '../../utils'
 import * as Constants from '../../../src/constants'
-import { updateMessageInState } from '../../../src/filecoin/message'
 import { testAddress } from '../rpc/keyPairTestConstants'
 import { mockSnapProvider } from '../wallet-mock'
+import { updateMessageInState } from '../../../src/utils'
 
 describe('Test saving transactions in state', function () {
   const walletStub = mockSnapProvider()

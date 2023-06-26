@@ -2,7 +2,7 @@ import { expect } from '../../utils'
 import { signMessage } from '../../../src/rpc/signMessage'
 import { LotusApiMock } from '../lotusapi-mock'
 import { mockSnapProvider } from '../wallet-mock'
-import { getKeyPair } from '../../../src/filecoin/account'
+import { getKeyPair } from '../../../src/keypair'
 
 describe('Test rpc handler function: signMessage', function () {
   const walletStub = mockSnapProvider()
