@@ -44,7 +44,7 @@ export async function enableFilecoinSnap(
   const isInstalled = await isSnapInstalled(snapId)
 
   if (!isInstalled) {
-    // // enable snap
+    // enable snap
     await window.ethereum.request({
       method: 'wallet_requestSnaps',
       params: {

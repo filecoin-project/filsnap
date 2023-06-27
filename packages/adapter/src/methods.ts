@@ -1,4 +1,5 @@
 import type {
+  EstimateMessageGasRequest,
   MessageStatus,
   MetamaskFilecoinRpcRequest,
   SignedMessage,
@@ -78,7 +79,7 @@ export async function exportPrivateKey(
  */
 export async function configure(
   this: MetamaskFilecoinSnap,
-  configuration: SnapConfig
+  configuration: Partial<SnapConfig>
 ): Promise<void> {
   await sendSnapMethod(
     { method: 'fil_configure', params: { ...configuration } },
@@ -94,10 +95,10 @@ export async function configure(
  */
 export async function signMessage(
   this: MetamaskFilecoinSnap,
-  message: SignMessageRequest
+  message: SignMessageRequest['params']
 ): Promise<SignMessageResponse> {
   return await sendSnapMethod(
-    { method: 'fil_signMessage', params: { message } },
+    { method: 'fil_signMessage', params: message },
     this.snapId
   )
 }
@@ -129,7 +130,7 @@ export async function sendMessage(
   signedMessage: SignedMessage
 ): Promise<MessageStatus> {
   return await sendSnapMethod(
-    { method: 'fil_sendMessage', params: { signedMessage } },
+    { method: 'fil_sendMessage', params: signedMessage },
     this.snapId
   )
 }
@@ -154,7 +155,7 @@ export async function getMessages(
  */
 export async function calculateGasForMessage(
   this: MetamaskFilecoinSnap,
-  message: SignMessageRequest,
+  message: EstimateMessageGasRequest['params']['message'],
   maxFee?: string
 ): Promise<MessageGasEstimate> {
   return await sendSnapMethod(

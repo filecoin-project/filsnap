@@ -17,5 +17,7 @@
     "files": true,
     // "experimentalResolver": true
     "experimentalSpecifierResolution": "node"
-  }
+  },
+
+  "references": [{ "path": "../snap" }]
 }

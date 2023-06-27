@@ -25,7 +25,10 @@ import type {
   SignMessageRawResponse,
 } from './rpc/signMessage'
 
-export type { MessageGasEstimate } from './rpc/estimateMessageGas'
+export type {
+  EstimateMessageGasRequest,
+  MessageGasEstimate,
+} from './rpc/estimateMessageGas'
 export type {
   SignMessageRequest,
   SignMessageResponse,
@@ -114,12 +117,14 @@ export interface FilecoinSnapApi {
   getBalance: () => Promise<string>
   exportPrivateKey: () => Promise<string>
   configure: (configuration: Partial<SnapConfig>) => Promise<void>
-  signMessage: (message: SignMessageRequest) => Promise<SignMessageResponse>
+  signMessage: (
+    message: SignMessageRequest['params']
+  ) => Promise<SignMessageResponse>
   signMessageRaw: (message: string) => Promise<SignMessageRawResponse>
   sendMessage: (signedMessage: SignedMessage) => Promise<MessageStatus>
   getMessages: () => Promise<MessageStatus[]>
   calculateGasForMessage: (
-    message: SignMessageRequest,
+    message: EstimateMessageGasRequest['params']['message'],
     maxFee?: string
   ) => Promise<MessageGasEstimate>
 }

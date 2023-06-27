@@ -20,12 +20,11 @@
     "snap",
     "dapp"
   ],
-  "main": "./build/index.js",
-  "module": "./build/index.js",
-  "types": "./build/index.d.ts",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
-    "test": "tsc --build && mocha --colors \"test/**/*.spec.ts\" -n loader=ts-node/esm"
+    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore"
   },
   "devDependencies": {
     "@playwright/test": "^1.35.1",
@@ -66,6 +65,6 @@
     ]
   },
   "dependencies": {
-    "filsnap": "workspace:^0.0.1"
+    "filsnap": "workspace:^"
   }
 }
