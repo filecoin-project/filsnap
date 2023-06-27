@@ -1,5 +1,5 @@
 import type {
-  EstimateMessageGasRequest,
+  GasForMessageRequest,
   MessageStatus,
   MetamaskFilecoinRpcRequest,
   SignedMessage,
@@ -155,7 +155,7 @@ export async function getMessages(
  */
 export async function calculateGasForMessage(
   this: MetamaskFilecoinSnap,
-  message: EstimateMessageGasRequest['params']['message'],
+  message: GasForMessageRequest['params']['message'],
   maxFee?: string
 ): Promise<MessageGasEstimate> {
   return await sendSnapMethod(

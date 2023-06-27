@@ -17,12 +17,12 @@ import { getKeyPair } from './keypair'
 import { hex } from 'iso-base/rfc4648'
 
 export type * from './rpc/configure'
-export type * from './rpc/estimateMessageGas'
-export type * from './rpc/exportPrivateKey'
-export type * from './rpc/getBalance'
-export type * from './rpc/getMessages'
-export type * from './rpc/sendMessage'
-export type * from './rpc/signMessage'
+export type * from './rpc/gas-for-message'
+export type * from './rpc/export-private-key'
+export type * from './rpc/get-balance'
+export type * from './rpc/get-messages'
+export type * from './rpc/send-message'
+export type * from './rpc/sign-message'
 export type * from './types'
 
 export type GetAddressResponse = SnapResponse<string>

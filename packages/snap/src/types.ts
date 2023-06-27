@@ -11,29 +11,29 @@ import type {
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { ConfigureRequest } from './rpc/configure'
 import type {
-  EstimateMessageGasRequest,
+  GasForMessageRequest,
   MessageGasEstimate,
-} from './rpc/estimateMessageGas'
-import type { ExportPrivateKeyRequest } from './rpc/exportPrivateKey'
-import type { GetMessagesRequest } from './rpc/getMessages'
-import type { GetBalanceRequest } from './rpc/getBalance'
-import type { SendMessageRequest } from './rpc/sendMessage'
+} from './rpc/gas-for-message'
+import type { ExportPrivateKeyRequest } from './rpc/export-private-key'
+import type { GetMessagesRequest } from './rpc/get-messages'
+import type { GetBalanceRequest } from './rpc/get-balance'
+import type { SendMessageRequest } from './rpc/send-message'
 import type {
   SignMessageRequest,
   SignMessageRawRequest,
   SignMessageResponse,
   SignMessageRawResponse,
-} from './rpc/signMessage'
+} from './rpc/sign-message'
 
 export type {
-  EstimateMessageGasRequest,
+  GasForMessageRequest,
   MessageGasEstimate,
-} from './rpc/estimateMessageGas'
+} from './rpc/gas-for-message'
 export type {
   SignMessageRequest,
   SignMessageResponse,
   SignMessageRawResponse,
-} from './rpc/signMessage'
+} from './rpc/sign-message'
 export type { MessageObj, Network } from 'iso-filecoin/types'
 
 // Schema types
@@ -109,7 +109,7 @@ export type MetamaskFilecoinRpcRequest =
   | SignMessageRequest
   | SignMessageRawRequest
   | SendMessageRequest
-  | EstimateMessageGasRequest
+  | GasForMessageRequest
 
 export interface FilecoinSnapApi {
   getPublicKey: () => Promise<string>
@@ -124,7 +124,7 @@ export interface FilecoinSnapApi {
   sendMessage: (signedMessage: SignedMessage) => Promise<MessageStatus>
   getMessages: () => Promise<MessageStatus[]>
   calculateGasForMessage: (
-    message: EstimateMessageGasRequest['params']['message'],
+    message: GasForMessageRequest['params']['message'],
     maxFee?: string
   ) => Promise<MessageGasEstimate>
 }
