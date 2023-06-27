@@ -41,6 +41,14 @@
   vertical-align: middle;
 }
 
+.Input {
+  border: 1px solid white;
+}
+
+.Space-below {
+  margin-bottom: 12px;
+}
+
 .Grid {
   --fl-gap-h: 1em; /* This needs to have a unit for calc() below */
   --fl-gap-v: 1em; /* This needs to have a unit for calc() below */

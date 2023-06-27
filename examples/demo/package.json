@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "test": "pnpm run build && METAMASK_TAG=v10.27.0 playwright test",
-    "dev": "vite --force",
+    "serve": "pnpm -r --filter filsnap run serve",
+    "dev": "pnpm run serve | vite --force",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --build && eslint '**/*.{js,jsx,ts}' && prettier --check '**/*.{js,jsx,ts,yml,json}' --ignore-path ../../.gitignore",
@@ -21,7 +22,7 @@
     "@acab/reset.css": "^0.5.3",
     "@chainsafe/filsnap-types": "^2.1.3",
     "@preact/signals": "^1.1.3",
-    "filsnap-adapter": "^0.0.1",
+    "filsnap-adapter": "workspace:^",
     "metamask-testing-tools": "^1.0.1",
     "preact": "^10.15.1",
     "water.css": "^2.1.1"

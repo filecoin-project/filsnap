@@ -10,7 +10,7 @@
   },
   "references": [
     {
-      "path": "../tools"
+      "path": "../../packages/adapter"
     }
   ],
   "include": ["src", "test"],
