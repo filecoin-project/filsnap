@@ -1,5 +1,5 @@
 import { expect } from '../../utils'
-import { getBalance } from '../../../src/rpc/getBalance'
+import { getBalance } from '../../../src/rpc/get-balance'
 import { LotusApiMock } from '../lotusapi-mock'
 import { mockSnapProvider } from '../wallet-mock'
 import { getKeyPair } from '../../../src/keypair'

@@ -1,7 +1,7 @@
 import { getKeyPair } from '../../../src/keypair'
 import { expect } from '../../utils'
 import { mockSnapProvider } from '../wallet-mock'
-import { testAddress, testBip44Entropy } from './keyPairTestConstants'
+import { testAddress, testBip44Entropy } from './fixtures'
 import * as Constants from '../../../src/constants'
 
 describe('Test rpc handler function: getAddress', function () {

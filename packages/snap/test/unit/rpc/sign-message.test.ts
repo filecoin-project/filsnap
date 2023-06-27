@@ -1,5 +1,5 @@
 import { expect } from '../../utils'
-import { signMessage } from '../../../src/rpc/signMessage'
+import { signMessage } from '../../../src/rpc/sign-message'
 import { LotusApiMock } from '../lotusapi-mock'
 import { mockSnapProvider } from '../wallet-mock'
 import { getKeyPair } from '../../../src/keypair'

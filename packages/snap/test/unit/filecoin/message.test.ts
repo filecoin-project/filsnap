@@ -1,7 +1,7 @@
 import { type MessageStatus } from '../../../src/types'
 import { expect } from '../../utils'
 import * as Constants from '../../../src/constants'
-import { testAddress } from '../rpc/keyPairTestConstants'
+import { testAddress } from '../rpc/fixtures'
 import { mockSnapProvider } from '../wallet-mock'
 import { updateMessageInState } from '../../../src/utils'
 

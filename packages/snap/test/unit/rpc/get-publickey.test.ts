@@ -1,7 +1,7 @@
 import { expect } from '../../utils'
 import { getKeyPair } from '../../../src/keypair'
 import { mockSnapProvider } from '../wallet-mock'
-import { testPublicKey } from './keyPairTestConstants'
+import { testPublicKey } from './fixtures'
 import { base16 } from 'iso-base/rfc4648'
 
 describe('Test rpc handler function: getPublicKey', function () {

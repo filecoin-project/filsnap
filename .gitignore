@@ -7,3 +7,4 @@ docs
 out
 test-results
 .rollup.cache
+playwright-report
