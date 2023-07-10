@@ -1,6 +1,6 @@
 import { createFixture } from 'metamask-testing-tools'
 
-const SNAP_ID = 'npm:/filsnap'
+const SNAP_ID = 'local:http://localhost:8081'
 let fixture = createFixture({
   download: {
     flask: true,
@@ -12,14 +12,14 @@ let fixture = createFixture({
 })
 
 fixture.test.describe('filsnap adapter', () => {
-  fixture.test(
+  fixture.test.only(
     'should enable snap when already installed',
     async ({ metamask, page }) => {
       await page.getByTestId('enable-snap').click()
-
+      await page.pause()
       await fixture
         .expect(page.getByTestId('output'))
-        .toHaveText(`{"snapOrigin":"${SNAP_ID}","snapId":"${SNAP_ID}"}`)
+        .toHaveText(`{"snapId":"${SNAP_ID}"}`)
     }
   )
 

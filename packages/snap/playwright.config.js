@@ -19,8 +19,4 @@ export default defineConfig({
     colorScheme: 'dark',
     browserName: 'chromium',
   },
-  webServer: {
-    command: 'pnpm run serve',
-    url: 'http://localhost:8081',
-  },
 })

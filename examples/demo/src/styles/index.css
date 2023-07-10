@@ -20,7 +20,6 @@
   margin: 20px auto;
   padding: 0 10px;
   word-wrap: break-word;
-  padding-top: 54px;
   flex-direction: column;
   margin-bottom: 80px;
 }
@@ -28,25 +27,16 @@
 .Box {
   background-color: var(--background-alt);
   border-radius: 6px;
-  padding: 10px;
+  padding: 10px 15px;
+  overflow: auto;
 }
-
-.Box-text {
-  line-height: 32px;
-  margin-left: 5px;
+.Box input {
+  border: 1px solid var(--border);
 }
 
 .Box-svg {
   display: inline;
   vertical-align: middle;
-}
-
-.Input {
-  border: 1px solid white;
-}
-
-.Space-below {
-  margin-bottom: 12px;
 }
 
 .Grid {
@@ -61,9 +51,25 @@
   flex: 0 0 100%;
 }
 
+.Grid > .Cell100 {
+  flex: 0 0 100%;
+}
+
 @media screen and (min-width: 640px) {
   .Grid > * {
     flex: 0 0 calc(1 / 2 * 100% - (1 - 1 / 2) * var(--fl-gap-h));
+  }
+
+  .Grid > .Cell50 {
+    flex: 0 0 calc(1 / 2 * 100% - (1 - 1 / 2) * var(--fl-gap-h));
+  }
+
+  .Grid > .Cell25 {
+    flex: 0 0 calc(0.25 * 100% - (1 - 0.25) * var(--fl-gap-h));
+  }
+
+  .Grid > .Cell75 {
+    flex: 0 0 calc(0.75 * 100% - (1 - 0.75) * var(--fl-gap-h));
   }
 }
 

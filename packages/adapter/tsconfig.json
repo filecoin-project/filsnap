@@ -12,12 +12,5 @@
     "internalModule": "<internal>"
   },
 
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true,
-    // "experimentalResolver": true
-    "experimentalSpecifierResolution": "node"
-  },
-
   "references": [{ "path": "../snap" }]
 }

@@ -1,143 +1,104 @@
+/* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
+import { useFilsnapContext } from '../hooks/filsnap.js'
 
-// @ts-ignore-next-line
-const Account = ({ api }) => {
-  const [error, setError] = useState(/** @type {Error | undefined} */ (undefined))
-  const [address, setAddress] = useState(/** @type {Error | undefined} */ (undefined))
-  const [balance, setBalance] = useState(/** @type {Error | undefined} */ (undefined))
-  const [publicKey, setPublicKey] = useState(/** @type {Error | undefined} */ (undefined))
-  const [privateKey, setPrivateKey] = useState(/** @type {Error | undefined} */ (undefined))
+const Account = () => {
+  const { isLoading, snap } = useFilsnapContext()
+  const [error, setError] = useState(
+    /** @type {string | undefined | null} */ (undefined)
+  )
+  const [address, setAddress] = useState(
+    /** @type {string | undefined | null} */ (undefined)
+  )
+  const [balance, setBalance] = useState(
+    /** @type {string | undefined | null} */ (undefined)
+  )
+  const [publicKey, setPublicKey] = useState(
+    /** @type {string | undefined| null} */ (undefined)
+  )
+  const [privateKey, setPrivateKey] = useState(
+    /** @type {string | undefined | null} */ (undefined)
+  )
 
   const handleGetAddress = async () => {
-    try {
-      const addressResponse = await api.getAddress()
-      setAddress(addressResponse?.result)
-    } catch (err) {
-      // @ts-ignore
-      setError(err)
+    const addressResponse = await snap?.getAddress()
+    if (addressResponse && addressResponse.result) {
+      setAddress(addressResponse.result)
+    }
+    if (addressResponse && addressResponse.error) {
+      setError(addressResponse.error.message)
     }
   }
 
   const handleGetBalance = async () => {
-    try {
-      const balanceResponse = await api.getBalance()
-      setBalance(balanceResponse?.result)
-    } catch (err) {
-      // @ts-ignore
-      setError(err)
+    const response = await snap?.getBalance()
+    if (response && response.result) {
+      setBalance(response.result)
+    }
+    if (response && response.error) {
+      setError(response.error.message)
     }
   }
 
   const handleGetPublicKey = async () => {
-    try {
-      const publicKeyResponse = await api.getPublicKey()
-      setPublicKey(publicKeyResponse?.result)
-    } catch (err) {
-      // @ts-ignore
-      setError(err)
+    const response = await snap?.getPublicKey()
+    if (response && response.result) {
+      setPublicKey(response.result)
+    }
+    if (response && response.error) {
+      setError(response.error.message)
     }
   }
 
   const handleExportPrivateKey = async () => {
-    try {
-      const privateKeyResponse = await api.exportPrivateKey()
-      setPrivateKey(privateKeyResponse?.result)
-    } catch (err) {
-      // @ts-ignore
-      setError(err)
+    const response = await snap?.exportPrivateKey()
+    if (response) {
+      setPrivateKey(response.result)
+      setError(response.error?.message)
     }
   }
 
   return (
-    <>
+    <div class="Box Cell100">
       <h3>Account Details</h3>
-      {/* Get Address */}
-      <div class="Grid Space-below">
-        <div class="Box">
-          <span class="Box-text">
-            <button data-testid="get-address" onClick={handleGetAddress}>
-              Get Address
-            </button>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="error">{error ? error.message : ''}</code>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="output">{address}</code>
-          </span>
-        </div>
-      </div>
-
-      {/* Get Balance */}
-      <div class="Grid Space-below">
-        <div class="Box">
-          <span class="Box-text">
-            <button data-testid="get-balance" onClick={handleGetBalance}>
-              Get Balance
-            </button>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="error">{error ? error.message : ''}</code>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="output">{balance}</code>
-          </span>
-        </div>
-      </div>
-
-      {/* Get Public Key */}
-      <div class="Grid Space-below">
-        <div class="Box">
-          <span class="Box-text">
-            <button data-testid="get-public-key" onClick={handleGetPublicKey}>
-              Get Public Key
-            </button>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="error">{error ? error.message : ''}</code>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="output">{publicKey}</code>
-          </span>
-        </div>
-      </div>
-
-      {/* Export Private Key */}
-      <div class="Grid Space-below">
-        <div class="Box">
-          <span class="Box-text">
-            <button
-              data-testid="get-public-key"
-              onClick={handleExportPrivateKey}
-            >
-              Export Private Key
-            </button>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="error">{error ? error.message : ''}</code>
-          </span>
-        </div>
-        <div class="Box">
-          <span class="Box-text">
-            <code data-testid="output">{privateKey}</code>
-          </span>
-        </div>
-      </div>
-    </>
+      {error && <code data-testid="error">{error}</code>}
+      <br />
+      <button
+        data-testid="get-address"
+        onClick={handleGetAddress}
+        disabled={isLoading}
+      >
+        Get Address
+      </button>
+      <code data-testid="address-result">{address}</code>
+      <br />
+      <button
+        data-testid="get-balance"
+        onClick={handleGetBalance}
+        disabled={isLoading}
+      >
+        Get Balance
+      </button>
+      <code data-testid="balance-result">{balance}</code>
+      <br />
+      <button
+        data-testid="get-public-key"
+        onClick={handleGetPublicKey}
+        disabled={isLoading}
+      >
+        Get Public Key
+      </button>
+      <code data-testid="public-key-result">{publicKey}</code>
+      <br />
+      <button
+        data-testid="get-private-key"
+        onClick={handleExportPrivateKey}
+        disabled={isLoading}
+      >
+        Get Private Key
+      </button>
+      <code data-testid="private-key-result">{privateKey}</code>
+    </div>
   )
 }
 

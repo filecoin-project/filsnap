@@ -1,5 +1,5 @@
 {
-  "name": "testing",
+  "name": "demo",
   "version": "1.0.0",
   "description": "",
   "author": "Hugo Dias <hugomrdias@gmail.com> (hugodias.me)",
@@ -7,32 +7,59 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "pnpm run build && METAMASK_TAG=v10.27.0 playwright test",
-    "serve": "pnpm -r --filter filsnap run serve",
-    "dev": "pnpm run serve | vite --force",
-    "build": "vite build",
-    "preview": "vite preview",
     "lint": "tsc --build && eslint '**/*.{js,jsx,ts}' && prettier --check '**/*.{js,jsx,ts,yml,json}' --ignore-path ../../.gitignore",
-    "check": "tsc --build",
-    "start": "vite preview --port 3000"
+    "build": "wireit",
+    "dev": "wireit",
+    "serve": "wireit"
+  },
+  "wireit": {
+    "build": {
+      "command": "vite build --force",
+      "dependencies": [
+        "../../packages/adapter:build"
+      ],
+      "files": [
+        "index.html",
+        "src/**/*.{jsx,js,ts,tsx,css}",
+        "vite.config.js"
+      ],
+      "output": [
+        "dist/**/*.{html,js,css}"
+      ]
+    },
+    "serve": {
+      "command": "vite preview --port 3000",
+      "dependencies": [
+        "build"
+      ],
+      "service": true
+    },
+    "dev": {
+      "command": "vite --force",
+      "dependencies": [
+        "../../packages/adapter:build",
+        "../../packages/snap:serve"
+      ],
+      "service": true
+    }
   },
   "keywords": [],
   "license": "MIT",
   "dependencies": {
     "@acab/reset.css": "^0.5.3",
-    "@chainsafe/filsnap-types": "^2.1.3",
-    "@preact/signals": "^1.1.3",
+    "@preact/signals": "^1.1.5",
     "filsnap-adapter": "workspace:^",
-    "metamask-testing-tools": "^1.0.1",
-    "preact": "^10.15.1",
+    "iso-filecoin": "^1.0.0",
+    "metamask-testing-tools": "^1.0.3",
+    "preact": "^10.16.0",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.22.8",
     "@playwright/test": "^1.35.0",
     "@preact/preset-vite": "^2.5.0",
-    "@types/node": "^20.3.1",
-    "vite": "^4.3.9"
+    "@types/node": "^20.4.1",
+    "vite": "^4.4.2"
   },
   "eslintConfig": {
     "extends": [
@@ -56,7 +83,6 @@
       "@types/*",
       "@acab/reset.css",
       "water.css",
-      "@chainsafe/filsnap-types",
       "@preact/signals"
     ]
   }

@@ -30,7 +30,7 @@ export type GasForMessageResponse = SnapResponse<MessageGasEstimate>
  * @param ctx - Snap context
  * @param params - Estimate params
  */
-export async function gasForMessage(
+export async function getGasForMessage(
   ctx: SnapContext,
   params: EstimateParams
 ): Promise<GasForMessageResponse> {
