@@ -137,7 +137,9 @@
       "ts-node",
       "@types/*",
       "hd-scripts",
-      "assert"
+      "assert",
+      "@metamask/snaps-cli",
+      "mocha"
     ]
   }
 }
