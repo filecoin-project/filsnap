@@ -5,6 +5,10 @@ import { base64pad } from 'iso-base/rfc4648'
 // Types
 export type ExportPrivateKeyResponse = SnapResponse<string>
 
+export interface ExportPrivateKeyRequest {
+  method: 'fil_exportPrivateKey'
+}
+
 /**
  * Export the private key of the current account
  *

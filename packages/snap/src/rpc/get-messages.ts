@@ -2,7 +2,12 @@ import * as Schemas from '../schemas'
 import type { MessageStatus, SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
 
+// Types
 export type GetMessagesResponse = SnapResponse<MessageStatus[]>
+
+export interface GetMessagesRequest {
+  method: 'fil_getMessages'
+}
 
 /**
  * Get the messages from the state

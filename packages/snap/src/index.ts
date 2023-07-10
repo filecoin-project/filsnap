@@ -1,42 +1,31 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types'
 import { RPC } from 'iso-filecoin/rpc'
 import { configure } from './rpc/configure'
-import { gasForMessage, type EstimateParams } from './rpc/gas-for-message'
 import { exportPrivateKey } from './rpc/export-private-key'
+import { getGasForMessage, type EstimateParams } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
 import { getMessages } from './rpc/get-messages'
 import { sendMessage } from './rpc/send-message'
-import { signMessage, signMessageRaw } from './rpc/sign-message'
+
+import { hex } from 'iso-base/rfc4648'
+import { getKeyPair } from './keypair'
+import { getAccountInfo } from './rpc/get-account'
 import type {
   SignMessageParams,
   SignMessageRawParams,
 } from './rpc/sign-message'
-import type { SnapConfig, SnapContext, SnapResponse } from './types'
+import { signMessage, signMessageRaw } from './rpc/sign-message'
+import type { SnapConfig, SnapContext } from './types'
 import { configFromSnap, serializeError } from './utils'
-import { getKeyPair } from './keypair'
-import { hex } from 'iso-base/rfc4648'
 
-export type { ConfigureRequest, ConfigureResponse } from './rpc/configure'
-export type {
-  GasForMessageRequest,
-  GasForMessageResponse,
-} from './rpc/gas-for-message'
-export type { ExportPrivateKeyResponse } from './rpc/export-private-key'
-export type { GetBalanceResponse } from './rpc/get-balance'
-export type { GetMessagesResponse } from './rpc/get-messages'
-export type {
-  SendMessageRequest,
-  SendMessageResponse,
-} from './rpc/send-message'
-export type {
-  SignMessageRawRequest,
-  SignMessageRawResponse,
-  SignMessageRequest,
-  SignMessageResponse,
-} from './rpc/sign-message'
-
-export type GetAddressResponse = SnapResponse<string>
-export type GetPublicResponse = SnapResponse<string>
+export type * from './rpc/configure'
+export type * from './rpc/export-private-key'
+export type * from './rpc/gas-for-message'
+export type * from './rpc/get-balance'
+export type * from './rpc/get-messages'
+export type * from './rpc/send-message'
+export type * from './rpc/sign-message'
+export type * from './types'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   try {
@@ -57,6 +46,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     switch (request.method) {
       case 'fil_configure': {
         return await configure(snap, request.params as Partial<SnapConfig>)
+      }
+      case 'fil_getAccountInfo': {
+        return await getAccountInfo(context)
       }
       case 'fil_getAddress': {
         return { result: account.address.toString() }
@@ -86,7 +78,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         return await sendMessage(context, request.params as any)
       }
       case 'fil_getGasForMessage': {
-        return await gasForMessage(context, request.params as EstimateParams)
+        return await getGasForMessage(context, request.params as EstimateParams)
       }
       default: {
         return serializeError(

@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
-  testDir: './test/e2e',
+  testDir: './test',
   timeout: process.env.CI ? 60 * 1000 : 30 * 1000,
   expect: {
     timeout: 5000,
@@ -14,9 +14,15 @@ export default defineConfig({
   reporter: process.env.CI ? [['html'], ['list']] : 'list',
   use: {
     actionTimeout: 0,
-    baseURL: 'http://example.org',
+    baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     colorScheme: 'dark',
     browserName: 'chromium',
   },
+  // webServer: {
+  //   command: 'pnpm -r --parallel run serve',
+  //   url: 'http://localhost:3000',
+  //   stdout: 'pipe',
+  //   stderr: 'pipe',
+  // },
 })

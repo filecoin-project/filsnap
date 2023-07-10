@@ -1,7 +1,12 @@
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
 
+// Types
 export type GetBalanceResponse = SnapResponse<string>
+
+export interface GetBalanceRequest {
+  method: 'fil_getBalance'
+}
 
 /**
  * Get the balance of the current account

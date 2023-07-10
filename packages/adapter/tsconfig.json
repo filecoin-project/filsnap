@@ -3,12 +3,14 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src", "scripts", "test", "package.json"],
+  "include": ["src", "test"],
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],
     "includeVersion": true,
     "excludeExternals": true,
     "internalModule": "<internal>"
-  }
+  },
+
+  "references": [{ "path": "../snap" }]
 }
