@@ -60,7 +60,7 @@
     "@playwright/test": "^1.35.0",
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.4.1",
-    "vite": "^4.4.2"
+    "vite": "^4.4.3"
   },
   "eslintConfig": {
     "extends": [

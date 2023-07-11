@@ -9,7 +9,7 @@ export default defineConfig({
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   maxFailures: process.env.CI ? 2 : 0,
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 2,
   reporter: process.env.CI ? [['html'], ['list']] : 'list',
   use: {

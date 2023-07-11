@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
-import { copyable, heading, panel, text } from '@metamask/snaps-ui'
 import type { NodeType, Panel } from '@metamask/snaps-ui'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
@@ -116,53 +115,6 @@ export function serializeError(msg: string, data?: unknown): SnapResponseError {
       data: _data,
     },
   }
-}
-
-interface Message {
-  message: string
-  value: unknown | undefined
-}
-
-/**
- * Create a UI message from an array of messages
- *
- * @param messages - Array of messages
- * @returns A string containing all the messages
- */
-export function createUIMessage(messages: Message[]): string {
-  return messages
-    .map(({ message, value }) => message + ' ' + String(value))
-    .join('\n')
-}
-
-interface ConfirmationDialogContent {
-  prompt: string
-  description?: string
-  textAreaContent?: string
-}
-
-/**
- * Show a confirmation dialog to the user
- *
- * @see https://docs.metamask.io/snaps/reference/rpc-api/#confirmation-dialog
- * @param snap - The snap itself
- * @param message - The message to show
- */
-export async function showConfirmationDialog(
-  snap: SnapsGlobalObject,
-  message: ConfirmationDialogContent
-): Promise<boolean> {
-  return (await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'confirmation',
-      content: panel([
-        heading(message.prompt),
-        text(message.description ?? ''),
-        copyable(message.textAreaContent ?? ''),
-      ]),
-    },
-  })) as boolean
 }
 
 type DialogContent =

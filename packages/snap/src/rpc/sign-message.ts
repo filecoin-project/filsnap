@@ -5,7 +5,7 @@ import { Token } from 'iso-filecoin/token'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
 import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
-import { serializeError, showConfirmationDialog, snapDialog } from '../utils'
+import { serializeError, snapDialog } from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
 
 // Schemas
@@ -113,13 +113,16 @@ export async function signMessageRaw(
   }
 
   const { message } = _params.data
-  const confirmation = await showConfirmationDialog(ctx.snap, {
-    description: `It will be signed with address: ${ctx.account.address}`,
-    prompt: `Do you want to sign this message?`,
-    textAreaContent: message,
+
+  const conf = await snapDialog(ctx.snap, {
+    type: 'confirmation',
+    content: panel([
+      heading(`Do you want to sign this message?`),
+      copyable(message),
+    ]),
   })
 
-  if (confirmation) {
+  if (conf) {
     const sig = sign(ctx.account.privateKey, 'SECP256K1', message)
     return {
       result: base64pad.encode(sig),
