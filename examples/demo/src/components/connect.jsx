@@ -38,13 +38,26 @@ export default function Connect() {
         <h3 title={account.balance + ' attoFIL'}>
           <b>
             {account
-              ? Token.fromAttoFIL(account.balance).toFIL().toFormat()
+              ? Token.fromAttoFIL(account.balance).toFIL().toFormat(6)
               : 'unknown'}{' '}
             FIL
           </b>
         </h3>
         <span>
-          Connected to <code>{account ? account.address : 'unknown'}</code>{' '}
+          Connected to{' '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`https://explorer.glif.io/address/${
+              account.address
+            }/?network=${
+              account?.config.network === 'mainnet'
+                ? 'mainnet'
+                : 'calibrationnet'
+            }`}
+          >
+            {account ? account.address : 'unknown'}
+          </a>{' '}
         </span>
       </>
     )

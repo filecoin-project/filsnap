@@ -12,7 +12,7 @@ let fixture = createFixture({
 })
 
 fixture.test.describe('filsnap adapter', () => {
-  fixture.test.only(
+  fixture.test(
     'should enable snap when already installed',
     async ({ metamask, page }) => {
       await page.getByTestId('enable-snap').click()

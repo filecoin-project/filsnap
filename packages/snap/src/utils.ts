@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
 import { copyable, heading, panel, text } from '@metamask/snaps-ui'
+import type { NodeType, Panel } from '@metamask/snaps-ui'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
 import type {
@@ -164,6 +165,96 @@ export async function showConfirmationDialog(
   })) as boolean
 }
 
+type DialogContent =
+  | {
+      type: 'alert'
+      content:
+        | Panel
+        | {
+            value: string
+            type: NodeType.Copyable
+          }
+        | {
+            type: NodeType.Divider
+          }
+        | {
+            value: string
+            type: NodeType.Heading
+          }
+        | {
+            type: NodeType.Spinner
+          }
+        | {
+            value: string
+            type: NodeType.Text
+          }
+    }
+  | {
+      type: 'confirmation'
+      content:
+        | Panel
+        | {
+            value: string
+            type: NodeType.Copyable
+          }
+        | {
+            type: NodeType.Divider
+          }
+        | {
+            value: string
+            type: NodeType.Heading
+          }
+        | {
+            type: NodeType.Spinner
+          }
+        | {
+            value: string
+            type: NodeType.Text
+          }
+    }
+  | {
+      type: 'prompt'
+      content:
+        | Panel
+        | {
+            value: string
+            type: NodeType.Copyable
+          }
+        | {
+            type: NodeType.Divider
+          }
+        | {
+            value: string
+            type: NodeType.Heading
+          }
+        | {
+            type: NodeType.Spinner
+          }
+        | {
+            value: string
+            type: NodeType.Text
+          }
+      placeholder?: string | undefined
+    }
+
+/**
+ * Show a dialog to the user
+ *
+ * @param snap - The snap itself
+ * @param params - The dialog content
+ * @see https://docs.metamask.io/snaps/reference/rpc-api/#snap_dialog
+ */
+export async function snapDialog(
+  snap: SnapsGlobalObject,
+  params: DialogContent
+): Promise<boolean> {
+  const result = await snap.request({
+    method: 'snap_dialog',
+    params,
+  })
+
+  return result as boolean
+}
 /**
  * Update the messages in the state
  *

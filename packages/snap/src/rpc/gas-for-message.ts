@@ -7,8 +7,14 @@ import { serializeError } from '../utils'
 const DEFAULT_MAX_FEE = '100000000000000000'
 // Schemas
 export const estimateParams = z.object({
+  /**
+   * Message to estimate gas for
+   */
   message: Schemas.messagePartial.omit({ from: true }),
-  maxFee: z.string().optional(),
+  /**
+   * Max fee in attoFIL
+   */
+  maxFee: z.string().optional().describe('Max fee in attoFIL'),
 })
 
 // Types
@@ -18,9 +24,18 @@ export interface GasForMessageRequest {
   params: EstimateParams
 }
 export interface MessageGasEstimate {
-  gasfeecap: string
-  gaslimit: number
-  gaspremium: string
+  /**
+   * GasFeeCap is the maximum price that the message sender is willing to pay per unit of gas (measured in attoFIL/gas unit). Together with the GasLimit, the GasFeeCap is setting the maximum amount of FIL that a sender will pay for a message: a sender is guaranteed that a message will never cost them more than GasLimit * GasFeeCap attoFIL (not including any Premium that the message includes for its recipient).
+   */
+  gasFeeCap: string
+  /**
+   * GasLimit is measured in units of gas and set by the message sender. It imposes a hard limit on the amount of gas (i.e., number of units of gas) that a message’s execution should be allowed to consume on chain.
+   */
+  gasLimit: number
+  /**
+   * GasPremium is the price per unit of gas (measured in attoFIL/gas) that the message sender is willing to pay (on top of the BaseFee) to “tip” the miner that will include this message in a block.
+   */
+  gasPremium: string
 }
 export type GasForMessageResponse = SnapResponse<MessageGasEstimate>
 
@@ -59,9 +74,9 @@ export async function getGasForMessage(
 
   return {
     result: {
-      gasfeecap: result.GasFeeCap,
-      gaslimit: result.GasLimit,
-      gaspremium: result.GasPremium,
+      gasFeeCap: result.GasFeeCap,
+      gasLimit: result.GasLimit,
+      gasPremium: result.GasPremium,
     },
   }
 }

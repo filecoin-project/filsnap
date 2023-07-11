@@ -7,7 +7,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,jsx,ts}' && prettier --check '**/*.{js,jsx,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
     "build": "wireit",
     "dev": "wireit",
     "serve": "wireit"
@@ -52,6 +52,7 @@
     "iso-filecoin": "^1.0.0",
     "metamask-testing-tools": "^1.0.3",
     "preact": "^10.16.0",
+    "react-hook-form": "^7.45.1",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
@@ -65,6 +66,11 @@
     "extends": [
       "../../node_modules/hd-scripts/eslint/preact.js"
     ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "jsdoc/require-returns": "off",
+      "unicorn/no-null": "off"
+    },
     "parserOptions": {
       "project": "./tsconfig.json"
     },

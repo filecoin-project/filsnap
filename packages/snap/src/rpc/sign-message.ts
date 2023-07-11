@@ -4,11 +4,8 @@ import { Message, Schemas } from 'iso-filecoin/message'
 import { Token } from 'iso-filecoin/token'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
-import {
-  createUIMessage,
-  serializeError,
-  showConfirmationDialog,
-} from '../utils'
+import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
+import { serializeError, showConfirmationDialog, snapDialog } from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
 
 // Schemas
@@ -65,26 +62,23 @@ export async function signMessage(
     method: _params.data.method,
   }).prepare(ctx.rpc)
 
-  // show confirmation
-  const confirmation = await showConfirmationDialog(ctx.snap, {
-    description: `It will be signed with address: **${message.from}**`,
-    prompt: `Do you want to sign this message?`,
-    textAreaContent: createUIMessage([
-      { message: 'to:', value: message.to },
-      { message: 'from:', value: message.from },
-      {
-        message: 'value:',
-        value: `${Token.fromAttoFIL(message.value).toFIL()} FIL`,
-      },
-      { message: 'method:', value: message.method },
-      { message: 'params:', value: message.params },
-      { message: 'gas limit:', value: `${message.gasLimit} aFIL` },
-      { message: 'gas fee cap:', value: `${message.gasFeeCap} aFIL` },
-      { message: 'gas premium:', value: `${message.gasPremium} aFIL` },
+  const gas = Token.fromAttoFIL(message.gasPremium).mul(message.gasLimit)
+  const total = Token.fromAttoFIL(message.value).add(gas)
+  const conf = await snapDialog(ctx.snap, {
+    type: 'confirmation',
+    content: panel([
+      heading(
+        `Send ${Token.fromAttoFIL(message.value).toFIL().toFormat(10)} FIL to`
+      ),
+      copyable(message.to),
+      divider(),
+      heading('Details'),
+      text(`Gas _(estimated)_: **${gas.toFIL().toFormat(10)} FIL**`),
+      text(`Total _(amount + gas)_: **${total.toFIL().toFormat(10)} FIL**`),
     ]),
   })
 
-  if (confirmation) {
+  if (conf) {
     const sig = filSignMessage(ctx.account.privateKey, 'SECP256K1', message)
     return {
       result: {

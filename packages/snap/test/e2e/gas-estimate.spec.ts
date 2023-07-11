@@ -45,7 +45,7 @@ test.describe('fil_getGasForMessage', () => {
       throw new Error('Should not error')
     }
 
-    expect(estimate.result.gaslimit).toBeGreaterThanOrEqual(1000)
+    expect(estimate.result.gasLimit).toBeGreaterThanOrEqual(1000)
   })
 
   test('should estimate on testnet with 0.2 FIL maxfee', async ({
@@ -69,7 +69,7 @@ test.describe('fil_getGasForMessage', () => {
       throw new Error('Should not error')
     }
 
-    expect(estimate.result.gaslimit).toBeGreaterThanOrEqual(1000)
+    expect(estimate.result.gasLimit).toBeGreaterThanOrEqual(1000)
   })
 
   test('should estimate on testnet for non 0 value', async ({
@@ -93,7 +93,7 @@ test.describe('fil_getGasForMessage', () => {
       throw new Error('Should not error')
     }
 
-    expect(estimate.result.gaslimit).toBeGreaterThanOrEqual(1000)
+    expect(estimate.result.gasLimit).toBeGreaterThanOrEqual(1000)
   })
 
   test('should error with invalid params', async ({ metamask, page }) => {

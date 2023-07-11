@@ -225,6 +225,13 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Estimate the gas for a message
+   *
+   * `maxFee` is optional and defaults to `100000000000000000` attoFIL (0.1 FIL)
+   *
+   * @param params -`fil_getGasForMessage` RPC method params
+   */
   async calculateGasForMessage(
     params: Parameters<FilSnapMethods['fil_getGasForMessage']>[1]
   ): ReturnType<FilSnapMethods['fil_getGasForMessage']> {
