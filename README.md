@@ -4,8 +4,8 @@ Filecoin metamask snap and related packages to enable developers to add Filecoin
 
 ## Packages
 
-- [filsnap](./packages/filsnap) - Filecoin snap for metamask
-- [filsnap-adapter](./packages/filsnap-adapter) - Adapter to interact with Filsnap from a dapp
+- [filsnap](./packages/snap) - Filecoin snap for metamask
+- [filsnap-adapter](./packages/adapter) - Adapter to interact with Filsnap from a dapp
 
 ## Examples
 
