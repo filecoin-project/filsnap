@@ -1,45 +1,38 @@
-# FilSnap
-![](https://github.com/chainsafe/filsnap/workflows/ci/badge.svg)
-![](https://img.shields.io/badge/yarn-%3E%3D3-orange)
-![](https://img.shields.io/badge/Node.js-%3E%3D16-orange)
+# ⨎ FilSnap Monorepo
 
-Snap to enable MetaMask users interaction with filecoin dapps. For detailed documentation and integration instructions see our [wiki](https://github.com/chainsafe/filsnap/wiki).
+Filecoin metamask snap and related packages to enable developers to add Filecoin integration to their dapps.
 
-## Testing FilSnap
+## Packages
 
-### MetaMask Flask
-Snaps is pre-release software available in MetaMask Flask, a canary distribution for developers that provides access to upcoming features. To try Snaps [install MetaMask Flask](https://metamask.io/flask/).
+- [filsnap](./packages/filsnap) - Filecoin snap for metamask
+- [filsnap-adapter](./packages/filsnap-adapter) - Adapter to interact with Filsnap from a dapp
 
-### Live demo dapp
-Test FilSnap inside [our demo dapp](http://filsnap.chainsafe.io/).
+## Examples
 
-## Development
+- [`demo`](./packages/demo) - Preact demo dapp using [filsnap-adapter](./packages/filsnap-adapter) to interact with [filsnap](./packages/filsnap)
 
-### Requirements
+### Checkout examples
+
+Using can you Codesandbox: <https://githubbox.com/filecoin-project/filsnap/tree/main/examples/demo> and start hacking right away.
+
+To clone it locally:
+
+```bash
+npx tiged filecoin-project/filsnap/examples/demo filsnap-demo
+cd filsnap-demo
+pnpm install
+pnpm dev
 ```
-node version 16 or above
-```
 
-### Usage
-* For nvm users
-```sh
-nvm use
-```
----
-* Enable corepack
-```sh
-corepack enable
-```
-* Install packages
-```sh
-yarn install
-```
-* Run local snap server and React Demo page 
-```sh
-yarn demo
-```
+You can try any of the examples by replacing `filsnap-demo` with the name of the example you want to try.
+
+## Contributing
+
+Read contributing guidelines [here](.github/CONTRIBUTING.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/oddsdk/passkeys)
 
 ## License
-This project is dual-licensed under Apache 2.0 and MIT terms:
-- Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+
+Dual-licensed: [MIT](./LICENSE-MIT), [Apache Software License v2](./LICENSE-APACHE), by way of the
+[Permissive License Stack](https://protocol.ai/blog/announcing-the-permissive-license-stack/).
