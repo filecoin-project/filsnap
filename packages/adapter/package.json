@@ -24,7 +24,7 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "pnpm run build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build --pretty && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
     "build": "wireit",
     "test": "wireit"
   },
@@ -74,6 +74,22 @@
     },
     "ignorePatterns": [
       "dist"
+    ]
+  },
+  "depcheck": {
+    "specials": [
+      "bin"
+    ],
+    "ignorePatterns": [
+      "dist",
+      ".wireit"
+    ],
+    "ignores": [
+      "@types/*",
+      "hd-scripts",
+      "assert",
+      "@metamask/snaps-cli",
+      "playwright-test"
     ]
   }
 }
