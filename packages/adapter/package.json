@@ -43,7 +43,6 @@
     "test": {
       "command": "playwright test",
       "dependencies": [
-        "../../examples/demo:build",
         "../../examples/demo:serve",
         "../snap:serve"
       ]

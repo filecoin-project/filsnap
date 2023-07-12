@@ -32,8 +32,6 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm -r --filter demo run lint
-      - run: pnpm -r --filter demo run build
       - run: pnpm dlx playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap-adapter run lint
       - run: pnpm -r --filter filsnap-adapter exec depcheck
