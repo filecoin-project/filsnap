@@ -139,7 +139,8 @@
       "hd-scripts",
       "assert",
       "@metamask/snaps-cli",
-      "playwright-test"
+      "playwright-test",
+      "mocha"
     ]
   }
 }
