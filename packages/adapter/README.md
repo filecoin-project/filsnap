@@ -1,9 +1,9 @@
 # FilSnap adapter
-![](https://github.com/chainsafe/filsnap/workflows/ci/badge.svg)
+
+[![NPM Version](https://img.shields.io/npm/v/filsnap-adapter.svg)](https://www.npmjs.com/package/filsnap-adapter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![](https://img.shields.io/badge/yarn-%3E%3D1.17.0-orange.svg?style=flat-square)
-![Discord](https://img.shields.io/discord/608204864593461248?color=blue&label=Discord&logo=discord)
+[![filsnap-adapter](https://github.com/filecoin-project/filsnap/actions/workflows/adapter.yml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/adapter.yml)
 
 FilSnap adapter is used to install Filecoin snap and expose API toward snap.
 
@@ -15,9 +15,9 @@ Adapter has only exposed function for installing Filecoin snap.
 
 ```typescript
 async function enableFilecoinSnap(
-  config: Partial<SnapConfig>, 
+  config: Partial<SnapConfig>,
   snapOrigin?: string
-): Promise<MetamaskFilecoinSnap> 
+): Promise<MetamaskFilecoinSnap>
 ```
 
 On snap installation, it is possible to send full or partial configuration.
@@ -28,31 +28,31 @@ Below you can see structure of config object:
 
 ```typescript
 export interface SnapConfig {
-  derivationPath: string;
-  token: string;
-  network: FilecoinNetwork; // "f" || "t"
-  rpcUrl: string;
-  unit?: UnitConfiguration;
+  derivationPath: string
+  token: string
+  network: FilecoinNetwork // "f" || "t"
+  rpcUrl: string
+  unit?: UnitConfiguration
 }
 
 export interface UnitConfiguration {
-  symbol: string;
-  decimals: number;
-  image?: string;
-  customViewUrl?: string;
+  symbol: string
+  decimals: number
+  image?: string
+  customViewUrl?: string
 }
 ```
 
-After snap installation, this function returns `MetamaskFilecoinSnap` object that can be used to retrieve snap API. 
+After snap installation, this function returns `MetamaskFilecoinSnap` object that can be used to retrieve snap API.
 An example of initializing Filecoin snap and invoking snap API is shown below.
 
 ```typescript
 // install snap and fetch API
-const snap = await enableFilecoinSnap({network: "t"});
-const api = await metamaskFilecoinSnap.getFilecoinSnapApi();
+const snap = await enableFilecoinSnap({ network: 't' })
+const api = await metamaskFilecoinSnap.getFilecoinSnapApi()
 
 // invoke API
-const address = await api.getAddress();
+const address = await api.getAddress()
 
-console.log(`Snap installed, account generated with address: ${address}`);
+console.log(`Snap installed, account generated with address: ${address}`)
 ```
