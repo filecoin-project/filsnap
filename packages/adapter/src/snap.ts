@@ -56,6 +56,26 @@ export class FilsnapAdapter {
     return true
   }
 
+  static async create(
+    config: Parameters<FilSnapMethods['fil_configure']>[1],
+    snapId: string = 'npm:filsnap'
+  ): Promise<FilsnapAdapter> {
+    const hasFlask = await FilsnapAdapter.hasFlask()
+    if (!hasFlask) {
+      throw new Error('Flask is not installed.')
+    }
+
+    const isConnected = await FilsnapAdapter.isConnected(snapId)
+
+    if (!isConnected) {
+      throw new Error('Filsnap is not connected.')
+    }
+
+    const adapter = new FilsnapAdapter(snapId)
+    await adapter.configure(config)
+    return adapter
+  }
+
   static async connect(
     config: Parameters<FilSnapMethods['fil_configure']>[1],
     snapId: string = 'npm:filsnap',
@@ -78,7 +98,7 @@ export class FilsnapAdapter {
       })
 
       if (snaps == null || snaps[snapId] == null) {
-        throw new Error(`Failed to connect to snap ${snapId}`)
+        throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
       }
     }
 

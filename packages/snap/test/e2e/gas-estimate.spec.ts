@@ -11,8 +11,7 @@ const { test, expect } = createFixture({
     flask: true,
   },
   snap: {
-    snapId: 'local:http://localhost:8081',
-    version: '*',
+    id: 'local:http://localhost:8081',
   },
 })
 test.beforeAll(async ({ metamask, page }) => {

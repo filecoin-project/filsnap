@@ -10,12 +10,5 @@
     "includeVersion": true,
     "excludeExternals": false,
     "internalModule": "<internal>"
-  },
-
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true,
-    // "experimentalResolver": true
-    "experimentalSpecifierResolution": "node"
   }
 }

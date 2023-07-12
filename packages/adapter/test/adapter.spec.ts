@@ -1,37 +1,60 @@
 import { createFixture } from 'metamask-testing-tools'
 
 const SNAP_ID = 'local:http://localhost:8081'
+const SNAP_VERSION = '*'
+
 let fixture = createFixture({
   download: {
     flask: true,
   },
+})
+
+fixture.test(
+  'should start connect to snap when flask is installed',
+  async ({ metamask, page }) => {
+    await page.getByTestId('connect-snap').click()
+
+    const dialog = await metamask.waitForDialog('experimental-area')
+    await fixture.expect(dialog.getByTestId('experimental-area')).toBeVisible()
+  }
+)
+
+fixture.test(
+  'should start enabling snap when metamask as an account',
+  async ({ metamask, page }) => {
+    await metamask.setup()
+    await page.getByTestId('connect-snap').click()
+
+    const dialog = await metamask.waitForDialog('snaps-connect')
+    fixture.expect(dialog).toBeDefined()
+  }
+)
+
+fixture = createFixture({
+  download: {
+    flask: true,
+  },
   snap: {
-    snapId: SNAP_ID,
-    version: '*',
+    id: SNAP_ID,
+    version: SNAP_VERSION,
   },
 })
 
-fixture.test.describe('filsnap adapter', () => {
-  fixture.test(
-    'should enable snap when already installed',
-    async ({ metamask, page }) => {
-      await page.getByTestId('enable-snap').click()
-      await page.pause()
-      await fixture
-        .expect(page.getByTestId('output'))
-        .toHaveText(`{"snapId":"${SNAP_ID}"}`)
-    }
-  )
+fixture.test(
+  'should show account info when snap is connected',
+  async ({ metamask, page }) => {
+    await fixture
+      .expect(page.getByTestId('account-info'))
+      .toHaveText('Connected to t1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna')
+  }
+)
 
-  fixture = createFixture({})
-  fixture.test(
-    'should enable error when flask is not installed',
-    async ({ metamask, page }) => {
-      await page.getByTestId('enable-snap').click()
-
-      await fixture
-        .expect(page.getByTestId('error'))
-        .toHaveText("Current Metamask version doesn't support snaps")
-    }
-  )
-})
+fixture = createFixture({})
+fixture.test(
+  'should enable error when flask is not installed',
+  async ({ metamask, page }) => {
+    await fixture
+      .expect(page.getByTestId('install-mm-flask'))
+      .toHaveText('Install Metamask Flask')
+  }
+)

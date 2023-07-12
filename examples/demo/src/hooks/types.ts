@@ -18,6 +18,16 @@ export type FilsnapContext =
       error: undefined
       connect: ConnectFn
     }
+  // Flask is not installed
+  | {
+      isLoading: false
+      isConnected: false
+      hasFlask: false
+      snap: undefined
+      account: undefined
+      error: undefined
+      connect: ConnectFn
+    }
   // Flask is installed
   | {
       isLoading: false

@@ -24,7 +24,7 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "pnpm run build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
     "build": "wireit",
     "test": "wireit"
   },
@@ -48,12 +48,13 @@
       ]
     }
   },
+  "dependencies": {
+    "filsnap": "workspace:^"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.35.1",
-    "@types/mocha": "^10.0.1",
+    "@playwright/test": "^1.36.0",
     "@types/node": "^20.4.1",
-    "metamask-testing-tools": "^1.0.3",
-    "mocha": "^10.2.0",
+    "metamask-testing-tools": "^1.1.1",
     "typescript": "5.1.6"
   },
   "eslintConfig": {
@@ -71,14 +72,8 @@
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "env": {
-      "mocha": true
-    },
     "ignorePatterns": [
       "dist"
     ]
-  },
-  "dependencies": {
-    "filsnap": "workspace:^"
   }
 }

@@ -40,7 +40,8 @@
       "files": [
         "src/**/*.ts",
         "tsconfig.json",
-        "rollup.config.js"
+        "rollup.config.js",
+        "snap.manifest.json"
       ],
       "output": [
         "dist/snap.js"
@@ -54,7 +55,7 @@
       "service": true
     },
     "test:unit": {
-      "command": "mocha --colors \"test/unit/**/*.test.ts\" -n loader=ts-node/esm"
+      "command": "playwright-test \"test/unit/**/*.test.ts\" --mode node"
     },
     "test:e2e": {
       "command": "playwright test",
@@ -71,7 +72,7 @@
     }
   },
   "dependencies": {
-    "@metamask/key-tree": "^7.1.1",
+    "@metamask/key-tree": "^8.0.0",
     "@metamask/snaps-ui": "^0.32.2",
     "iso-base": "^1.0.0",
     "iso-filecoin": "^1.0.0",
@@ -82,7 +83,7 @@
     "@metamask/snaps-cli": "^0.32.2",
     "@metamask/snaps-rollup-plugin": "^0.32.2",
     "@metamask/snaps-types": "^0.32.2",
-    "@playwright/test": "^1.35.1",
+    "@playwright/test": "^1.36.0",
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-sucrase": "^5.0.1",
@@ -97,12 +98,12 @@
     "chai-as-promised": "^7.1.1",
     "chai-parentheses": "^0.0.2",
     "chai-subset": "^1.6.0",
-    "metamask-testing-tools": "^1.0.3",
+    "metamask-testing-tools": "^1.1.1",
     "mocha": "^10.2.0",
+    "playwright-test": "^11.0.3",
     "rollup": "^3.26.2",
     "sinon": "^15.2.0",
     "sinon-chai": "^3.7.0",
-    "ts-node": "^10.9.1",
     "typescript": "5.1.6"
   },
   "eslintConfig": {
@@ -134,7 +135,6 @@
       "bin"
     ],
     "ignores": [
-      "ts-node",
       "@types/*",
       "hd-scripts",
       "assert",

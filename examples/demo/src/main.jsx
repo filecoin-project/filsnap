@@ -1,7 +1,7 @@
 import { render } from 'preact'
 import { App } from './app.jsx'
 import './styles/index.css'
-import { OddContextProvider } from './hooks/filsnap.js'
+import { FilsnapContextProvider } from './hooks/filsnap.js'
 
 /** @type {Partial<import('filsnap-adapter').SnapConfig>} */
 const config = {
@@ -13,9 +13,12 @@ const appEl = document.getElementById('app')
 
 if (appEl) {
   render(
-    <OddContextProvider snapId="local:http://localhost:8081" config={config}>
+    <FilsnapContextProvider
+      snapId="local:http://localhost:8081"
+      config={config}
+    >
       <App />
-    </OddContextProvider>,
+    </FilsnapContextProvider>,
     appEl
   )
 }

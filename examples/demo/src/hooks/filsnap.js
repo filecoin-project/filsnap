@@ -25,7 +25,12 @@ const FilsnapContext = createContext({
  * @param {import('./types.js').FilsnapContextProviderProps & {children : import('preact').ComponentChildren}} props
  * @returns
  */
-export function OddContextProvider({ snapId, snapVersion, config, children }) {
+export function FilsnapContextProvider({
+  snapId,
+  snapVersion,
+  config,
+  children,
+}) {
   // State
   const [error, setError] = useState(
     /** @type {Error |undefined} */ (undefined)
@@ -49,25 +54,20 @@ export function OddContextProvider({ snapId, snapVersion, config, children }) {
       if (mounted) {
         setError(undefined)
         try {
-          setHasFlask(await FilsnapAdapter.hasFlask())
+          const hasFlask = await FilsnapAdapter.hasFlask()
           const isConnected = await FilsnapAdapter.isConnected(snapId)
-          if (isConnected) {
-            const snap = await FilsnapAdapter.connect(
-              config,
-              snapId,
-              snapVersion
-            )
+          if (hasFlask && isConnected) {
+            const snap = await FilsnapAdapter.create(config, snapId)
             const account = await snap.getAccountInfo()
             if (account.error) {
-              setError(
-                new Error(account.error.message, { cause: account.error })
-              )
+              throw new Error(account.error.message, { cause: account.error })
             }
 
             setAccount(account.result)
             setSnap(snap)
           }
           setIsConnected(isConnected)
+          setHasFlask(hasFlask)
         } catch (error) {
           const err = /** @type {Error} */ (error)
           setError(err)
@@ -117,6 +117,17 @@ export function OddContextProvider({ snapId, snapVersion, config, children }) {
     if (isLoading) {
       return {
         isLoading: true,
+        isConnected: false,
+        hasFlask: false,
+        error: undefined,
+        snap: undefined,
+        account: undefined,
+        connect,
+      }
+    }
+    if (!hasFlask) {
+      return {
+        isLoading: false,
         isConnected: false,
         hasFlask: false,
         error: undefined,
@@ -192,7 +203,7 @@ export function useFilsnapContext() {
   const context = useContext(FilsnapContext)
   if (context === undefined) {
     throw new Error(
-      `useFilsnapContext must be used within a OddContextProvider.`
+      `useFilsnapContext must be used within a FilsnapContextProvider.`
     )
   }
 
