@@ -18,6 +18,7 @@
       "dependencies": [
         "../../packages/adapter:build"
       ],
+      "clean": true,
       "files": [
         "index.html",
         "src/**/*.{jsx,js,ts,tsx,css}",

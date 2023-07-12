@@ -1,8 +1,8 @@
-import Account from './components/account.jsx'
-import Network from './components/network.jsx'
-import SignMessage from './components/sign-message.jsx'
+import Account from './components/rpc.jsx'
 import Connect from './components/connect.jsx'
+import Network from './components/network.jsx'
 import Send from './components/send.tsx'
+import SignMessage from './components/sign-message.jsx'
 import { useFilsnapContext } from './hooks/filsnap.js'
 
 export function App() {
