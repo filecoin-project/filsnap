@@ -66,11 +66,13 @@ jobs:
       - uses: mshick/add-pr-comment@v2
         if: always() && steps.tests.outcome != 'success' && github.event_name == 'pull_request'
         with:
+          message-id: 'snap-tests'
           message: |
             ### Tests failed 🤷🏻‍♂️
             Check report and traces: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
       - uses: mshick/add-pr-comment@v2
         if: always() && steps.tests.outcome == 'success' && github.event_name == 'pull_request'
         with:
+          message-id: 'snap-tests'
           message: |
             ### Tests passed 🎉
