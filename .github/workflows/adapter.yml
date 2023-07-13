@@ -35,8 +35,8 @@ jobs:
       - run: pnpm dlx playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap-adapter run lint
       - run: pnpm -r --filter filsnap-adapter exec depcheck
-      - id: tests
-        run: pnpm -r --filter filsnap-adapter run test
+      - run: pnpm -r --filter filsnap-adapter run test
+        id: tests
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
@@ -52,23 +52,16 @@ jobs:
         with:
           files: packages/snap/playwright-report
       - name: Add report to web3.storage
-        if: always() && steps.check_report.outputs.files_exists == 'true'
+        if: always() && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
         uses: web3-storage/add-to-web3@v2
         id: add_to_web3_storage
         with:
           path_to_add: packages/snap/playwright-report
           web3_token: ${{ secrets.WEB3_TOKEN }}
       - name: Add url to GITHUB_STEP_SUMMARY
-        if: always() && steps.check_report.outputs.files_exists == 'true'
+        if: always() && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
         run: |
           echo "
-          ### playwright-report
-          * url: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
-          " >> $GITHUB_STEP_SUMMARY
-      - uses: mshick/add-pr-comment@v2
-        if: always() && steps.check_report.outputs.files_exists == 'true' && github.event_name == 'pull_request'
-        with:
-          message-id: 'adapter-tests'
-          message: |
-            ### Adapter Tests failed 🤷🏻‍♂️
+          ### Adapter Tests failed 🤷🏻‍♂️
             Check report and traces: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
+          " >> $GITHUB_STEP_SUMMARY
