@@ -7,6 +7,7 @@ import { useFilsnapContext } from './hooks/filsnap.js'
 
 export function App() {
   const { isConnected } = useFilsnapContext()
+
   return (
     <main class="App">
       <h1>
