@@ -30,7 +30,7 @@ You can try any of the examples by replacing `filsnap-demo` with the name of the
 
 Read contributing guidelines [here](.github/CONTRIBUTING.md).
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/oddsdk/passkeys)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/filecoin-project/filsnap)
 
 ## License
 

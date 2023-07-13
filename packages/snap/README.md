@@ -1,11 +1,11 @@
-# Filsnap adapter
+# filsnap
 
-[![NPM Version](https://img.shields.io/npm/v/filsnap-adapter.svg)](https://www.npmjs.com/package/filsnap-adapter)
+[![NPM Version](https://img.shields.io/npm/v/filsnap.svg)](https://www.npmjs.com/package/filsnap)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Adapter](https://github.com/filecoin-project/filsnap/actions/workflows/adapter.yaml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/adapter.yaml)
+[![Snap](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yaml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yaml)
 
-Filsnap adapter is used to install Filecoin snap and expose it's.
+> Filecoin metamask snap to enable developers to add Filecoin integration to their dapps.
 
 ## Contributing
 
