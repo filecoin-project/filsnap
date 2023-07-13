@@ -1,0 +1,35 @@
+name: publish-demo
+env:
+  CI: true
+  FORCE_COLOR: 1
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'examples/demo/**'
+      - '.github/workflows/publish-demo.yml'
+      - 'pnpm-lock.yaml'
+  pull_request:
+    paths:
+      - 'packages/demo/**'
+      - '.github/workflows/publish-demo.yml'
+      - 'pnpm-lock.yaml'
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm -r --filter demo run build
+      - uses: fission-suite/publish-action@v1.2.7
+        with:
+          machine_key: ${{ secrets.FISSION_MACHINE_KEY }}
+          workdir: 'examples/demo'

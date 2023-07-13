@@ -1,0 +1,3 @@
+ignore: []
+url: filsnap.fission.app
+build: ./dist
