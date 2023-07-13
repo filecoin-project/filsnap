@@ -22,5 +22,6 @@ export default defineConfig({
   webServer: {
     command: 'pnpm run build && pnpm exec mm-snap serve',
     url: 'http://localhost:8081',
+    reuseExistingServer: true,
   },
 })
