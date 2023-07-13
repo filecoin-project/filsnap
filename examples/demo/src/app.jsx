@@ -32,14 +32,14 @@ export function App() {
               {' '}
               Docs:{' '}
               <a href="https://filecoin-project.github.io/filsnap/">
-                https://filecoin-project.github.io/filsnap/
+                filecoin-project.github.io/filsnap
               </a>
             </li>
             <li>
               {' '}
               Github:{' '}
               <a href="https://github.com/filecoin-project/filsnap">
-                https://github.com/filecoin-project/filsnap
+                github.com/filecoin-project/filsnap
               </a>
             </li>
           </ul>
