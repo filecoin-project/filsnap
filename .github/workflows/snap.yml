@@ -35,8 +35,9 @@ jobs:
       - run: pnpm dlx playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap run lint
       - run: pnpm -r --filter filsnap exec depcheck
+      - run: pnpm -r --filter filsnap run test:unit
       - id: tests
-        run: pnpm -r --filter filsnap run test
+        run: pnpm -r --filter filsnap run test:e2e
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
