@@ -28,9 +28,9 @@
   "main": "dist/src/index.js",
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
-    "test": "wireit",
-    "test:unit": "wireit",
-    "test:e2e": "wireit",
+    "test": "pnpm run '/^test:.*/'",
+    "test:unit": "playwright-test \"test/unit/**/*.test.ts\" --mode node",
+    "test:e2e": "playwright test",
     "build": "wireit",
     "serve": "wireit"
   },
@@ -53,22 +53,6 @@
         "build"
       ],
       "service": true
-    },
-    "test:unit": {
-      "command": "playwright-test \"test/unit/**/*.test.ts\" --mode node"
-    },
-    "test:e2e": {
-      "command": "playwright test",
-      "dependencies": [
-        "serve"
-      ]
-    },
-    "test": {
-      "command": "echo 'Running all tests'",
-      "dependencies": [
-        "test:unit",
-        "test:e2e"
-      ]
     }
   },
   "dependencies": {
