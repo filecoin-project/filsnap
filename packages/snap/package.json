@@ -22,7 +22,8 @@
   ],
   "files": [
     "dist",
-    "snap.manifest.json"
+    "snap.manifest.json",
+    "filecoin-logo.svg"
   ],
   "type": "module",
   "main": "dist/src/index.js",
