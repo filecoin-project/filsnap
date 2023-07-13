@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.1.1...filsnap-v0.1.2) (2023-07-13)
+
+
+### Bug Fixes
+
+* add filecoin logo to npm ([e48fdf0](https://github.com/filecoin-project/filsnap/commit/e48fdf0169648e905b7da9c706e07f88129e7b41))
+
 ## [0.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.1.0...filsnap-v0.1.1) (2023-07-13)
 
 
