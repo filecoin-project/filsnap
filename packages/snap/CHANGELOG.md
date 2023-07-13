@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.1.2...filsnap-v0.1.3) (2023-07-13)
+
+
+### Bug Fixes
+
+* update manifest ([53be07b](https://github.com/filecoin-project/filsnap/commit/53be07b06cb0ae5b20db2c190babe58d27b537ff))
+
 ## [0.1.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.1.1...filsnap-v0.1.2) (2023-07-13)
 
 
