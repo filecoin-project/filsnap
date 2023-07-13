@@ -14,7 +14,7 @@ import {
 } from '../../src/index'
 
 const { test, expect } = createFixture({
-  isolated: false,
+  // isolated: false,
   download: {
     flask: true,
   },
