@@ -1,5 +1,7 @@
 {
   "separate-pull-requests": true,
+  "bootstrap-sha": "24c8c8ccbf3d616d9dc7725df479197f100c05ee",
+  "last-release-sha": "24c8c8ccbf3d616d9dc7725df479197f100c05ee",
   "packages": {
     "packages/adapter": {},
     "packages/snap": {
