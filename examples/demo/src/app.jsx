@@ -9,7 +9,9 @@ export function App() {
   const { isConnected } = useFilsnapContext()
   return (
     <main class="App">
-      <h1>⨎ Filsnap </h1>
+      <h1>
+        ⨎ Filsnap <small>docs</small>
+      </h1>
       <div class="Grid">
         <Connect />
         {isConnected && (
@@ -23,6 +25,26 @@ export function App() {
             </details>
           </>
         )}
+        <div class="Cell100 Box">
+          <h3>Links</h3>
+          <ul>
+            <li>
+              {' '}
+              Docs:{' '}
+              <a href="https://filecoin-project.github.io/filsnap/">
+                https://filecoin-project.github.io/filsnap/
+              </a>
+            </li>
+            <li>
+              {' '}
+              Github:{' '}
+              <a href="https://github.com/filecoin-project/filsnap">
+                https://github.com/filecoin-project/filsnap
+              </a>
+            </li>
+          </ul>
+          <br />
+        </div>
       </div>
     </main>
   )

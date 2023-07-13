@@ -21,7 +21,7 @@
   padding: 0 10px;
   word-wrap: break-word;
   flex-direction: column;
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
 }
 
 .Box {
