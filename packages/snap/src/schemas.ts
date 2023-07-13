@@ -12,6 +12,9 @@ const unitConfiguration = z.object({
 export const network = z.enum(['mainnet', 'testnet'])
 
 export const snapConfig = z.object({
+  /**
+   * The derivation path for the account
+   */
   derivationPath: z.string(),
   rpc: z.object({
     url: z.string(),

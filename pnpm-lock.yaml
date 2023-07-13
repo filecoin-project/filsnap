@@ -26,9 +26,15 @@ importers:
       typedoc:
         specifier: ^0.24.8
         version: 0.24.8(typescript@5.1.6)
+      typedoc-plugin-expand-object-like-types:
+        specifier: ^0.1.2
+        version: 0.1.2(typedoc@0.24.8)
       typedoc-plugin-missing-exports:
         specifier: ^2.0.0
         version: 2.0.0(typedoc@0.24.8)
+      typedoc-plugin-zod:
+        specifier: ^1.0.2
+        version: 1.0.2(typedoc@0.24.8)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -7552,10 +7558,26 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
+  /typedoc-plugin-expand-object-like-types@0.1.2(typedoc@0.24.8):
+    resolution: {integrity: sha512-RRMOCWMElQHBOVraWMWrh/0tDqCdS5oxYwaWMZBB3KlUUUUCxKllpvJPsRH/uFLO1nOuy28CbJxGVU1umv7LOQ==}
+    peerDependencies:
+      typedoc: 0.22.x || 0.23.x
+    dependencies:
+      typedoc: 0.24.8(typescript@5.1.6)
+    dev: true
+
   /typedoc-plugin-missing-exports@2.0.0(typedoc@0.24.8):
     resolution: {integrity: sha512-t0QlKCm27/8DaheJkLo/gInSNjzBXgSciGhoLpL6sLyXZibm7SuwJtHvg4qXI2IjJfFBgW9mJvvszpoxMyB0TA==}
     peerDependencies:
       typedoc: 0.24.x
+    dependencies:
+      typedoc: 0.24.8(typescript@5.1.6)
+    dev: true
+
+  /typedoc-plugin-zod@1.0.2(typedoc@0.24.8):
+    resolution: {integrity: sha512-83JOctc7wyUJfKiFjXuqjL2DF/b5hOd0xdwMmMwtLs9sIWSAsqqntoO3yFB0aY+phRnzkV0z31SXtwR7gYBDmw==}
+    peerDependencies:
+      typedoc: 0.23.x || 0.24.x
     dependencies:
       typedoc: 0.24.8(typescript@5.1.6)
     dev: true

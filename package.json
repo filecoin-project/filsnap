@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "format": "prettier --write '**/*.{js,ts,yml,json}' --ignore-path .gitignore",
@@ -17,7 +17,7 @@
     "build": "pnpm -r --if-present run build",
     "lint": "pnpm -r --if-present run lint",
     "test": "pnpm -r --if-present run test",
-    "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports"
+    "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod --plugin typedoc-plugin-expand-object-like-types"
   },
   "devDependencies": {
     "depcheck": "^1.4.3",
@@ -26,7 +26,9 @@
     "prettier": "3.0.0",
     "simple-git-hooks": "^2.8.1",
     "typedoc": "^0.24.8",
+    "typedoc-plugin-expand-object-like-types": "^0.1.2",
     "typedoc-plugin-missing-exports": "^2.0.0",
+    "typedoc-plugin-zod": "^1.0.2",
     "typescript": "5.1.6",
     "wireit": "^0.10.0"
   },

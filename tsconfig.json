@@ -35,7 +35,7 @@
   },
   "typedocOptions": {
     "entryPointStrategy": "packages",
-    "entryPoints": ["packages/snap"],
+    "entryPoints": ["packages/snap", "packages/adapter"],
     "darkHighlightTheme": "github-dark",
     "navigationLinks": {
       "Github": "https://github.com/filecoin-project/filsnap"
