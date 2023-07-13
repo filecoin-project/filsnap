@@ -37,6 +37,8 @@ jobs:
       - run: pnpm -r --filter filsnap-adapter exec depcheck
       - id: tests
         run: pnpm -r --filter filsnap-adapter run test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
