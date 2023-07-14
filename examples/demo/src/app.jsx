@@ -10,9 +10,7 @@ export function App() {
 
   return (
     <main class="App">
-      <h1>
-        ⨎ Filsnap <small>docs</small>
-      </h1>
+      <h1>⨎ Filsnap</h1>
       <div class="Grid">
         <Connect />
         {isConnected && (
