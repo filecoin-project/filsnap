@@ -30,14 +30,22 @@ export function App() {
             <li>
               {' '}
               Docs:{' '}
-              <a href="https://filecoin-project.github.io/filsnap/">
+              <a
+                target="_blank"
+                href="https://filecoin-project.github.io/filsnap/"
+                rel="noreferrer"
+              >
                 filecoin-project.github.io/filsnap
               </a>
             </li>
             <li>
               {' '}
               Github:{' '}
-              <a href="https://github.com/filecoin-project/filsnap">
+              <a
+                target="_blank"
+                href="https://github.com/filecoin-project/filsnap"
+                rel="noreferrer"
+              >
                 github.com/filecoin-project/filsnap
               </a>
             </li>
