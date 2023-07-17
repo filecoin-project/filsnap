@@ -15,7 +15,7 @@ on:
       metamask-password:
         description: 'Password to use for metamask'
       metamask-snap-id:
-        description: 'Snap ID to use for metamask. ie. "npm:@filsnap"'
+        description: 'Snap ID to use for metamask. ie. "npm:filsnap"'
       metamask-snap-version:
         description: 'Snap version to use for metamask'
 jobs:
