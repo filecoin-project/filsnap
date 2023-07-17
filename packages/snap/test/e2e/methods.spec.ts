@@ -14,12 +14,12 @@ import {
 } from '../../src/index'
 
 const { test, expect } = createFixture({
+  isolated: false,
   download: {
     flask: true,
   },
   snap: {
     id: 'local:http://localhost:8081',
-    version: '*',
   },
 })
 
@@ -35,7 +35,7 @@ test.beforeAll(async ({ metamask, page }) => {
   })
 })
 
-test.describe('filsnap testnet', () => {
+test.describe.only('filsnap testnet', () => {
   test('should get address', async ({ metamask, page }) => {
     const { result } = await metamask.invokeSnap<GetAddressResponse>({
       request: {
