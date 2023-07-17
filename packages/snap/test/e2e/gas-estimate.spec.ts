@@ -41,7 +41,7 @@ test.describe('fil_getGasForMessage', () => {
     })
 
     if (estimate.error != null) {
-      throw new Error('Should not error')
+      throw new Error(estimate.error.message)
     }
 
     expect(estimate.result.gasLimit).toBeGreaterThanOrEqual(1000)
@@ -65,7 +65,7 @@ test.describe('fil_getGasForMessage', () => {
     })
 
     if (estimate.error != null) {
-      throw new Error('Should not error')
+      throw new Error(estimate.error.message)
     }
 
     expect(estimate.result.gasLimit).toBeGreaterThanOrEqual(1000)
