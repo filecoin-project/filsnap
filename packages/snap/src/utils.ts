@@ -205,7 +205,7 @@ export async function snapDialog(
     params,
   })
 
-  return result as boolean
+  return result === true
 }
 /**
  * Update the messages in the state

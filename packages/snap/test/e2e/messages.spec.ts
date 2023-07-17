@@ -48,8 +48,8 @@ test.describe('snap messages', () => {
     const from = 't1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna'
     const to = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 
-    metamask.on('notification', (page) => {
-      void page.getByRole('button').filter({ hasText: 'Approve' }).click()
+    metamask.on('notification', async (page) => {
+      await page.getByRole('button').filter({ hasText: 'Approve' }).click()
     })
 
     const message = {

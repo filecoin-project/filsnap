@@ -42,7 +42,7 @@ jobs:
           METAMASK_MNEMONIC: ${{ inputs.metamask-seed }}
           METAMASK_PASSWORD: ${{ inputs.metamask-password }}
           METAMASK_SNAP_ID: ${{ inputs.metamask-snap-id }}
-          MEtAMASK_SNAP_VERSION: ${{ inputs.metamask-snap-version }}
+          METAMASK_SNAP_VERSION: ${{ inputs.metamask-snap-version }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
