@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { createFixture } from 'metamask-testing-tools'
 import {
   type GetBalanceResponse,
@@ -185,10 +184,6 @@ test.describe('filsnap testnet', () => {
     await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
     const signedMessageResponse = await invoke
 
-    console.log(
-      '🚀 ~ file: 1-methods.spec.ts:182 ~ test ~ signedMessageResponse:',
-      signedMessageResponse
-    )
     if (signedMessageResponse.error != null) {
       throw new Error(signedMessageResponse.error.message)
     }
@@ -203,10 +198,6 @@ test.describe('filsnap testnet', () => {
       } satisfies SendMessageRequest,
       page,
     })
-    console.log(
-      '🚀 ~ file: 1-methods.spec.ts:208 ~ test ~ sendResponse:',
-      sendResponse
-    )
 
     if (sendResponse.error != null) {
       throw new Error(sendResponse.error.message)
