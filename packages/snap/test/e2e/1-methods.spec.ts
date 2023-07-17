@@ -169,24 +169,21 @@ test.describe('filsnap testnet', () => {
     const from = 't1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna'
     const to = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 
-    metamask.on('notification', async (page) => {
-      console.log('dialog confirmation')
-      await page.getByRole('button').filter({ hasText: 'Approve' }).click()
-      console.log('dialog confirmation end')
-    })
-
     const message = {
       to,
       value: '1',
     }
-    const signedMessageResponse =
-      await metamask.invokeSnap<SignMessageResponse>({
-        request: {
-          method: 'fil_signMessage',
-          params: message,
-        } satisfies SignMessageRequest,
-        page,
-      })
+    const invoke = metamask.invokeSnap<SignMessageResponse>({
+      request: {
+        method: 'fil_signMessage',
+        params: message,
+      } satisfies SignMessageRequest,
+      page,
+    })
+
+    const dialog = await metamask.waitForDialog('confirmation')
+    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const signedMessageResponse = await invoke
 
     console.log(
       '🚀 ~ file: 1-methods.spec.ts:182 ~ test ~ signedMessageResponse:',
