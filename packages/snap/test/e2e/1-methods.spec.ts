@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createFixture } from 'metamask-testing-tools'
 import {
   type GetBalanceResponse,
@@ -169,7 +170,9 @@ test.describe('filsnap testnet', () => {
     const to = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 
     metamask.on('notification', async (page) => {
+      console.log('dialog confirmation')
       await page.getByRole('button').filter({ hasText: 'Approve' }).click()
+      console.log('dialog confirmation end')
     })
 
     const message = {
@@ -185,6 +188,10 @@ test.describe('filsnap testnet', () => {
         page,
       })
 
+    console.log(
+      '🚀 ~ file: 1-methods.spec.ts:182 ~ test ~ signedMessageResponse:',
+      signedMessageResponse
+    )
     if (signedMessageResponse.error != null) {
       throw new Error(signedMessageResponse.error.message)
     }
@@ -199,6 +206,10 @@ test.describe('filsnap testnet', () => {
       } satisfies SendMessageRequest,
       page,
     })
+    console.log(
+      '🚀 ~ file: 1-methods.spec.ts:208 ~ test ~ sendResponse:',
+      sendResponse
+    )
 
     if (sendResponse.error != null) {
       throw new Error(sendResponse.error.message)
