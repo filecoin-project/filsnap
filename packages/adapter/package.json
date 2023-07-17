@@ -24,7 +24,7 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "tsc --build --pretty && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
     "build": "wireit",
     "test": "wireit"
   },

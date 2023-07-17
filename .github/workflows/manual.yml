@@ -1,4 +1,4 @@
-name: Manual
+name: Manual/Periodic Tests
 env:
   CI: true
   FORCE_COLOR: 1
@@ -69,3 +69,16 @@ jobs:
           ### Snap Tests failed 🤷🏻‍♂️
             Check report and traces: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
           " >> $GITHUB_STEP_SUMMARY
+      - name: Notify Slack
+        if: always() && github.event_name == 'schedule' && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
+        run: echo "Slack notification"
+        # uses: ravsamhq/notify-slack-action@v2
+        # with:
+        #   status: ${{ job.status }}
+        #   notify_when: 'failure'
+        #   token: ${{ secrets.GITHUB_TOKEN }}
+        #   notification_title: 'Filsnap tests {status_message}!'
+        #   message_format: '{emoji} *<{workflow_url}|{workflow}>* workflow {status_message} in the <{run_url}|{job}> job.'
+        #   footer: '<{repo_url}|{repo}>'
+        # env:
+        #   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

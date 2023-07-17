@@ -29,7 +29,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
-    "test": "pnpm run '/^test:.*/'",
+    "test": "pnpm run test:unit && pnpm run test:e2e",
     "test:unit": "playwright-test \"test/unit/**/*.test.ts\" --mode node",
     "test:e2e": "playwright test",
     "build": "wireit",
