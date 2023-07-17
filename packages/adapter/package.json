@@ -52,9 +52,9 @@
     "filsnap": "workspace:^"
   },
   "devDependencies": {
-    "@playwright/test": "^1.36.0",
-    "@types/node": "^20.4.1",
-    "metamask-testing-tools": "^1.1.1",
+    "@playwright/test": "^1.36.1",
+    "@types/node": "^20.4.2",
+    "metamask-testing-tools": "^1.1.2",
     "typescript": "5.1.6"
   },
   "eslintConfig": {

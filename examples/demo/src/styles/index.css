@@ -1,8 +1,11 @@
 @import '@acab/reset.css';
 @import 'water.css';
 
-:where(html) {
-  color-scheme: normal;
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    /* chrome for some reason doesnt inherit the custom variable here */
+    background-color: #1c76c5;
+  }
 }
 
 :where(:root) body {
