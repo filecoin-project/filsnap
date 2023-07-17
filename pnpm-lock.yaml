@@ -57,14 +57,14 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       metamask-testing-tools:
-        specifier: ^1.1.2
-        version: 1.1.2(@metamask/approval-controller@2.1.1)
+        specifier: ^1.1.3
+        version: 1.1.3(@metamask/approval-controller@2.1.1)
       preact:
         specifier: ^10.16.0
         version: 10.16.0
       react-hook-form:
-        specifier: ^7.45.1
-        version: 7.45.1(react@18.2.0)
+        specifier: ^7.45.2
+        version: 7.45.2(react@18.2.0)
       water.css:
         specifier: ^2.1.1
         version: 2.1.1
@@ -98,8 +98,8 @@ importers:
         specifier: ^20.4.2
         version: 20.4.2
       metamask-testing-tools:
-        specifier: ^1.1.2
-        version: 1.1.2(@metamask/approval-controller@2.1.1)
+        specifier: ^1.1.3
+        version: 1.1.3(@metamask/approval-controller@2.1.1)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -180,8 +180,8 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0
       metamask-testing-tools:
-        specifier: ^1.1.2
-        version: 1.1.2(@metamask/approval-controller@2.1.1)
+        specifier: ^1.1.3
+        version: 1.1.3(@metamask/approval-controller@2.1.1)
       mocha:
         specifier: ^10.2.0
         version: 10.2.0
@@ -6003,8 +6003,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /metamask-testing-tools@1.1.2(@metamask/approval-controller@2.1.1):
-    resolution: {integrity: sha512-XdnsMd8moKjokP/U03TRuILO6gLeUIiGgfi3nMKUqM3lBOL7s/OJq6fKwoAYLE2oua38jbSXP/Rv2kMDcPNuRg==}
+  /metamask-testing-tools@1.1.3(@metamask/approval-controller@2.1.1):
+    resolution: {integrity: sha512-ANBPMN298HevoG15IGLpCC69Add2tLEPY197f439FljA8xwfHx6JjA/ygnt+TUJC4CYr5n7EOH5RgyrFAJWpPQ==}
     engines: {node: '>=16'}
     dependencies:
       '@metamask/providers': 11.1.0
@@ -6799,8 +6799,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /react-hook-form@7.45.1(react@18.2.0):
-    resolution: {integrity: sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==}
+  /react-hook-form@7.45.2(react@18.2.0):
+    resolution: {integrity: sha512-9s45OdTaKN+4NSTbXVqeDITd/nwIg++nxJGL8+OD5uf1DxvhsXQ641kaYHk5K28cpIOTYm71O/fYk7rFaygb3A==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18

@@ -54,7 +54,7 @@
   "devDependencies": {
     "@playwright/test": "^1.36.1",
     "@types/node": "^20.4.2",
-    "metamask-testing-tools": "^1.1.2",
+    "metamask-testing-tools": "^1.1.3",
     "typescript": "5.1.6"
   },
   "eslintConfig": {
