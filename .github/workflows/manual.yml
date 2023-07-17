@@ -4,6 +4,8 @@ env:
   FORCE_COLOR: 1
   PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
 on:
+  schedule:
+    - cron: '15 * * * *'
   workflow_dispatch:
     inputs:
       metamask-tag:
@@ -31,6 +33,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm dlx playwright install --with-deps chromium
+      - run: echo "${{ github.event_name}}"
       - run: pnpm -r --filter filsnap run test
         id: tests
         env:
