@@ -1,4 +1,4 @@
-name: publish-demo
+name: Publish Demo
 env:
   CI: true
   FORCE_COLOR: 1

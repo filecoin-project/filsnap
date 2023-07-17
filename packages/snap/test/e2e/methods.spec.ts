@@ -35,7 +35,7 @@ test.beforeAll(async ({ metamask, page }) => {
   })
 })
 
-test.describe.only('filsnap testnet', () => {
+test.describe('filsnap testnet', () => {
   test('should get address', async ({ metamask, page }) => {
     const { result } = await metamask.invokeSnap<GetAddressResponse>({
       request: {
