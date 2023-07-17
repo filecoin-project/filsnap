@@ -9,15 +9,15 @@ on:
   workflow_dispatch:
     inputs:
       metamask-tag:
-        description: 'Tag of metamask to download. ie. "v10.27.0"'
+        description: 'Metamask tag to download. ie. "v10.27.0"'
       metamask-seed:
-        description: 'Seed to use for metamask'
+        description: 'Seed to use for Metamask'
       metamask-password:
-        description: 'Password to use for metamask'
+        description: 'Password to use for Metamask'
       metamask-snap-id:
-        description: 'Snap ID to use for metamask. ie. "npm:filsnap"'
+        description: 'Snap ID to install in Metamask. ie. "npm:filsnap"'
       metamask-snap-version:
-        description: 'Snap version to use for metamask'
+        description: 'Snap Version to install Metamask'
 jobs:
   test:
     timeout-minutes: 60
