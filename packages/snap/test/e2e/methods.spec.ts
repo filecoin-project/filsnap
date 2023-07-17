@@ -14,7 +14,6 @@ import {
 } from '../../src/index'
 
 const { test, expect } = createFixture({
-  // isolated: false,
   download: {
     flask: true,
   },
@@ -24,7 +23,7 @@ const { test, expect } = createFixture({
   },
 })
 
-test.beforeEach(async ({ metamask, page }) => {
+test.beforeAll(async ({ metamask, page }) => {
   await metamask.invokeSnap({
     request: {
       method: 'fil_configure',
