@@ -5,7 +5,7 @@ env:
   PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
 on:
   schedule:
-    - cron: '15 * * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
     inputs:
       metamask-tag:
