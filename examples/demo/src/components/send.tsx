@@ -35,7 +35,7 @@ function Send() {
     const { unsubscribe } = watch(async (data) => {
       if (snap == null) return
       const { recipient, amount } = data
-      if (amount != null && recipient != null) {
+      if (amount && recipient) {
         setIsEstimating(true)
         const value = Token.fromFIL(amount).toAttoFIL().toString()
         const estimate = await snap.calculateGasForMessage({
