@@ -59,6 +59,7 @@
   "dependencies": {
     "@metamask/key-tree": "^7.1.1",
     "@metamask/snaps-ui": "^0.32.2",
+    "@stfil/filecoin-utils": "^1.0.0",
     "iso-base": "^1.0.0",
     "iso-filecoin": "^1.0.0",
     "merge-options": "^3.0.4",
@@ -70,6 +71,7 @@
     "@metamask/snaps-types": "^0.32.2",
     "@playwright/test": "^1.36.1",
     "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-sucrase": "^5.0.1",
     "@rollup/plugin-terser": "^0.4.3",

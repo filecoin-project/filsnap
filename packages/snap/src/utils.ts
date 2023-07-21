@@ -8,8 +8,11 @@ import type {
   MessageStatus,
   Network,
   SnapConfig,
+  SnapContext,
   SnapResponseError,
 } from './types'
+import { NetworkPrefix } from '@stfil/filecoin-utils/build/artifacts/address'
+import { Address } from '@stfil/filecoin-utils'
 
 /**
  * Get default configuration by network name
@@ -236,4 +239,24 @@ export async function updateMessageInState(
     method: 'snap_manageState',
     params: { newState: state, operation: 'update' },
   })
+}
+
+export function getNetworkPrefix(
+  ctx: SnapContext,
+): NetworkPrefix {
+  if (ctx && ctx.rpc && ctx.rpc.network && ctx.rpc.network.toLocaleLowerCase() === 'mainnet') {
+    return NetworkPrefix.Mainnet;
+  }
+  return NetworkPrefix.Testnet;
+}
+
+export function getFilAddress(
+  ctx: SnapContext,
+  addr: string,
+): string {
+  const networkPrefix = getNetworkPrefix(ctx);
+  if (addr && addr.startsWith("0x")) {
+    return Address.fromEthAddress(networkPrefix, addr).toString();
+  }
+  return addr;
 }

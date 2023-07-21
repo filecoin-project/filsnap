@@ -2,11 +2,13 @@
 import { z } from 'zod'
 import { Message, Schemas } from 'iso-filecoin/message'
 import { Token } from 'iso-filecoin/token'
-import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
+import { sign } from 'iso-filecoin/wallet'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
 import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
-import { serializeError, snapDialog } from '../utils'
+import { getFilAddress, getNetworkPrefix, serializeError, snapDialog } from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
+import { Transaction, Wallet } from '@stfil/filecoin-utils'
+import { SignatureType } from '@stfil/filecoin-utils/build/artifacts/wallet'
 
 // Schemas
 export const signMessageParams = Schemas.messagePartial.omit({
@@ -51,7 +53,7 @@ export async function signMessage(
 
   // create Message
   const message = await new Message({
-    to: _params.data.to,
+    to: getFilAddress(ctx, _params.data.to),
     from: ctx.account.address.toString(),
     value: _params.data.value,
     nonce: _params.data.nonce,
@@ -70,7 +72,7 @@ export async function signMessage(
       heading(
         `Send ${Token.fromAttoFIL(message.value).toFIL().toFormat(10)} FIL to`
       ),
-      copyable(message.to),
+      copyable(_params.data.to),
       divider(),
       heading('Details'),
       text(`Gas _(estimated)_: **${gas.toFIL().toFormat(10)} FIL**`),
@@ -79,12 +81,24 @@ export async function signMessage(
   })
 
   if (conf) {
-    const sig = filSignMessage(ctx.account.privateKey, 'SECP256K1', message)
+    const accountData = Wallet.recoverAccount(getNetworkPrefix(ctx), SignatureType.SECP256K1, base64pad.encode(ctx.account.privateKey))
+    const signature = (await Wallet.signTransaction(accountData, Transaction.fromJSON({
+      To: message.to,
+      From: message.from,
+      Value: message.value,
+      Params: message.params,
+      GasFeeCap: message.gasFeeCap,
+      GasPremium: message.gasPremium,
+      GasLimit: message.gasLimit,
+      Nonce: message.nonce,
+      Method: message.method,
+    }))).toJSON()
+    const sig = {message, signature: {data: signature.Data, type: signature.Type}}
     return {
       result: {
         message,
         signature: {
-          data: base64pad.encode(sig),
+          data: sig.signature.data,
           type: 'SECP256K1',
         },
       },

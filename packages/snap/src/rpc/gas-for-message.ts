@@ -1,7 +1,7 @@
 import { Schemas } from 'iso-filecoin/message'
 import { z } from 'zod'
 import type { SnapContext, SnapResponse } from '../types'
-import { serializeError } from '../utils'
+import { getFilAddress, serializeError } from '../utils'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'
@@ -60,7 +60,7 @@ export async function getGasForMessage(
 
   const { message, maxFee } = _params.data
   const msg = {
-    to: message.to,
+    to: getFilAddress(ctx, message.to),
     from: keypair.address.toString(),
     value: message.value,
   }
