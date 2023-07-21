@@ -98,6 +98,16 @@ const Account = () => {
         Get Private Key
       </button>
       <code data-testid="private-key-result">{privateKey}</code>
+
+      <br />
+      <button
+        data-testid="get-private-key"
+        onClick={() => snap?.switchOrAddChain('testnet')}
+        disabled={isLoading}
+      >
+        Add FEVM Mainnet
+      </button>
+      <code data-testid="private-key-result">{privateKey}</code>
     </div>
   )
 }

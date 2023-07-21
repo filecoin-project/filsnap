@@ -33,11 +33,13 @@ function Send() {
 
   useEffect(() => {
     const { unsubscribe } = watch(async (data) => {
+      setError(undefined)
       if (snap == null) return
       const { recipient, amount } = data
       if (amount && recipient) {
         setIsEstimating(true)
         const value = Token.fromFIL(amount).toAttoFIL().toString()
+
         const estimate = await snap.calculateGasForMessage({
           message: {
             to: recipient,
@@ -108,6 +110,7 @@ function Send() {
         <input
           style={{ width: '100%' }}
           disabled={isLoading || isSending}
+          placeholder="f1, f4 or 0x address"
           {...register('recipient', { required: true })}
         />
         {errors.recipient != null && (

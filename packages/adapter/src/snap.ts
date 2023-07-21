@@ -1,4 +1,9 @@
-import type { FilSnapMethods, RequestWithFilSnap, SnapConfig } from 'filsnap'
+import type {
+  FilSnapMethods,
+  Network,
+  RequestWithFilSnap,
+  SnapConfig,
+} from 'filsnap'
 
 type SnapsResult = Record<
   string,
@@ -265,5 +270,60 @@ export class FilsnapAdapter {
         snapId: this.snapId,
       },
     })
+  }
+
+  async switchOrAddChain(network: Network): Promise<void> {
+    let config = {
+      chainId: '0x13A',
+      chainName: 'Filecoin',
+      rpcUrls: ['https://api.node.glif.io/rpc/v1'],
+      blockExplorerUrls: ['https://filfox.info', 'https://explorer.glif.io/'],
+      nativeCurrency: {
+        name: 'Filecoin',
+        symbol: 'FIL',
+        decimals: 18,
+      },
+      iconUrls: ['https://filsnap.fission.app/filecoin-logo.svg'],
+    }
+
+    if (network === 'testnet') {
+      config = {
+        chainId: '0x4CB2F',
+        chainName: 'Filecoin Calibration testnet',
+        rpcUrls: ['https://api.calibration.node.glif.io/rpc/v1'],
+        blockExplorerUrls: ['https://filfox.info', 'https://explorer.glif.io/'],
+        nativeCurrency: {
+          name: 'Filecoin',
+          symbol: 'tFIL',
+          decimals: 18,
+        },
+        iconUrls: ['https://filsnap.fission.app/filecoin-logo.svg'],
+      }
+    }
+
+    try {
+      await this.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: config.chainId }],
+      })
+    } catch (switchError) {
+      const err = switchError as Error & {
+        code: number
+      }
+
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (err.code === 4902) {
+        try {
+          await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [config],
+          })
+        } catch (error) {
+          throw new Error('Failed to add chain to MetaMask.', { cause: error })
+        }
+      } else {
+        throw new Error('Failed to add switch to MetaMask.', { cause: err })
+      }
+    }
   }
 }

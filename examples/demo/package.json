@@ -50,7 +50,7 @@
     "@acab/reset.css": "^0.5.3",
     "@preact/signals": "^1.1.5",
     "filsnap-adapter": "workspace:^",
-    "iso-filecoin": "^1.0.0",
+    "iso-filecoin": "^1.1.1",
     "metamask-testing-tools": "^1.1.4",
     "preact": "^10.16.0",
     "react-hook-form": "^7.45.2",
@@ -61,7 +61,7 @@
     "@playwright/test": "^1.36.1",
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.4.2",
-    "vite": "^4.4.4"
+    "vite": "^4.4.6"
   },
   "eslintConfig": {
     "extends": [
