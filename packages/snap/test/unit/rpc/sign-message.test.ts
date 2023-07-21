@@ -3,6 +3,7 @@ import { signMessage } from '../../../src/rpc/sign-message'
 import { LotusApiMock } from '../lotusapi-mock'
 import { mockSnapProvider } from '../wallet-mock'
 import { getKeyPair } from '../../../src/keypair'
+import * as Constants from '../../../src/constants'
 
 describe('Test rpc handler function: signMessage', function () {
   const walletStub = mockSnapProvider()
@@ -56,8 +57,15 @@ describe('Test rpc handler function: signMessage', function () {
     })
 
     const response = await signMessage(
-      // @ts-expect-error - test code
-      { snap: walletStub, rpc: apiStub, account },
+      {
+        snap: walletStub,
+        // @ts-expect-error - test code
+        rpc: apiStub,
+        account,
+        config: {
+          ...Constants.testnetConfig,
+        },
+      },
       messageRequest
     )
 
@@ -101,8 +109,15 @@ describe('Test rpc handler function: signMessage', function () {
       nonce: 1,
     }
     const response = await signMessage(
-      // @ts-expect-error - test code
-      { snap: walletStub, rpc: apiStub, account },
+      {
+        snap: walletStub,
+        // @ts-expect-error - test code
+        rpc: apiStub,
+        account,
+        config: {
+          ...Constants.testnetConfig,
+        },
+      },
       messageRequestWithGasParams
     )
 
@@ -144,8 +159,15 @@ describe('Test rpc handler function: signMessage', function () {
       params: 'bugugugu',
     }
     const response = await signMessage(
-      // @ts-expect-error - test code
-      { snap: walletStub, rpc: apiStub, account },
+      {
+        snap: walletStub,
+        // @ts-expect-error - test code
+        rpc: apiStub,
+        account,
+        config: {
+          ...Constants.testnetConfig,
+        },
+      },
       messageRequestWithCustomParams
     )
 
@@ -181,8 +203,15 @@ describe('Test rpc handler function: signMessage', function () {
     }
 
     const response = await signMessage(
-      // @ts-expect-error - test code
-      { snap: walletStub, rpc: apiStub, account },
+      {
+        snap: walletStub,
+        // @ts-expect-error - test code
+        rpc: apiStub,
+        account,
+        config: {
+          ...Constants.testnetConfig,
+        },
+      },
       messageRequestWithGasParams
     )
 
