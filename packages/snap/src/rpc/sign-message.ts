@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { z } from 'zod'
+import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
+import { base64pad } from 'iso-base/rfc4648'
 import { Message, Schemas } from 'iso-filecoin/message'
 import { Token } from 'iso-filecoin/token'
+import * as Address from 'iso-filecoin/address'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
+import { z } from 'zod'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
-import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
 import { serializeError, snapDialog } from '../utils'
-import { base64pad } from 'iso-base/rfc4648'
 
 // Schemas
 export const signMessageParams = Schemas.messagePartial.omit({
@@ -51,7 +52,7 @@ export async function signMessage(
 
   // create Message
   const message = await new Message({
-    to: _params.data.to,
+    to: Address.from(_params.data.to, ctx.config.network).toString(),
     from: ctx.account.address.toString(),
     value: _params.data.value,
     nonce: _params.data.nonce,

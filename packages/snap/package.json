@@ -59,8 +59,8 @@
   "dependencies": {
     "@metamask/key-tree": "^7.1.1",
     "@metamask/snaps-ui": "^0.32.2",
-    "iso-base": "^1.0.0",
-    "iso-filecoin": "^1.0.0",
+    "iso-base": "^1.1.1",
+    "iso-filecoin": "^1.1.1",
     "merge-options": "^3.0.4",
     "zod": "^3.21.4"
   },

@@ -2,6 +2,7 @@ import { Schemas } from 'iso-filecoin/message'
 import { z } from 'zod'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
+import * as Address from 'iso-filecoin/address'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'
@@ -49,7 +50,7 @@ export async function getGasForMessage(
   ctx: SnapContext,
   params: EstimateParams
 ): Promise<GasForMessageResponse> {
-  const { rpc, account: keypair } = ctx
+  const { rpc, account: keypair, config } = ctx
   const _params = estimateParams.safeParse(params)
   if (!_params.success) {
     return serializeError(
@@ -59,17 +60,19 @@ export async function getGasForMessage(
   }
 
   const { message, maxFee } = _params.data
+
   const msg = {
-    to: message.to,
+    to: Address.from(message.to, config.network).toString(),
     from: keypair.address.toString(),
     value: message.value,
   }
+
   const { error, result } = await rpc.gasEstimate(
     msg,
     maxFee == null ? DEFAULT_MAX_FEE : maxFee
   )
   if (error != null) {
-    return serializeError('RPC call to "GasEstimateMessageGas" failed', error)
+    return serializeError(`RPC call to "GasEstimateMessageGas" failed`, error)
   }
 
   return {
