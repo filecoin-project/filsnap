@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.1.3...filsnap-v0.2.0) (2023-07-21)
+
+
+### Features
+
+* add support for f4 and 0x addresses ([c9be659](https://github.com/filecoin-project/filsnap/commit/c9be6595301959d0a82b4cff6cd572d5c4389efd))
+
 ## [0.1.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.1.2...filsnap-v0.1.3) (2023-07-13)
 
 
