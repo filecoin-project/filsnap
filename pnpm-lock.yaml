@@ -54,8 +54,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/adapter
       iso-filecoin:
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.2.0
+        version: 1.2.0
       metamask-testing-tools:
         specifier: ^1.1.4
         version: 1.1.4(@metamask/approval-controller@2.1.1)
@@ -79,11 +79,11 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0(@babel/core@7.22.9)(preact@10.16.0)(vite@4.4.6)
       '@types/node':
-        specifier: ^20.4.2
-        version: 20.4.2
+        specifier: ^20.4.3
+        version: 20.4.3
       vite:
         specifier: ^4.4.6
-        version: 4.4.6(@types/node@20.4.2)
+        version: 4.4.6(@types/node@20.4.3)
 
   packages/adapter:
     dependencies:
@@ -95,8 +95,8 @@ importers:
         specifier: ^1.36.1
         version: 1.36.1
       '@types/node':
-        specifier: ^20.4.2
-        version: 20.4.2
+        specifier: ^20.4.3
+        version: 20.4.3
       metamask-testing-tools:
         specifier: ^1.1.4
         version: 1.1.4(@metamask/approval-controller@2.1.1)
@@ -116,8 +116,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       iso-filecoin:
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.2.0
+        version: 1.2.0
       merge-options:
         specifier: ^3.0.4
         version: 3.0.4
@@ -2401,7 +2401,7 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 20.4.3
       playwright-core: 1.36.1
     optionalDependencies:
       fsevents: 2.3.2
@@ -2429,7 +2429,7 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
       kolorist: 1.8.0
       resolve: 1.22.2
-      vite: 4.4.6(@types/node@20.4.2)
+      vite: 4.4.6(@types/node@20.4.3)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -2476,7 +2476,7 @@ packages:
       '@prefresh/utils': 1.2.0
       '@rollup/pluginutils': 4.2.1
       preact: 10.16.0
-      vite: 4.4.6(@types/node@20.4.2)
+      vite: 4.4.6(@types/node@20.4.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2623,7 +2623,7 @@ packages:
   /@types/bn.js@5.1.1:
     resolution: {integrity: sha512-qNrYbZqMx0uJAfKnKclPh+dTwK33KfLHYqtyODwd5HnXOjnkhc4qgn3BrK6RWyGZm5+sIFE7Q7Vz6QQtJB7w7g==}
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 20.4.3
 
   /@types/chai-as-promised@7.1.5:
     resolution: {integrity: sha512-jStwss93SITGBwt/niYrkf2C+/1KTeZCZl1LaeezTlqppAKeoQC7jxyqYuP72sxBGKCIbw7oHgbYssIRzT5FCQ==}
@@ -2693,8 +2693,8 @@ packages:
   /@types/ms@0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
 
-  /@types/node@20.4.2:
-    resolution: {integrity: sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==}
+  /@types/node@20.4.3:
+    resolution: {integrity: sha512-Yu3+r4Mn/iY6Mf0aihncZQ1qOjOUrCiodbHHY1hds5O+7BbKp9t+Li7zLO13zO8j9L2C6euz8xsYQP0rjGvVXw==}
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -2707,7 +2707,7 @@ packages:
   /@types/pbkdf2@3.1.0:
     resolution: {integrity: sha512-Cf63Rv7jCQ0LaL8tNXmEyqTHuIJxRdlS5vMh1mj5voN4+QFhVZnlZruezqpWYDiJ8UTzhP0VmeLXCmBk66YrMQ==}
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 20.4.3
 
   /@types/resolve@1.20.2:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -2719,7 +2719,7 @@ packages:
   /@types/secp256k1@4.0.3:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 20.4.3
 
   /@types/semver@7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
@@ -5623,8 +5623,8 @@ packages:
       bigint-mod-arith: 3.3.1
     dev: false
 
-  /iso-filecoin@1.1.1:
-    resolution: {integrity: sha512-/K7wVAPh6z0FLCu0Aaqc7JKuflO8ljo8zcNqVKDvGtVBLyz0iR5CP5CCT+12TDWcBqvo+0L8zjxitZt+RCu1MQ==}
+  /iso-filecoin@1.2.0:
+    resolution: {integrity: sha512-bWALhb6UXj3F+3Q7iMN/QJqVfnbyPj4FTlx3z3T4gtex/Tl8RmfUm+HjPI6M9olQgzCoX2pDbfe5rneZvRfFiA==}
     dependencies:
       '@ipld/dag-cbor': 9.0.3
       '@noble/curves': 1.1.0
@@ -7922,7 +7922,7 @@ packages:
     dependencies:
       builtins: 5.0.1
 
-  /vite@4.4.6(@types/node@20.4.2):
+  /vite@4.4.6(@types/node@20.4.3):
     resolution: {integrity: sha512-EY6Mm8vJ++S3D4tNAckaZfw3JwG3wa794Vt70M6cNJ6NxT87yhq7EC8Rcap3ahyHdo8AhCmV9PTk+vG1HiYn1A==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -7950,7 +7950,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 20.4.3
       esbuild: 0.18.15
       postcss: 8.4.27
       rollup: 3.26.3

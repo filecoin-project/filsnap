@@ -110,7 +110,7 @@ function Send() {
         <input
           style={{ width: '100%' }}
           disabled={isLoading || isSending}
-          placeholder="f1, f4 or 0x address"
+          placeholder="f0, f1, f2, f3, f4 or 0x address"
           {...register('recipient', { required: true })}
         />
         {errors.recipient != null && (
