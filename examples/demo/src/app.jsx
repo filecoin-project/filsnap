@@ -4,6 +4,8 @@ import Network from './components/network.jsx'
 import Send from './components/send.tsx'
 import SignMessage from './components/sign-message.jsx'
 import { useFilsnapContext } from './hooks/filsnap.js'
+import ConnectFEVM from './components/connect-fevm.jsx'
+import Forward from './components/forward.tsx'
 
 export function App() {
   const { isConnected } = useFilsnapContext()
@@ -13,10 +15,12 @@ export function App() {
       <h1>⨎ Filsnap</h1>
       <div class="Grid">
         <Connect />
+        <Network />
         {isConnected && (
           <>
-            <Network />
             <Send />
+            <ConnectFEVM />
+            <Forward />
             <details class="Cell100">
               <summary>Advanced</summary>
               <Account />
@@ -50,7 +54,6 @@ export function App() {
               </a>
             </li>
           </ul>
-          <br />
         </div>
       </div>
     </main>

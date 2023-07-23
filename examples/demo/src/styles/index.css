@@ -24,13 +24,12 @@
   padding: 0 10px;
   word-wrap: break-word;
   flex-direction: column;
-  /* margin-bottom: 80px; */
 }
 
 .Box {
   background-color: var(--background-alt);
   border-radius: 6px;
-  padding: 10px 15px;
+  padding: 15px 15px;
   overflow: auto;
 }
 .Box input {
@@ -40,6 +39,13 @@
 .Box-svg {
   display: inline;
   vertical-align: middle;
+}
+
+.Box > h1,
+h2,
+h3,
+h4 {
+  margin-top: 0px;
 }
 
 .Grid {
@@ -80,4 +86,16 @@
   .Grid > * {
     flex: 0 0 calc(1 / 3 * 100% - (1 - 1 / 3) * var(--fl-gap-h));
   }
+}
+
+/* Utils */
+
+.u-AlignCenter {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.u-FullWidth {
+  width: 100%;
 }

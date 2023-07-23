@@ -2,6 +2,8 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { useFilsnapContext } from '../hooks/filsnap.js'
 import { Token } from 'iso-filecoin/token'
+import { clsx } from 'clsx'
+import ExplorerLink from './explorer-link.jsx'
 
 export default function Connect() {
   const { isLoading, hasFlask, isConnected, connect, account, error } =
@@ -19,7 +21,7 @@ export default function Connect() {
 
   if (!hasFlask) {
     out = (
-      <span data-testid="install-mm-flask">
+      <div data-testid="install-mm-flask">
         Install Metamask{' '}
         <a
           href="https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk"
@@ -28,43 +30,31 @@ export default function Connect() {
         >
           Flask
         </a>
-      </span>
+      </div>
     )
   }
 
   if (isConnected) {
     out = (
       <>
-        <h3 title={account.balance + ' attoFIL'}>
+        <h3>Native Account</h3>
+        <div title={account.balance + ' attoFIL'}>
           <b>
             {account
-              ? Token.fromAttoFIL(account.balance).toFIL().toFormat(6)
+              ? Token.fromAttoFIL(account.balance).toFIL().toFormat(18)
               : 'unknown'}{' '}
             FIL
           </b>
-        </h3>
+        </div>
         <span data-testid="account-info">
-          Connected to{' '}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://explorer.glif.io/address/${
-              account.address
-            }/?network=${
-              account?.config.network === 'mainnet'
-                ? 'mainnet'
-                : 'calibrationnet'
-            }`}
-          >
-            {account ? account.address : 'unknown'}
-          </a>{' '}
+          <ExplorerLink address={account.address} chain="filecoin" />
         </span>
       </>
     )
   }
 
   if (isLoading) {
-    out = <span>Loading...</span>
+    out = <div>Loading...</div>
   }
 
   if (error) {
@@ -77,5 +67,9 @@ export default function Connect() {
       </>
     )
   }
-  return <div class="Cell75 Box">{out}</div>
+  return (
+    <div class={clsx('Cell75', 'Box', !isConnected && 'u-AlignCenter')}>
+      {out}
+    </div>
+  )
 }
