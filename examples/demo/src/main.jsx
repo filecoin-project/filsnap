@@ -41,7 +41,6 @@ if (appEl) {
       <FilsnapContextProvider snapId={SNAP_ID} config={config}>
         <App />
       </FilsnapContextProvider>
-      ,
     </WagmiConfig>,
     appEl
   )
