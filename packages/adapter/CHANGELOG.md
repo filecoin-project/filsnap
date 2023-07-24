@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v0.1.0...filsnap-adapter-v0.1.1) (2023-07-24)
+
+
+### Bug Fixes
+
+* connect now updates snap if needed ([810c355](https://github.com/filecoin-project/filsnap/commit/810c35512a5294c0c797e69ff7ead16de5ed6bc9))
+
 ## [0.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v0.0.2...filsnap-adapter-v0.1.0) (2023-07-22)
 
 
