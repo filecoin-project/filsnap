@@ -45,7 +45,7 @@ fixture.test(
   async ({ metamask, page }) => {
     await page.getByTestId('connect-snap').click()
 
-    const dialog = await metamask.waitForDialog('snaps-connect')
+    const dialog = await metamask.waitForDialog('snap-install')
     fixture.expect(dialog).toBeDefined()
   }
 )
