@@ -28,9 +28,9 @@ test.describe('fil_configure', () => {
       network: 'testnet',
       rpc: { token: '', url: 'https://api.calibration.node.glif.io' },
       unit: {
-        decimals: 6,
-        image: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007',
-        symbol: 'FIL',
+        decimals: 18,
+        image: 'https://filecoin.io/images/filecoin-logo.svg',
+        symbol: 'tFIL',
       },
     })
   })
@@ -51,8 +51,8 @@ test.describe('fil_configure', () => {
       network: 'mainnet',
       rpc: { token: '', url: 'https://api.node.glif.io' },
       unit: {
-        decimals: 6,
-        image: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007',
+        decimals: 18,
+        image: 'https://filecoin.io/images/filecoin-logo.svg',
         symbol: 'FIL',
       },
     })
@@ -67,8 +67,8 @@ test.describe('fil_configure', () => {
       network: 'mainnet',
       rpc: { token: '', url: 'https://api.node.glif.io' },
       unit: {
-        decimals: 6,
-        image: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007',
+        decimals: 18,
+        image: 'https://filecoin.io/images/filecoin-logo.svg',
         symbol: 'FIL',
       },
     } satisfies ConfigureRequest['params']
@@ -95,8 +95,8 @@ test.describe('fil_configure', () => {
       network: 'testnet',
       rpc: { token: '', url: 'https://api.calibration.node.glif.io' },
       unit: {
-        decimals: 6,
-        image: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007',
+        decimals: 18,
+        image: 'https://filecoin.io/images/filecoin-logo.svg',
         symbol: 'FIL',
       },
     } satisfies ConfigureRequest['params']
@@ -123,8 +123,8 @@ test.describe('fil_configure', () => {
       network: 'testnet',
       rpc: { token: '', url: 'https://api.node.glif.io' },
       unit: {
-        decimals: 6,
-        image: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007',
+        decimals: 18,
+        image: 'https://filecoin.io/images/filecoin-logo.svg',
         symbol: 'FIL',
       },
     } satisfies ConfigureRequest['params']
@@ -149,8 +149,8 @@ test.describe('fil_configure', () => {
       network: 'RANDOM_NETWORK',
       rpc: { token: '', url: 'https://api.node.glif.io' },
       unit: {
-        decimals: 6,
-        image: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007',
+        decimals: 18,
+        image: 'https://filecoin.io/images/filecoin-logo.svg',
         symbol: 'FIL',
       },
     } satisfies ConfigureRequest['params']

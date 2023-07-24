@@ -57,18 +57,6 @@ export function FilsnapContextProvider({
         setError(undefined)
         try {
           const hasFlask = await FilsnapAdapter.hasFlask()
-          const isConnected = await FilsnapAdapter.isConnected(snapId)
-          if (hasFlask && isConnected) {
-            const snap = await FilsnapAdapter.create(snapConfig, snapId)
-            const account = await snap.getAccountInfo()
-            if (account.error) {
-              throw new Error(account.error.message, { cause: account.error })
-            }
-
-            setAccount(account.result)
-            setSnap(snap)
-          }
-          setIsConnected(isConnected)
           setHasFlask(hasFlask)
         } catch (error) {
           const err = /** @type {Error} */ (error)

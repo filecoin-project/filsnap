@@ -91,20 +91,17 @@ export class FilsnapAdapter {
       throw new Error('Flask is not installed')
     }
 
-    const isConnected = await FilsnapAdapter.isConnected(snapId)
-    if (!isConnected) {
-      const snaps = await window.ethereum.request<SnapsResult>({
-        method: 'wallet_requestSnaps',
-        params: {
-          [snapId]: {
-            version: snapVersion,
-          },
+    const snaps = await window.ethereum.request<SnapsResult>({
+      method: 'wallet_requestSnaps',
+      params: {
+        [snapId]: {
+          version: snapVersion,
         },
-      })
+      },
+    })
 
-      if (snaps == null || snaps[snapId] == null) {
-        throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
-      }
+    if (snaps == null || snaps[snapId] == null) {
+      throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
     }
 
     const adapter = new FilsnapAdapter(snapId)
