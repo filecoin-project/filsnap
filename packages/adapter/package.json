@@ -57,6 +57,9 @@
     "metamask-testing-tools": "^1.1.4",
     "typescript": "5.1.6"
   },
+  "publishConfig": {
+    "provenance": true
+  },
   "eslintConfig": {
     "extends": [
       "../../node_modules/hd-scripts/eslint/index.js"
