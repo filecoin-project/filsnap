@@ -3,7 +3,7 @@
 [![NPM Version](https://img.shields.io/npm/v/filsnap.svg)](https://www.npmjs.com/package/filsnap)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Snap](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yaml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yaml)
+[![Snap](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yml)
 
 > Filecoin metamask snap to enable developers to add Filecoin integration to their dapps.
 

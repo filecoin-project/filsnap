@@ -9,9 +9,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     outputs:
       paths_released: ${{ steps.release.outputs.paths_released }}
     steps:
@@ -30,6 +27,9 @@ jobs:
       contains(fromJson(needs.release.outputs.paths_released), 'packages/snap') ||
       contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter')
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.4

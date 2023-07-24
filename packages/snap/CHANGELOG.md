@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.1...filsnap-v0.3.2) (2023-07-24)
+
+
+### Bug Fixes
+
+* npm providence ([8f4b474](https://github.com/filecoin-project/filsnap/commit/8f4b4746f6839a7222674d2df6cb69f48267f54b))
+
+## [0.3.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.0...filsnap-v0.3.1) (2023-07-24)
+
+
+### Bug Fixes
+
+* use snap config to format fil amounts ([eba19be](https://github.com/filecoin-project/filsnap/commit/eba19bef0eaaf9a16a0fd8cf0b503f9395226146))
+
 ## [0.3.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.2.0...filsnap-v0.3.0) (2023-07-22)
 
 
