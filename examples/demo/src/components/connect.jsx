@@ -41,7 +41,7 @@ export default function Connect() {
         <div title={account.balance + ' attoFIL'}>
           <b>
             {account
-              ? Token.fromAttoFIL(account.balance).toFIL().toFormat(18)
+              ? Token.fromAttoFIL(account.balance).toFIL().toFormat()
               : 'unknown'}{' '}
             FIL
           </b>

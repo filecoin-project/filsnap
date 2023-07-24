@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
 import { base64pad } from 'iso-base/rfc4648'
+import * as Address from 'iso-filecoin/address'
 import { Message, Schemas } from 'iso-filecoin/message'
 import { Token } from 'iso-filecoin/token'
-import * as Address from 'iso-filecoin/address'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
@@ -68,14 +68,22 @@ export async function signMessage(
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
-      heading(
-        `Send ${Token.fromAttoFIL(message.value).toFIL().toFormat(10)} FIL to`
-      ),
+      heading(`Send ${Token.fromAttoFIL(message.value).toFIL().toString()} to`),
       copyable(message.to),
       divider(),
       heading('Details'),
-      text(`Gas _(estimated)_: **${gas.toFIL().toFormat(10)} FIL**`),
-      text(`Total _(amount + gas)_: **${total.toFIL().toFormat(10)} FIL**`),
+      text(
+        `Gas _(estimated)_: **${gas.toFIL().toFormat({
+          decimalPlaces: ctx.config.unit?.decimals,
+          suffix: ` ${ctx.config.unit?.symbol}`,
+        })}**`
+      ),
+      text(
+        `Total _(amount + gas)_: **${total.toFIL().toFormat({
+          decimalPlaces: ctx.config.unit?.decimals,
+          suffix: ` ${ctx.config.unit?.symbol}`,
+        })}**`
+      ),
     ]),
   })
 

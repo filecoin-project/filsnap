@@ -14,6 +14,6 @@
       "path": "../../packages/adapter"
     }
   ],
-  "include": ["src", "test"],
+  // "include": ["**/*.{jsx,js,ts,tsx}"],
   "exclude": ["node_modules", "dist", "out"]
 }

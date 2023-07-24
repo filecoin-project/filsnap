@@ -58,8 +58,8 @@ function Send() {
         )
 
         const total = Token.fromFIL(amount).add(gas)
-        setEstimate(gas.toFIL().toFormat(10))
-        setTotal(total.toFIL().toFormat(10))
+        setEstimate(gas.toFIL().toFormat())
+        setTotal(total.toFIL().toFormat())
         setIsEstimating(false)
       }
     })
@@ -122,6 +122,7 @@ function Send() {
           Amount
         </label>
         <input
+          placeholder="FIL"
           disabled={isLoading || isSending}
           {...register('amount', { required: true })}
         />

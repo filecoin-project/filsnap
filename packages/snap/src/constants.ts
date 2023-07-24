@@ -8,8 +8,8 @@ export const mainnetConfig: SnapConfig = {
     url: 'https://api.node.glif.io',
   },
   unit: {
-    decimals: 6,
-    image: `https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007`,
+    decimals: 18,
+    image: `https://filecoin.io/images/filecoin-logo.svg`,
     symbol: 'FIL',
   },
 }
@@ -22,10 +22,9 @@ export const testnetConfig: SnapConfig = {
     url: `https://api.calibration.node.glif.io`,
   },
   unit: {
-    decimals: 6,
-    image: `https://cryptologos.cc/logos/filecoin-fil-logo.svg?v=007`,
-    symbol: 'FIL',
-    // custom view url ?
+    decimals: 18,
+    image: `https://filecoin.io/images/filecoin-logo.svg`,
+    symbol: 'tFIL',
   },
 }
 
