@@ -41,11 +41,12 @@ fixture = createFixture({
 })
 
 fixture.test(
-  'should show account info when snap is connected',
+  'should show connect button when snap is installed',
   async ({ metamask, page }) => {
-    await fixture
-      .expect(page.getByTestId('account-info'))
-      .toHaveText('⨎ t1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna')
+    await page.getByTestId('connect-snap').click()
+
+    const dialog = await metamask.waitForDialog('snap-install')
+    fixture.expect(dialog).toBeDefined()
   }
 )
 
