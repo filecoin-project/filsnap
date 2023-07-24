@@ -51,7 +51,10 @@
     "serve": {
       "command": "mm-snap serve",
       "dependencies": [
-        "build"
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "service": true
     }

@@ -61,15 +61,16 @@ test.describe('filsnap testnet', () => {
   })
 
   test('should get private key', async ({ metamask, page }) => {
-    metamask.on('notification', (page) => {
-      void page.getByRole('button').filter({ hasText: 'Approve' }).click()
-    })
-    const { result } = await metamask.invokeSnap<ExportPrivateKeyResponse>({
+    const privateKey = metamask.invokeSnap<ExportPrivateKeyResponse>({
       request: {
         method: 'fil_exportPrivateKey',
       },
       page,
     })
+
+    const dialog = await metamask.waitForDialog('confirmation')
+    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const { result } = await privateKey
 
     expect(result).toBe('oUultedTWcsLGiRYLrBi/d7WoVvAxFedERBPTNKgBTo=')
   })
@@ -97,17 +98,17 @@ test.describe('filsnap testnet', () => {
   })
 
   test('should sign raw message', async ({ metamask, page }) => {
-    metamask.on('notification', (page) => {
-      void page.getByRole('button').filter({ hasText: 'Approve' }).click()
-    })
-
-    const { result } = await metamask.invokeSnap<SignMessageRawResponse>({
+    const signRaw = metamask.invokeSnap<SignMessageRawResponse>({
       request: {
         method: 'fil_signMessageRaw',
         params: { message: 'raw message' },
       } satisfies SignMessageRawRequest,
       page,
     })
+
+    const dialog = await metamask.waitForDialog('confirmation')
+    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const { result } = await signRaw
 
     expect(result).toStrictEqual(
       'BjNeqpqxb9CdnxVbE3J8YGHMg9kZjAz95mnnlASUSGgluIhTvaNRB5/Qx5/dKXqzBvpSclOXQfkeeRvqvo3jqAA='
@@ -130,21 +131,21 @@ test.describe('filsnap testnet', () => {
     const from = 't1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna'
     const to = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 
-    metamask.on('notification', (page) => {
-      void page.getByRole('button').filter({ hasText: 'Approve' }).click()
-    })
-
     const message = {
       to,
       value: '1',
     }
-    const { result } = await metamask.invokeSnap<SignMessageResponse>({
+    const sign = metamask.invokeSnap<SignMessageResponse>({
       request: {
         method: 'fil_signMessage',
         params: message,
       } satisfies SignMessageRequest,
       page,
     })
+
+    const dialog = await metamask.waitForDialog('confirmation')
+    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const { result } = await sign
 
     if (result == null) {
       throw new Error('Failed to sign message')
