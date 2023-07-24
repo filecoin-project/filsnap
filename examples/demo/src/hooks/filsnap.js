@@ -32,12 +32,10 @@ export function FilsnapContextProvider({
   children,
 }) {
   // State
-  const [error, setError] = useState(
-    /** @type {Error |undefined} */ (undefined)
-  )
-  const [snap, setSnap] = useState(
-    /** @type {FilsnapAdapter |undefined} */ (undefined)
-  )
+  const [error, setError] = /** @type {typeof useState<Error>} */ (useState)()
+  const [snap, setSnap] = /** @type {typeof useState<FilsnapAdapter>} */ (
+    useState
+  )()
   const [account, setAccount] = useState(
     /** @type {import('filsnap-adapter').AccountInfo | undefined | null} */ (
       undefined
@@ -46,6 +44,10 @@ export function FilsnapContextProvider({
   const [isConnected, setIsConnected] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [hasFlask, setHasFlask] = useState(false)
+  const [snapConfig, setSnapConfig] =
+    /** @type {typeof useState<Partial<import('filsnap-adapter').SnapConfig>>} */ (
+      useState
+    )(config)
 
   // Effects
   useEffect(() => {
@@ -57,7 +59,7 @@ export function FilsnapContextProvider({
           const hasFlask = await FilsnapAdapter.hasFlask()
           const isConnected = await FilsnapAdapter.isConnected(snapId)
           if (hasFlask && isConnected) {
-            const snap = await FilsnapAdapter.create(config, snapId)
+            const snap = await FilsnapAdapter.create(snapConfig, snapId)
             const account = await snap.getAccountInfo()
             if (account.error) {
               throw new Error(account.error.message, { cause: account.error })
@@ -83,12 +85,12 @@ export function FilsnapContextProvider({
     return () => {
       mounted = false
     }
-  }, [config, snapId, snapVersion])
+  }, [snapConfig, snapId, snapVersion])
 
   // Callbacks
   const connect = useCallback(
     async (
-      /** @type {Partial<import('filsnap-adapter').SnapConfig> | undefined} */ _config = config
+      /** @type {Partial<import('filsnap-adapter').SnapConfig> | undefined} */ _config = snapConfig
     ) => {
       setIsLoading(true)
       setError(undefined)
@@ -109,7 +111,7 @@ export function FilsnapContextProvider({
         setIsLoading(false)
       }
     },
-    [config, snapId, snapVersion]
+    [snapConfig, snapId, snapVersion]
   )
 
   /** @type {import('./types.js').FilsnapContext} */
@@ -123,6 +125,7 @@ export function FilsnapContextProvider({
         snap: undefined,
         account: undefined,
         connect,
+        setSnapConfig,
       }
     }
     if (!hasFlask) {
@@ -134,6 +137,7 @@ export function FilsnapContextProvider({
         snap: undefined,
         account: undefined,
         connect,
+        setSnapConfig,
       }
     }
 
@@ -146,6 +150,7 @@ export function FilsnapContextProvider({
         snap: undefined,
         account: undefined,
         connect,
+        setSnapConfig,
       }
     }
 
@@ -158,6 +163,7 @@ export function FilsnapContextProvider({
         snap: undefined,
         account: undefined,
         connect,
+        setSnapConfig,
       }
     }
 
@@ -170,6 +176,7 @@ export function FilsnapContextProvider({
         snap: undefined,
         account: undefined,
         connect,
+        setSnapConfig,
       }
     }
 
@@ -182,6 +189,7 @@ export function FilsnapContextProvider({
         snap: undefined,
         account: undefined,
         connect,
+        setSnapConfig,
       }
     }
 
@@ -193,8 +201,18 @@ export function FilsnapContextProvider({
       snap,
       account,
       connect,
+      setSnapConfig,
     }
-  }, [account, connect, error, hasFlask, isConnected, isLoading, snap])
+  }, [
+    account,
+    connect,
+    error,
+    hasFlask,
+    isConnected,
+    isLoading,
+    snap,
+    setSnapConfig,
+  ])
 
   return createElement(FilsnapContext.Provider, { value, children })
 }

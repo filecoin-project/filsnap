@@ -45,7 +45,7 @@ fixture.test(
   async ({ metamask, page }) => {
     await fixture
       .expect(page.getByTestId('account-info'))
-      .toHaveText('Connected to t1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna')
+      .toHaveText('⨎ t1pc2apytmdas3sn5ylwhfa32jfpx7ez7ykieelna')
   }
 )
 

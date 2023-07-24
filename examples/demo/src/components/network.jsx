@@ -3,10 +3,10 @@
 import { useFilsnapContext } from '../hooks/filsnap.js'
 
 export default function Connect() {
-  const { isLoading, connect, account } = useFilsnapContext()
+  const { isLoading, setSnapConfig, account } = useFilsnapContext()
 
   return (
-    <div class="Cell25 Box">
+    <div class="Cell25 Box" style="overflow: hidden">
       <h3>Network</h3>
       <select
         name="network"
@@ -14,8 +14,9 @@ export default function Connect() {
         disabled={isLoading}
         onChange={(event) => {
           // @ts-ignore
-          connect({ network: event?.currentTarget.value })
+          setSnapConfig({ network: event?.currentTarget.value })
         }}
+        class="u-FullWidth"
       >
         <option
           value="testnet"

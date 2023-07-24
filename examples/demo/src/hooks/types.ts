@@ -1,4 +1,5 @@
 import type { FilsnapAdapter, SnapConfig, AccountInfo } from 'filsnap-adapter'
+import type { StateUpdater } from 'preact/hooks'
 
 export interface FilsnapContextProviderProps {
   snapId: string
@@ -7,6 +8,7 @@ export interface FilsnapContextProviderProps {
 }
 
 export type ConnectFn = (config?: Partial<SnapConfig>) => Promise<void>
+export type SetSnapConfig = StateUpdater<Partial<SnapConfig>>
 export type FilsnapContext =
   // Initial state
   | {
@@ -17,6 +19,7 @@ export type FilsnapContext =
       account: undefined
       error: undefined
       connect: ConnectFn
+      setSnapConfig: SetSnapConfig
     }
   // Flask is not installed
   | {
@@ -27,6 +30,7 @@ export type FilsnapContext =
       account: undefined
       error: undefined
       connect: ConnectFn
+      setSnapConfig: SetSnapConfig
     }
   // Flask is installed
   | {
@@ -37,6 +41,7 @@ export type FilsnapContext =
       account: undefined
       error: undefined
       connect: ConnectFn
+      setSnapConfig: SetSnapConfig
     }
   // Flask is installed but not connected to snap with error
   | {
@@ -47,6 +52,7 @@ export type FilsnapContext =
       account: undefined
       error: Error
       connect: ConnectFn
+      setSnapConfig: SetSnapConfig
     }
   // Just Error
   | {
@@ -57,6 +63,7 @@ export type FilsnapContext =
       account: undefined
       error: Error
       connect: ConnectFn
+      setSnapConfig: SetSnapConfig
     }
   // Flask is installed and connected
   | {
@@ -67,4 +74,5 @@ export type FilsnapContext =
       account: AccountInfo
       error: undefined
       connect: ConnectFn
+      setSnapConfig: SetSnapConfig
     }
