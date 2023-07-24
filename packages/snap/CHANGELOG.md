@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.1...filsnap-v0.3.2) (2023-07-24)
+
+
+### Bug Fixes
+
+* npm providence ([8f4b474](https://github.com/filecoin-project/filsnap/commit/8f4b4746f6839a7222674d2df6cb69f48267f54b))
+
 ## [0.3.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.0...filsnap-v0.3.1) (2023-07-24)
 
 
