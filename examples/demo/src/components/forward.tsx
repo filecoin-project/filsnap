@@ -6,8 +6,8 @@ import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useContractWrite } from 'wagmi'
-import { abi } from '../fil-forwarder.js'
 import { useFilsnapContext } from '../hooks/filsnap.js'
+import { filForwarderMetadata } from 'filsnap-adapter'
 
 interface Inputs {
   recipient: string
@@ -20,8 +20,8 @@ interface Inputs {
 function Forward() {
   const { account } = useFilsnapContext()
   const { data, isLoading, isSuccess, error, write } = useContractWrite({
-    address: '0x2B3ef6906429b580b7b2080de5CA893BC282c225',
-    abi,
+    address: filForwarderMetadata.contractAddress,
+    abi: filForwarderMetadata.abi,
     functionName: 'forward',
     value: 0n,
   })
