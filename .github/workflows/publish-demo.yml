@@ -18,10 +18,17 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm -r --filter demo run build
-      - uses: fission-suite/publish-action@v1.2.7
+      - uses: fission-suite/publish-action@feat/cid-output
+        id: fission
         with:
           machine_key: ${{ secrets.FISSION_MACHINE_KEY }}
           workdir: 'examples/demo'
+      - name: Add url to GITHUB_STEP_SUMMARY
+        run: |
+          echo "
+          ### App URL 🌐
+          https://dweb.link/ipfs/${{ steps.fission.outputs.app_cid }}
+          " >> $GITHUB_STEP_SUMMARY
   preview:
     runs-on: ubuntu-latest
     if: github.ref_name != 'master'

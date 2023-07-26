@@ -6,9 +6,25 @@ import SignMessage from './components/sign-message.jsx'
 import { useFilsnapContext } from './hooks/filsnap.js'
 import ConnectFEVM from './components/connect-fevm.jsx'
 import Forward from './components/forward.tsx'
+import { useEffect, useState } from 'preact/hooks'
+import Resolver from 'dns-over-http-resolver'
 
 export function App() {
   const { isConnected } = useFilsnapContext()
+  const [cid, setCid] = /** @type {typeof useState<string>} */ (useState)()
+  useEffect(() => {
+    async function main() {
+      try {
+        const dnsRecord = await new Resolver().resolve(
+          `_dnslink.${window.location.host}`,
+          'TXT'
+        )
+        setCid(dnsRecord[0][0].replace('dnslink=/ipfs/', ''))
+      } catch {}
+    }
+
+    main()
+  }, [])
 
   return (
     <main class="App">
@@ -55,7 +71,18 @@ export function App() {
             </li>
             <li>
               {' '}
-              Workflow:{' '}
+              CID:{' '}
+              <a
+                target="_blank"
+                href={`https://${cid}.ipfs.dweb.link/`}
+                rel="noreferrer"
+              >
+                {cid || 'unknown'}
+              </a>
+            </li>
+            <li>
+              {' '}
+              Release Job:{' '}
               <a
                 target="_blank"
                 href={`https://github.com/filecoin-project/filsnap/actions/runs/${
