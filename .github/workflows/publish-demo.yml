@@ -18,6 +18,8 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm -r --filter demo run build
+        env:
+          GITHUB_WORKFLOW_ID: ${{ github.run_id }}
       - uses: fission-suite/publish-action@feat/cid-output
         id: fission
         with:
