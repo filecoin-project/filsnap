@@ -99,9 +99,6 @@ importers:
 
   examples/fil-forwarder-viem:
     dependencies:
-      '@metamask/providers':
-        specifier: ^11.1.0
-        version: 11.1.0
       filsnap-adapter:
         specifier: workspace:^
         version: link:../../packages/adapter
