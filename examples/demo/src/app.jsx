@@ -53,6 +53,34 @@ export function App() {
                 github.com/filecoin-project/filsnap
               </a>
             </li>
+            <li>
+              {' '}
+              Git:{' '}
+              <code>
+                {import.meta.env.GIT_BRANCH}{' '}
+                <a
+                  title="Commit hash"
+                  target="_blank"
+                  href={`https://github.com/filecoin-project/filsnap/commit/${
+                    import.meta.env.GIT_COMMIT_HASH
+                  }`}
+                  rel="noreferrer"
+                >
+                  {import.meta.env.GIT_COMMIT_HASH.slice(0, 7)}
+                </a>{' '}
+                <a
+                  title="Release tag"
+                  target="_blank"
+                  href={`https://github.com/filecoin-project/filsnap/releases/tag/${
+                    import.meta.env.GIT_TAG
+                  }`}
+                  rel="noreferrer"
+                >
+                  {import.meta.env.GIT_TAG}
+                </a>{' '}
+                {import.meta.env.GIT_DATE}
+              </code>
+            </li>
           </ul>
         </div>
       </div>
