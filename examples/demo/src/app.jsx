@@ -6,9 +6,30 @@ import SignMessage from './components/sign-message.jsx'
 import { useFilsnapContext } from './hooks/filsnap.js'
 import ConnectFEVM from './components/connect-fevm.jsx'
 import Forward from './components/forward.tsx'
+import { useEffect, useState } from 'preact/hooks'
+import Resolver from 'dns-over-http-resolver'
 
 export function App() {
   const { isConnected } = useFilsnapContext()
+  const [cid, setCid] = /** @type {typeof useState<string>} */ (useState)()
+  useEffect(() => {
+    async function main() {
+      try {
+        if (window.location.host.includes('ipfs.dweb.link')) {
+          const cid = window.location.host.split('.')[0]
+          setCid(cid)
+          return
+        }
+        const dnsRecord = await new Resolver().resolve(
+          `_dnslink.${window.location.host}`,
+          'TXT'
+        )
+        setCid(dnsRecord[0][0].replace('dnslink=/ipfs/', ''))
+      } catch {}
+    }
+
+    main()
+  }, [])
 
   return (
     <main class="App">
@@ -52,6 +73,58 @@ export function App() {
               >
                 github.com/filecoin-project/filsnap
               </a>
+            </li>
+            <li>
+              {' '}
+              CID:{' '}
+              <a
+                target="_blank"
+                href={`https://${cid}.ipfs.dweb.link/`}
+                rel="noreferrer"
+              >
+                {cid || 'unknown'}
+              </a>
+            </li>
+            <li>
+              {' '}
+              Release Job:{' '}
+              <a
+                target="_blank"
+                href={`https://github.com/filecoin-project/filsnap/actions/runs/${
+                  import.meta.env.GITHUB_WORKFLOW_ID
+                }`}
+                rel="noreferrer"
+              >
+                {import.meta.env.GITHUB_WORKFLOW_ID || 'unknown'}
+              </a>
+            </li>
+            <li>
+              {' '}
+              Git:{' '}
+              <code>
+                {import.meta.env.GIT_BRANCH}{' '}
+                <a
+                  title="Commit hash"
+                  target="_blank"
+                  href={`https://github.com/filecoin-project/filsnap/commit/${
+                    import.meta.env.GIT_COMMIT_HASH
+                  }`}
+                  rel="noreferrer"
+                >
+                  {import.meta.env.GIT_COMMIT_HASH.slice(0, 7)}
+                </a>{' '}
+                <a
+                  title="Release tag"
+                  target="_blank"
+                  href={`https://github.com/filecoin-project/filsnap/releases/tag/${
+                    import.meta.env.GIT_TAG
+                  }`}
+                  rel="noreferrer"
+                >
+                  {import.meta.env.GIT_TAG}
+                </a>{' '}
+                {import.meta.env.GIT_DATE}
+              </code>
             </li>
           </ul>
         </div>
