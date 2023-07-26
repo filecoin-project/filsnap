@@ -10,7 +10,7 @@ import { useEffect, useState } from 'preact/hooks'
 import Resolver from 'dns-over-http-resolver'
 
 export function App() {
-  const { isConnected } = useFilsnapContext()
+  const { isConnected, snap } = useFilsnapContext()
   const [cid, setCid] = /** @type {typeof useState<string>} */ (useState)()
   useEffect(() => {
     async function main() {
@@ -125,6 +125,17 @@ export function App() {
                 </a>{' '}
                 {import.meta.env.GIT_DATE}
               </code>
+            </li>
+            <li>
+              {' '}
+              Snap:{' '}
+              <a
+                target="_blank"
+                href={`https://www.npmjs.com/package/filsnap/v/${snap?.snapVersion}#user-content-provenance`}
+                rel="noreferrer"
+              >
+                {snap?.snapVersion || 'unknown'}
+              </a>
             </li>
           </ul>
         </div>
