@@ -1,0 +1,95 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Hugo Dias <hugomrdias@gmail.com> (hugodias.me)",
+  "main": "src/main.jsx",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
+    "build": "wireit",
+    "dev": "wireit",
+    "serve": "wireit"
+  },
+  "wireit": {
+    "build": {
+      "command": "vite build --force",
+      "dependencies": [
+        "../../packages/adapter:build"
+      ],
+      "clean": true,
+      "files": [
+        "index.html",
+        "src/**/*.{jsx,js,ts,tsx,css}",
+        "vite.config.js"
+      ],
+      "output": [
+        "dist/**/*.{html,js,css}"
+      ]
+    },
+    "serve": {
+      "command": "vite preview --port 3000",
+      "dependencies": [
+        "build"
+      ],
+      "service": true
+    },
+    "dev": {
+      "command": "vite --force",
+      "dependencies": [
+        "../../packages/adapter:build"
+      ],
+      "service": true
+    }
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "filsnap-adapter": "workspace:^",
+    "iso-base": "^1.1.1",
+    "iso-filecoin": "^2.0.1",
+    "prettier": "3.0.0",
+    "viem": "^1.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@playwright/test": "^1.36.1",
+    "@preact/preset-vite": "^2.5.0",
+    "@types/node": "^20.4.4",
+    "vite": "^4.4.7"
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../node_modules/hd-scripts/eslint/preact.js"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "jsdoc/require-returns": "off",
+      "unicorn/no-null": "off",
+      "no-alert": "off",
+      "no-console": "off"
+    },
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "env": {
+      "mocha": true
+    },
+    "ignorePatterns": [
+      "dist"
+    ]
+  },
+  "depcheck": {
+    "specials": [
+      "bin"
+    ],
+    "ignores": [
+      "@types/*",
+      "@acab/reset.css",
+      "water.css",
+      "@preact/signals"
+    ]
+  }
+}

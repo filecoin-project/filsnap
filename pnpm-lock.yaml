@@ -97,6 +97,43 @@ importers:
         specifier: ^4.4.7
         version: 4.4.7(@types/node@20.4.4)
 
+  examples/fil-forwarder-viem:
+    dependencies:
+      '@metamask/providers':
+        specifier: ^11.1.0
+        version: 11.1.0
+      filsnap-adapter:
+        specifier: workspace:^
+        version: link:../../packages/adapter
+      iso-base:
+        specifier: ^1.1.1
+        version: 1.1.1
+      iso-filecoin:
+        specifier: ^2.0.1
+        version: 2.0.1
+      prettier:
+        specifier: 3.0.0
+        version: 3.0.0
+      viem:
+        specifier: ^1.4.1
+        version: 1.4.1(typescript@5.1.6)
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.22.9
+        version: 7.22.9
+      '@playwright/test':
+        specifier: ^1.36.1
+        version: 1.36.1
+      '@preact/preset-vite':
+        specifier: ^2.5.0
+        version: 2.5.0(@babel/core@7.22.9)(preact@10.16.0)(vite@4.4.7)
+      '@types/node':
+        specifier: ^20.4.4
+        version: 20.4.4
+      vite:
+        specifier: ^4.4.7
+        version: 4.4.7(@types/node@20.4.4)
+
   packages/adapter:
     dependencies:
       filsnap:
@@ -7937,7 +7974,6 @@ packages:
     resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

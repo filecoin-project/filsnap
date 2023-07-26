@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["ESNext", "DOM"],
+    "emitDeclarationOnly": true,
+    "types": ["vite/client"],
+    "allowImportingTsExtensions": true
+  },
+  "references": [
+    {
+      "path": "../../packages/adapter"
+    }
+  ],
+  "exclude": ["node_modules", "dist", "out"]
+}
