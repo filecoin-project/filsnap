@@ -37,7 +37,7 @@ jobs:
       - run: pnpm install
       - run: pnpm -r --filter demo run build
         env:
-          GITHUB_WORKFLOW: ${{ github.run_id }}
+          GITHUB_WORKFLOW_ID: ${{ github.run_id }}
       - name: Add report to web3.storage
         uses: web3-storage/add-to-web3@v2
         id: add_to_web3_storage

@@ -11,8 +11,8 @@ export default defineConfig({
     'import.meta.env.GIT_BRANCH': JSON.stringify(git.gitBranch()),
     'import.meta.env.GIT_DATE': JSON.stringify(git.gitDate()),
     'import.meta.env.GIT_TAG': JSON.stringify(git.gitTag()),
-    'import.meta.env.GITHUB_WORKFLOW': JSON.stringify(
-      process.env.GITHUB_WORKFLOW
+    'import.meta.env.GITHUB_WORKFLOW_ID': JSON.stringify(
+      process.env.GITHUB_WORKFLOW_ID
     ),
   },
   plugins: [preact()],
