@@ -15,6 +15,11 @@ export function App() {
   useEffect(() => {
     async function main() {
       try {
+        if (window.location.host.includes('ipfs.dweb.link')) {
+          const cid = window.location.host.split('.')[0]
+          setCid(cid)
+          return
+        }
         const dnsRecord = await new Resolver().resolve(
           `_dnslink.${window.location.host}`,
           'TXT'
