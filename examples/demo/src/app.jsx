@@ -55,6 +55,19 @@ export function App() {
             </li>
             <li>
               {' '}
+              Workflow:{' '}
+              <a
+                target="_blank"
+                href={`https://github.com/filecoin-project/filsnap/actions/runs/${
+                  import.meta.env.WORKFLOW_ID
+                }`}
+                rel="noreferrer"
+              >
+                {import.meta.env.WORKFLOW_ID || 'unknown'}
+              </a>
+            </li>
+            <li>
+              {' '}
               Git:{' '}
               <code>
                 {import.meta.env.GIT_BRANCH}{' '}
