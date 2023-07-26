@@ -37,7 +37,7 @@ jobs:
       - run: pnpm install
       - run: pnpm -r --filter demo run build
         env:
-          GITHUB_WORKFLOW: run_id
+          GITHUB_WORKFLOW: ${{ github.run_id }}
       - name: Add report to web3.storage
         uses: web3-storage/add-to-web3@v2
         id: add_to_web3_storage
@@ -51,7 +51,6 @@ jobs:
             ${{ steps.add_to_web3_storage.outputs.url }}
           " >> $GITHUB_STEP_SUMMARY
       - uses: mshick/add-pr-comment@v2
-        if: github.event_name == 'pull_request'
         with:
           message-id: 'preview-url'
           message: |
