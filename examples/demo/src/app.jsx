@@ -59,11 +59,11 @@ export function App() {
               <a
                 target="_blank"
                 href={`https://github.com/filecoin-project/filsnap/actions/runs/${
-                  import.meta.env.WORKFLOW_ID
+                  import.meta.env.GITHUB_WORKFLOW
                 }`}
                 rel="noreferrer"
               >
-                {import.meta.env.WORKFLOW_ID || 'unknown'}
+                {import.meta.env.GITHUB_WORKFLOW || 'unknown'}
               </a>
             </li>
             <li>
