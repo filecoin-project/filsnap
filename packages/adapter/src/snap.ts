@@ -12,11 +12,13 @@ type SnapsResult = Record<
 
 export class FilsnapAdapter {
   readonly snapId: string
+  readonly snapVersion: string
   readonly request: RequestWithFilSnap
   config: SnapConfig | undefined
 
-  public constructor(snapId: string) {
+  public constructor(snapId: string, snapVersion: string) {
     this.snapId = snapId
+    this.snapVersion = snapVersion
     this.request = window.ethereum.request as RequestWithFilSnap
   }
 
@@ -36,7 +38,10 @@ export class FilsnapAdapter {
     return true
   }
 
-  static async isConnected(snapId: string = 'npm:filsnap'): Promise<boolean> {
+  static async isConnected(
+    snapId: string = 'npm:filsnap',
+    snapVersion: string = '*'
+  ): Promise<boolean> {
     const hasFlask = await FilsnapAdapter.hasFlask()
     if (!hasFlask) {
       return false
@@ -58,25 +63,30 @@ export class FilsnapAdapter {
       return false
     }
 
+    if (snapVersion !== '*' && snaps[snapId]?.version !== snapVersion) {
+      return false
+    }
+
     return true
   }
 
   static async create(
     config: Parameters<FilSnapMethods['fil_configure']>[1],
-    snapId: string = 'npm:filsnap'
+    snapId: string = 'npm:filsnap',
+    snapVersion: string = '*'
   ): Promise<FilsnapAdapter> {
     const hasFlask = await FilsnapAdapter.hasFlask()
     if (!hasFlask) {
       throw new Error('Flask is not installed.')
     }
 
-    const isConnected = await FilsnapAdapter.isConnected(snapId)
+    const isConnected = await FilsnapAdapter.isConnected(snapId, snapVersion)
 
     if (!isConnected) {
       throw new Error('Filsnap is not connected.')
     }
 
-    const adapter = new FilsnapAdapter(snapId)
+    const adapter = new FilsnapAdapter(snapId, snapVersion)
     await adapter.configure(config)
     return adapter
   }
@@ -104,7 +114,8 @@ export class FilsnapAdapter {
       throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
     }
 
-    const adapter = new FilsnapAdapter(snapId)
+    // @ts-expect-error - SnapsResult is not complex enough for this
+    const adapter = new FilsnapAdapter(snapId, snaps[snapId]?.version)
     await adapter.configure(config)
     return adapter
   }
