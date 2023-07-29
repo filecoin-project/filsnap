@@ -1,5 +1,5 @@
 {
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Metamask snap to enable developers to add Filecoin integration to their dapps.",
   "proposedName": "Filecoin Snap",
   "repository": {
