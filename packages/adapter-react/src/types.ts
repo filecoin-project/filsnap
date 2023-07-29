@@ -1,14 +1,15 @@
-import type { FilsnapAdapter, SnapConfig, AccountInfo } from 'filsnap-adapter'
-import type { StateUpdater } from 'preact/hooks'
+import type { AccountInfo, FilsnapAdapter, SnapConfig } from 'filsnap-adapter'
 
-export interface FilsnapContextProviderProps {
+export interface FilsnapProviderProps {
   snapId: string
   snapVersion?: string
   config: Partial<SnapConfig>
 }
 
 export type ConnectFn = (config?: Partial<SnapConfig>) => Promise<void>
-export type SetSnapConfig = StateUpdater<Partial<SnapConfig>>
+export type SetSnapConfig = React.Dispatch<
+  React.SetStateAction<Partial<SnapConfig>>
+>
 export type FilsnapContext =
   // Initial state
   | {

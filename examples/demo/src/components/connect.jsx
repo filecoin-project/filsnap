@@ -1,13 +1,13 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable unicorn/no-useless-undefined */
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 import { Token } from 'iso-filecoin/token'
 import { clsx } from 'clsx'
 import ExplorerLink from './explorer-link.jsx'
 
 export default function Connect() {
   const { isLoading, hasFlask, isConnected, connect, account, error } =
-    useFilsnapContext()
+    useFilsnap()
 
   let out = null
 

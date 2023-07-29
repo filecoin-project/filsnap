@@ -11,7 +11,7 @@
   },
   "references": [
     {
-      "path": "../../packages/adapter"
+      "path": "../../packages/adapter-react"
     }
   ],
   // "include": ["**/*.{jsx,js,ts,tsx}"],

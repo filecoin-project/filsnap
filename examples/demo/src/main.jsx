@@ -1,10 +1,10 @@
 import { render } from 'preact'
 import { App } from './app.jsx'
 import './styles/index.css'
-import { FilsnapContextProvider } from './hooks/filsnap.js'
 
-import { WagmiConfig, createConfig, configureChains } from 'wagmi'
-import { filecoinCalibration, filecoin } from 'wagmi/chains'
+import { FilsnapProvider } from 'filsnap-adapter-react'
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { filecoin, filecoinCalibration } from 'wagmi/chains'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
 const { publicClient, webSocketPublicClient } = configureChains(
@@ -24,7 +24,7 @@ const configWagmi = createConfig({
   webSocketPublicClient,
 })
 
-/** @type {Partial<import('filsnap-adapter').SnapConfig>} */
+/** @type {Partial<import('filsnap-adapter-react').FilsnapProviderProps['config']>} */
 const config = {
   network: 'testnet',
 }
@@ -38,9 +38,9 @@ const appEl = document.getElementById('app')
 if (appEl) {
   render(
     <WagmiConfig config={configWagmi}>
-      <FilsnapContextProvider snapId={SNAP_ID} config={config}>
+      <FilsnapProvider snapId={SNAP_ID} config={config}>
         <App />
-      </FilsnapContextProvider>
+      </FilsnapProvider>
     </WagmiConfig>,
     appEl
   )

@@ -1,0 +1,94 @@
+{
+  "name": "filsnap-adapter-react",
+  "version": "0.0.1",
+  "description": "Context and hook for filsnap adapter.",
+  "license": "(Apache-2.0 AND MIT)",
+  "author": "Protocol Labs",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filecoin-project/filsnap.git",
+    "directory": "packages/adapter-react"
+  },
+  "homepage": "https://github.com/filecoin-project/filsnap/tree/master/packages/adapter-react",
+  "bugs": {
+    "url": "https://github.com/filecoin-project/filsnap/issues"
+  },
+  "keywords": [
+    "filecoin",
+    "metamask",
+    "snap",
+    "dapp",
+    "react",
+    "hook",
+    "context"
+  ],
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "test": "wireit"
+  },
+  "wireit": {
+    "test": {
+      "command": "playwright-test",
+      "dependencies": [
+        "../adapter:build"
+      ]
+    }
+  },
+  "dependencies": {
+    "filsnap-adapter": "workspace:^"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.4",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "assert": "^2.0.0",
+    "mocha": "^10.2.0",
+    "playwright-test": "^12.1.1",
+    "preact": "^10.16.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "typescript": "5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17 || ^18"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../node_modules/hd-scripts/eslint/preact.js"
+    ],
+    "env": {
+      "mocha": true
+    },
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "ignorePatterns": [
+      "dist"
+    ]
+  },
+  "depcheck": {
+    "specials": [
+      "bin"
+    ],
+    "ignorePatterns": [
+      "dist",
+      ".wireit"
+    ],
+    "ignores": [
+      "@types/*",
+      "hd-scripts",
+      "assert",
+      "playwright-test"
+    ]
+  }
+}

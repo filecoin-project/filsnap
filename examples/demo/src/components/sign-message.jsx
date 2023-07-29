@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 
 // @ts-ignore-next-line
 const SignMessage = () => {
-  const { isLoading, snap } = useFilsnapContext()
+  const { isLoading, snap } = useFilsnap()
   const [signature, setSignature] = useState(
     /** @type {string | undefined | null} */ (undefined)
   )

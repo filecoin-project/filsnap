@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable unicorn/no-useless-undefined */
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 
 export default function Connect() {
-  const { isLoading, setSnapConfig, account } = useFilsnapContext()
+  const { isLoading, setSnapConfig, account } = useFilsnap()
 
   return (
     <div class="Cell25 Box" style="overflow: hidden">

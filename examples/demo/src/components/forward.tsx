@@ -6,7 +6,7 @@ import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useContractWrite } from 'wagmi'
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 import { filForwarderMetadata } from 'filsnap-adapter'
 
 interface Inputs {
@@ -18,20 +18,13 @@ interface Inputs {
  * Send fil to an address
  */
 function Forward() {
-  const { account } = useFilsnapContext()
+  const { account } = useFilsnap()
   const { data, isLoading, isSuccess, error, write } = useContractWrite({
     address: filForwarderMetadata.contractAddress,
     abi: filForwarderMetadata.abi,
     functionName: 'forward',
     value: 0n,
   })
-  // eslint-disable-next-line no-console
-  console.log(
-    '🚀 ~ file: connect-fevm.jsx:33 ~ ConnectFEVM ~ isLoading:',
-    isLoading,
-    isSuccess,
-    error
-  )
 
   const {
     register,
@@ -55,7 +48,11 @@ function Forward() {
     <div class="Box Cell100">
       <h3>Forward ⨎ </h3>
       {error != null && <code data-testid="error">{error.message}</code>}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        /*
+      // @ts-expect-error - preact */
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label for="recipient" id="recipient">
           Recipient
         </label>

@@ -1,56 +1,57 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { FilsnapAdapter } from 'filsnap-adapter'
-import { createContext, createElement } from 'preact'
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'preact/hooks'
+import * as React from 'react'
 
-/** @type {import('preact').Context<import('./types.js').FilsnapContext>} */
-// @ts-ignore
-const FilsnapContext = createContext({
-  isLoading: true,
-  isConnected: false,
-  hasFlask: false,
-  error: undefined,
-  snap: undefined,
-  connect: () => Promise.resolve(),
-})
+/**
+ * @typedef {import('./types.js').FilsnapProviderProps} FilsnapProviderProps
+ */
+
+const FilsnapContext =
+  /** @type {typeof React.createContext<import('./types.js').FilsnapContext>} */ (
+    React.createContext
+  )({
+    isLoading: true,
+    isConnected: false,
+    hasFlask: false,
+    error: undefined,
+    snap: undefined,
+    connect: () => Promise.resolve(),
+    account: undefined,
+    setSnapConfig: () => {},
+  })
 
 /**
  *
- * @param {import('./types.js').FilsnapContextProviderProps & {children : import('preact').ComponentChildren}} props
- * @returns
+ * @param {import('./types.js').FilsnapProviderProps & {children : React.ReactNode}} props
+ * @returns {React.FunctionComponentElement<React.ProviderProps<import('./types.js').FilsnapContext>>}
  */
-export function FilsnapContextProvider({
-  snapId,
-  snapVersion,
-  config,
-  children,
-}) {
+export function FilsnapProvider({ snapId, snapVersion, config, children }) {
   // State
-  const [error, setError] = /** @type {typeof useState<Error>} */ (useState)()
-  const [snap, setSnap] = /** @type {typeof useState<FilsnapAdapter>} */ (
-    useState
+  const [error, setError] = /** @type {typeof React.useState<Error>} */ (
+    React.useState
   )()
-  const [account, setAccount] = useState(
+  const [snap, setSnap] = /** @type {typeof React.useState<FilsnapAdapter>} */ (
+    React.useState
+  )()
+  const [account, setAccount] = React.useState(
     /** @type {import('filsnap-adapter').AccountInfo | undefined | null} */ (
       undefined
     )
   )
-  const [isConnected, setIsConnected] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [hasFlask, setHasFlask] = useState(false)
+  const [isConnected, setIsConnected] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [hasFlask, setHasFlask] = React.useState(false)
   const [snapConfig, setSnapConfig] =
-    /** @type {typeof useState<Partial<import('filsnap-adapter').SnapConfig>>} */ (
-      useState
+    /** @type {typeof React.useState<Partial<import('filsnap-adapter').SnapConfig>>} */ (
+      React.useState
     )(config)
 
   // Effects
-  useEffect(() => {
+  React.useEffect(() => {
+    setIsConnected(false)
+  }, [snapConfig])
+
+  React.useEffect(() => {
     let mounted = true
     async function setup() {
       if (mounted) {
@@ -73,10 +74,10 @@ export function FilsnapContextProvider({
     return () => {
       mounted = false
     }
-  }, [snapConfig, snapId, snapVersion])
+  }, [snap, snapConfig])
 
   // Callbacks
-  const connect = useCallback(
+  const connect = React.useCallback(
     async (
       /** @type {Partial<import('filsnap-adapter').SnapConfig> | undefined} */ _config = snapConfig
     ) => {
@@ -84,12 +85,12 @@ export function FilsnapContextProvider({
       setError(undefined)
       try {
         const snap = await FilsnapAdapter.connect(_config, snapId, snapVersion)
-        setSnap(snap)
         const account = await snap.getAccountInfo()
         if (account.error) {
           setError(new Error(account.error.message, { cause: account.error }))
         }
 
+        setSnap(snap)
         setAccount(account.result)
         setIsConnected(true)
       } catch (error) {
@@ -103,7 +104,7 @@ export function FilsnapContextProvider({
   )
 
   /** @type {import('./types.js').FilsnapContext} */
-  const value = useMemo(() => {
+  const value = React.useMemo(() => {
     if (isLoading) {
       return {
         isLoading: true,
@@ -202,15 +203,13 @@ export function FilsnapContextProvider({
     setSnapConfig,
   ])
 
-  return createElement(FilsnapContext.Provider, { value, children })
+  return React.createElement(FilsnapContext.Provider, { value }, children)
 }
 
-export function useFilsnapContext() {
-  const context = useContext(FilsnapContext)
-  if (context === undefined) {
-    throw new Error(
-      `useFilsnapContext must be used within a FilsnapContextProvider.`
-    )
+export function useFilsnap() {
+  const context = React.useContext(FilsnapContext)
+  if (!context) {
+    throw new Error(`useFilsnap must be used within a FilsnapProvider.`)
   }
 
   return context

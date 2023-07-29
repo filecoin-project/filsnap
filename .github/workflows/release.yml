@@ -25,7 +25,8 @@ jobs:
     needs: release
     if: |
       contains(fromJson(needs.release.outputs.paths_released), 'packages/snap') ||
-      contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter')
+      contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter') ||
+      contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter-react')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -50,5 +51,6 @@ jobs:
     needs: release
     if: |
       contains(fromJson(needs.release.outputs.paths_released), 'packages/snap') ||
-      contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter')
+      contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter')||
+      contains(fromJson(needs.release.outputs.paths_released), 'packages/adapter-react')
     uses: './.github/workflows/reusable-docs.yml'

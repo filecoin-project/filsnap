@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 
 const Account = () => {
-  const { isLoading, snap } = useFilsnapContext()
+  const { isLoading, snap } = useFilsnap()
   const [error, setError] = useState(
     /** @type {string | undefined | null} */ (undefined)
   )

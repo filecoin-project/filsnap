@@ -1,5 +1,5 @@
 import * as Address from 'iso-filecoin/address'
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 
 /**
  *
@@ -8,7 +8,7 @@ import { useFilsnapContext } from '../hooks/filsnap.js'
  * @param {'filecoin' | 'ethereum'} [param0.chain]
  */
 export default function ExplorerLink({ address, chain }) {
-  const { account } = useFilsnapContext()
+  const { account } = useFilsnap()
 
   if (!address) return null
 

@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist", "out"],
+  "typedocOptions": {
+    "entryPoints": ["src/index.js"],
+    "includeVersion": true,
+    "internalModule": "<internal>",
+    "excludeExternals": true
+  },
+
+  "references": [{ "path": "../adapter" }]
+}

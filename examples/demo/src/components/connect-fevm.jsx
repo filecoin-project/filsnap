@@ -4,11 +4,11 @@ import { clsx } from 'clsx'
 import { useAccount, useBalance, useConnect } from 'wagmi'
 import { filecoin, filecoinCalibration } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { useFilsnapContext } from '../hooks/filsnap.js'
+import { useFilsnap } from 'filsnap-adapter-react'
 import ExplorerLink from './explorer-link.jsx'
 
 export default function ConnectFEVM() {
-  const { account } = useFilsnapContext()
+  const { account } = useFilsnap()
   const { address, isConnected, isConnecting } = useAccount()
   const { connect } = useConnect({
     chainId:
