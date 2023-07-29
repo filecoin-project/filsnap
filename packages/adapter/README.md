@@ -9,7 +9,7 @@ Filsnap adapter is used to install Filecoin snap and expose it's.
 
 ## Contributing
 
-Read contributing guidelines [here](.github/CONTRIBUTING.md).
+Read contributing guidelines [here](../../.github/CONTRIBUTING.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/filecoin-project/filsnap)
 
