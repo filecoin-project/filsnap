@@ -10,8 +10,8 @@ Filecoin metamask snap and related packages to enable developers to add Filecoin
 
 ## Examples
 
-- [`demo`](./packages/demo) - Preact demo dapp using [filsnap-adapter](./packages/filsnap-adapter) to interact with [filsnap](./packages/filsnap)
-- [`fil-forwarder-viem`](./packages/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
+- [`demo`](./examples/demo) - Preact demo dapp using [filsnap-adapter](./packages/filsnap-adapter) to interact with [filsnap](./packages/filsnap)
+- [`fil-forwarder-viem`](./examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
 
 ### Checkout examples
 
