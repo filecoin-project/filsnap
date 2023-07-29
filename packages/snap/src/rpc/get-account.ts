@@ -18,6 +18,7 @@ export async function getAccountInfo(
     return serializeError('RPC call to "WalletBalance" failed', balance.error)
   }
   return {
+    error: undefined,
     result: {
       address: ctx.account.address.toString(),
       pubKey: ctx.account.pubKey.toString(),

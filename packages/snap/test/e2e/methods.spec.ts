@@ -1,17 +1,21 @@
 import { createFixture } from 'metamask-testing-tools'
+import { type ExportPrivateKeyResponse } from '../../src/rpc/export-private-key'
+import { type GetBalanceResponse } from '../../src/rpc/get-balance'
+import { type GetMessagesResponse } from '../../src/rpc/get-messages'
 import {
-  type GetBalanceResponse,
-  type ExportPrivateKeyResponse,
-  type GetAddressResponse,
-  type GetMessagesResponse,
-  type GetPublicResponse,
+  type SendMessageResponse,
+  type SendMessageRequest,
+} from '../../src/rpc/send-message'
+import {
   type SignMessageRawResponse,
   type SignMessageRawRequest,
   type SignMessageResponse,
   type SignMessageRequest,
-  type SendMessageResponse,
-  type SendMessageRequest,
-} from '../../src/index'
+} from '../../src/rpc/sign-message'
+import {
+  type GetAddressResponse,
+  type GetPublicResponse,
+} from '../../src/types'
 
 const { test, expect } = createFixture({
   isolated: false,

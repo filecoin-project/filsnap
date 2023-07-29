@@ -1,5 +1,8 @@
 import { createFixture } from 'metamask-testing-tools'
-import { type ConfigureRequest, type ConfigureResponse } from '../../src/index'
+import {
+  type ConfigureResponse,
+  type ConfigureRequest,
+} from '../../src/rpc/configure'
 
 const { test, expect } = createFixture({
   isolated: false,

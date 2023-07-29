@@ -237,13 +237,13 @@ describe('Test rpc handler function: signMessage', function () {
 
     apiStub.nonce.returns('0')
 
-    const response = await signMessage(
+    const { error, result } = await signMessage(
       // @ts-expect-error - test code
       { snap: walletStub, rpc: apiStub, account },
       invalidMessage
     )
 
-    expect(response.result).to.be.undefined()
-    expect(response.error).to.not.be.null()
+    expect(result).to.be.undefined()
+    expect(error).to.not.be.null()
   })
 })

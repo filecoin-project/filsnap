@@ -14,6 +14,8 @@ export const estimateParams = z.object({
   message: Schemas.messagePartial.omit({ from: true }),
   /**
    * Max fee in attoFIL
+   *
+   * @default 100000000000000000 - 0.1 FIL
    */
   maxFee: z.string().optional().describe('Max fee in attoFIL'),
 })
@@ -76,6 +78,7 @@ export async function getGasForMessage(
   }
 
   return {
+    error: undefined,
     result: {
       gasFeeCap: result.GasFeeCap,
       gasLimit: result.GasLimit,

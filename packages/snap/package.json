@@ -62,8 +62,8 @@
   "dependencies": {
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-ui": "^0.32.2",
-    "iso-base": "^1.1.1",
-    "iso-filecoin": "^2.0.1",
+    "iso-base": "^1.1.2",
+    "iso-filecoin": "^2.0.2",
     "merge-options": "^3.0.4",
     "zod": "^3.21.4"
   },
@@ -71,7 +71,7 @@
     "@metamask/snaps-cli": "^0.32.2",
     "@metamask/snaps-rollup-plugin": "^0.32.2",
     "@metamask/snaps-types": "^0.32.2",
-    "@playwright/test": "^1.36.1",
+    "@playwright/test": "^1.36.2",
     "@rollup/plugin-commonjs": "^25.0.3",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-sucrase": "^5.0.1",
@@ -89,7 +89,7 @@
     "metamask-testing-tools": "^1.1.4",
     "mocha": "^10.2.0",
     "playwright-test": "^12.1.1",
-    "rollup": "^3.26.3",
+    "rollup": "^3.27.0",
     "sinon": "^15.2.0",
     "sinon-chai": "^3.7.0",
     "typescript": "5.1.6"

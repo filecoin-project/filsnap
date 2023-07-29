@@ -1,10 +1,10 @@
 import { createFixture } from 'metamask-testing-tools'
-import type {
-  ExportPrivateKeyResponse,
-  GetAddressResponse,
-  GetMessagesResponse,
-  GetPublicResponse,
-} from '../../src/index'
+import { type ExportPrivateKeyResponse } from '../../src/rpc/export-private-key'
+import { type GetMessagesResponse } from '../../src/rpc/get-messages'
+import {
+  type GetAddressResponse,
+  type GetPublicResponse,
+} from '../../src/types'
 
 const { test, expect } = createFixture({
   isolated: false,

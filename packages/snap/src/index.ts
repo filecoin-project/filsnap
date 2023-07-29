@@ -18,14 +18,13 @@ import { signMessage, signMessageRaw } from './rpc/sign-message'
 import type { SnapConfig, SnapContext } from './types'
 import { configFromSnap, serializeError } from './utils'
 
-export type * from './rpc/configure'
-export type * from './rpc/export-private-key'
-export type * from './rpc/gas-for-message'
-export type * from './rpc/get-balance'
-export type * from './rpc/get-messages'
-export type * from './rpc/send-message'
-export type * from './rpc/sign-message'
-export type * from './types'
+export type {
+  SnapConfig,
+  FilSnapMethods,
+  RequestWithFilSnap,
+  Network,
+  AccountInfo,
+} from './types'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   try {

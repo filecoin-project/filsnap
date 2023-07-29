@@ -1,11 +1,13 @@
 import { createFixture } from 'metamask-testing-tools'
+import { type GetMessagesResponse } from '../../src/rpc/get-messages'
 import {
-  type GetMessagesResponse,
-  type SignMessageResponse,
-  type SignMessageRequest,
   type SendMessageResponse,
   type SendMessageRequest,
-} from '../../src/index'
+} from '../../src/rpc/send-message'
+import {
+  type SignMessageResponse,
+  type SignMessageRequest,
+} from '../../src/rpc/sign-message'
 
 const { test, expect } = createFixture({
   isolated: true,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type {
   FilSnapMethods,
   Network,
@@ -22,6 +23,9 @@ export class FilsnapAdapter {
     this.request = window.ethereum.request as RequestWithFilSnap
   }
 
+  /**
+   * Check if Metamask flask is installed and enabled
+   */
   static async hasFlask(): Promise<boolean> {
     if (window.ethereum == null || !window.ethereum.isMetaMask) {
       return false
@@ -38,6 +42,12 @@ export class FilsnapAdapter {
     return true
   }
 
+  /**
+   * Check if Filsnap is installed and enabled
+   *
+   * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
+   * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
+   */
   static async isConnected(
     snapId: string = 'npm:filsnap',
     snapVersion: string = '*'
@@ -70,6 +80,15 @@ export class FilsnapAdapter {
     return true
   }
 
+  /**
+   * Create and configure a new Filsnap adapter
+   *
+   * This will check if Filsnap is installed and enabled, and if not, throw an error.
+   *
+   * @param config - Snap config
+   * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
+   * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
+   */
   static async create(
     config: Parameters<FilSnapMethods['fil_configure']>[1],
     snapId: string = 'npm:filsnap',
@@ -91,6 +110,15 @@ export class FilsnapAdapter {
     return adapter
   }
 
+  /**
+   * Installs and connects to Filsnap
+   *
+   * @throws Error if Metamask flask is not installed
+   *
+   * @param config - Snap config
+   * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
+   * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
+   */
   static async connect(
     config: Parameters<FilSnapMethods['fil_configure']>[1],
     snapId: string = 'npm:filsnap',
@@ -120,6 +148,11 @@ export class FilsnapAdapter {
     return adapter
   }
 
+  /**
+   * Configure the snap
+   *
+   * @param params - {@link FilSnapMethods.fil_configure} params
+   */
   async configure(
     params: Parameters<FilSnapMethods['fil_configure']>[1]
   ): ReturnType<FilSnapMethods['fil_configure']> {
@@ -141,6 +174,11 @@ export class FilsnapAdapter {
     return config
   }
 
+  /**
+   * Request account info from the snap
+   *
+   * @see {@link FilSnapMethods.fil_getAccountInfo}
+   */
   async getAccountInfo(): ReturnType<FilSnapMethods['fil_getAccountInfo']> {
     return await this.request({
       method: 'wallet_invokeSnap',
@@ -153,6 +191,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Request account address from the snap
+   *
+   * @see {@link FilSnapMethods.fil_getAddress}
+   */
   async getAddress(): ReturnType<FilSnapMethods['fil_getAddress']> {
     return await this.request({
       method: 'wallet_invokeSnap',
@@ -165,6 +208,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Request account public key from the snap
+   *
+   * @see {@link FilSnapMethods.fil_getPublicKey}
+   */
   async getPublicKey(): ReturnType<FilSnapMethods['fil_getPublicKey']> {
     return await this.request({
       method: 'wallet_invokeSnap',
@@ -177,6 +225,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Export the account private key from the snap
+   *
+   * @see {@link FilSnapMethods.fil_exportPrivateKey}
+   */
   async exportPrivateKey(): ReturnType<FilSnapMethods['fil_exportPrivateKey']> {
     return await this.request({
       method: 'wallet_invokeSnap',
@@ -189,6 +242,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Request account balance from the snap
+   *
+   * @see {@link FilSnapMethods.fil_getBalance}
+   */
   async getBalance(): ReturnType<FilSnapMethods['fil_getBalance']> {
     return await this.request({
       method: 'wallet_invokeSnap',
@@ -213,6 +271,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Sign a message
+   *
+   * @param params - {@link FilSnapMethods.fil_signMessage} params
+   */
   async signMessage(
     params: Parameters<FilSnapMethods['fil_signMessage']>[1]
   ): ReturnType<FilSnapMethods['fil_signMessage']> {
@@ -228,6 +291,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Sign a raw message
+   *
+   * @param params - {@link FilSnapMethods.fil_signMessageRaw} params
+   */
   async signMessageRaw(
     params: Parameters<FilSnapMethods['fil_signMessageRaw']>[1]
   ): ReturnType<FilSnapMethods['fil_signMessageRaw']> {
@@ -243,6 +311,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Send a signed message
+   *
+   * @param params - {@link FilSnapMethods.fil_sendMessage} params
+   */
   async sendMessage(
     params: Parameters<FilSnapMethods['fil_sendMessage']>[1]
   ): ReturnType<FilSnapMethods['fil_sendMessage']> {
@@ -280,6 +353,11 @@ export class FilsnapAdapter {
     })
   }
 
+  /**
+   * Switch to or add a different network
+   *
+   * @param network - Network to switch to. Defaults to `mainnet`
+   */
   async switchOrAddChain(network: Network): Promise<void> {
     let config = {
       chainId: '0x13A',

@@ -62,7 +62,7 @@ export interface SnapError {
 
 export interface SnapResponseError {
   error: SnapError
-  result?: null
+  result: undefined
 }
 
 /**
@@ -70,7 +70,7 @@ export interface SnapResponseError {
  */
 export type SnapResponse<R> =
   | {
-      error?: null
+      error: undefined
       result: R
     }
   | SnapResponseError
@@ -105,6 +105,14 @@ export interface FilSnapMethods {
   fil_getAccountInfo: typeof getAccountInfo
 }
 
+/**
+ * Provider request with filsnap methods
+ *
+ * @example
+ * ```ts
+ * const request = window.ethereum.request as RequestWithFilSnap
+ * ```
+ */
 export type RequestWithFilSnap = <
   T,
   Method,

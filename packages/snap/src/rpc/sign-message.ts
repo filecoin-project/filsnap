@@ -90,6 +90,7 @@ export async function signMessage(
   if (conf) {
     const sig = filSignMessage(ctx.account.privateKey, 'SECP256K1', message)
     return {
+      error: undefined,
       result: {
         message,
         signature: {
@@ -134,6 +135,7 @@ export async function signMessageRaw(
   if (conf) {
     const sig = sign(ctx.account.privateKey, 'SECP256K1', message)
     return {
+      error: undefined,
       result: base64pad.encode(sig),
     }
   }

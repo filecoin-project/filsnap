@@ -75,5 +75,5 @@ export async function configure(
     method: 'snap_manageState',
     params: { newState: state, operation: 'update' },
   })
-  return { result: _params.data }
+  return { result: _params.data, error: undefined }
 }

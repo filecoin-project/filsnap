@@ -5,7 +5,44 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Adapter](https://github.com/filecoin-project/filsnap/actions/workflows/adapter.yml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/adapter.yml)
 
-Filsnap adapter is used to install Filecoin snap and expose it's.
+> Adapter for [Filsnap](../snap/)
+
+Exposes a simple API to interact the snap from a dapp and also Fil Forwarder contract metadata.
+
+## Installation
+
+```bash
+pnpm install filsnap-adapter
+```
+
+## Usage
+
+This adapter interacts directly with the snap, so Metamask Flask needs to be installed and unlocked in the browser.
+
+```js
+import * as Filsnap from 'filsnap-adapter'
+
+const hasFlask = await Filsnap.hasFlask()
+if (!hasFlask) {
+  console.error('Flask not installed')
+  return
+}
+
+const snap = await Filsnap.connect({ network: 'testnet' }, 'npm:filsnap')
+
+const { error, result } = await snap.getAddress()
+if (error) {
+  console.error(error)
+} else {
+  console.log(result)
+  // t1d2xrzcslx7xlbbylc5c3d5lvandqw4iwl6epxba
+}
+
+const isConnected = await snap.isConnected()
+// true
+```
+
+Check out the [demo](../../examples/demo) for a working example and the [API](https://filecoin-project.github.io/filsnap/modules/filsnap_adapter.html) for more details.
 
 ## Contributing
 
