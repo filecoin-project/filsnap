@@ -88,6 +88,8 @@
       "@types/*",
       "hd-scripts",
       "assert",
+      "mocha",
+      "preact",
       "playwright-test"
     ]
   }
