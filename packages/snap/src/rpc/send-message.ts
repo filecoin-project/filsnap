@@ -37,5 +37,5 @@ export async function sendMessage(
     message: params.message,
   }
   await updateMessageInState(snap, messageStatus)
-  return { result: messageStatus, error: undefined }
+  return { result: messageStatus, error: null }
 }

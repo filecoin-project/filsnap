@@ -78,7 +78,7 @@ export async function getGasForMessage(
   }
 
   return {
-    error: undefined,
+    error: null,
     result: {
       gasFeeCap: result.GasFeeCap,
       gasLimit: result.GasLimit,

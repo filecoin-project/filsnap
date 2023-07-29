@@ -110,7 +110,7 @@ export function serializeError(msg: string, data?: unknown): SnapResponseError {
   // @ts-expect-error - no types
   const _msg = (hasMessage ? _data.message : '') as string
   return {
-    result: undefined,
+    result: null,
     error: {
       message: msg + (hasMessage ? ` - ${_msg}` : ''),
       data: _data,

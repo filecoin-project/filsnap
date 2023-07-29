@@ -17,13 +17,17 @@ describe('Test rpc handler function: getBalance', function () {
     // prepare stubs
     walletStub.prepareFoKeyPair()
     const account = await getKeyPair(walletStub)
-    rpcStub.balance.returns('30000000')
+    rpcStub.balance.returns({ result: '30000000' })
     // call getBalance
-    // @ts-expect-error - test code
-    const result = await getBalance({ snap: walletStub, rpc: rpcStub, account })
+    const balance = await getBalance({
+      snap: walletStub,
+      // @ts-expect-error - test code
+      rpc: rpcStub,
+      account,
+    })
     // assertions
     expect(walletStub.rpcStubs.snap_manageState).to.have.been.calledOnce()
     expect(walletStub.rpcStubs.snap_getBip44Entropy).to.have.been.calledOnce()
-    expect(result).to.be.eq('30000000')
+    expect(balance.result).to.be.eq('30000000')
   })
 })

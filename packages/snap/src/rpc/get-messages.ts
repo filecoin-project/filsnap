@@ -28,5 +28,5 @@ export async function getMessages(
     return serializeError(`Invalid messages in snap state`, state.error)
   }
 
-  return { result: state.data.filecoin.messages, error: undefined }
+  return { result: state.data.filecoin.messages, error: null }
 }
