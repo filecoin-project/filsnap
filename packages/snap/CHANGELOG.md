@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.2...filsnap-v0.4.0) (2023-07-29)
+
+
+### Features
+
+* expose `FilForwarder` metadata in adapter ([#30](https://github.com/filecoin-project/filsnap/issues/30)) ([41a04b9](https://github.com/filecoin-project/filsnap/commit/41a04b92ccad985dd74ceb0fe90c16fa67c9aa46))
+
 ## [0.3.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.1...filsnap-v0.3.2) (2023-07-24)
 
 
