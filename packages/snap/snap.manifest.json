@@ -7,7 +7,7 @@
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "A3iZwXzHmYbIDCPkBJ4OfiEMabYvimV54XNeqtrstNU=",
+    "shasum": "PrxFxKiusGgxcttw9R6UenDIU4vxcM2CFCfrX70fMWM=",
     "location": {
       "npm": {
         "filePath": "dist/snap.js",

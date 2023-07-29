@@ -21,5 +21,5 @@ export async function getBalance(
   if (balance.error != null) {
     return serializeError('RPC call to "WalletBalance" failed', balance.error)
   }
-  return balance
+  return { result: balance.result, error: null }
 }

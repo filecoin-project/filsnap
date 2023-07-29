@@ -76,7 +76,7 @@ describe('Test rpc handler function: signMessage', function () {
     expect(apiStub.gasEstimate).to.have.been.calledOnce()
 
     expect(response).to.containSubset({
-      error: undefined,
+      error: null,
       result: {
         message: fullMessage,
         signature: {
@@ -127,7 +127,7 @@ describe('Test rpc handler function: signMessage', function () {
     expect(apiStub.nonce).to.have.not.been.called()
 
     expect(response).to.containSubset({
-      error: undefined,
+      error: null,
       result: {
         message: {
           ...fullMessage,
@@ -178,7 +178,7 @@ describe('Test rpc handler function: signMessage', function () {
     expect(apiStub.gasEstimate).to.have.been.calledOnce()
 
     expect(response).to.containSubset({
-      error: undefined,
+      error: null,
       result: {
         message: paramsMessage,
         signature: {
@@ -223,7 +223,7 @@ describe('Test rpc handler function: signMessage', function () {
       error: {
         message: 'User denied message signing',
       },
-      result: undefined,
+      result: null,
     })
   })
 
@@ -243,7 +243,7 @@ describe('Test rpc handler function: signMessage', function () {
       invalidMessage
     )
 
-    expect(result).to.be.undefined()
+    expect(result).to.be.null()
     expect(error).to.not.be.null()
   })
 })

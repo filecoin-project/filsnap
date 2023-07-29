@@ -62,7 +62,7 @@ export interface SnapError {
 
 export interface SnapResponseError {
   error: SnapError
-  result: undefined
+  result: null
 }
 
 /**
@@ -70,7 +70,7 @@ export interface SnapResponseError {
  */
 export type SnapResponse<R> =
   | {
-      error: undefined
+      error: null
       result: R
     }
   | SnapResponseError
