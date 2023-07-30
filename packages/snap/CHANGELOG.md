@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.4.0...filsnap-v0.4.1) (2023-07-29)
+
+
+### Bug Fixes
+
+* improve docs and type descriptions ([b6c95cc](https://github.com/filecoin-project/filsnap/commit/b6c95ccde12b015812721abaf90d970b1a1a82e4))
+
 ## [0.4.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.3.2...filsnap-v0.4.0) (2023-07-29)
 
 

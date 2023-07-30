@@ -27,7 +27,7 @@ export async function exportPrivateKey(
   if (conf) {
     return {
       result: base64pad.encode(ctx.account.privateKey),
-      error: undefined,
+      error: null,
     }
   }
   return serializeError('User denied private key export')

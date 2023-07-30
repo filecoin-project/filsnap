@@ -33,6 +33,6 @@ describe('Test rpc handler function: exportSeed', function () {
     const result = await exportPrivateKey({ snap: walletStub, account })
 
     expect(walletStub.rpcStubs.snap_dialog).to.have.been.calledOnce()
-    expect(result.result).to.be.undefined()
+    expect(result.result).to.be.null()
   })
 })
