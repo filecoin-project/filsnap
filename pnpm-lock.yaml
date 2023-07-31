@@ -164,7 +164,7 @@ importers:
     devDependencies:
       '@testing-library/react-hooks':
         specifier: ^8.0.1
-        version: 8.0.1(@types/react@17.0.0)(react-dom@17.0.0)(react@17.0.0)
+        version: 8.0.1(@types/react@17.0.0)(react-dom@18.2.0)(react@17.0.0)
       '@types/mocha':
         specifier: ^10.0.1
         version: 10.0.1
@@ -175,8 +175,8 @@ importers:
         specifier: ^17.0.0
         version: 17.0.0
       '@types/react-dom':
-        specifier: ^17.0.0
-        version: 17.0.0
+        specifier: ^18.2.7
+        version: 18.2.7
       assert:
         specifier: ^2.0.0
         version: 2.0.0
@@ -193,8 +193,8 @@ importers:
         specifier: ^17.0.0
         version: 17.0.0
       react-dom:
-        specifier: ^17.0.0
-        version: 17.0.0(react@17.0.0)
+        specifier: ^18.2.0
+        version: 18.2.0(react@17.0.0)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -3097,7 +3097,7 @@ packages:
       use-sync-external-store: 1.2.0(react@17.0.0)
     dev: false
 
-  /@testing-library/react-hooks@8.0.1(@types/react@17.0.0)(react-dom@17.0.0)(react@17.0.0):
+  /@testing-library/react-hooks@8.0.1(@types/react@17.0.0)(react-dom@18.2.0)(react@17.0.0):
     resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -3116,7 +3116,7 @@ packages:
       '@babel/runtime': 7.22.6
       '@types/react': 17.0.0
       react: 17.0.0
-      react-dom: 17.0.0(react@17.0.0)
+      react-dom: 18.2.0(react@17.0.0)
       react-error-boundary: 3.1.4(react@17.0.0)
     dev: true
 
@@ -3223,8 +3223,8 @@ packages:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
 
-  /@types/react-dom@17.0.0:
-    resolution: {integrity: sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==}
+  /@types/react-dom@18.2.7:
+    resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
       '@types/react': 17.0.0
     dev: true
@@ -8226,15 +8226,14 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /react-dom@17.0.0(react@17.0.0):
-    resolution: {integrity: sha512-OGnFbxCjI2TMAZYMVxi4hqheJiN8rCEVVrL7XIGzCB6beNc4Am8M47HtkvxODZw9QgjmAPKpLba9FTu4fC1byA==}
+  /react-dom@18.2.0(react@17.0.0):
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
-      react: 17.0.0
+      react: ^18.2.0
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
       react: 17.0.0
-      scheduler: 0.20.2
+      scheduler: 0.23.0
     dev: true
 
   /react-error-boundary@3.1.4(react@17.0.0):
@@ -8587,11 +8586,10 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /scheduler@0.20.2:
-    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
+  /scheduler@0.23.0:
+    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
     dev: true
 
   /scrypt-js@3.0.1:
