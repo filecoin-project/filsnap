@@ -26,7 +26,7 @@
     "prettier": "3.0.0",
     "simple-git-hooks": "^2.9.0",
     "typedoc": "^0.24.8",
-    "typedoc-plugin-missing-exports": "^2.0.0",
+    "typedoc-plugin-missing-exports": "^2.0.1",
     "typedoc-plugin-zod": "^1.0.2",
     "typescript": "5.1.6",
     "wireit": "^0.10.0"
