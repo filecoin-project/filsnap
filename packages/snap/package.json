@@ -18,7 +18,8 @@
     "snap",
     "dapp",
     "wallet",
-    "plugin"
+    "plugin",
+    "fevm"
   ],
   "files": [
     "dist",
