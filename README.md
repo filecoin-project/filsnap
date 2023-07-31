@@ -15,7 +15,7 @@ Filecoin metamask snap and related packages to enable developers to add Filecoin
 
 ### Checkout examples
 
-Using can you Codesandbox: <https://githubbox.com/filecoin-project/filsnap/tree/main/examples/demo> and start hacking right away.
+You can use Codesandbox: <https://githubbox.com/filecoin-project/filsnap/tree/main/examples/demo> and start hacking right away.
 
 To clone it locally:
 

@@ -125,4 +125,4 @@ The most important prefixes you should have in mind are:
 [sscce]: http://www.sscce.org/
 [signing]: https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
 [telling-git]: https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
-[template]: .github/PULL_REQUEST_TEMPLATE.md
+[template]: PULL_REQUEST_TEMPLATE.md
