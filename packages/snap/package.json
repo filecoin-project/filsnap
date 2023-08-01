@@ -1,6 +1,6 @@
 {
   "name": "filsnap",
-  "version": "0.5.0",
+  "version": "0.4.1",
   "description": "Filsnap - Metamask snap to interact with Filecoin dapps.",
   "license": "(Apache-2.0 AND MIT)",
   "author": "Protocol Labs",

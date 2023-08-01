@@ -1,12 +1,5 @@
 # Changelog
 
-## [0.5.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.4.1...filsnap-v0.5.0) (2023-08-01)
-
-
-### Features
-
-* add transaction insight for FilForwarder transfers ([#48](https://github.com/filecoin-project/filsnap/issues/48)) ([863376c](https://github.com/filecoin-project/filsnap/commit/863376c56f5f0b6fe52994a55717a6f020e68a3e))
-
 ## [0.4.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.4.0...filsnap-v0.4.1) (2023-07-29)
 
 
