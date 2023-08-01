@@ -64,8 +64,9 @@
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-ui": "^0.32.2",
     "iso-base": "^1.1.2",
-    "iso-filecoin": "^2.0.2",
+    "iso-filecoin": "^2.1.0",
     "merge-options": "^3.0.4",
+    "viem": "^1.4.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {

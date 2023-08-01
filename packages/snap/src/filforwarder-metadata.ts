@@ -82,8 +82,8 @@ const contractAddress: `0x${string}` =
   '0x2B3ef6906429b580b7b2080de5CA893BC282c225'
 
 const chainIds = {
-  filecoinMainnet: 314,
-  filecoinCalibrationTestnet: 314_159,
+  filecoinMainnet: 'eip155:13a',
+  filecoinCalibrationTestnet: 'eip155:4cb2f',
 }
 
 // FEVM FilForwarder contract metadata
@@ -92,6 +92,6 @@ export const filForwarderMetadata = {
   abi,
   // The contract address is the same on all chains where the contract is deployed
   contractAddress,
-  // The Ethereum chain ids where the contract is deployed
+  // The CAIP-2 chain ids where the contract is deployed
   chainIds,
 }
