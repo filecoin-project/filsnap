@@ -1,4 +1,4 @@
 export { FilsnapAdapter } from './snap'
-export { filForwarderMetadata } from './filforwarder-metadata'
 
+export { filForwarderMetadata } from 'filsnap'
 export type { SnapConfig, AccountInfo } from 'filsnap'

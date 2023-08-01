@@ -26,6 +26,10 @@ export type {
   AccountInfo,
 } from './types'
 
+export { filForwarderMetadata } from './filforwarder-metadata'
+
+export { onTransaction } from './transaction-insight'
+
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   try {
     const config = await configFromSnap(snap)
