@@ -63,8 +63,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       iso-filecoin:
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.1.0
+        version: 2.1.0
       metamask-testing-tools:
         specifier: ^1.1.4
         version: 1.1.4(@metamask/approval-controller@2.1.1)
@@ -112,8 +112,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       iso-filecoin:
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.1.0
+        version: 2.1.0
       prettier:
         specifier: 3.0.0
         version: 3.0.0
@@ -6853,19 +6853,6 @@ packages:
     dependencies:
       base-x: 4.0.0
       bigint-mod-arith: 3.3.1
-    dev: false
-
-  /iso-filecoin@2.0.2:
-    resolution: {integrity: sha512-LDUjqqp1XIAcDjUNC5WsahcaK9zp+VfPdR2iRq4MaB8cOXGI5g0LI+6q8RuMXhWQRDNNqDFHJEeo2nzp4yfNBA==}
-    dependencies:
-      '@ipld/dag-cbor': 9.0.3
-      '@noble/curves': 1.1.0
-      '@noble/hashes': 1.3.1
-      '@scure/bip32': 1.3.1
-      '@scure/bip39': 1.2.1
-      bignumber.js: 9.1.1
-      iso-base: 1.1.2
-      zod: 3.21.4
     dev: false
 
   /iso-filecoin@2.1.0:

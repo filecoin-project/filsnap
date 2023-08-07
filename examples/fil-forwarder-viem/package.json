@@ -48,7 +48,7 @@
   "dependencies": {
     "filsnap-adapter": "workspace:^",
     "iso-base": "^1.1.2",
-    "iso-filecoin": "^2.0.2",
+    "iso-filecoin": "^2.1.0",
     "prettier": "3.0.0",
     "viem": "^1.4.2"
   },
