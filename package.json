@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "depcheck": "^1.4.3",
-    "hd-scripts": "^7.0.0",
-    "lint-staged": "^13.2.3",
-    "prettier": "3.0.0",
+    "hd-scripts": "^8.0.0",
+    "lint-staged": "^14.0.0",
+    "prettier": "3.0.2",
     "simple-git-hooks": "^2.9.0",
     "typedoc": "^0.24.8",
     "typedoc-plugin-missing-exports": "^2.0.1",

@@ -53,8 +53,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.37.0",
-    "@types/node": "^20.4.5",
-    "metamask-testing-tools": "^1.1.4",
+    "@types/node": "^20.5.0",
+    "metamask-testing-tools": "^1.1.5",
     "typescript": "5.1.6"
   },
   "publishConfig": {
