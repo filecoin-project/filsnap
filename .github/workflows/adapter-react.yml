@@ -2,7 +2,6 @@ name: Adapter React
 env:
   CI: true
   FORCE_COLOR: 1
-  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
 on:
   push:
     branches:
@@ -32,7 +31,6 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm dlx playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap-adapter-react run lint
       - run: pnpm -r --filter filsnap-adapter-react exec depcheck
       - run: pnpm -r --filter filsnap-adapter-react run test

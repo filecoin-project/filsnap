@@ -32,7 +32,7 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm dlx playwright install --with-deps chromium
+      - run: pnpm --filter filsnap-adapter exec playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap-adapter run lint
       - run: pnpm -r --filter filsnap-adapter exec depcheck
       - run: pnpm -r --filter filsnap-adapter run test
