@@ -68,7 +68,7 @@
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.4.5",
     "tiny-git-rev-sync": "^0.1.0",
-    "vite": "^4.4.7"
+    "vite": "^4.4.9"
   },
   "eslintConfig": {
     "extends": [
