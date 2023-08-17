@@ -20,7 +20,7 @@ jobs:
       - run: pnpm -r --filter demo run build
         env:
           GITHUB_WORKFLOW_ID: ${{ github.run_id }}
-      - uses: fission-suite/publish-action@feat/cid-output
+      - uses: fission-suite/publish-action@v1.2.8
         id: fission
         with:
           machine_key: ${{ secrets.FISSION_MACHINE_KEY }}
@@ -33,7 +33,7 @@ jobs:
           " >> $GITHUB_STEP_SUMMARY
   preview:
     runs-on: ubuntu-latest
-    if: github.ref_name != 'master'
+    if: github.ref_name != 'master' && github.actor != 'dependabot[bot]'
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.4.0

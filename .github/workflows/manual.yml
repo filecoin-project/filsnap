@@ -32,8 +32,7 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm dlx playwright install --with-deps chromium
-      - run: echo "${{ github.event_name}}"
+      - run: pnpm --filter filsnap exec playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap run test
         id: tests
         env:
