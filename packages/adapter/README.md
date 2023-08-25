@@ -20,18 +20,15 @@ pnpm install filsnap-adapter
 This adapter interacts directly with the snap, so Metamask Flask needs to be installed and unlocked in the browser.
 
 ```js
-import * as Filsnap from 'filsnap-adapter'
+import { FilsnapAdapter } from 'filsnap-adapter'
 
-const hasFlask = await Filsnap.FilsnapAdapter.hasFlask()
+const hasFlask = await FilsnapAdapter.hasFlask()
 if (!hasFlask) {
   console.error('Flask not installed')
   return
 }
 
-const snap = await Filsnap.FilsnapAdapter.connect(
-  { network: 'testnet' },
-  'npm:filsnap'
-)
+const snap = await FilsnapAdapter.connect({ network: 'testnet' }, 'npm:filsnap')
 
 const { error, result } = await snap.getAddress()
 if (error) {
@@ -41,7 +38,7 @@ if (error) {
   // t1d2xrzcslx7xlbbylc5c3d5lvandqw4iwl6epxba
 }
 
-const isConnected = await Filsnap.FilsnapAdapter.isConnected()
+const isConnected = await FilsnapAdapter.isConnected()
 // true
 ```
 
