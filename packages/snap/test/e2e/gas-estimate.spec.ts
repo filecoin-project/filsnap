@@ -104,7 +104,7 @@ test.describe('fil_getGasForMessage', () => {
     const estimate = await metamask.invokeSnap<GasForMessageResponse>({
       request: {
         method: 'fil_getGasForMessage',
-        // @ts-expect-error - Invalid params
+        // @ts-expect-error - invalid params
         params: { message },
       } satisfies GasForMessageRequest,
       page,

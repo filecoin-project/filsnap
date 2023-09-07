@@ -24,9 +24,12 @@ export async function sendMessage(
   ctx: SnapContext,
   params: SignedMessage
 ): Promise<SendMessageResponse> {
-  const response = await ctx.rpc.pushMessage(params.message, {
-    type: params.signature.type,
-    data: base64pad.decode(params.signature.data),
+  const response = await ctx.rpc.pushMessage({
+    msg: params.message,
+    signature: {
+      type: params.signature.type,
+      data: base64pad.decode(params.signature.data),
+    },
   })
 
   if (response.error != null) {

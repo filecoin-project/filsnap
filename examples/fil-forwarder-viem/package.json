@@ -47,16 +47,16 @@
   "license": "MIT",
   "dependencies": {
     "filsnap-adapter": "workspace:^",
-    "iso-base": "^1.1.2",
-    "iso-filecoin": "^2.1.0",
-    "prettier": "3.0.2",
-    "viem": "^1.6.0"
+    "iso-base": "^2.0.1",
+    "iso-filecoin": "^3.0.0",
+    "prettier": "3.0.3",
+    "viem": "^1.10.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.10",
-    "@playwright/test": "^1.37.0",
+    "@babel/core": "^7.22.15",
+    "@playwright/test": "^1.37.1",
     "@preact/preset-vite": "^2.5.0",
-    "@types/node": "^20.5.0",
+    "@types/node": "^20.5.9",
     "vite": "^4.4.9"
   },
   "eslintConfig": {

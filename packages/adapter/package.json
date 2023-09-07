@@ -52,10 +52,10 @@
     "filsnap": "workspace:^"
   },
   "devDependencies": {
-    "@playwright/test": "^1.37.0",
-    "@types/node": "^20.5.0",
+    "@playwright/test": "^1.37.1",
+    "@types/node": "^20.5.9",
     "metamask-testing-tools": "^1.1.5",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "publishConfig": {
     "provenance": true
