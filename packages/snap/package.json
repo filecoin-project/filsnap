@@ -88,7 +88,7 @@
     "chai-as-promised": "^7.1.1",
     "chai-parentheses": "^0.0.2",
     "chai-subset": "^1.6.0",
-    "metamask-testing-tools": "^1.1.5",
+    "metamask-testing-tools": "^1.1.6",
     "mocha": "^10.2.0",
     "playwright-test": "^12.3.0",
     "rollup": "^3.29.0",

@@ -16,9 +16,6 @@ const Account = () => {
   const [publicKey, setPublicKey] = useState(
     /** @type {string | undefined| null} */ (undefined)
   )
-  const [privateKey, setPrivateKey] = useState(
-    /** @type {string | undefined | null} */ (undefined)
-  )
 
   const handleGetAddress = async () => {
     const addressResponse = await snap?.getAddress()
@@ -52,8 +49,7 @@ const Account = () => {
 
   const handleExportPrivateKey = async () => {
     const response = await snap?.exportPrivateKey()
-    if (response) {
-      setPrivateKey(response.result)
+    if (response && response.error) {
       setError(response.error?.message)
     }
   }
@@ -90,14 +86,9 @@ const Account = () => {
       </button>
       <code data-testid="public-key-result">{publicKey}</code>
       <br />
-      <button
-        data-testid="get-private-key"
-        onClick={handleExportPrivateKey}
-        disabled={isLoading}
-      >
+      <button data-testid="get-private-key" onClick={handleExportPrivateKey}>
         Get Private Key
       </button>
-      <code data-testid="private-key-result">{privateKey}</code>
 
       <br />
       <button
@@ -107,7 +98,6 @@ const Account = () => {
       >
         Add FEVM Mainnet
       </button>
-      <code data-testid="private-key-result">{privateKey}</code>
     </div>
   )
 }

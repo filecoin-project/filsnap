@@ -72,11 +72,14 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const dialog1 = await metamask.waitForDialog('confirmation')
+    await dialog1.getByRole('button').filter({ hasText: 'Approve' }).click()
+
+    const dialog2 = await metamask.waitForDialog('confirmation')
+    await dialog2.locator('.confirmation-footer__actions > button').click()
     const { result } = await privateKey
 
-    expect(result).toBe('oUultedTWcsLGiRYLrBi/d7WoVvAxFedERBPTNKgBTo=')
+    expect(result).toBe(true)
   })
 
   test('should get messages', async ({ metamask, page }) => {
