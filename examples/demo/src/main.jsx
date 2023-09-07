@@ -38,7 +38,7 @@ const appEl = document.getElementById('app')
 if (appEl) {
   render(
     <WagmiConfig config={configWagmi}>
-      <FilsnapProvider snapId={SNAP_ID} config={config}>
+      <FilsnapProvider snapId={SNAP_ID} snapVersion=">=0.5.0" config={config}>
         <App />
       </FilsnapProvider>
     </WagmiConfig>,
