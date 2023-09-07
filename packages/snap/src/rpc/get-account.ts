@@ -14,9 +14,11 @@ export async function getAccountInfo(
   ctx: SnapContext
 ): Promise<GetAccountInfoResponse> {
   const balance = await ctx.rpc.balance(ctx.account.address.toString())
+
   if (balance.error != null) {
     return serializeError('RPC call to "WalletBalance" failed', balance.error)
   }
+
   return {
     error: null,
     result: {

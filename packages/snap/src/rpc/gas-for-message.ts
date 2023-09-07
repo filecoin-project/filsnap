@@ -69,10 +69,11 @@ export async function getGasForMessage(
     value: message.value,
   }
 
-  const { error, result } = await rpc.gasEstimate(
+  const { error, result } = await rpc.gasEstimate({
     msg,
-    maxFee == null ? DEFAULT_MAX_FEE : maxFee
-  )
+    maxFee: maxFee == null ? DEFAULT_MAX_FEE : maxFee,
+  })
+
   if (error != null) {
     return serializeError(`RPC call to "GasEstimateMessageGas" failed`, error)
   }
