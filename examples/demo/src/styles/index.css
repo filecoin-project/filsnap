@@ -19,11 +19,18 @@
 
 .App {
   display: flex;
-  max-width: 800px;
+  max-width: 100vw;
+  max-width: 100dvw;
   margin: 20px auto;
   padding: 0 10px;
   word-wrap: break-word;
   flex-direction: column;
+}
+
+@media screen and (min-width: 960px) {
+  .App {
+    max-width: 800px;
+  }
 }
 
 .Box {
