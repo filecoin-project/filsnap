@@ -48,7 +48,7 @@
     "@types/node": "^20.5.9",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "assert": "^2.0.0",
+    "assert": "^2.1.0",
     "mocha": "^10.2.0",
     "playwright-test": "^12.3.0",
     "preact": "^10.17.1",
