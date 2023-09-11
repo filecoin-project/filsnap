@@ -63,7 +63,7 @@
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.15",
+    "@babel/core": "^7.22.17",
     "@playwright/test": "^1.37.1",
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.5.9",
