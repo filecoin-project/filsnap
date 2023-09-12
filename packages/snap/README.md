@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Snap](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yml/badge.svg)](https://github.com/filecoin-project/filsnap/actions/workflows/snap.yml)
 
-> Filecoin metamask snap to enable developers to add Filecoin integration to their dapps.
+> Connect to Filecoin dapps using Metamask. Manage Filecoin accounts, send FIL to Native and FEVM accounts and enable FEVM transaction insights.
 
 ## Usage
 
@@ -81,7 +81,6 @@ We recommend using [`filsnap-adapter`](../adapter) to interact with filsnap for 
 - `fil_getAddress` - Get the address of the connected account.
 - `fil_getPublicKey` - Get the public key of the connected account.
 - `fil_getAccountInfo` - Get the account info of the connected account.
-- `fil_getMessages` - Get the messages of the connected account.
 - `fil_getGasForMessage` - Get the gas for a message.
 - `fil_signMessage` - Sign a message with the connected account.
 - `fil_signMessageRaw` - Sign a raw message (string) with the connected account.

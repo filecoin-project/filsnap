@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v0.3.0...filsnap-adapter-v1.0.0) (2023-09-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove getMessages and add error to connect
+
+### Features
+
+* remove getMessages and add error to connect ([ca10c48](https://github.com/filecoin-project/filsnap/commit/ca10c48c71d45a21f8f20f3f8a6635c88591aa03))
+* update mm and others ([#60](https://github.com/filecoin-project/filsnap/issues/60)) ([06dd585](https://github.com/filecoin-project/filsnap/commit/06dd5858af23b47907ba32b2a16e3de756476845))
+
+
+### Bug Fixes
+
+* remove flask detection code ([776c41b](https://github.com/filecoin-project/filsnap/commit/776c41b4eb8bac08a6f8d17cf83d157fb047fe34)), closes [#62](https://github.com/filecoin-project/filsnap/issues/62)
+* remove programatic private key export and add more info to the UI elements ([c88a9ee](https://github.com/filecoin-project/filsnap/commit/c88a9ee1359e9a35735ce5d7b18b4cfcd2de0326)), closes [#67](https://github.com/filecoin-project/filsnap/issues/67)
+
 ## [0.3.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v0.2.1...filsnap-adapter-v0.3.0) (2023-08-09)
 
 
