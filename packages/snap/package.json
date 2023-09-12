@@ -91,7 +91,7 @@
     "metamask-testing-tools": "^1.1.6",
     "mocha": "^10.2.0",
     "playwright-test": "^12.3.0",
-    "rollup": "^3.29.0",
+    "rollup": "^3.29.1",
     "sinon": "^15.2.0",
     "sinon-chai": "^3.7.0",
     "typescript": "5.2.2"
