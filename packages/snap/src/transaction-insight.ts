@@ -58,7 +58,7 @@ function contractAddressMatches(transactionTo: string | undefined): boolean {
   )
 }
 
-// Note: currently MetaMask Flask shows the transaction insight tab by default even if we don't display any information
+// Note: currently MetaMask shows the transaction insight tab by default even if we don't display any information
 // in it. This is a bug that the MetaMask team is addressing in this PR:
 // https://github.com/MetaMask/metamask-extension/pull/20267
 export const onTransaction: OnTransactionHandler = async ({

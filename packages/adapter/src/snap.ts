@@ -5,6 +5,7 @@ import type {
   RequestWithFilSnap,
   SnapConfig,
 } from 'filsnap'
+import { RPC } from 'iso-filecoin/rpc'
 
 type SnapsResult = Record<
   string,
@@ -24,22 +25,21 @@ export class FilsnapAdapter {
   }
 
   /**
-   * Check if Metamask flask is installed and enabled
+   * Check if Metamask has Snaps API
    */
-  static async hasFlask(): Promise<boolean> {
+  static async hasSnaps(): Promise<boolean> {
     if (window.ethereum == null || !window.ethereum.isMetaMask) {
       return false
     }
 
-    const version = await window.ethereum.request<string>({
-      method: 'web3_clientVersion',
-    })
-
-    if (version == null || (version.length > 0 && !version.includes('flask'))) {
+    try {
+      await window.ethereum.request<SnapsResult>({
+        method: 'wallet_getSnaps',
+      })
+      return true
+    } catch {
       return false
     }
-
-    return true
   }
 
   /**
@@ -48,12 +48,12 @@ export class FilsnapAdapter {
    * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
    * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
    */
-  static async isConnected(
+  static async isAvailable(
     snapId: string = 'npm:filsnap',
     snapVersion: string = '*'
   ): Promise<boolean> {
-    const hasFlask = await FilsnapAdapter.hasFlask()
-    if (!hasFlask) {
+    const hasSnaps = await FilsnapAdapter.hasSnaps()
+    if (!hasSnaps) {
       return false
     }
 
@@ -81,39 +81,9 @@ export class FilsnapAdapter {
   }
 
   /**
-   * Create and configure a new Filsnap adapter
-   *
-   * This will check if Filsnap is installed and enabled, and if not, throw an error.
-   *
-   * @param config - Snap config
-   * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
-   * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
-   */
-  static async create(
-    config: Parameters<FilSnapMethods['fil_configure']>[1],
-    snapId: string = 'npm:filsnap',
-    snapVersion: string = '*'
-  ): Promise<FilsnapAdapter> {
-    const hasFlask = await FilsnapAdapter.hasFlask()
-    if (!hasFlask) {
-      throw new Error('Flask is not installed.')
-    }
-
-    const isConnected = await FilsnapAdapter.isConnected(snapId, snapVersion)
-
-    if (!isConnected) {
-      throw new Error('Filsnap is not connected.')
-    }
-
-    const adapter = new FilsnapAdapter(snapId, snapVersion)
-    await adapter.configure(config)
-    return adapter
-  }
-
-  /**
    * Installs and connects to Filsnap
    *
-   * @throws Error if Metamask flask is not installed
+   * @throws Error if Metamask is not installed
    *
    * @param config - Snap config
    * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
@@ -124,9 +94,11 @@ export class FilsnapAdapter {
     snapId: string = 'npm:filsnap',
     snapVersion: string = '*'
   ): Promise<FilsnapAdapter> {
-    const hasFlask = await FilsnapAdapter.hasFlask()
-    if (!hasFlask) {
-      throw new Error('Flask is not installed')
+    const hasSnaps = await FilsnapAdapter.hasSnaps()
+    if (!hasSnaps) {
+      throw new Error(
+        'Metamask does not have the Snaps API. Please update to the latest version.'
+      )
     }
 
     const snaps = await window.ethereum.request<SnapsResult>({
@@ -151,6 +123,32 @@ export class FilsnapAdapter {
     }
 
     return adapter
+  }
+
+  /**
+   * Check dapp is connected to Filsnap
+   *
+   * @returns `true` if connected to Filsnap, `false` otherwise
+   */
+  isConnected(): boolean {
+    return this.config != null
+  }
+
+  /**
+   * Get the RPC instance configured by Filsnap
+   *
+   * @returns RPC instance
+   */
+  rpc(): RPC {
+    if (this.config == null) {
+      throw new Error('Not connected to Filsnap')
+    }
+
+    return new RPC({
+      token: this.config.rpc.token,
+      api: this.config.rpc.url,
+      network: this.config.network,
+    })
   }
 
   /**

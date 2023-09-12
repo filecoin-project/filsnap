@@ -57,7 +57,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       if (mounted) {
         setError(undefined)
         try {
-          const hasFlask = await FilsnapAdapter.hasFlask()
+          const hasFlask = await FilsnapAdapter.hasSnaps()
           setHasFlask(hasFlask)
         } catch (error) {
           const err = /** @type {Error} */ (error)

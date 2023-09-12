@@ -38,4 +38,40 @@ export class State {
 
     return config
   }
+
+  async delete(origin: string): Promise<boolean> {
+    const state = (await this.snap.request({
+      method: 'snap_manageState',
+      params: { operation: 'get' },
+    })) as unknown as Record<string, SnapConfig> | null
+
+    if (state == null || state[origin] == null) {
+      return false
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete state[origin]
+    await this.snap.request({
+      method: 'snap_manageState',
+      params: {
+        newState: state,
+        operation: 'update',
+      },
+    })
+
+    return true
+  }
+
+  async has(origin: string): Promise<boolean> {
+    const state = (await this.snap.request({
+      method: 'snap_manageState',
+      params: { operation: 'get' },
+    })) as unknown as Record<string, SnapConfig> | null
+
+    if (state == null || state[origin] == null) {
+      return false
+    }
+
+    return true
+  }
 }
