@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.5.0...filsnap-v1.0.0) (2023-09-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* more UI info, remove Messages, origin scoped config, private key export only in the UI and more
+
+### Features
+
+* more UI info, remove Messages, origin scoped config, private key export only in the UI and more ([1a8715f](https://github.com/filecoin-project/filsnap/commit/1a8715f42cfc9f721e8faab8a7a2610f53592f94)), closes [#72](https://github.com/filecoin-project/filsnap/issues/72) [#70](https://github.com/filecoin-project/filsnap/issues/70) [#69](https://github.com/filecoin-project/filsnap/issues/69) [#68](https://github.com/filecoin-project/filsnap/issues/68) [#66](https://github.com/filecoin-project/filsnap/issues/66)
+* update mm and others ([#60](https://github.com/filecoin-project/filsnap/issues/60)) ([06dd585](https://github.com/filecoin-project/filsnap/commit/06dd5858af23b47907ba32b2a16e3de756476845))
+
+
+### Bug Fixes
+
+* remove flask detection code ([776c41b](https://github.com/filecoin-project/filsnap/commit/776c41b4eb8bac08a6f8d17cf83d157fb047fe34)), closes [#62](https://github.com/filecoin-project/filsnap/issues/62)
+* remove programatic private key export and add more info to the UI elements ([c88a9ee](https://github.com/filecoin-project/filsnap/commit/c88a9ee1359e9a35735ce5d7b18b4cfcd2de0326)), closes [#67](https://github.com/filecoin-project/filsnap/issues/67)
+
 ## [0.5.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.4.1...filsnap-v0.5.0) (2023-08-01)
 
 
