@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.0.3...filsnap-adapter-react-v0.1.0) (2023-09-12)
+
+
+### Features
+
+* update mm and others ([#60](https://github.com/filecoin-project/filsnap/issues/60)) ([06dd585](https://github.com/filecoin-project/filsnap/commit/06dd5858af23b47907ba32b2a16e3de756476845))
+
+
+### Bug Fixes
+
+* fix error prop and mount useEffect dependencies ([8e03461](https://github.com/filecoin-project/filsnap/commit/8e0346103d8da37fa99284baf2eb02b6315257e1))
+* remove flask detection code ([776c41b](https://github.com/filecoin-project/filsnap/commit/776c41b4eb8bac08a6f8d17cf83d157fb047fe34)), closes [#62](https://github.com/filecoin-project/filsnap/issues/62)
+
 ## [0.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.0.2...filsnap-adapter-react-v0.0.3) (2023-07-29)
 
 
