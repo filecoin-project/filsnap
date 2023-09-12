@@ -74,7 +74,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
     return () => {
       mounted = false
     }
-  }, [snap, snapConfig])
+  }, [])
 
   // Callbacks
   const connect = React.useCallback(
@@ -135,7 +135,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
         isLoading: false,
         isConnected: false,
         hasFlask: true,
-        error: undefined,
+        error,
         snap: undefined,
         account: undefined,
         connect,
@@ -174,7 +174,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
         isLoading: false,
         isConnected: false,
         hasFlask,
-        error: new Error('Oops something went wrong!'),
+        error,
         snap: undefined,
         account: undefined,
         connect,
