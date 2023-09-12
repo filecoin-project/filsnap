@@ -50,7 +50,11 @@ fixture.test(
   }
 )
 
-fixture = createFixture({})
+fixture = createFixture({
+  download: {
+    tag: 'v10.35.1',
+  },
+})
 fixture.test(
   'should enable error when flask is not installed',
   async ({ metamask, page }) => {

@@ -1,13 +1,13 @@
 {
   "version": "0.5.0",
-  "description": "Metamask snap to enable developers to add Filecoin integration to their dapps.",
-  "proposedName": "Filecoin Snap",
+  "description": "Connect to Filecoin dapps using Metamask. Manage Filecoin accounts, send FIL to Native and FEVM accounts and enable FEVM transaction insights.",
+  "proposedName": "Filecoin Wallet",
   "repository": {
     "type": "git",
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "GaHeQ59kzC3GGcDTg0ehuWTs0toIsuv2ug6vAK8DaI0=",
+    "shasum": "m8xh1nzTEms/7dEtDEm3rG7A3XoGvz6nBtMJ3ZMy6fA=",
     "location": {
       "npm": {
         "filePath": "dist/snap.js",
