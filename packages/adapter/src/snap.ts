@@ -144,7 +144,12 @@ export class FilsnapAdapter {
 
     // @ts-expect-error - SnapsResult is not complex enough for this
     const adapter = new FilsnapAdapter(snapId, snaps[snapId]?.version)
-    await adapter.configure(config)
+    const result = await adapter.configure(config)
+
+    if (result.error != null) {
+      throw new Error(result.error.message)
+    }
+
     return adapter
   }
 
@@ -253,18 +258,6 @@ export class FilsnapAdapter {
       params: {
         request: {
           method: 'fil_getBalance',
-        },
-        snapId: this.snapId,
-      },
-    })
-  }
-
-  async getMessages(): ReturnType<FilSnapMethods['fil_getMessages']> {
-    return await this.request({
-      method: 'wallet_invokeSnap',
-      params: {
-        request: {
-          method: 'fil_getMessages',
         },
         snapId: this.snapId,
       },

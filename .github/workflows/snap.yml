@@ -35,8 +35,7 @@ jobs:
       - run: pnpm --filter filsnap exec playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap run lint
       - run: pnpm -r --filter filsnap exec depcheck
-      - run: pnpm -r --filter filsnap run test:unit
-      - run: pnpm -r --filter filsnap run test:e2e
+      - run: pnpm -r --filter filsnap run test
         id: tests
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

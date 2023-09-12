@@ -50,13 +50,13 @@
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.0",
     "prettier": "3.0.3",
-    "viem": "^1.10.4"
+    "viem": "^1.10.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.15",
+    "@babel/core": "^7.22.17",
     "@playwright/test": "^1.37.1",
     "@preact/preset-vite": "^2.5.0",
-    "@types/node": "^20.5.9",
+    "@types/node": "^20.6.0",
     "vite": "^4.4.9"
   },
   "eslintConfig": {

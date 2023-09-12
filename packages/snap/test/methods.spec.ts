@@ -1,21 +1,17 @@
 import { createFixture } from 'metamask-testing-tools'
-import { type ExportPrivateKeyResponse } from '../../src/rpc/export-private-key'
-import { type GetBalanceResponse } from '../../src/rpc/get-balance'
-import { type GetMessagesResponse } from '../../src/rpc/get-messages'
+import { type ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
+import { type GetBalanceResponse } from '../src/rpc/get-balance'
 import {
   type SendMessageResponse,
   type SendMessageRequest,
-} from '../../src/rpc/send-message'
+} from '../src/rpc/send-message'
 import {
   type SignMessageRawResponse,
   type SignMessageRawRequest,
   type SignMessageResponse,
   type SignMessageRequest,
-} from '../../src/rpc/sign-message'
-import {
-  type GetAddressResponse,
-  type GetPublicResponse,
-} from '../../src/types'
+} from '../src/rpc/sign-message'
+import { type GetAddressResponse, type GetPublicResponse } from '../src/types'
 
 const { test, expect } = createFixture({
   isolated: false,
@@ -28,7 +24,7 @@ const { test, expect } = createFixture({
 })
 
 test.beforeAll(async ({ metamask, page }) => {
-  await metamask.invokeSnap({
+  const req = metamask.invokeSnap({
     request: {
       method: 'fil_configure',
       params: {
@@ -37,6 +33,11 @@ test.beforeAll(async ({ metamask, page }) => {
     },
     page,
   })
+
+  const dialog = await metamask.waitForDialog('confirmation')
+  await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+
+  await req
 })
 
 test.describe('filsnap testnet', () => {
@@ -80,17 +81,6 @@ test.describe('filsnap testnet', () => {
     const { result } = await privateKey
 
     expect(result).toBe(true)
-  })
-
-  test('should get messages', async ({ metamask, page }) => {
-    const { result } = await metamask.invokeSnap<GetMessagesResponse>({
-      request: {
-        method: 'fil_getMessages',
-      },
-      page,
-    })
-
-    expect(result).toStrictEqual([])
   })
 
   test('should get balance', async ({ metamask, page }) => {

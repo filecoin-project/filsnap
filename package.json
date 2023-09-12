@@ -20,7 +20,7 @@
     "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod"
   },
   "devDependencies": {
-    "depcheck": "^1.4.5",
+    "depcheck": "^1.4.6",
     "hd-scripts": "^8.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
