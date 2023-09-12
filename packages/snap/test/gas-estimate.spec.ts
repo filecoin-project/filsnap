@@ -2,7 +2,7 @@ import { createFixture } from 'metamask-testing-tools'
 import type {
   GasForMessageRequest,
   GasForMessageResponse,
-} from '../../src/rpc/gas-for-message'
+} from '../src/rpc/gas-for-message'
 
 const TARGET_ADDRESS = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 const { test, expect } = createFixture({
@@ -15,7 +15,7 @@ const { test, expect } = createFixture({
   },
 })
 test.beforeAll(async ({ metamask, page }) => {
-  await metamask.invokeSnap({
+  const req = metamask.invokeSnap({
     request: {
       method: 'fil_configure',
       params: {
@@ -24,6 +24,11 @@ test.beforeAll(async ({ metamask, page }) => {
     },
     page,
   })
+
+  const dialog = await metamask.waitForDialog('confirmation')
+  await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+
+  await req
 })
 test.describe('fil_getGasForMessage', () => {
   test('should estimate on testnet', async ({ metamask, page }) => {

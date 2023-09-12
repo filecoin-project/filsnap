@@ -3,6 +3,8 @@ import { z } from 'zod'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
 import * as Address from 'iso-filecoin/address'
+import { getAccountSafe } from '../account'
+import { RPC } from 'iso-filecoin/rpc'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'
@@ -52,7 +54,13 @@ export async function getGasForMessage(
   ctx: SnapContext,
   params: EstimateParams
 ): Promise<GasForMessageResponse> {
-  const { rpc, account: keypair, config } = ctx
+  const { state } = ctx
+  const config = await state.get(ctx.origin)
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
   const _params = estimateParams.safeParse(params)
   if (!_params.success) {
     return serializeError(
@@ -63,9 +71,14 @@ export async function getGasForMessage(
 
   const { message, maxFee } = _params.data
 
+  const account = await getAccountSafe(snap, config)
+  const rpc = new RPC({
+    api: config.rpc.url,
+    network: config.network,
+  })
   const msg = {
     to: Address.from(message.to, config.network).toString(),
-    from: keypair.address.toString(),
+    from: account.address.toString(),
     value: message.value,
   }
 

@@ -1,62 +1,73 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types'
-import { RPC } from 'iso-filecoin/rpc'
 import { configure } from './rpc/configure'
 import { exportPrivateKey } from './rpc/export-private-key'
 import { getGasForMessage, type EstimateParams } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
-import { getMessages } from './rpc/get-messages'
 import { sendMessage } from './rpc/send-message'
 
 import { hex } from 'iso-base/rfc4648'
-import { getKeyPair } from './keypair'
+import { getAccountSafe } from './account'
 import { getAccountInfo } from './rpc/get-account'
 import type {
   SignMessageParams,
   SignMessageRawParams,
 } from './rpc/sign-message'
 import { signMessage, signMessageRaw } from './rpc/sign-message'
+import { State } from './state'
 import type { SnapConfig, SnapContext } from './types'
-import { configFromSnap, serializeError } from './utils'
+import { serializeError } from './utils'
 
 export type {
-  SnapConfig,
-  FilSnapMethods,
-  RequestWithFilSnap,
-  Network,
   AccountInfo,
+  FilSnapMethods,
+  Network,
+  RequestWithFilSnap,
+  SnapConfig,
 } from './types'
-
-export { filForwarderMetadata } from './filforwarder-metadata'
 
 export { onTransaction } from './transaction-insight'
 
-export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({
+  origin,
+  request,
+}) => {
   try {
-    const config = await configFromSnap(snap)
-    const rpc = new RPC({
-      api: config.rpc.url,
-      network: config.network,
-    })
-    const account = await getKeyPair(snap)
-
+    const state = new State(snap)
     const context: SnapContext = {
-      config,
-      rpc,
-      account,
       snap,
+      origin,
+      state,
     }
 
     switch (request.method) {
       case 'fil_configure': {
-        return await configure(snap, request.params as Partial<SnapConfig>)
+        return await configure(context, request.params as Partial<SnapConfig>)
       }
       case 'fil_getAccountInfo': {
         return await getAccountInfo(context)
       }
       case 'fil_getAddress': {
+        const config = await state.get(origin)
+
+        if (config == null) {
+          return serializeError(
+            `No configuration found for ${origin}. Connect to Filsnap first.`
+          )
+        }
+
+        const account = await getAccountSafe(snap, config)
         return { result: account.address.toString() }
       }
       case 'fil_getPublicKey': {
+        const config = await state.get(origin)
+
+        if (config == null) {
+          return serializeError(
+            `No configuration found for ${origin}. Connect to Filsnap first.`
+          )
+        }
+
+        const account = await getAccountSafe(snap, config)
         return { result: hex.encode(account.pubKey) }
       }
       case 'fil_exportPrivateKey': {
@@ -64,9 +75,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       }
       case 'fil_getBalance': {
         return await getBalance(context)
-      }
-      case 'fil_getMessages': {
-        return await getMessages(context)
       }
       case 'fil_signMessage': {
         return await signMessage(context, request.params as SignMessageParams)

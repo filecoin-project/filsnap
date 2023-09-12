@@ -1,4 +1,4 @@
-import type { MetamaskState, SnapConfig } from './types'
+import type { SnapConfig } from './types'
 
 export const mainnetConfig: SnapConfig = {
   derivationPath: "m/44'/461'/0'/0/0",
@@ -9,7 +9,6 @@ export const mainnetConfig: SnapConfig = {
   },
   unit: {
     decimals: 18,
-    image: `https://filecoin.io/images/filecoin-logo.svg`,
     symbol: 'FIL',
   },
 }
@@ -23,14 +22,6 @@ export const testnetConfig: SnapConfig = {
   },
   unit: {
     decimals: 18,
-    image: `https://filecoin.io/images/filecoin-logo.svg`,
     symbol: 'tFIL',
-  },
-}
-
-export const initialState: MetamaskState = {
-  filecoin: {
-    config: mainnetConfig,
-    messages: [],
   },
 }

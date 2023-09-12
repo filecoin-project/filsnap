@@ -1,12 +1,19 @@
 import { z } from 'zod'
 import { Schemas } from 'iso-filecoin/message'
 import type { Json } from './types'
+import { parseDerivationPath } from 'iso-filecoin/utils'
+
+const alphabet =
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=+/'
+// Build the character lookup table:
+const codes = new Map<string, number>()
+for (let i = 0; i < alphabet.length; ++i) {
+  codes.set(alphabet[i], i)
+}
 
 const unitConfiguration = z.object({
-  decimals: z.number(),
-  symbol: z.string(),
-  image: z.string().optional(),
-  customViewUrl: z.string().optional(),
+  decimals: z.number().positive().int().lte(18),
+  symbol: z.enum(['FIL', 'tFIL']),
 })
 
 export const network = z.enum(['mainnet', 'testnet'])
@@ -15,10 +22,36 @@ export const snapConfig = z.object({
   /**
    * The derivation path for the account
    */
-  derivationPath: z.string(),
+  derivationPath: z.string().superRefine((val, ctx) => {
+    try {
+      const parsed = parseDerivationPath(val)
+      return parsed
+    } catch (error) {
+      const err = error as Error
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: err.message,
+      })
+      return z.NEVER
+    }
+  }),
   rpc: z.object({
-    url: z.string(),
-    token: z.string(),
+    url: z.string().url().trim(),
+    token: z
+      .string()
+      .trim()
+      .refine(
+        (val) => {
+          for (const element of val) {
+            if (codes.get(element) === undefined) {
+              return false
+            }
+          }
+
+          return true
+        },
+        { message: `Invalid characters` }
+      ),
   }),
   network,
   unit: unitConfiguration.optional(),
@@ -27,13 +60,6 @@ export const snapConfig = z.object({
 export const messageStatus = z.object({
   cid: z.string(),
   message: Schemas.message,
-})
-
-export const metamaskState = z.object({
-  filecoin: z.object({
-    config: snapConfig,
-    messages: z.array(messageStatus),
-  }),
 })
 
 export const literal = z.union([z.string(), z.number(), z.boolean(), z.null()])

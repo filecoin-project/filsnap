@@ -1,5 +1,7 @@
+import { getAccountSafe } from '../account'
 import type { AccountInfo, SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
+import { RPC } from 'iso-filecoin/rpc'
 
 // Types
 export type GetAccountInfoResponse = SnapResponse<AccountInfo>
@@ -13,7 +15,20 @@ export type GetAccountInfoResponse = SnapResponse<AccountInfo>
 export async function getAccountInfo(
   ctx: SnapContext
 ): Promise<GetAccountInfoResponse> {
-  const balance = await ctx.rpc.balance(ctx.account.address.toString())
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
+
+  const account = await getAccountSafe(snap, config)
+  const rpc = new RPC({
+    api: config.rpc.url,
+    network: config.network,
+  })
+  const balance = await rpc.balance(account.address.toString())
 
   if (balance.error != null) {
     return serializeError('RPC call to "WalletBalance" failed', balance.error)
@@ -22,10 +37,10 @@ export async function getAccountInfo(
   return {
     error: null,
     result: {
-      address: ctx.account.address.toString(),
-      pubKey: ctx.account.pubKey.toString(),
+      address: account.address.toString(),
+      pubKey: account.pubKey.toString(),
       balance: balance.result,
-      config: ctx.config,
+      config,
     },
   }
 }

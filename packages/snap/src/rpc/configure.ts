@@ -1,10 +1,11 @@
-import { type SnapsGlobalObject } from '@metamask/snaps-types'
 import merge from 'merge-options'
+import { copyable, panel, text } from '@metamask/snaps-ui'
 import { snapConfig } from '../schemas'
-import { configFromNetwork, serializeError } from '../utils'
+import { configFromNetwork, serializeError, snapDialog } from '../utils'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
-import type { MetamaskState, SnapConfig, SnapResponse } from '../types'
+import type { SnapConfig, SnapContext, SnapResponse } from '../types'
+import { getAccountSafe } from '../account'
 
 // Types
 export type ConfigureParams = Partial<SnapConfig>
@@ -17,11 +18,11 @@ export type ConfigureResponse = SnapResponse<SnapConfig>
 /**
  * Configures the snap with the provided configuration
  *
- * @param snap - Snaps global object
+ * @param ctx - Snap context
  * @param params - overrides for the default configuration
  */
 export async function configure(
-  snap: SnapsGlobalObject,
+  ctx: SnapContext,
   params: ConfigureParams
 ): Promise<ConfigureResponse> {
   const _params = snapConfig.safeParse(
@@ -36,12 +37,15 @@ export async function configure(
 
   const {
     derivationPath,
-    rpc: { url },
+    rpc: { url, token },
     network,
+    unit,
   } = _params.data
 
-  const { coinType } = parseDerivationPath(derivationPath)
+  const { coinType, account: accountNumber } =
+    parseDerivationPath(derivationPath)
   const rpc = new RPC({
+    token,
     api: url,
     network,
   })
@@ -65,15 +69,33 @@ export async function configure(
       'Mismatch between configured network and network provided by RPC'
     )
   }
-  const state = (await snap.request({
-    method: 'snap_manageState',
-    params: { operation: 'get' },
-  })) as unknown as MetamaskState
-  state.filecoin.config = _params.data
 
-  await snap.request({
-    method: 'snap_manageState',
-    params: { newState: state, operation: 'update' },
+  const account = await getAccountSafe(snap, _params.data)
+
+  const conf = await snapDialog(ctx.snap, {
+    type: 'confirmation',
+    content: panel([
+      text(
+        `Do you want to connect **Account ${accountNumber}** _${account.address.toString()}_ to **${
+          ctx.origin
+        }**?`
+      ),
+      text('Derivation Path:'),
+      copyable(derivationPath),
+      text('API:'),
+      copyable(url),
+      text('Network:'),
+      copyable(network),
+      text('Unit Decimals:'),
+      copyable(unit?.decimals.toString() ?? 'N/A'),
+      text('Unit Symbol:'),
+      copyable(unit?.symbol ?? 'N/A'),
+    ]),
   })
-  return { result: _params.data, error: null }
+
+  if (conf) {
+    await ctx.state.set(ctx.origin, _params.data)
+    return { result: _params.data, error: null }
+  }
+  return serializeError('User denied configuration')
 }

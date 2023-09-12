@@ -6,12 +6,13 @@ import { heading, panel, text } from '@metamask/snaps-ui'
 import { fromHex, type Hex } from 'viem'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
-import { filForwarderMetadata } from './filforwarder-metadata'
+import { filForwarderMetadata } from './filforwarder'
 import { decodeFunctionData } from 'viem'
 
 /**
+ * Invalid transfer message
  *
- * @param message
+ * @param message - The message to display
  */
 function invalidTransferMessage(message: string): OnTransactionResponse {
   return {
@@ -20,8 +21,9 @@ function invalidTransferMessage(message: string): OnTransactionResponse {
 }
 
 /**
+ * Human readable network
  *
- * @param chainId
+ * @param chainId - The chain ID
  */
 function humanReadableNetwork(chainId: string): string {
   if (chainId === filForwarderMetadata.chainIds.filecoinMainnet) {
@@ -36,16 +38,18 @@ function humanReadableNetwork(chainId: string): string {
 }
 
 /**
+ * Chain matches
  *
- * @param chainId
+ * @param chainId - The chain ID
  */
 function chainMatches(chainId: string): boolean {
   return Object.values(filForwarderMetadata.chainIds).includes(chainId)
 }
 
 /**
+ * Contract address matches
  *
- * @param transactionTo
+ * @param transactionTo - The transaction to address
  */
 function contractAddressMatches(transactionTo: string | undefined): boolean {
   return (

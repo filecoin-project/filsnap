@@ -1,10 +1,11 @@
+import { RPC } from 'iso-filecoin/rpc'
 import type {
   MessageStatus,
   SignedMessage,
   SnapContext,
   SnapResponse,
 } from '../types'
-import { serializeError, updateMessageInState } from '../utils'
+import { serializeError } from '../utils'
 import { base64pad } from 'iso-base/rfc4648'
 
 // Types
@@ -24,7 +25,19 @@ export async function sendMessage(
   ctx: SnapContext,
   params: SignedMessage
 ): Promise<SendMessageResponse> {
-  const response = await ctx.rpc.pushMessage({
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
+
+  const rpc = new RPC({
+    api: config.rpc.url,
+    network: config.network,
+  })
+  const response = await rpc.pushMessage({
     msg: params.message,
     signature: {
       type: params.signature.type,
@@ -39,6 +52,5 @@ export async function sendMessage(
     cid: response.result['/'],
     message: params.message,
   }
-  await updateMessageInState(snap, messageStatus)
   return { result: messageStatus, error: null }
 }

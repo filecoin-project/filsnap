@@ -8,6 +8,9 @@ import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
 import { serializeError, snapDialog } from '../utils'
+import { getAccount } from '../account'
+import { RPC } from 'iso-filecoin/rpc'
+import { parseDerivationPath } from 'iso-filecoin/utils'
 
 // Schemas
 export const signMessageParams = Schemas.messagePartial.omit({
@@ -42,6 +45,14 @@ export async function signMessage(
   ctx: SnapContext,
   params: SignMessageParams
 ): Promise<SignMessageResponse> {
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
+
   const _params = signMessageParams.safeParse(params)
   if (!_params.success) {
     return serializeError(
@@ -50,10 +61,15 @@ export async function signMessage(
     )
   }
 
+  const account = await getAccount(snap, config)
+  const rpc = new RPC({
+    api: config.rpc.url,
+    network: config.network,
+  })
   // create Message
   const message = await new Message({
-    to: Address.from(_params.data.to, ctx.config.network).toString(),
-    from: ctx.account.address.toString(),
+    to: Address.from(_params.data.to, config.network).toString(),
+    from: account.address.toString(),
     value: _params.data.value,
     nonce: _params.data.nonce,
     gasFeeCap: _params.data.gasFeeCap,
@@ -61,34 +77,45 @@ export async function signMessage(
     gasPremium: _params.data.gasPremium,
     params: _params.data.params,
     method: _params.data.method,
-  }).prepare(ctx.rpc)
+  }).prepare(rpc)
 
   const gas = Token.fromAttoFIL(message.gasPremium).mul(message.gasLimit)
   const total = Token.fromAttoFIL(message.value).add(gas)
+  const { account: accountNumber } = parseDerivationPath(config.derivationPath)
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
-      heading(`Send ${Token.fromAttoFIL(message.value).toFIL().toString()} to`),
+      text(
+        `Send **${Token.fromAttoFIL(message.value).toFIL().toString()} ${
+          config.unit?.symbol ?? 'FIL'
+        }** from Account ${accountNumber}`
+      ),
+      copyable(message.from),
+      text(`to`),
       copyable(message.to),
       divider(),
       heading('Details'),
-      text(
-        `Gas _(estimated)_: **${gas.toFIL().toFormat({
-          decimalPlaces: ctx.config.unit?.decimals,
-          suffix: ` ${ctx.config.unit?.symbol}`,
-        })}**`
+      text(`Gas _(estimated ${config.unit?.symbol ?? 'FIL'})_:`),
+      copyable(
+        gas.toFIL().toFormat({
+          decimalPlaces: config.unit?.decimals,
+        })
       ),
-      text(
-        `Total _(amount + gas)_: **${total.toFIL().toFormat({
-          decimalPlaces: ctx.config.unit?.decimals,
-          suffix: ` ${ctx.config.unit?.symbol}`,
-        })}**`
+      text(`Total _(amount + gas ${config.unit?.symbol ?? 'FIL'})_:`),
+      copyable(
+        total.toFIL().toFormat({
+          decimalPlaces: config.unit?.decimals,
+        })
       ),
+      text('API:'),
+      copyable(config.rpc.url),
+      text('Network:'),
+      copyable(config.network),
     ]),
   })
 
   if (conf) {
-    const sig = filSignMessage(ctx.account.privateKey, 'SECP256K1', message)
+    const sig = filSignMessage(account.privateKey, 'SECP256K1', message)
     return {
       error: null,
       result: {
@@ -114,6 +141,13 @@ export async function signMessageRaw(
   ctx: SnapContext,
   params: SignMessageRawParams
 ): Promise<SignMessageRawResponse> {
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
   const _params = signMessageRawParams.safeParse(params)
   if (!_params.success) {
     return serializeError(
@@ -124,16 +158,21 @@ export async function signMessageRaw(
 
   const { message } = _params.data
 
+  const account = await getAccount(snap, config)
+  const { account: accountNumber } = parseDerivationPath(config.derivationPath)
+
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
-      heading(`Do you want to sign this message?`),
+      text(
+        `Do you want to sign this message with **Account ${accountNumber}** _${account.address.toString()}_?`
+      ),
       copyable(message),
     ]),
   })
 
   if (conf) {
-    const sig = sign(ctx.account.privateKey, 'SECP256K1', message)
+    const sig = sign(account.privateKey, 'SECP256K1', message)
     return {
       error: null,
       result: base64pad.encode(sig),

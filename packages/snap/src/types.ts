@@ -1,5 +1,4 @@
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
-import type { RPC } from 'iso-filecoin/rpc'
 import type { MessageObj } from 'iso-filecoin/types'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { z } from 'zod'
@@ -8,15 +7,10 @@ import type { exportPrivateKey } from './rpc/export-private-key'
 import type { getGasForMessage } from './rpc/gas-for-message'
 import type { getAccountInfo } from './rpc/get-account'
 import type { getBalance } from './rpc/get-balance'
-import type { getMessages } from './rpc/get-messages'
 import type { sendMessage } from './rpc/send-message'
 import type { signMessage, signMessageRaw } from './rpc/sign-message'
-import type {
-  literal,
-  messageStatus,
-  metamaskState,
-  snapConfig,
-} from './schemas'
+import type { literal, messageStatus, snapConfig } from './schemas'
+import type { State } from './state'
 
 export type { MessageObj, Network } from 'iso-filecoin/types'
 
@@ -25,7 +19,6 @@ export type Literal = z.infer<typeof literal>
 export type Json = Literal | { [key: string]: Json } | Json[]
 export type SnapConfig = z.infer<typeof snapConfig>
 export type MessageStatus = z.infer<typeof messageStatus>
-export type MetamaskState = z.infer<typeof metamaskState>
 export type Account = ReturnType<typeof accountFromPrivateKey>
 
 // Filecoin types
@@ -76,10 +69,12 @@ export type SnapResponse<R> =
   | SnapResponseError
 
 export interface SnapContext {
-  config: SnapConfig
+  // config: SnapConfig
   snap: SnapsGlobalObject
-  rpc: RPC
-  account: Account
+  // rpc: RPC
+  // account: Account
+  origin: string
+  state: State
 }
 
 // Extra resquest types
@@ -97,7 +92,6 @@ export interface FilSnapMethods {
   fil_getPublicKey: (snap: SnapsGlobalObject) => Promise<GetPublicResponse>
   fil_getBalance: typeof getBalance
   fil_exportPrivateKey: typeof exportPrivateKey
-  fil_getMessages: typeof getMessages
   fil_getGasForMessage: typeof getGasForMessage
   fil_signMessage: typeof signMessage
   fil_signMessageRaw: typeof signMessageRaw

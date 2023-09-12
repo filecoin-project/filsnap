@@ -3,13 +3,7 @@ import type { SnapsGlobalObject } from '@metamask/snaps-types'
 import type { NodeType, Panel } from '@metamask/snaps-ui'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
-import type {
-  Json,
-  MessageStatus,
-  Network,
-  SnapConfig,
-  SnapResponseError,
-} from './types'
+import type { Json, Network, SnapConfig, SnapResponseError } from './types'
 
 /**
  * Get default configuration by network name
@@ -20,44 +14,14 @@ import type {
 export function configFromNetwork(networkName?: Network): SnapConfig {
   switch (networkName) {
     case 'mainnet': {
-      console.log('Filecoin mainnet network selected')
       return Constants.mainnetConfig
     }
     case 'testnet': {
-      console.log('Filecoin testnet network selected')
       return Constants.testnetConfig
     }
     default: {
       return Constants.mainnetConfig
     }
-  }
-}
-
-/**
- * Get configuration from snap
- * If configuration is not present in state, it will be initialized with default values
- *
- * @param snap - Snaps global object
- */
-export async function configFromSnap(
-  snap: SnapsGlobalObject
-): Promise<SnapConfig> {
-  const state = await snap.request({
-    method: 'snap_manageState',
-    params: { operation: 'get' },
-  })
-
-  const result = Schemas.metamaskState.safeParse(state)
-
-  if (result.success) {
-    return result.data.filecoin.config
-  } else {
-    await snap.request({
-      method: 'snap_manageState',
-      params: { newState: Constants.initialState, operation: 'update' },
-    })
-
-    return Constants.initialState.filecoin.config
   }
 }
 
@@ -207,34 +171,4 @@ export async function snapDialog(
   })
 
   return result === true
-}
-/**
- * Update the messages in the state
- *
- * @param snap - The snap itself
- * @param message - The message to update
- */
-export async function updateMessageInState(
-  snap: SnapsGlobalObject,
-  message: MessageStatus
-): Promise<void> {
-  const _state = await snap.request({
-    method: 'snap_manageState',
-    params: { operation: 'get' },
-  })
-
-  const state = Schemas.metamaskState.parse(_state)
-
-  const index = state.filecoin.messages.findIndex(
-    (msg) => msg.cid === message.cid
-  )
-  if (index >= 0) {
-    state.filecoin.messages[index] = message
-  } else {
-    state.filecoin.messages.push(message)
-  }
-  await snap.request({
-    method: 'snap_manageState',
-    params: { newState: state, operation: 'update' },
-  })
 }
