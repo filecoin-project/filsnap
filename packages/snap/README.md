@@ -89,7 +89,7 @@ We recommend using [`filsnap-adapter`](../adapter) to interact with filsnap for 
 
 Check the full RPC methods documentation [here](https://filecoin-project.github.io/filsnap/interfaces/filsnap.FilSnapMethods.html).
 
-## Arquitecture
+## Architecture
 
 ```mermaid
 sequenceDiagram
@@ -120,7 +120,7 @@ sequenceDiagram
   - One workaround currently supported is to use the derivation path from the configuration to get the account you want to use.
 - Ledger is not supported, this is a **Metamask limitation**.
 - There's no UI native in the extension for the user to interact with the snap, this is a **Metamask limitation**.
-- Transaction insights are supported but forces the Filsnap tab to be openned even if the snap doesn't return any data. This is a **Metamask limitation**.
+- Transaction insights are supported but forces the Filsnap tab to be opened even if the snap doesn't return any data. This is a **Metamask limitation**.
 
 ## Recommendations for future work
 
