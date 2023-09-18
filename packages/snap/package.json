@@ -94,7 +94,7 @@
     "@rollup/plugin-sucrase": "^5.0.1",
     "@rollup/plugin-terser": "^0.4.3",
     "metamask-testing-tools": "^1.1.6",
-    "playwright-test": "^12.3.0",
+    "playwright-test": "^12.3.3",
     "rollup": "^3.29.1",
     "typescript": "5.2.2"
   },
