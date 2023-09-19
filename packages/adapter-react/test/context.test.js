@@ -1,9 +1,13 @@
-import { renderHook } from '@testing-library/react-hooks/dom'
+import { renderHook, waitFor, cleanup } from '@testing-library/react'
 import assert from 'assert'
 import { useFilsnap, FilsnapProvider } from '../src/index.js'
 
+beforeEach(() => {
+  cleanup()
+})
 // @ts-ignore
 const wrapper = ({ children }) => FilsnapProvider({ children })
+
 it('should return the initial context', async () => {
   const { result } = renderHook(() => useFilsnap(), { wrapper })
 
@@ -11,25 +15,25 @@ it('should return the initial context', async () => {
 })
 
 it('should stop loading', async () => {
-  const { result, waitForNextUpdate } = renderHook(() => useFilsnap(), {
+  const { result } = renderHook(() => useFilsnap(), {
     wrapper,
   })
 
-  await waitForNextUpdate()
-
-  assert.strictEqual(result.current.isLoading, false)
-  assert.strictEqual(result.current.hasFlask, false)
+  await waitFor(() => {
+    assert.strictEqual(result.current.isLoading, false)
+    assert.strictEqual(result.current.hasFlask, false)
+  })
 })
 
-it('should still be stoped after rerender', async () => {
-  const { result, waitForNextUpdate, rerender } = renderHook(
-    () => useFilsnap(),
-    {
-      wrapper,
-    }
-  )
+it('should still be stopped after rerender', async () => {
+  const { result, rerender } = renderHook(() => useFilsnap(), {
+    wrapper,
+  })
 
-  await waitForNextUpdate()
+  await waitFor(() => {
+    assert.strictEqual(result.current.isLoading, false)
+    assert.strictEqual(result.current.hasFlask, false)
+  })
 
   rerender()
 
