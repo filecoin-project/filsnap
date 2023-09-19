@@ -1,7 +1,8 @@
 {
   "name": "js",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+  //https://containers.dev/templates or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/typescript-node",
+  // https://containers.dev/features
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": true,
@@ -31,7 +32,10 @@
         "editor.formatOnPaste": true,
         "editor.formatOnType": true,
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "javascript.preferences.importModuleSpecifierEnding": "js",
+        "typescript.preferences.importModuleSpecifierEnding": "auto",
+        "typescript.enablePromptUseWorkspaceTsdk": true
       }
     }
   }
