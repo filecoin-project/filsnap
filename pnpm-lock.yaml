@@ -127,12 +127,6 @@ importers:
       '@babel/core':
         specifier: ^7.22.20
         version: 7.22.20
-      '@playwright/test':
-        specifier: ^1.38.0
-        version: 1.38.0
-      '@preact/preset-vite':
-        specifier: ^2.5.0
-        version: 2.5.0(@babel/core@7.22.20)(preact@10.17.1)(vite@4.4.9)
       '@types/node':
         specifier: ^20.6.2
         version: 20.6.2
