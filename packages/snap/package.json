@@ -93,7 +93,7 @@
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-sucrase": "^5.0.1",
     "@rollup/plugin-terser": "^0.4.3",
-    "metamask-testing-tools": "^1.1.6",
+    "metamask-testing-tools": "^1.1.7",
     "playwright-test": "^12.3.4",
     "rollup": "^3.29.2",
     "typescript": "5.2.2"

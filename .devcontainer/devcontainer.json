@@ -25,7 +25,11 @@
       "openFiles": ["readme.md"]
     },
     "vscode": {
-      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "yoavbls.pretty-ts-errors"
+      ],
       "settings": {
         "javascript.format.enable": false,
         "typescript.format.enable": false,
