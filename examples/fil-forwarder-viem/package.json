@@ -9,8 +9,8 @@
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
     "build": "vite build --force",
-    "dev": "vite preview --port 3000",
-    "serve": "vite --force"
+    "dev": "vite --force",
+    "serve": "vite preview --port 3000"
   },
   "wireit": {
     "build": {
