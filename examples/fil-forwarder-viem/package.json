@@ -46,7 +46,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "filsnap-adapter": "workspace:^",
+    "filsnap-adapter": "*",
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.0",
     "prettier": "3.0.3",
