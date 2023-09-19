@@ -177,9 +177,6 @@ importers:
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
-      '@testing-library/react-hooks':
-        specifier: ^8.0.1
-        version: 8.0.1(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
       '@types/mocha':
         specifier: ^10.0.1
         version: 10.0.1
@@ -336,7 +333,7 @@ packages:
       '@babel/traverse': 7.22.20
       '@babel/types': 7.22.19
       convert-source-map: 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -417,7 +414,7 @@ packages:
       '@babel/core': 7.22.20
       '@babel/helper-compilation-targets': 7.22.15
       '@babel/helper-plugin-utils': 7.22.5
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       lodash.debounce: 4.0.8
       resolve: 1.22.6
     transitivePeerDependencies:
@@ -1595,13 +1592,6 @@ packages:
     dependencies:
       regenerator-runtime: 0.14.0
 
-  /@babel/runtime@7.22.6:
-    resolution: {integrity: sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.11
-    dev: true
-
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
     engines: {node: '>=6.9.0'}
@@ -1623,7 +1613,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.22.16
       '@babel/types': 7.22.19
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -2602,7 +2592,7 @@ packages:
       '@ethereumjs/tx': 4.2.0
       '@noble/hashes': 1.3.2
       '@types/debug': 4.1.8
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       semver: 7.5.4
       superstruct: 1.0.3
     transitivePeerDependencies:
@@ -2615,7 +2605,7 @@ packages:
       '@ethereumjs/tx': 4.2.0
       '@noble/hashes': 1.3.2
       '@types/debug': 4.1.8
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       semver: 7.5.4
       superstruct: 1.0.3
     transitivePeerDependencies:
@@ -2629,7 +2619,7 @@ packages:
       '@ethereumjs/tx': 4.2.0
       '@noble/hashes': 1.3.2
       '@types/debug': 4.1.8
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       semver: 7.5.4
       superstruct: 1.0.3
     transitivePeerDependencies:
@@ -3231,29 +3221,6 @@ packages:
       dom-accessibility-api: 0.5.16
       lz-string: 1.5.0
       pretty-format: 27.5.1
-    dev: true
-
-  /@testing-library/react-hooks@8.0.1(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      '@types/react': ^16.9.0 || ^17.0.0
-      react: ^16.9.0 || ^17.0.0
-      react-dom: ^16.9.0 || ^17.0.0
-      react-test-renderer: ^16.9.0 || ^17.0.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      react-dom:
-        optional: true
-      react-test-renderer:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.22.6
-      '@types/react': 18.2.22
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-error-boundary: 3.1.4(react@18.2.0)
     dev: true
 
   /@testing-library/react@14.0.0(react-dom@18.2.0)(react@18.2.0):
@@ -5284,17 +5251,6 @@ packages:
     dependencies:
       ms: 2.1.3
     dev: true
-
-  /debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
 
   /debug@4.3.4(supports-color@8.1.1):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -8623,16 +8579,6 @@ packages:
       scheduler: 0.23.0
     dev: true
 
-  /react-error-boundary@3.1.4(react@18.2.0):
-    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
-    engines: {node: '>=10', npm: '>=6'}
-    peerDependencies:
-      react: '>=16.13.1'
-    dependencies:
-      '@babel/runtime': 7.22.6
-      react: 18.2.0
-    dev: true
-
   /react-hook-form@7.46.1(react@18.2.0):
     resolution: {integrity: sha512-0GfI31LRTBd5tqbXMGXT1Rdsv3rnvy0FjEk8Gn9/4tp6+s77T7DPZuGEpBRXOauL+NhyGT5iaXzdIM2R6F/E+w==}
     engines: {node: '>=12.22.0'}
@@ -8740,10 +8686,6 @@ packages:
 
   /regenerate@1.4.2:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
-    dev: true
-
-  /regenerator-runtime@0.13.11:
-    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
     dev: true
 
   /regenerator-runtime@0.14.0:

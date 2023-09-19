@@ -44,7 +44,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
-    "@testing-library/react-hooks": "^8.0.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.6.2",
     "@types/react": "^18.2.22",
