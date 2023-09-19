@@ -8,9 +8,9 @@
   "private": true,
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
-    "build": "wireit",
-    "dev": "wireit",
-    "serve": "wireit"
+    "build": "vite build --force",
+    "dev": "vite preview --port 3000",
+    "serve": "vite --force"
   },
   "wireit": {
     "build": {
@@ -57,6 +57,8 @@
     "@playwright/test": "^1.38.0",
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.6.2",
+    "hd-scripts": "^8.1.2",
+    "typescript": "5.2.2",
     "vite": "^4.4.9",
     "wireit": "^0.14.0"
   },

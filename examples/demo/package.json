@@ -65,7 +65,9 @@
     "@babel/core": "^7.22.20",
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.6.2",
+    "hd-scripts": "^8.1.2",
     "tiny-git-rev-sync": "^0.1.0",
+    "typescript": "5.2.2",
     "vite": "^4.4.9",
     "wireit": "^0.14.0"
   },
