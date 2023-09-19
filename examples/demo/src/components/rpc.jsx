@@ -96,7 +96,7 @@ const Account = () => {
         onClick={() => snap?.switchOrAddChain('testnet')}
         disabled={isLoading}
       >
-        Add FEVM Mainnet
+        Add FEVM Testnet
       </button>
     </div>
   )

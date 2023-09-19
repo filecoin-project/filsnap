@@ -4,18 +4,18 @@ Filecoin metamask snap and related packages to enable developers to add Filecoin
 
 ## Packages
 
-- [filsnap](./packages/snap) - Filecoin snap for metamask
-- [filsnap-adapter](./packages/adapter) - Adapter to interact with Filsnap from a dapp
-- [filsnap-adapter-react](./packages/adapter-react) - React hooks to interact with Filsnap from a dapp
+- [filsnap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap) - Filecoin snap for metamask
+- [filsnap-adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter) - Adapter to interact with Filsnap from a dapp
+- [filsnap-adapter-react](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter-react) - React hooks to interact with Filsnap from a dapp
 
 ## Examples
 
-- [`demo`](./examples/demo) - Preact demo dapp using [filsnap-adapter](./packages/adapter) to interact with [filsnap](./packages/snap)
-- [`fil-forwarder-viem`](./examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
+- [`demo`](https://github.com/filecoin-project/filsnap/tree/master/examples/demo) - Preact demo dapp using [filsnap-adapter](<[./packages/adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter)>) to interact with [filsnap](<[./packages/snap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap)>)
+- [`fil-forwarder-viem`](https://github.com/filecoin-project/filsnap/tree/master/examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
 
 ### Checkout examples
 
-You can use Codesandbox: <https://githubbox.com/filecoin-project/filsnap/tree/main/examples/demo> and start hacking right away.
+You can use [Codesandbox](https://githubbox.com/filecoin-project/filsnap/tree/master/examples/demo) and start hacking right away.
 
 To clone it locally:
 

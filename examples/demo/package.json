@@ -51,24 +51,25 @@
     "@preact/signals": "^1.2.1",
     "clsx": "^2.0.0",
     "dns-over-http-resolver": "^2.1.2",
-    "filsnap-adapter": "workspace:^",
-    "filsnap-adapter-react": "workspace:^",
+    "filsnap-adapter": "*",
+    "filsnap-adapter-react": "*",
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.0",
-    "metamask-testing-tools": "^1.1.6",
     "preact": "^10.17.1",
     "react-hook-form": "^7.46.1",
-    "viem": "^1.10.9",
-    "wagmi": "^1.4.1",
+    "viem": "^1.10.14",
+    "wagmi": "^1.4.2",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.17",
-    "@playwright/test": "^1.37.1",
+    "@babel/core": "^7.22.20",
     "@preact/preset-vite": "^2.5.0",
-    "@types/node": "^20.6.0",
+    "@types/node": "^20.6.2",
+    "hd-scripts": "^8.1.2",
     "tiny-git-rev-sync": "^0.1.0",
-    "vite": "^4.4.9"
+    "typescript": "5.2.2",
+    "vite": "^4.4.9",
+    "wireit": "^0.14.0"
   },
   "eslintConfig": {
     "extends": [

@@ -8,9 +8,9 @@
   "private": true,
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
-    "build": "wireit",
-    "dev": "wireit",
-    "serve": "wireit"
+    "build": "vite build --force",
+    "dev": "vite preview --port 3000",
+    "serve": "vite --force"
   },
   "wireit": {
     "build": {
@@ -46,18 +46,19 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "filsnap-adapter": "workspace:^",
+    "filsnap-adapter": "*",
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.0",
     "prettier": "3.0.3",
-    "viem": "^1.10.9"
+    "viem": "^1.10.14"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.17",
-    "@playwright/test": "^1.37.1",
-    "@preact/preset-vite": "^2.5.0",
-    "@types/node": "^20.6.0",
-    "vite": "^4.4.9"
+    "@babel/core": "^7.22.20",
+    "@types/node": "^20.6.2",
+    "hd-scripts": "^8.1.2",
+    "typescript": "5.2.2",
+    "vite": "^4.4.9",
+    "wireit": "^0.14.0"
   },
   "eslintConfig": {
     "extends": [
@@ -74,22 +75,8 @@
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "env": {
-      "mocha": true
-    },
     "ignorePatterns": [
       "dist"
-    ]
-  },
-  "depcheck": {
-    "specials": [
-      "bin"
-    ],
-    "ignores": [
-      "@types/*",
-      "@acab/reset.css",
-      "water.css",
-      "@preact/signals"
     ]
   }
 }
