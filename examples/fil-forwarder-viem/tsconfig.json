@@ -1,16 +1,27 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["ESNext", "DOM"],
-    "emitDeclarationOnly": true,
+    "target": "ES2022",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    // Type Checking
+    "strict": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    // Advanced
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "types": ["vite/client"],
     "allowImportingTsExtensions": true
   },
-  "references": [
-    {
-      "path": "../../packages/adapter"
-    }
-  ],
   "exclude": ["node_modules", "dist", "out"]
 }

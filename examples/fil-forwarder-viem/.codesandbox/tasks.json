@@ -14,10 +14,6 @@
       "name": "Run Dev Server",
       "command": "pnpm dev",
       "runAtStart": true
-    },
-    "test": {
-      "name": "Run Tests",
-      "command": "pnpm test"
     }
   }
 }
