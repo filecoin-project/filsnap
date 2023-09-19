@@ -54,8 +54,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
-    "@playwright/test": "^1.38.0",
-    "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.6.2",
     "hd-scripts": "^8.1.2",
     "typescript": "5.2.2",
@@ -77,22 +75,8 @@
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "env": {
-      "mocha": true
-    },
     "ignorePatterns": [
       "dist"
-    ]
-  },
-  "depcheck": {
-    "specials": [
-      "bin"
-    ],
-    "ignores": [
-      "@types/*",
-      "@acab/reset.css",
-      "water.css",
-      "@preact/signals"
     ]
   }
 }
