@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "fil-forwarder-viem",
   "version": "1.0.0",
   "description": "",
   "author": "Hugo Dias <hugomrdias@gmail.com> (hugodias.me)",
@@ -62,7 +62,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "../../node_modules/hd-scripts/eslint/preact.js"
+      "./node_modules/hd-scripts/eslint/preact.js"
     ],
     "rules": {
       "@typescript-eslint/explicit-function-return-type": "off",

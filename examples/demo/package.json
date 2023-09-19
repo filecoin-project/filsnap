@@ -66,6 +66,7 @@
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.6.2",
     "hd-scripts": "^8.1.2",
+    "react": "^18.2.0",
     "tiny-git-rev-sync": "^0.1.0",
     "typescript": "5.2.2",
     "vite": "^4.4.9",
@@ -73,7 +74,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "../../node_modules/hd-scripts/eslint/preact.js"
+      "./node_modules/hd-scripts/eslint/preact.js"
     ],
     "rules": {
       "@typescript-eslint/explicit-function-return-type": "off",

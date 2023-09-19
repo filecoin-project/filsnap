@@ -12,8 +12,12 @@
     },
     "dev": {
       "name": "Run Dev Server",
-      "command": "pnpm dev",
+      "command": "pnpm exec vite --force",
       "runAtStart": true
+    },
+    "lint": {
+      "name": "Lint Code",
+      "command": "pnpm run lint"
     }
   }
 }
