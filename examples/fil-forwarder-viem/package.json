@@ -53,7 +53,7 @@
     "viem": "^1.10.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.17",
+    "@babel/core": "^7.22.20",
     "@playwright/test": "^1.37.1",
     "@preact/preset-vite": "^2.5.0",
     "@types/node": "^20.6.0",
