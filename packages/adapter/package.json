@@ -53,8 +53,8 @@
     "iso-filecoin": "^3.0.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.37.1",
-    "@types/node": "^20.6.0",
+    "@playwright/test": "^1.38.0",
+    "@types/node": "^20.6.2",
     "metamask-testing-tools": "^1.1.6",
     "typescript": "5.2.2"
   },
