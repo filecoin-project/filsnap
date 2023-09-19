@@ -31,6 +31,7 @@ fixture.test(
 )
 
 fixture = createFixture({
+  isolated: true,
   download: {
     flask: true,
   },

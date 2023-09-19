@@ -12,6 +12,7 @@ const { test, expect } = createFixture({
   },
   snap: {
     id: 'local:http://localhost:8081',
+    version: '*',
   },
 })
 
