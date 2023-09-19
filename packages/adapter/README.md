@@ -7,7 +7,7 @@
 
 > Adapter for [Filsnap](../snap/)
 
-Exposes a simple API to interact the snap from a dapp and also Fil Forwarder contract metadata.
+Exposes a simple API to interact with the snap from a dapp and also Fil Forwarder contract metadata.
 
 ## Installation
 
