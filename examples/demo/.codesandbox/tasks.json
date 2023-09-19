@@ -1,0 +1,23 @@
+{
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "setupTasks": ["pnpm install"],
+  "tasks": {
+    "install-dependencies": {
+      "name": "Install Dependencies",
+      "command": "pnpm install",
+      "restartOn": {
+        "files": ["package.json", "pnpm-lock.yaml"],
+        "branch": true
+      }
+    },
+    "dev": {
+      "name": "Run Dev Server",
+      "command": "pnpm exec vite --force",
+      "runAtStart": true
+    },
+    "lint": {
+      "name": "Lint Code",
+      "command": "pnpm run lint"
+    }
+  }
+}
