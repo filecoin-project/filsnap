@@ -45,7 +45,7 @@ export class State {
       params: { operation: 'get' },
     })) as unknown as Record<string, SnapConfig> | null
 
-    if (state == null || state[origin] == null) {
+    if (state?.[origin] == null) {
       return false
     }
 
@@ -68,7 +68,7 @@ export class State {
       params: { operation: 'get' },
     })) as unknown as Record<string, SnapConfig> | null
 
-    if (state == null || state[origin] == null) {
+    if (state?.[origin] == null) {
       return false
     }
 
