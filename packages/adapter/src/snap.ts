@@ -28,7 +28,7 @@ export class FilsnapAdapter {
    * Check if Metamask has Snaps API
    */
   static async hasSnaps(): Promise<boolean> {
-    if (window.ethereum == null || !window.ethereum.isMetaMask) {
+    if (!window.ethereum?.isMetaMask) {
       return false
     }
 
@@ -61,7 +61,7 @@ export class FilsnapAdapter {
       method: 'wallet_getSnaps',
     })
 
-    if (snaps == null || snaps[snapId] == null) {
+    if (snaps?.[snapId] == null) {
       return false
     }
 
@@ -110,7 +110,7 @@ export class FilsnapAdapter {
       },
     })
 
-    if (snaps == null || snaps[snapId] == null) {
+    if (snaps?.[snapId] == null) {
       throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
     }
 

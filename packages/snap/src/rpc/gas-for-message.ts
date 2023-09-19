@@ -84,7 +84,7 @@ export async function getGasForMessage(
 
   const { error, result } = await rpc.gasEstimate({
     msg,
-    maxFee: maxFee == null ? DEFAULT_MAX_FEE : maxFee,
+    maxFee: maxFee ?? DEFAULT_MAX_FEE,
   })
 
   if (error != null) {
