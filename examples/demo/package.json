@@ -81,9 +81,6 @@
       "jsdoc/require-returns": "off",
       "unicorn/no-null": "off"
     },
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
     "env": {
       "mocha": true
     },
