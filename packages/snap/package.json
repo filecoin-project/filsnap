@@ -79,7 +79,7 @@
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-ui": "^1.0.2",
     "iso-base": "^2.0.1",
-    "iso-filecoin": "^3.0.0",
+    "iso-filecoin": "^3.0.1",
     "merge-options": "^3.0.4",
     "viem": "^1.11.1",
     "zod": "^3.22.2"
@@ -113,9 +113,6 @@
         "error",
         "never"
       ]
-    },
-    "parserOptions": {
-      "project": "./tsconfig.json"
     },
     "env": {
       "mocha": true

@@ -1,3 +1,4 @@
+// @ts-expect-error - no types for this package
 import merge from 'merge-options'
 import { copyable, panel, text } from '@metamask/snaps-ui'
 import { snapConfig } from '../schemas'

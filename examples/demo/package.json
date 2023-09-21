@@ -54,7 +54,7 @@
     "filsnap-adapter": "*",
     "filsnap-adapter-react": "*",
     "iso-base": "^2.0.1",
-    "iso-filecoin": "^3.0.0",
+    "iso-filecoin": "^3.0.1",
     "preact": "^10.17.1",
     "react-hook-form": "^7.46.2",
     "viem": "^1.11.1",

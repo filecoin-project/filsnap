@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "filsnap": "workspace:^",
-    "iso-filecoin": "^3.0.0"
+    "iso-filecoin": "^3.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.38.0",
