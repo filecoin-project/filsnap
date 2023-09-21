@@ -72,9 +72,6 @@
       "no-alert": "off",
       "no-console": "off"
     },
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
     "ignorePatterns": [
       "dist"
     ]
