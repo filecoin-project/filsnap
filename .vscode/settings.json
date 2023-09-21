@@ -1,0 +1,9 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.format.enable": false,
+  "typescript.preferences.importModuleSpecifierEnding": "auto",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
