@@ -73,9 +73,6 @@
         "never"
       ]
     },
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
     "ignorePatterns": [
       "dist"
     ]
