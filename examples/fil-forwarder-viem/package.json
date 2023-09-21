@@ -50,11 +50,11 @@
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.0",
     "prettier": "3.0.3",
-    "viem": "^1.10.14"
+    "viem": "^1.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
-    "@types/node": "^20.6.2",
+    "@types/node": "^20.6.3",
     "hd-scripts": "^8.1.2",
     "typescript": "5.2.2",
     "vite": "^4.4.9",
