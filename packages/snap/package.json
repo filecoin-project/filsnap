@@ -81,7 +81,7 @@
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.1",
     "merge-options": "^3.0.4",
-    "viem": "^1.11.1",
+    "viem": "^1.12.2",
     "zod": "^3.22.2"
   },
   "devDependencies": {
