@@ -95,7 +95,7 @@
     "@rollup/plugin-terser": "^0.4.3",
     "metamask-testing-tools": "^1.1.10",
     "playwright-test": "^12.3.4",
-    "rollup": "^3.29.2",
+    "rollup": "^3.29.3",
     "typescript": "5.2.2"
   },
   "publishConfig": {
