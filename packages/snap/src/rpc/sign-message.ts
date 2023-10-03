@@ -85,6 +85,7 @@ export async function signMessage(
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
+      heading(`Request from ${ctx.origin}`),
       text(
         `Send **${Token.fromAttoFIL(message.value).toFIL().toString()} ${
           config.unit?.symbol ?? 'FIL'
@@ -164,6 +165,7 @@ export async function signMessageRaw(
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
+      heading(`Request from ${ctx.origin}`),
       text(
         `Do you want to sign this message with **Account ${accountNumber}** _${account.address.toString()}_?`
       ),
