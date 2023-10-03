@@ -87,7 +87,7 @@
   "devDependencies": {
     "@metamask/snaps-cli": "^1.0.2",
     "@metamask/snaps-rollup-plugin": "^1.0.2",
-    "@metamask/snaps-types": "^1.0.2",
+    "@metamask/snaps-types": "^2.0.0",
     "@playwright/test": "^1.38.0",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.2.1",
