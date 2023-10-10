@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.0.0...filsnap-v1.0.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* add origin data to the signature dialogs ([6ddb227](https://github.com/filecoin-project/filsnap/commit/6ddb227738ed3aa041c18131eee65a98e17acdf4))
+* change naming to Filecoin Wallet ([54c2783](https://github.com/filecoin-project/filsnap/commit/54c2783c6d0f1852c6f83a07dd38cf5f6ba5e314))
+
 ## [1.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v0.5.0...filsnap-v1.0.0) (2023-09-12)
 
 
