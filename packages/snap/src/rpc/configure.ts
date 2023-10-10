@@ -1,10 +1,10 @@
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
 import { copyable, panel, text } from '@metamask/snaps-ui'
-import { snapConfig } from '../schemas'
-import { configFromNetwork, serializeError, snapDialog } from '../utils'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
+import { snapConfig } from '../schemas'
+import { configFromNetwork, serializeError, snapDialog } from '../utils'
 import type { SnapConfig, SnapContext, SnapResponse } from '../types'
 import { getAccountSafe } from '../account'
 

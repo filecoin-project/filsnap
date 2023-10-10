@@ -1,7 +1,7 @@
 import { createFixture } from 'metamask-testing-tools'
 import {
-  type ConfigureResponse,
   type ConfigureRequest,
+  type ConfigureResponse,
 } from '../src/rpc/configure'
 import type { GetAddressResponse } from '../src/types'
 

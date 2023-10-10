@@ -53,6 +53,9 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
 
   React.useEffect(() => {
     let mounted = true
+    /**
+     * Setup the adapter
+     */
     async function setup() {
       if (mounted) {
         setError(undefined)
@@ -206,6 +209,9 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
   return React.createElement(FilsnapContext.Provider, { value }, children)
 }
 
+/**
+ * Filsnap React Hook
+ */
 export function useFilsnap() {
   const context = React.useContext(FilsnapContext)
   if (!context) {

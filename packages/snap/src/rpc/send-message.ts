@@ -1,4 +1,5 @@
 import { RPC } from 'iso-filecoin/rpc'
+import { base64pad } from 'iso-base/rfc4648'
 import type {
   MessageStatus,
   SignedMessage,
@@ -6,7 +7,6 @@ import type {
   SnapResponse,
 } from '../types'
 import { serializeError } from '../utils'
-import { base64pad } from 'iso-base/rfc4648'
 
 // Types
 export interface SendMessageRequest {

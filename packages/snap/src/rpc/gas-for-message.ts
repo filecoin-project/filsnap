@@ -1,10 +1,10 @@
 import { Schemas } from 'iso-filecoin/message'
 import { z } from 'zod'
+import * as Address from 'iso-filecoin/address'
+import { RPC } from 'iso-filecoin/rpc'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
-import * as Address from 'iso-filecoin/address'
 import { getAccountSafe } from '../account'
-import { RPC } from 'iso-filecoin/rpc'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'

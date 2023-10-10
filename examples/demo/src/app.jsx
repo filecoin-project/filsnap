@@ -1,5 +1,6 @@
 import Resolver from 'dns-over-http-resolver'
 import { useEffect, useState } from 'preact/hooks'
+import { useFilsnap } from 'filsnap-adapter-react'
 import ConnectFEVM from './components/connect-fevm.jsx'
 import Connect from './components/connect.jsx'
 import Forward from './components/forward.tsx'
@@ -7,12 +8,17 @@ import Network from './components/network.jsx'
 import Account from './components/rpc.jsx'
 import Send from './components/send.tsx'
 import SignMessage from './components/sign-message.jsx'
-import { useFilsnap } from 'filsnap-adapter-react'
 
+/**
+ * App component.
+ */
 export function App() {
   const { isConnected, snap } = useFilsnap()
   const [cid, setCid] = /** @type {typeof useState<string>} */ (useState)()
   useEffect(() => {
+    /**
+     *
+     */
     async function main() {
       try {
         if (window.location.host.includes('ipfs.dweb.link')) {

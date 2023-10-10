@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable no-nested-ternary */
+
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable unicorn/no-useless-undefined */
+
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 import { useContractWrite } from 'wagmi'
 import { useFilsnap } from 'filsnap-adapter-react'
 import { filForwarderMetadata } from 'filsnap-adapter'
+import type { JSX } from 'preact'
 
 interface Inputs {
   recipient: string
@@ -17,7 +18,7 @@ interface Inputs {
 /**
  * Send fil to an address
  */
-function Forward() {
+function Forward(): JSX.Element {
   const { account } = useFilsnap()
   const { data, isLoading, isSuccess, error, write } = useContractWrite({
     address: filForwarderMetadata.contractAddress,

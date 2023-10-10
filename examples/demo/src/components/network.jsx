@@ -1,7 +1,8 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable unicorn/no-useless-undefined */
 import { useFilsnap } from 'filsnap-adapter-react'
 
+/**
+ * Connect to the network.
+ */
 export default function Connect() {
   const { isLoading, setSnapConfig, account } = useFilsnap()
 

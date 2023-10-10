@@ -33,7 +33,7 @@ try {
     blocked: false,
   },
 }
-*/
+   */
 } catch (error) {
   console.log(error)
 }
@@ -53,7 +53,7 @@ console.log(result)
     blocked: false,
   },
 }
-*/
+ */
 ```
 
 ```js
@@ -69,7 +69,7 @@ console.log(result)
   result: '100699819802794525019',
   error: null
 }
-*/
+ */
 ```
 
 We recommend using [`filsnap-adapter`](../adapter) to interact with filsnap for a simpler interface. Check the full API documentation [here](https://filecoin-project.github.io/filsnap/).

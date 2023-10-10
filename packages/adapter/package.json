@@ -1,16 +1,16 @@
 {
   "name": "filsnap-adapter",
+  "type": "module",
   "version": "1.0.0",
   "description": "Adapter for installing Filsnap",
-  "license": "(Apache-2.0 AND MIT)",
   "author": "Protocol Labs",
-  "type": "module",
+  "license": "(Apache-2.0 AND MIT)",
+  "homepage": "https://github.com/filecoin-project/filsnap/tree/master/packages/adapter",
   "repository": {
     "type": "git",
     "url": "https://github.com/filecoin-project/filsnap.git",
     "directory": "packages/adapter"
   },
-  "homepage": "https://github.com/filecoin-project/filsnap/tree/master/packages/adapter",
   "bugs": {
     "url": "https://github.com/filecoin-project/filsnap/issues"
   },
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.38.0",
-    "@types/node": "^20.6.3",
+    "@types/node": "^20.8.4",
     "metamask-testing-tools": "^1.1.10",
     "typescript": "5.2.2"
   },

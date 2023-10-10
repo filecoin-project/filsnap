@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { copyable, divider, heading, panel, text } from '@metamask/snaps-ui'
 import { base64pad } from 'iso-base/rfc4648'
 import * as Address from 'iso-filecoin/address'
@@ -6,11 +5,11 @@ import { Message, Schemas } from 'iso-filecoin/message'
 import { Token } from 'iso-filecoin/token'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
+import { RPC } from 'iso-filecoin/rpc'
+import { parseDerivationPath } from 'iso-filecoin/utils'
 import type { SignedMessage, SnapContext, SnapResponse } from '../types'
 import { serializeError, snapDialog } from '../utils'
 import { getAccount } from '../account'
-import { RPC } from 'iso-filecoin/rpc'
-import { parseDerivationPath } from 'iso-filecoin/utils'
 
 // Schemas
 export const signMessageParams = Schemas.messagePartial.omit({

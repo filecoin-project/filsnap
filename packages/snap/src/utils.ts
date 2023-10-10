@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { SnapsGlobalObject } from '@metamask/snaps-types'
 import type { NodeType, Panel } from '@metamask/snaps-ui'
 import * as Constants from './constants'

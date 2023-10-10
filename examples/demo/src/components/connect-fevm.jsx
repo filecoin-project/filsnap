@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable unicorn/no-useless-undefined */
 import { clsx } from 'clsx'
 import { useAccount, useBalance, useConnect } from 'wagmi'
 import { filecoin, filecoinCalibration } from 'wagmi/chains'
@@ -7,6 +5,9 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { useFilsnap } from 'filsnap-adapter-react'
 import ExplorerLink from './explorer-link.jsx'
 
+/**
+ * Connect to the FEVM network.
+ */
 export default function ConnectFEVM() {
   const { account } = useFilsnap()
   const { address, isConnected, isConnecting } = useAccount()

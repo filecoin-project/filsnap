@@ -1,11 +1,11 @@
 import { render } from 'preact'
-import { App } from './app.jsx'
 import './styles/index.css'
 
 import { FilsnapProvider } from 'filsnap-adapter-react'
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { filecoin, filecoinCalibration } from 'wagmi/chains'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
+import { App } from './app.jsx'
 
 const { publicClient, webSocketPublicClient } = configureChains(
   [filecoinCalibration, filecoin],

@@ -3,8 +3,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useEffect, useState } from 'preact/hooks'
 import { useFilsnap } from 'filsnap-adapter-react'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 import { Token } from 'iso-filecoin/token'
+import type { JSX } from 'preact'
 
 interface Inputs {
   recipient: string
@@ -14,7 +15,7 @@ interface Inputs {
 /**
  * Send fil to an address
  */
-function Send() {
+function Send(): JSX.Element {
   const { isLoading, snap, account } = useFilsnap()
   const [isEstimating, setIsEstimating] = useState<boolean>(false)
   const [isSending, setIsSending] = useState<boolean>(false)
@@ -103,8 +104,7 @@ function Send() {
       <h3>Send ⨎ </h3>
       {error != null && <code data-testid="error">{error}</code>}
       <form
-        /*
-      // @ts-expect-error - preact */
+        // @ts-expect-error - preact */
         onSubmit={handleSubmit(onSubmit)}
       >
         <label for="recipient" id="recipient">
