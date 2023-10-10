@@ -1,9 +1,9 @@
 {
   "name": "root",
   "private": true,
+  "packageManager": "pnpm@8.6.1",
   "author": "Protocol Labs, Inc.",
   "license": "(Apache-2.0 AND MIT)",
-  "packageManager": "pnpm@8.6.1",
   "workspaces": [
     "packages/*"
   ],
@@ -21,11 +21,11 @@
   },
   "devDependencies": {
     "depcheck": "^1.4.6",
-    "hd-scripts": "^8.1.2",
+    "hd-scripts": "^9.0.6",
     "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
     "simple-git-hooks": "^2.9.0",
-    "typedoc": "^0.25.1",
+    "typedoc": "^0.25.2",
     "typedoc-plugin-missing-exports": "^2.1.0",
     "typedoc-plugin-zod": "^1.1.0",
     "typescript": "5.2.2",
@@ -36,7 +36,15 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,yml,json,css}": "prettier --write",
-    "*.{js,ts,jsx,tsx}": "eslint --fix"
+    "*": "eslint --fix"
   },
-  "prettier": "hd-scripts/prettier.config.js"
+  "prettier": "hd-scripts/prettier.config.js",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/hd-scripts/eslint/index.js"
+    ],
+    "ignorePatterns": [
+      "docs"
+    ]
+  }
 }

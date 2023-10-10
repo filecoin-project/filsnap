@@ -1,14 +1,15 @@
 {
   "name": "filsnap",
+  "type": "module",
   "version": "1.0.0",
   "description": "Connect to Filecoin dapps using Metamask. Manage Filecoin accounts, send FIL to Native and FEVM accounts and enable FEVM transaction insights.",
-  "license": "(Apache-2.0 AND MIT)",
   "author": "Protocol Labs",
+  "license": "(Apache-2.0 AND MIT)",
+  "homepage": "https://github.com/filecoin-project/filsnap/tree/master/packages/snap",
   "repository": {
     "type": "git",
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
-  "homepage": "https://github.com/filecoin-project/filsnap/tree/master/packages/snap",
   "bugs": {
     "url": "https://github.com/filecoin-project/filsnap/issues"
   },
@@ -21,13 +22,6 @@
     "plugin",
     "fevm"
   ],
-  "files": [
-    "dist",
-    "snap.manifest.json",
-    "filecoin-logo.svg"
-  ],
-  "type": "module",
-  "main": "dist/src/index.js",
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
@@ -38,6 +32,7 @@
       "default": "./dist/src/filforwarder.js"
     }
   },
+  "main": "dist/src/index.js",
   "typesVersions": {
     "*": {
       "filforwarder": [
@@ -45,8 +40,13 @@
       ]
     }
   },
+  "files": [
+    "dist",
+    "snap.manifest.json",
+    "filecoin-logo.svg"
+  ],
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && eslint . && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
     "test": "playwright test",
     "build": "wireit",
     "serve": "wireit"
@@ -77,25 +77,25 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^9.0.0",
-    "@metamask/snaps-ui": "^1.0.2",
+    "@metamask/snaps-ui": "^3.0.0",
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.1",
     "merge-options": "^3.0.4",
-    "viem": "^1.11.1",
-    "zod": "^3.22.2"
+    "viem": "^1.16.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "^1.0.2",
-    "@metamask/snaps-rollup-plugin": "^1.0.2",
-    "@metamask/snaps-types": "^1.0.2",
+    "@metamask/snaps-cli": "^3.0.0",
+    "@metamask/snaps-rollup-plugin": "^3.0.0",
+    "@metamask/snaps-types": "^3.0.0",
     "@playwright/test": "^1.38.0",
-    "@rollup/plugin-commonjs": "^25.0.4",
-    "@rollup/plugin-node-resolve": "^15.2.1",
-    "@rollup/plugin-sucrase": "^5.0.1",
-    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-sucrase": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "metamask-testing-tools": "^1.1.10",
     "playwright-test": "^12.3.4",
-    "rollup": "^3.29.2",
+    "rollup": "^4.0.2",
     "typescript": "5.2.2"
   },
   "publishConfig": {
@@ -120,7 +120,8 @@
     "ignorePatterns": [
       "dist",
       "out",
-      "snap.config.cjs"
+      "snap.config.cjs",
+      ".wireit"
     ]
   },
   "depcheck": {

@@ -1,7 +1,7 @@
+import { RPC } from 'iso-filecoin/rpc'
 import { getAccountSafe } from '../account'
 import type { AccountInfo, SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
-import { RPC } from 'iso-filecoin/rpc'
 
 // Types
 export type GetAccountInfoResponse = SnapResponse<AccountInfo>

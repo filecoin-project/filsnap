@@ -1,6 +1,6 @@
-import { renderHook, waitFor, cleanup } from '@testing-library/react'
 import assert from 'assert'
-import { useFilsnap, FilsnapProvider } from '../src/index.js'
+import { cleanup, renderHook, waitFor } from '@testing-library/react'
+import { FilsnapProvider, useFilsnap } from '../src/index.js'
 
 beforeEach(() => {
   cleanup()

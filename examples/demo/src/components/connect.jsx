@@ -1,10 +1,11 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable unicorn/no-useless-undefined */
 import { useFilsnap } from 'filsnap-adapter-react'
 import { Token } from 'iso-filecoin/token'
 import { clsx } from 'clsx'
 import ExplorerLink from './explorer-link.jsx'
 
+/**
+ * Connect to the network.
+ */
 export default function Connect() {
   const { isLoading, hasFlask, isConnected, connect, account, error } =
     useFilsnap()

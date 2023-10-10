@@ -1,11 +1,13 @@
 {
   "name": "fil-forwarder-viem",
+  "type": "module",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "author": "Hugo Dias <hugomrdias@gmail.com> (hugodias.me)",
+  "license": "MIT",
+  "keywords": [],
   "main": "src/main.jsx",
-  "type": "module",
-  "private": true,
   "scripts": {
     "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
     "build": "vite build --force",
@@ -43,21 +45,19 @@
       "service": true
     }
   },
-  "keywords": [],
-  "license": "MIT",
   "dependencies": {
     "filsnap-adapter": "*",
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.1",
     "prettier": "3.0.3",
-    "viem": "^1.11.1"
+    "viem": "^1.16.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
-    "@types/node": "^20.6.3",
-    "hd-scripts": "^8.1.2",
+    "@types/node": "^20.8.4",
+    "hd-scripts": "^9.0.6",
     "typescript": "5.2.2",
-    "vite": "^4.4.9",
+    "vite": "^4.4.11",
     "wireit": "^0.14.0"
   },
   "eslintConfig": {

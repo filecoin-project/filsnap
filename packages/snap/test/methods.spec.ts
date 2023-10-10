@@ -2,14 +2,14 @@ import { createFixture } from 'metamask-testing-tools'
 import { type ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
 import { type GetBalanceResponse } from '../src/rpc/get-balance'
 import {
-  type SendMessageResponse,
   type SendMessageRequest,
+  type SendMessageResponse,
 } from '../src/rpc/send-message'
 import {
-  type SignMessageRawResponse,
   type SignMessageRawRequest,
-  type SignMessageResponse,
+  type SignMessageRawResponse,
   type SignMessageRequest,
+  type SignMessageResponse,
 } from '../src/rpc/sign-message'
 import { type GetAddressResponse, type GetPublicResponse } from '../src/types'
 

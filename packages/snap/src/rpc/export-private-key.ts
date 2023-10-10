@@ -1,8 +1,8 @@
-import { copyable, panel, text, divider } from '@metamask/snaps-ui'
-import type { SnapContext, SnapResponse } from '../types'
-import { serializeError, snapDialog } from '../utils'
+import { copyable, divider, panel, text } from '@metamask/snaps-ui'
 import { base64pad } from 'iso-base/rfc4648'
 import { parseDerivationPath } from 'iso-filecoin/utils'
+import type { SnapContext, SnapResponse } from '../types'
+import { serializeError, snapDialog } from '../utils'
 import { getAccount } from '../account'
 
 // Types
