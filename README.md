@@ -39,3 +39,8 @@ Read contributing guidelines [here](.github/CONTRIBUTING.md).
 
 Dual-licensed: [MIT](./LICENSE-MIT), [Apache Software License v2](./LICENSE-APACHE), by way of the
 [Permissive License Stack](https://protocol.ai/blog/announcing-the-permissive-license-stack/).
+
+
+## Security Audits
+
+**Filsnap v1.0.0** - The FilSnap v0.5.0 was audited by [ConsenSys Diligence](https://consensys.io/diligence/) in August 2023 with a follow-up assessment of fixes conducted in October 2023, leading to the release of [filsnap-v1.0.0](https://github.com/filecoin-project/filsnap/releases/tag/filsnap-v1.0.0). The complete audit report is [available here](./audits/filsnap-audit-2023-08.pdf) in the `audits/` directory as well as on the [ConsenSys Diligence website](https://consensys.io/diligence/audits/2023/08/metamask/partner-snaps-filsnap/).
