@@ -1,1 +1,1 @@
-# filsnap-demo
+# Filecoin Wallet demo

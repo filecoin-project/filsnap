@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="theme-color" content="#484A65">
         <meta name="description" content="Demo to transfer FIL from 0x address to f1 address with viem">
-        <title>Filsnap Demo</title>
-        
+        <title>FilForwarder Example</title>
+
         <!-- Based on https://www.quackit.com/css/flexbox/tutorial/align_form_elements_with_flexbox.cfm -->
         <style>
             .wrapper {
@@ -18,18 +18,18 @@
             .form-row {
                 display: flex;
                 justify-content: flex-end;
-                padding: .5em;
+                padding: 0.5em;
             }
             .form-row > label {
-                padding: .5em 1em .5em 0;
+                padding: 0.5em 1em 0.5em 0;
                 flex: 1;
             }
             .form-row > input {
                 flex: 2;
             }
-            .form-row > input,
-            .form-row > button {
-                padding: .5em;
+            .form-row > button,
+            .form-row > input {
+                padding: 0.5em;
             }
             .form-row > button {
                 background: gray;
@@ -58,25 +58,24 @@
         </style>
     </head>
     <body>
-    <h1>Transfer FIL from 0x to f1 address</h1>
-    <form id="transfer-form">
-        <ul class="wrapper">
-            <li class="form-row">
+        <h1>Transfer FIL from 0x to f1 address</h1>
+        <form id="transfer-form">
+            <ul class="wrapper">
+                <li class="form-row">
                     <label for="amount">Amount:</label>
-                    <input type="text" id="amount" name="amount" placeholder="Enter FIL amount" />
-            </li>
-            <li class="form-row">
+                    <input type="text" id="amount" name="amount" placeholder="Enter FIL amount"/>
+                </li>
+                <li class="form-row">
                     <label for="recipient">Recipient:</label>
-                    <input type="text" id="recipient" name="recipient" placeholder="Enter the recepient's f1/t1 address" />
-            </li>
-            <li class="form-row">
+                    <input type="text" id="recipient" name="recipient" placeholder="Enter the recepient's f1/t1 address"/>
+                </li>
+                <li class="form-row">
                     <button type="submit" id="submit-button">Transfer</button>
-            </li>
-            <li class="form-row" id="tx-link">
-            </li>
-        </ul>
-    </form>
+                </li>
+                <li class="form-row" id="tx-link"></li>
+            </ul>
+        </form>
 
-    <script type="module" src="/src/main.ts"></script>
+        <script type="module" src="/src/main.ts"></script>
     </body>
 </html>

@@ -33,7 +33,7 @@ export function App() {
 
   return (
     <main class="App">
-      <h1>⨎ Filsnap</h1>
+      <h1>⨎ Filecoin Wallet</h1>
       <div class="Grid">
         <Connect />
         <Network />

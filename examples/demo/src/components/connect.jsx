@@ -14,7 +14,7 @@ export default function Connect() {
   if (!isConnected) {
     out = (
       <button data-testid="connect-snap" onClick={() => connect()}>
-        Connect Filecoin Snap
+        Connect
       </button>
     )
   }
@@ -24,7 +24,7 @@ export default function Connect() {
       <div data-testid="install-mm-flask">
         Install Metamask{' '}
         <a
-          href="https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk"
+          href="https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
           target="_blank"
           rel="noreferrer"
         >

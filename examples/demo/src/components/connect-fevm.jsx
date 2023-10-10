@@ -29,7 +29,7 @@ export default function ConnectFEVM() {
     formatUnits: 'ether',
   })
 
-  let out = <button onClick={() => connect()}>Connect to Filecoin</button>
+  let out = <button onClick={() => connect()}>Connect to Filecoin EVM</button>
   if (isConnected) {
     out = (
       <>
