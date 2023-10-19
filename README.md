@@ -1,10 +1,21 @@
 # ⨎ FilSnap Monorepo
 
-Filecoin metamask snap and related packages to enable developers to add Filecoin integration to their dapps.
+Filecoin Metamask Snap and related packages to enable developers to add Filecoin integration to their dapps.
+
+This Snap enables storage of native Filecoin private keys in Metamask's local vault, to support native Filecoin addresses (e.g. f1 addresses or t1 testnet addresses).
+
+For FEVM (Filecoin EVM) address support using Ethereum-style 0x addresses, you can also use regular Metamask directly **without** installing this Snap. 
+
+- If you're using FEVM, the Snap can also show your 0x address info and its equivalent Filecoin f410 address. (More info about 0x / f410 addresses can be found in the [Filecoin Docs - Ethereum Address Manager](https://docs.filecoin.io/smart-contracts/filecoin-evm-runtime/address-types#ethereum-address-manager).)
+
+## Resources
+
+- [Filecoin MetaMask Snap Wallet Demo](https://filsnap.fission.app/)
+- [Filecoin Metamask Snap Docs](https://filecoin-project.github.io/filsnap/)
 
 ## Packages
 
-- [filsnap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap) - Filecoin snap for metamask
+- [filsnap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap) - Filecoin snap for Metamask
 - [filsnap-adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter) - Adapter to interact with Filsnap from a dapp
 - [filsnap-adapter-react](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter-react) - React hooks to interact with Filsnap from a dapp
 
