@@ -53,7 +53,7 @@
     "viem": "^1.16.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.20",
+    "@babel/core": "^7.23.3",
     "@types/node": "^20.8.4",
     "hd-scripts": "^9.0.6",
     "typescript": "5.2.2",
