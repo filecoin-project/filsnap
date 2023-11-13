@@ -50,7 +50,7 @@
     "iso-base": "^2.0.1",
     "iso-filecoin": "^3.0.1",
     "prettier": "3.0.3",
-    "viem": "^1.16.2"
+    "viem": "^1.19.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
