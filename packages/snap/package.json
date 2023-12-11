@@ -88,7 +88,7 @@
     "@metamask/snaps-cli": "^3.0.0",
     "@metamask/snaps-rollup-plugin": "^3.0.0",
     "@metamask/snaps-types": "^3.0.0",
-    "@playwright/test": "^1.38.0",
+    "@playwright/test": "^1.40.1",
     "@rollup/plugin-commonjs": "^25.0.5",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-sucrase": "^5.0.2",
