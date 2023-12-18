@@ -69,7 +69,7 @@
     "react": "^18.2.0",
     "tiny-git-rev-sync": "^0.1.0",
     "typescript": "5.2.2",
-    "vite": "^4.4.11",
+    "vite": "^5.0.10",
     "wireit": "^0.14.0"
   },
   "eslintConfig": {
