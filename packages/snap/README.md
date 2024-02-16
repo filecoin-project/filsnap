@@ -12,9 +12,13 @@
 You can install and use filsnap using the Metamask provider.
 
 ```js
+import { getRequestProvider } from 'filsnap-adapter'
+
+const provider = await getRequestProvider()
+
 // Install filsnap
 try {
-  const result = await window.ethereum.request({
+  const result = await provider.request({
     method: 'wallet_requestSnaps',
     params: {
       'npm:filsnap': {
@@ -40,8 +44,11 @@ try {
 ```
 
 ```js
+import { getRequestProvider } from 'filsnap-adapter'
+
+const provider = await getRequestProvider()
 // Get filsnap metadata
-const result = await window.ethereum.request({ method: 'wallet_getSnaps' })
+const result = await provider.request({ method: 'wallet_getSnaps' })
 
 console.log(result)
 /**
@@ -57,8 +64,11 @@ console.log(result)
 ```
 
 ```js
+import { getRequestProvider } from 'filsnap-adapter'
+
+const provider = await getRequestProvider()
 // Get filsnap metadata
-const result = await window.ethereum.request({
+const result = await provider.request({
   method: 'wallet_invokeSnap',
   params: { snapId: 'npm:filsnap', method: 'fil_getBalance' },
 })

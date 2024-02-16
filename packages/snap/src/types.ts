@@ -89,14 +89,6 @@ export interface FilSnapMethods {
   fil_getAccountInfo: typeof getAccountInfo
 }
 
-/**
- * Provider request with filsnap methods
- *
- * @example
- * ```ts
- * const request = window.ethereum.request as RequestWithFilSnap
- * ```
- */
 export type RequestWithFilSnap = <
   T,
   Method,
