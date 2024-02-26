@@ -21,19 +21,17 @@ interface ProviderDetailEvent extends Event {
  * @returns The request provider.
  */
 export async function getRequestProvider(timeout = 1000): Promise<Provider> {
-  // timeout in milliseconds
   return await new Promise((resolve, reject) => {
-    // eslint-disable-next-line prefer-const
-    let timeoutHandle: number
-
-    const onProviderFound = (event: ProviderDetailEvent): void => {
+    const onProviderFound = (event: Event): void => {
+      // Assert the event type to ProviderDetailEvent
+      const customEvent = event as ProviderDetailEvent
       clearTimeout(timeoutHandle) // Clear the timeout on successful provider detection
-      const { rdns } = event.detail.info
+      const { rdns } = customEvent.detail.info
       switch (rdns) {
         case 'io.metamask':
         case 'io.metamask.flask':
         case 'io.metamask.mmi': {
-          resolve(event.detail.provider)
+          resolve(customEvent.detail.provider)
           break
         }
         default: {
@@ -43,12 +41,18 @@ export async function getRequestProvider(timeout = 1000): Promise<Provider> {
       }
     }
 
-    window.addEventListener('eip6963:announceProvider', onProviderFound)
+    window.addEventListener(
+      'eip6963:announceProvider',
+      onProviderFound as EventListener
+    )
 
     window.dispatchEvent(new Event('eip6963:requestProvider'))
     // Set a timeout to reject the promise if no provider is found within the specified time
-    timeoutHandle = window.setTimeout(() => {
-      window.removeEventListener('eip6963:announceProvider', onProviderFound) // Clean up event listener
+    const timeoutHandle = window.setTimeout(() => {
+      window.removeEventListener(
+        'eip6963:announceProvider',
+        onProviderFound as EventListener
+      )
       reject(new Error('Provider request timed out.'))
     }, timeout)
   })
