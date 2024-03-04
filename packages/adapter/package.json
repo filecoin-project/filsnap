@@ -50,13 +50,13 @@
   },
   "dependencies": {
     "filsnap": "workspace:^",
-    "iso-filecoin": "^3.0.1"
+    "iso-filecoin": "^4.0.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.38.0",
-    "@types/node": "^20.8.4",
-    "metamask-testing-tools": "^1.1.10",
-    "typescript": "5.2.2"
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.24",
+    "metamask-testing-tools": "^1.2.1",
+    "typescript": "5.3.3"
   },
   "publishConfig": {
     "provenance": true

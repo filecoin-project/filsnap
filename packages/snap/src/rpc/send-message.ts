@@ -1,14 +1,21 @@
 import { RPC } from 'iso-filecoin/rpc'
+import { z } from 'zod'
 import { base64pad } from 'iso-base/rfc4648'
-import type {
-  MessageStatus,
-  SignedMessage,
-  SnapContext,
-  SnapResponse,
-} from '../types'
+import { Schemas } from 'iso-filecoin/message'
+import type { MessageStatus, SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
 
+// Schemas
+export const signedMessage = z.object({
+  message: Schemas.message,
+  signature: z.object({
+    type: z.literal('SECP256K1'),
+    data: z.string(),
+  }),
+})
+
 // Types
+export type SignedMessage = z.infer<typeof signedMessage>
 export interface SendMessageRequest {
   method: 'fil_sendMessage'
   params: SignedMessage

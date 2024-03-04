@@ -9,13 +9,13 @@ on:
       - master
     paths:
       - 'packages/adapter/**'
-      - '.github/workflows/adapter.yml'
-      - 'pnpm-lock.yaml'
+      - .github/workflows/adapter.yml
+      - pnpm-lock.yaml
   pull_request:
     paths:
       - 'packages/adapter/**'
-      - '.github/workflows/adapter.yml'
-      - 'pnpm-lock.yaml'
+      - .github/workflows/adapter.yml
+      - pnpm-lock.yaml
 jobs:
   test:
     timeout-minutes: 60
@@ -24,13 +24,13 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3
         with:
-          version: 8
-      - uses: actions/setup-node@v3
+          version: latest
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: lts/*
+          cache: pnpm
       - run: pnpm install
       - run: pnpm --filter filsnap-adapter exec playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap-adapter run lint
@@ -45,23 +45,3 @@ jobs:
           name: playwright-report
           path: packages/snap/playwright-report/
           retention-days: 30
-      - name: Check for playwright-report
-        id: check_report
-        if: always()
-        uses: andstor/file-existence-action@v2
-        with:
-          files: packages/snap/playwright-report
-      - name: Add report to web3.storage
-        if: always() && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
-        uses: web3-storage/add-to-web3@v2
-        id: add_to_web3_storage
-        with:
-          path_to_add: packages/snap/playwright-report
-          web3_token: ${{ secrets.WEB3_TOKEN }}
-      - name: Add url to GITHUB_STEP_SUMMARY
-        if: always() && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
-        run: |
-          echo "
-          ### Adapter Tests failed 🤷🏻‍♂️
-            Check report and traces: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
-          " >> $GITHUB_STEP_SUMMARY

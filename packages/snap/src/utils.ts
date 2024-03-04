@@ -1,5 +1,5 @@
-import type { SnapsGlobalObject } from '@metamask/snaps-types'
-import type { NodeType, Panel } from '@metamask/snaps-ui'
+import type { NodeType, Panel, SnapsProvider } from '@metamask/snaps-sdk'
+import type { Jsonify } from 'type-fest'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
 import type { Json, Network, SnapConfig, SnapResponseError } from './types'
@@ -66,7 +66,10 @@ export function isObject(
  * @param msg - Error message
  * @param data - Error data
  */
-export function serializeError(msg: string, data?: unknown): SnapResponseError {
+export function serializeError(
+  msg: string,
+  data?: unknown
+): Jsonify<SnapResponseError> {
   const _data = isObject(data) ? serializeObject(data) : null
   // @ts-expect-error - no types
   const hasMessage = _data?.message != null && typeof _data.message === 'string'
@@ -161,7 +164,7 @@ type DialogContent =
  * @see https://docs.metamask.io/snaps/reference/rpc-api/#snap_dialog
  */
 export async function snapDialog(
-  snap: SnapsGlobalObject,
+  snap: SnapsProvider,
   params: DialogContent
 ): Promise<boolean> {
   const result = await snap.request({

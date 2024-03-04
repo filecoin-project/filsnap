@@ -11,26 +11,26 @@ on:
       metamask-tag:
         description: 'Metamask tag to download. ie. "v10.27.0"'
       metamask-seed:
-        description: 'Seed to use for Metamask'
+        description: Seed to use for Metamask
       metamask-password:
-        description: 'Password to use for Metamask'
+        description: Password to use for Metamask
       metamask-snap-id:
         description: 'Snap ID to install in Metamask. ie. "npm:filsnap"'
       metamask-snap-version:
-        description: 'Snap Version to install Metamask'
+        description: Snap Version to install Metamask
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3
         with:
-          version: 8
-      - uses: actions/setup-node@v3
+          version: latest
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: lts/*
+          cache: pnpm
       - run: pnpm install
       - run: pnpm --filter filsnap exec playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap run test
@@ -48,32 +48,12 @@ jobs:
           name: playwright-report
           path: packages/snap/playwright-report/
           retention-days: 30
-      - name: Check for playwright-report
-        id: check_report
-        if: always()
-        uses: andstor/file-existence-action@v2
-        with:
-          files: packages/snap/playwright-report
-      - name: Add report to web3.storage
-        if: always() && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
-        uses: web3-storage/add-to-web3@v2
-        id: add_to_web3_storage
-        with:
-          path_to_add: packages/snap/playwright-report
-          web3_token: ${{ secrets.WEB3_TOKEN }}
-      - name: Add url to GITHUB_STEP_SUMMARY
-        if: always() && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
-        run: |
-          echo "
-          ### Snap Tests failed 🤷🏻‍♂️
-            Check report and traces: https://w3s.link/ipfs/${{ steps.add_to_web3_storage.outputs.cid }}
-          " >> $GITHUB_STEP_SUMMARY
       - name: Notify Slack
         if: always() && github.event_name == 'schedule' && steps.check_report.outputs.files_exists == 'true' && steps.tests.outcome != 'success'
         uses: ravsamhq/notify-slack-action@v2
         with:
           status: ${{ job.status }}
-          notify_when: 'failure'
+          notify_when: failure
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: 'Filsnap tests {status_message}!'
           message_format: '{emoji} *<{workflow_url}|{workflow}>* workflow {status_message} in the <{run_url}|{job}> job.'

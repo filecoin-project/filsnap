@@ -47,30 +47,30 @@
     }
   },
   "dependencies": {
-    "@acab/reset.css": "^0.7.0",
-    "@preact/signals": "^1.2.1",
-    "clsx": "^2.0.0",
-    "dns-over-http-resolver": "^2.1.2",
+    "@acab/reset.css": "^0.8.0",
+    "@preact/signals": "^1.2.2",
+    "clsx": "^2.1.0",
+    "dns-over-http-resolver": "^3.0.2",
     "filsnap-adapter": "*",
     "filsnap-adapter-react": "*",
     "iso-base": "^2.0.1",
-    "iso-filecoin": "^3.0.1",
-    "preact": "^10.17.1",
-    "react-hook-form": "^7.46.2",
+    "iso-filecoin": "^4.0.3",
+    "preact": "^10.19.6",
+    "react-hook-form": "^7.51.0",
     "viem": "^1.16.2",
     "wagmi": "^1.4.2",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.20",
-    "@preact/preset-vite": "^2.5.0",
-    "@types/node": "^20.8.4",
+    "@babel/core": "^7.24.0",
+    "@preact/preset-vite": "^2.8.1",
+    "@types/node": "^20.11.24",
     "hd-scripts": "^9.0.6",
     "react": "^18.2.0",
     "tiny-git-rev-sync": "^0.1.0",
-    "typescript": "5.2.2",
+    "typescript": "5.3.3",
     "vite": "^4.4.11",
-    "wireit": "^0.14.0"
+    "wireit": "^0.14.4"
   },
   "eslintConfig": {
     "extends": [

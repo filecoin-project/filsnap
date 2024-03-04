@@ -1,5 +1,4 @@
-import type { SnapsGlobalObject } from '@metamask/snaps-types'
-import type { MessageObj } from 'iso-filecoin/types'
+import type { SnapsProvider } from '@metamask/snaps-sdk'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { z } from 'zod'
 import type { configure } from './rpc/configure'
@@ -20,15 +19,6 @@ export type Json = Literal | { [key: string]: Json } | Json[]
 export type SnapConfig = z.infer<typeof snapConfig>
 export type MessageStatus = z.infer<typeof messageStatus>
 export type Account = ReturnType<typeof accountFromPrivateKey>
-
-// Filecoin types
-export interface SignedMessage {
-  message: MessageObj
-  signature: {
-    type: 'SECP256K1'
-    data: string
-  }
-}
 
 // Snap types
 export interface AccountInfo {
@@ -70,7 +60,7 @@ export type SnapResponse<R> =
 
 export interface SnapContext {
   // config: SnapConfig
-  snap: SnapsGlobalObject
+  snap: SnapsProvider
   // rpc: RPC
   // account: Account
   origin: string
@@ -88,8 +78,8 @@ export type GetPublicResponse = SnapResponse<string>
  */
 export interface FilSnapMethods {
   fil_configure: typeof configure
-  fil_getAddress: (snap: SnapsGlobalObject) => Promise<GetAddressResponse>
-  fil_getPublicKey: (snap: SnapsGlobalObject) => Promise<GetPublicResponse>
+  fil_getAddress: (snap: SnapsProvider) => Promise<GetAddressResponse>
+  fil_getPublicKey: (snap: SnapsProvider) => Promise<GetPublicResponse>
   fil_getBalance: typeof getBalance
   fil_exportPrivateKey: typeof exportPrivateKey
   fil_getGasForMessage: typeof getGasForMessage

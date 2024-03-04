@@ -1,10 +1,10 @@
-import type { SnapsGlobalObject } from '@metamask/snaps-types'
+import type { SnapsProvider } from '@metamask/snaps-sdk'
 import type { SnapConfig } from './types'
 
 export class State {
-  snap: SnapsGlobalObject
+  snap: SnapsProvider
 
-  constructor(snap: SnapsGlobalObject) {
+  constructor(snap: SnapsProvider) {
     this.snap = snap
   }
 

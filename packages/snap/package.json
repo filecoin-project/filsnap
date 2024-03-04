@@ -65,7 +65,7 @@
       ]
     },
     "serve": {
-      "command": "mm-snap serve",
+      "command": "sirv --port 8081",
       "dependencies": [
         {
           "script": "build",
@@ -77,26 +77,26 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^9.0.0",
-    "@metamask/snaps-ui": "^3.0.0",
+    "@metamask/snaps-sdk": "^3.0.1",
     "iso-base": "^2.0.1",
-    "iso-filecoin": "^3.0.1",
+    "iso-filecoin": "^4.0.3",
     "merge-options": "^3.0.4",
+    "sirv-cli": "^2.0.2",
     "viem": "^1.16.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "^3.0.0",
     "@metamask/snaps-rollup-plugin": "^3.0.0",
-    "@metamask/snaps-types": "^3.0.0",
-    "@playwright/test": "^1.38.0",
-    "@rollup/plugin-commonjs": "^25.0.5",
+    "@playwright/test": "^1.42.1",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-sucrase": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.4",
-    "metamask-testing-tools": "^1.1.10",
-    "playwright-test": "^12.3.4",
-    "rollup": "^4.0.2",
-    "typescript": "5.2.2"
+    "metamask-testing-tools": "^1.2.1",
+    "playwright-test": "^14.1.1",
+    "rollup": "^4.12.0",
+    "type-fest": "^4.11.0",
+    "typescript": "5.3.3"
   },
   "publishConfig": {
     "provenance": true
@@ -132,7 +132,7 @@
       "@types/*",
       "hd-scripts",
       "assert",
-      "@metamask/snaps-cli",
+      "sirv-cli",
       "playwright-test",
       "mocha"
     ]
