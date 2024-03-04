@@ -21,6 +21,7 @@ interface ProviderDetailEvent extends Event {
  * @returns The request provider.
  */
 export async function getRequestProvider(timeout = 1000): Promise<Provider> {
+  let timeoutHandle = 0
   return await new Promise((resolve, reject) => {
     const onProviderFound = (event: Event): void => {
       // Assert the event type to ProviderDetailEvent
@@ -48,7 +49,7 @@ export async function getRequestProvider(timeout = 1000): Promise<Provider> {
 
     window.dispatchEvent(new Event('eip6963:requestProvider'))
     // Set a timeout to reject the promise if no provider is found within the specified time
-    const timeoutHandle = window.setTimeout(() => {
+    timeoutHandle = window.setTimeout(() => {
       window.removeEventListener(
         'eip6963:announceProvider',
         onProviderFound as EventListener
