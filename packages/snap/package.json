@@ -89,11 +89,9 @@
     "@metamask/snaps-rollup-plugin": "^3.0.0",
     "@playwright/test": "^1.42.1",
     "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-sucrase": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
     "metamask-testing-tools": "^1.2.1",
     "playwright-test": "^14.1.1",
     "rollup": "^4.12.0",
@@ -134,7 +132,7 @@
       "@types/*",
       "hd-scripts",
       "assert",
-      "@metamask/snaps-cli",
+      "sirv-cli",
       "playwright-test",
       "mocha"
     ]
