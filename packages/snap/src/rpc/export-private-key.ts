@@ -1,4 +1,4 @@
-import { copyable, divider, panel, text } from '@metamask/snaps-ui'
+import { copyable, divider, panel, text } from '@metamask/snaps-sdk'
 import { base64pad } from 'iso-base/rfc4648'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import type { SnapContext, SnapResponse } from '../types'

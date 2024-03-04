@@ -1,8 +1,8 @@
 import type {
   OnTransactionHandler,
   OnTransactionResponse,
-} from '@metamask/snaps-types'
-import { heading, panel, text } from '@metamask/snaps-ui'
+} from '@metamask/snaps-sdk'
+import { heading, panel, text } from '@metamask/snaps-sdk'
 import { type Hex, fromHex } from 'viem'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
@@ -62,9 +62,7 @@ function contractAddressMatches(transactionTo: string | undefined): boolean {
 // in it. This is a bug that the MetaMask team is addressing in this PR:
 // https://github.com/MetaMask/metamask-extension/pull/20267
 export const onTransaction: OnTransactionHandler = async ({
-  // @ts-expect-error - TODO: fix this
   transaction,
-  // @ts-expect-error - TODO: fix this
   chainId,
 }) => {
   if (
@@ -72,9 +70,7 @@ export const onTransaction: OnTransactionHandler = async ({
     !contractAddressMatches(transaction.to as string | undefined)
   ) {
     // Don't show any insights if the transaction is not a FIL transfer.
-    return {
-      content: null,
-    }
+    return null
   }
 
   let transferAmount

@@ -1,5 +1,7 @@
 import { Schemas } from 'iso-filecoin/message'
 import { z } from 'zod'
+import type { Jsonify } from 'type-fest'
+
 import * as Address from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
 import type { SnapContext, SnapResponse } from '../types'
@@ -42,6 +44,7 @@ export interface MessageGasEstimate {
    */
   gasPremium: string
 }
+
 export type GasForMessageResponse = SnapResponse<MessageGasEstimate>
 
 /**
@@ -53,7 +56,7 @@ export type GasForMessageResponse = SnapResponse<MessageGasEstimate>
 export async function getGasForMessage(
   ctx: SnapContext,
   params: EstimateParams
-): Promise<GasForMessageResponse> {
+): Promise<Jsonify<GasForMessageResponse>> {
   const { state } = ctx
   const config = await state.get(ctx.origin)
   if (config == null) {

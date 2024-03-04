@@ -20,16 +20,16 @@
     "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod"
   },
   "devDependencies": {
-    "depcheck": "^1.4.6",
+    "depcheck": "^1.4.7",
     "hd-scripts": "^9.0.6",
-    "lint-staged": "^14.0.1",
-    "prettier": "3.0.3",
-    "simple-git-hooks": "^2.9.0",
-    "typedoc": "^0.25.2",
-    "typedoc-plugin-missing-exports": "^2.1.0",
-    "typedoc-plugin-zod": "^1.1.0",
-    "typescript": "5.2.2",
-    "wireit": "^0.14.0"
+    "lint-staged": "^15.2.2",
+    "prettier": "3.2.5",
+    "simple-git-hooks": "^2.10.0",
+    "typedoc": "^0.25.10",
+    "typedoc-plugin-missing-exports": "^2.2.0",
+    "typedoc-plugin-zod": "^1.1.2",
+    "typescript": "5.3.3",
+    "wireit": "^0.14.4"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

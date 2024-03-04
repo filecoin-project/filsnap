@@ -1,10 +1,10 @@
-import type { OnRpcRequestHandler } from '@metamask/snaps-types'
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
 import { hex } from 'iso-base/rfc4648'
 import { configure } from './rpc/configure'
 import { exportPrivateKey } from './rpc/export-private-key'
 import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
-import { sendMessage } from './rpc/send-message'
+import { type SignedMessage, sendMessage } from './rpc/send-message'
 
 import { getAccountSafe } from './account'
 import { getAccountInfo } from './rpc/get-account'
@@ -28,9 +28,7 @@ export type {
 export { onTransaction } from './transaction-insight'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
-  // @ts-expect-error - TODO: fix this
   origin,
-  // @ts-expect-error - TODO: fix this
   request,
 }) => {
   try {
@@ -88,7 +86,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
         )
       }
       case 'fil_sendMessage': {
-        return await sendMessage(context, request.params)
+        return await sendMessage(context, request.params as SignedMessage)
       }
       case 'fil_getGasForMessage': {
         return await getGasForMessage(context, request.params as EstimateParams)

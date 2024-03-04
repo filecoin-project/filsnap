@@ -9,13 +9,13 @@ on:
       - master
     paths:
       - 'packages/snap/**'
-      - '.github/workflows/snap.yml'
-      - 'pnpm-lock.yaml'
+      - .github/workflows/snap.yml
+      - pnpm-lock.yaml
   pull_request:
     paths:
       - 'packages/snap/**'
-      - '.github/workflows/snap.yml'
-      - 'pnpm-lock.yaml'
+      - .github/workflows/snap.yml
+      - pnpm-lock.yaml
 jobs:
   test:
     timeout-minutes: 60
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'
+          cache: pnpm
       - run: pnpm install
       - run: pnpm --filter filsnap exec playwright install --with-deps chromium
       - run: pnpm -r --filter filsnap run lint

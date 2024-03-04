@@ -17,7 +17,7 @@ export default defineConfig({
     browserName: 'chromium',
   },
   webServer: {
-    command: 'pnpm run build && pnpm exec mm-snap serve',
-    url: 'http://localhost:8081',
+    command: 'pnpm run build && pnpm exec sirv --port 8081',
+    url: 'http://localhost:8081/dist/snap.js',
   },
 })

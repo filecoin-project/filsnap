@@ -1,5 +1,5 @@
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
-import { type SnapsGlobalObject } from '@metamask/snaps-types'
+import { type SnapsProvider } from '@metamask/snaps-sdk'
 import { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
@@ -12,7 +12,7 @@ import type { Account, SnapConfig } from './types'
  * @param config - Snap configuration
  */
 export async function getAccount(
-  snap: SnapsGlobalObject,
+  snap: SnapsProvider,
   config: SnapConfig
 ): Promise<Account> {
   const { derivationPath } = config
@@ -52,7 +52,7 @@ export async function getAccount(
  * @param config - Snap configuration
  */
 export async function getAccountSafe(
-  snap: SnapsGlobalObject,
+  snap: SnapsProvider,
   config: SnapConfig
 ): Promise<{ address: AddressSecp256k1 | AddressBLS; pubKey: Uint8Array }> {
   const { derivationPath } = config

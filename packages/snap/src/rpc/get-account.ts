@@ -1,4 +1,5 @@
 import { RPC } from 'iso-filecoin/rpc'
+import type { Jsonify } from 'type-fest'
 import { getAccountSafe } from '../account'
 import type { AccountInfo, SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
@@ -14,7 +15,7 @@ export type GetAccountInfoResponse = SnapResponse<AccountInfo>
  */
 export async function getAccountInfo(
   ctx: SnapContext
-): Promise<GetAccountInfoResponse> {
+): Promise<Jsonify<GetAccountInfoResponse>> {
   const config = await ctx.state.get(ctx.origin)
 
   if (config == null) {

@@ -1,6 +1,6 @@
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
-import { copyable, panel, text } from '@metamask/snaps-ui'
+import { copyable, panel, text } from '@metamask/snaps-sdk'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { snapConfig } from '../schemas'
