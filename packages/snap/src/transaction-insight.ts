@@ -64,7 +64,7 @@ function contractAddressMatches(transactionTo: string | undefined): boolean {
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
   chainId,
-}) => {
+}): Promise<OnTransactionResponse | null> => {
   if (
     !chainMatches(chainId) ||
     !contractAddressMatches(transaction.to as string | undefined)

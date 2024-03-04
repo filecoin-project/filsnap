@@ -46,6 +46,7 @@
     "filecoin-logo.svg"
   ],
   "scripts": {
+    "ts-build": "tsc --build",
     "lint": "tsc --build && eslint . && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
     "test": "playwright test",
     "build": "wireit",
