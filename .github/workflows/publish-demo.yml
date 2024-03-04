@@ -9,13 +9,13 @@ jobs:
     if: github.ref_name == 'master'
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3
         with:
-          version: 8
-      - uses: actions/setup-node@v3
+          version: latest
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: lts/*
+          cache: pnpm
       - run: pnpm install
       - run: pnpm -r --filter demo run build
         env:
@@ -24,44 +24,10 @@ jobs:
         id: fission
         with:
           machine_key: ${{ secrets.FISSION_MACHINE_KEY }}
-          workdir: 'examples/demo'
+          workdir: examples/demo
       - name: Add url to GITHUB_STEP_SUMMARY
         run: |
           echo "
           ### App URL 🌐
           https://dweb.link/ipfs/${{ steps.fission.outputs.app_cid }}
           " >> $GITHUB_STEP_SUMMARY
-  preview:
-    runs-on: ubuntu-latest
-    if: github.ref_name != 'master' && github.actor != 'dependabot[bot]'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-        with:
-          version: 8
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm -r --filter demo run build
-        env:
-          GITHUB_WORKFLOW_ID: ${{ github.run_id }}
-      - name: Add report to web3.storage
-        uses: web3-storage/add-to-web3@v2
-        id: add_to_web3_storage
-        with:
-          path_to_add: examples/demo/dist
-          web3_token: ${{ secrets.WEB3_TOKEN }}
-      - name: Add url to GITHUB_STEP_SUMMARY
-        run: |
-          echo "
-          ### Preview URL 🌐
-            ${{ steps.add_to_web3_storage.outputs.url }}
-          " >> $GITHUB_STEP_SUMMARY
-      - uses: mshick/add-pr-comment@v2
-        with:
-          message-id: 'preview-url'
-          message: |
-            ### Preview URL 🌐
-            ${{ steps.add_to_web3_storage.outputs.url }}
