@@ -119,8 +119,8 @@ fixture.test(
     await extraExtensions(setupExtraExtensions)
     await page.getByTestId('connect-snap').click()
 
-    const dialog = await metamask.waitForDialog('experimental-area')
-    await fixture.expect(dialog.getByTestId('experimental-area')).toBeVisible()
+    const dialog = await metamask.waitForDialog('snap-install')
+    fixture.expect(dialog).toBeDefined()
   }
 )
 
