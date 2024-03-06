@@ -1,5 +1,5 @@
 import { Token } from 'iso-filecoin/token'
-import { filForwarderMetadata } from 'filsnap-adapter'
+import { filForwarderMetadata, getRequestProvider } from 'filsnap-adapter'
 import {
   createPublicClient,
   createWalletClient,
@@ -29,10 +29,12 @@ async function transfer(
     throw new Error('Recipient must be a testnet address')
   }
 
+  const provider = await getRequestProvider()
+
   // RPC client for requests that needs to be signed
   const metaMaskClient = createWalletClient({
     chain: filecoinCalibration,
-    transport: custom(window.ethereum),
+    transport: custom(provider),
   })
   // RPC client for requests that that doesn't need signing
   const publicClient = createPublicClient({
