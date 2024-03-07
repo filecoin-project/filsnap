@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.1.0...filsnap-adapter-react-v0.1.1) (2024-03-06)
+
+
+### Bug Fixes
+
+* collisions with other wallet providers ([#162](https://github.com/filecoin-project/filsnap/issues/162)) ([a166ddb](https://github.com/filecoin-project/filsnap/commit/a166ddb189282b3c327dc411b57b857064765335))
+* fix metamask updates ([#163](https://github.com/filecoin-project/filsnap/issues/163)) ([4aa9642](https://github.com/filecoin-project/filsnap/commit/4aa96421f871388e3804a4f99e626bd090a46248))
+
 ## [0.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.0.3...filsnap-adapter-react-v0.1.0) (2023-09-12)
 
 
