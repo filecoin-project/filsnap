@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -60,8 +60,8 @@ importers:
         specifier: '*'
         version: link:../../packages/adapter-react
       iso-base:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^3.0.0
+        version: 3.0.0
       iso-filecoin:
         specifier: ^4.0.3
         version: 4.0.3
@@ -115,8 +115,8 @@ importers:
         specifier: '*'
         version: link:../../packages/adapter
       iso-base:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^3.0.0
+        version: 3.0.0
       iso-filecoin:
         specifier: ^4.0.3
         version: 4.0.3
@@ -220,8 +220,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       iso-base:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^3.0.0
+        version: 3.0.0
       iso-filecoin:
         specifier: ^4.0.3
         version: 4.0.3
@@ -1698,6 +1698,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -6217,6 +6218,13 @@ packages:
       bigint-mod-arith: 3.3.1
     dev: false
 
+  /iso-base@3.0.0:
+    resolution: {integrity: sha512-6+6r3X0lFZTyjE9a72KMtBcJdM7xRdyJTNBFNNrza+12w1s081lqf/Cz8zCOgl4+wM7Rj7poQX3c/aeJS/wTkQ==}
+    dependencies:
+      base-x: 4.0.0
+      bigint-mod-arith: 3.3.1
+    dev: false
+
   /iso-filecoin@4.0.3:
     resolution: {integrity: sha512-JVEHvEoDs+Gz4uEvMo9wociX5LgUBxe84rXMoRtBwwXR2kjb1CeWbEiY8BeVzKOAiucy9vmFeYMdSqbxbvO9zA==}
     dependencies:
@@ -7027,6 +7035,10 @@ packages:
     engines: {node: ^18 || >=20}
     hasBin: true
     dev: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: false
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
