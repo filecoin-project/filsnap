@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -239,8 +239,8 @@ importers:
         version: 3.22.4
     devDependencies:
       '@metamask/snaps-rollup-plugin':
-        specifier: ^3.0.0
-        version: 3.0.2(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3)
       '@playwright/test':
         specifier: ^1.42.1
         version: 1.42.1
@@ -1362,28 +1362,14 @@ packages:
       - supports-color
     dev: true
 
-  /@metamask/snaps-rollup-plugin@3.0.2(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3):
-    resolution: {integrity: sha512-mMApiJWY56iukXidYydUMDtlp0s7lJn66MMoxJTP136UFiU527/KhCTimU8Sy2fZNsZevgthGinHjkxi7cEixQ==}
+  /@metamask/snaps-rollup-plugin@4.0.1(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3):
+    resolution: {integrity: sha512-P7WMXt590aHofkc5+QmzcytA7h2pomHyPZSAKYauq2Ktqtb69KVR8o9Dasl/lhCZpwR2TCPmOKPKWXMMLcYyJw==}
     engines: {node: ^18.16 || >=20}
     dependencies:
-      '@metamask/snaps-utils': 6.1.0(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3)
+      '@metamask/snaps-utils': 7.0.1(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3)
     transitivePeerDependencies:
       - '@babel/runtime'
       - '@metamask/approval-controller'
-      - supports-color
-    dev: true
-
-  /@metamask/snaps-sdk@2.1.0:
-    resolution: {integrity: sha512-np65mEcck5Ald9Phf65ItmIz1CExi1a/wZc/6H+WLyyPwkh9R+b22CQJjpr3pFeF+JY/etulM/vCECw5Wwux3Q==}
-    engines: {node: ^18.16 || >=20}
-    dependencies:
-      '@metamask/key-tree': 9.0.0
-      '@metamask/providers': 14.0.2
-      '@metamask/rpc-errors': 6.2.1
-      '@metamask/utils': 8.3.0
-      fast-xml-parser: 4.3.5
-      superstruct: 1.0.3
-    transitivePeerDependencies:
       - supports-color
     dev: true
 
@@ -1399,37 +1385,6 @@ packages:
       superstruct: 1.0.3
     transitivePeerDependencies:
       - supports-color
-
-  /@metamask/snaps-utils@6.1.0(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3):
-    resolution: {integrity: sha512-N8aeqN2DGcqEdb90q1ps3gHLOG7X5M9/1m6Fi/F7CBrRxQGXXL2aAZotRXg3CJzu5bChFimHwiDe8dLrjcidtw==}
-    engines: {node: ^18.16 || >=20}
-    dependencies:
-      '@babel/core': 7.24.0
-      '@babel/types': 7.24.0
-      '@metamask/base-controller': 4.1.1
-      '@metamask/key-tree': 9.0.0
-      '@metamask/permission-controller': 8.0.1(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3)
-      '@metamask/rpc-errors': 6.2.1
-      '@metamask/slip44': 3.1.0
-      '@metamask/snaps-registry': 3.0.0
-      '@metamask/snaps-sdk': 2.1.0
-      '@metamask/utils': 8.3.0
-      '@noble/hashes': 1.3.3
-      '@scure/base': 1.1.5
-      chalk: 4.1.2
-      cron-parser: 4.9.0
-      fast-deep-equal: 3.1.3
-      fast-json-stable-stringify: 2.1.0
-      rfdc: 1.3.1
-      semver: 7.6.0
-      ses: 1.3.0
-      superstruct: 1.0.3
-      validate-npm-package-name: 5.0.0
-    transitivePeerDependencies:
-      - '@babel/runtime'
-      - '@metamask/approval-controller'
-      - supports-color
-    dev: true
 
   /@metamask/snaps-utils@7.0.1(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3):
     resolution: {integrity: sha512-XXDowdkd6q+fE/V3vtkZnT+/T76hpFsR5h0GPGkt0JNFsN6euI0tlFVL9CHYrjhEmWSdQW1COt6q2ebLVkg59g==}
@@ -1698,6 +1653,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -7027,6 +6983,10 @@ packages:
     engines: {node: ^18 || >=20}
     hasBin: true
     dev: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: false
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
