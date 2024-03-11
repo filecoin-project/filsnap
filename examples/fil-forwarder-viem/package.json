@@ -55,7 +55,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@types/node": "^20.11.24",
-    "hd-scripts": "^9.0.6",
+    "hd-scripts": "^9.1.0",
     "typescript": "5.3.3",
     "vite": "^4.4.11",
     "wireit": "^0.14.4"
