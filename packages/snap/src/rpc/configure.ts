@@ -1,6 +1,6 @@
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
-import { copyable, panel, text } from '@metamask/snaps-sdk'
+import { row, panel, text } from '@metamask/snaps-sdk'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { snapConfig } from '../schemas'
@@ -81,17 +81,11 @@ export async function configure(
           ctx.origin
         }**?`
       ),
-      text('Derivation Path:'),
-      copyable(derivationPath),
-      text('API:'),
-      copyable(url),
-      text('Network:'),
-      copyable(network),
-      text('Unit Decimals:'),
-      copyable(unit?.decimals.toString() ?? 'N/A'),
-      text('Unit Symbol:'),
-      copyable(unit?.symbol ?? 'N/A'),
-    ]),
+      row('Derivation Path:', text(derivationPath)),
+      row('API:', text(url)),
+      row('Network:', text(network)),
+      row('Unit Decimals:', text(unit?.decimals.toString() ?? 'N/A')),
+      row('Unit Symbol:', text(unit?.symbol ?? 'N/A')),    ]),
   })
 
   if (conf) {
