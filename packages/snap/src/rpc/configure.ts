@@ -1,6 +1,6 @@
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
-import { row, panel, text } from '@metamask/snaps-sdk'
+import { row, panel, text, heading, copyable } from '@metamask/snaps-sdk'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { snapConfig } from '../schemas'
@@ -76,11 +76,12 @@ export async function configure(
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
+      heading("Connection request"),
       text(
-        `Do you want to connect **Account ${accountNumber}** _${account.address.toString()}_ to **${
-          ctx.origin
-        }**?`
+        `**${ctx.origin}** wants to connect with your Filecoin account.`
       ),
+      text(`**Account ${accountNumber}**`),
+      copyable(`${account.address.toString()}`),
       row('Derivation Path:', text(derivationPath)),
       row('API:', text(url)),
       row('Network:', text(network)),
