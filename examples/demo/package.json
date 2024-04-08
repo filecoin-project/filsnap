@@ -64,7 +64,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@preact/preset-vite": "^2.8.1",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.12.5",
     "hd-scripts": "^9.0.6",
     "react": "^18.2.0",
     "tiny-git-rev-sync": "^0.1.0",
