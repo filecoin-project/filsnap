@@ -57,7 +57,7 @@
     "@types/node": "^20.11.24",
     "hd-scripts": "^9.0.6",
     "typescript": "5.3.3",
-    "vite": "^4.4.11",
+    "vite": "^5.2.11",
     "wireit": "^0.14.4"
   },
   "eslintConfig": {
