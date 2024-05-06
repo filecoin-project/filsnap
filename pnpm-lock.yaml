@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -88,8 +88,8 @@ importers:
         specifier: ^2.8.1
         version: 2.8.1(@babel/core@7.24.0)(preact@10.19.6)(vite@4.5.2)
       '@types/node':
-        specifier: ^20.11.24
-        version: 20.11.24
+        specifier: ^20.12.9
+        version: 20.12.9
       hd-scripts:
         specifier: ^9.0.6
         version: 9.0.6
@@ -104,7 +104,7 @@ importers:
         version: 5.3.3
       vite:
         specifier: ^4.4.11
-        version: 4.5.2(@types/node@20.11.24)
+        version: 4.5.2(@types/node@20.12.9)
       wireit:
         specifier: ^0.14.4
         version: 0.14.4
@@ -131,8 +131,8 @@ importers:
         specifier: ^7.24.0
         version: 7.24.0
       '@types/node':
-        specifier: ^20.11.24
-        version: 20.11.24
+        specifier: ^20.12.9
+        version: 20.12.9
       hd-scripts:
         specifier: ^9.0.6
         version: 9.0.6
@@ -141,7 +141,7 @@ importers:
         version: 5.3.3
       vite:
         specifier: ^4.4.11
-        version: 4.5.2(@types/node@20.11.24)
+        version: 4.5.2(@types/node@20.12.9)
       wireit:
         specifier: ^0.14.4
         version: 0.14.4
@@ -159,8 +159,8 @@ importers:
         specifier: ^1.42.1
         version: 1.42.1
       '@types/node':
-        specifier: ^20.11.24
-        version: 20.11.24
+        specifier: ^20.12.9
+        version: 20.12.9
       metamask-testing-tools:
         specifier: ^1.2.1
         version: 1.2.1(@babel/runtime@7.24.0)(@metamask/approval-controller@5.1.3)
@@ -181,8 +181,8 @@ importers:
         specifier: ^10.0.6
         version: 10.0.6
       '@types/node':
-        specifier: ^20.11.24
-        version: 20.11.24
+        specifier: ^20.12.9
+        version: 20.12.9
       '@types/react':
         specifier: ^18.2.61
         version: 18.2.62
@@ -1698,6 +1698,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -1800,7 +1801,7 @@ packages:
       magic-string: 0.30.5
       node-html-parser: 6.1.12
       resolve: 1.22.8
-      vite: 4.5.2(@types/node@20.11.24)
+      vite: 4.5.2(@types/node@20.12.9)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -1847,7 +1848,7 @@ packages:
       '@prefresh/utils': 1.2.0
       '@rollup/pluginutils': 4.2.1
       preact: 10.19.6
-      vite: 4.5.2(@types/node@20.11.24)
+      vite: 4.5.2(@types/node@20.12.9)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2351,7 +2352,7 @@ packages:
   /@types/connect@3.4.38:
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
     dependencies:
-      '@types/node': 20.11.24
+      '@types/node': 20.12.9
     dev: false
 
   /@types/debug@4.1.12:
@@ -2400,8 +2401,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: false
 
-  /@types/node@20.11.24:
-    resolution: {integrity: sha512-Kza43ewS3xoLgCEpQrsT+xRo/EJej1y0kVYGiLFE1NEODXGzTfwiC6tXTLMQskn1X4/Rjlh0MQUvx9W+L9long==}
+  /@types/node@20.12.9:
+    resolution: {integrity: sha512-o93r47yu04MHumPBCFg0bMPBMNgtMg3jzbhl7e68z50+BMHmRMGDJv13eBlUgOdc9i/uoJXGMGYLtJV4ReTXEg==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2457,7 +2458,7 @@ packages:
   /@types/ws@7.4.7:
     resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
     dependencies:
-      '@types/node': 20.11.24
+      '@types/node': 20.12.9
     dev: false
 
   /@types/yargs-parser@21.0.3:
@@ -7028,6 +7029,10 @@ packages:
     hasBin: true
     dev: true
 
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: false
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
@@ -8997,7 +9002,7 @@ packages:
       - zod
     dev: false
 
-  /vite@4.5.2(@types/node@20.11.24):
+  /vite@4.5.2(@types/node@20.12.9):
     resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -9025,7 +9030,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.11.24
+      '@types/node': 20.12.9
       esbuild: 0.18.20
       postcss: 8.4.35
       rollup: 3.29.4
