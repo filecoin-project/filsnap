@@ -1,9 +1,9 @@
 import { createFixture } from 'metamask-testing-tools'
-import { type GetAddressResponse, type GetPublicResponse } from '../src/types'
+import type { GetAddressResponse, GetPublicResponse } from '../src/types'
 
 const { test, expect } = createFixture({
   isolated: false,
-  download: {
+  downloadOptions: {
     flask: true,
   },
   snap: {

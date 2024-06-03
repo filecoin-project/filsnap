@@ -7,7 +7,7 @@ import type {
 const TARGET_ADDRESS = 't1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi'
 const { test, expect } = createFixture({
   isolated: false,
-  download: {
+  downloadOptions: {
     flask: true,
   },
   snap: {
