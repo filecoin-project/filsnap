@@ -1,8 +1,8 @@
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
-import { type SnapsProvider } from '@metamask/snaps-sdk'
-import { accountFromPrivateKey } from 'iso-filecoin/wallet'
-import { parseDerivationPath } from 'iso-filecoin/utils'
+import type { SnapsProvider } from '@metamask/snaps-sdk'
 import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
+import { parseDerivationPath } from 'iso-filecoin/utils'
+import { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { Account, SnapConfig } from './types'
 
 /**

@@ -1,5 +1,5 @@
-import * as Address from 'iso-filecoin/address'
 import { useFilsnap } from 'filsnap-adapter-react'
+import * as Address from 'iso-filecoin/address'
 
 /**
  *

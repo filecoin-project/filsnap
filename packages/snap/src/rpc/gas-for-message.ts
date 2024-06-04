@@ -1,12 +1,12 @@
 import { Schemas } from 'iso-filecoin/message'
-import { z } from 'zod'
 import type { Jsonify } from 'type-fest'
+import { z } from 'zod'
 
 import * as Address from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
+import { getAccountSafe } from '../account'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
-import { getAccountSafe } from '../account'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'

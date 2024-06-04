@@ -2,14 +2,14 @@ import { copyable, divider, heading, panel, text } from '@metamask/snaps-sdk'
 import { base64pad } from 'iso-base/rfc4648'
 import * as Address from 'iso-filecoin/address'
 import { Message, Schemas } from 'iso-filecoin/message'
+import { RPC } from 'iso-filecoin/rpc'
 import { Token } from 'iso-filecoin/token'
+import { parseDerivationPath } from 'iso-filecoin/utils'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
-import { RPC } from 'iso-filecoin/rpc'
-import { parseDerivationPath } from 'iso-filecoin/utils'
+import { getAccount } from '../account'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError, snapDialog } from '../utils'
-import { getAccount } from '../account'
 import type { SignedMessage } from './send-message'
 
 // Schemas
@@ -92,7 +92,7 @@ export async function signMessage(
         }** from Account ${accountNumber}`
       ),
       copyable(message.from),
-      text(`to`),
+      text('to'),
       copyable(message.to),
       divider(),
       heading('Details'),

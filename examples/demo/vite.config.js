@@ -1,7 +1,7 @@
 import * as child from 'child_process'
-import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import * as git from 'tiny-git-rev-sync'
+import { defineConfig } from 'vite'
 
 const commitHash = child.execSync('git rev-parse HEAD').toString()
 

@@ -47,7 +47,7 @@
   ],
   "scripts": {
     "ts-build": "tsc --build",
-    "lint": "tsc --build && eslint . && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
     "test": "playwright test",
     "build": "wireit",
     "serve": "wireit"
@@ -102,36 +102,12 @@
   "publishConfig": {
     "provenance": true
   },
-  "eslintConfig": {
-    "extends": [
-      "../../node_modules/hd-scripts/eslint/index.js"
-    ],
-    "rules": {
-      "unicorn/no-null": "off",
-      "jsdoc/require-returns": "off",
-      "@typescript-eslint/no-base-to-string": "off",
-      "import/extensions": [
-        "error",
-        "never"
-      ]
-    },
-    "env": {
-      "mocha": true
-    },
-    "ignorePatterns": [
-      "dist",
-      "out",
-      "snap.config.cjs",
-      ".wireit"
-    ]
-  },
   "depcheck": {
     "specials": [
       "bin"
     ],
     "ignores": [
       "@types/*",
-      "hd-scripts",
       "assert",
       "sirv-cli",
       "playwright-test",

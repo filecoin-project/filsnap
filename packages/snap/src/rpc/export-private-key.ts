@@ -1,9 +1,9 @@
 import { copyable, divider, panel, text } from '@metamask/snaps-sdk'
 import { base64pad } from 'iso-base/rfc4648'
 import { parseDerivationPath } from 'iso-filecoin/utils'
+import { getAccount } from '../account'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError, snapDialog } from '../utils'
-import { getAccount } from '../account'
 
 // Types
 export type ExportPrivateKeyResponse = SnapResponse<boolean>

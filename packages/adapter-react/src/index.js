@@ -17,7 +17,9 @@ const FilsnapContext =
     snap: undefined,
     connect: () => Promise.resolve(),
     account: undefined,
-    setSnapConfig: () => {},
+    setSnapConfig: () => {
+      // noop
+    },
   })
 
 /**
@@ -49,7 +51,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
   // Effects
   React.useEffect(() => {
     setIsConnected(false)
-  }, [snapConfig])
+  }, [])
 
   React.useEffect(() => {
     let mounted = true
@@ -77,7 +79,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
     return () => {
       mounted = false
     }
-  }, [])
+  }, [setError])
 
   // Callbacks
   const connect = React.useCallback(
@@ -103,7 +105,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
         setIsLoading(false)
       }
     },
-    [snapConfig, snapId, snapVersion]
+    [snapConfig, snapId, snapVersion, setSnap, setError]
   )
 
   /** @type {import('./types.js').FilsnapContext} */
@@ -215,7 +217,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
 export function useFilsnap() {
   const context = React.useContext(FilsnapContext)
   if (!context) {
-    throw new Error(`useFilsnap must be used within a FilsnapProvider.`)
+    throw new Error('useFilsnap must be used within a FilsnapProvider.')
   }
 
   return context

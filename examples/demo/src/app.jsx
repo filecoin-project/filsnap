@@ -1,6 +1,6 @@
 import Resolver from 'dns-over-http-resolver'
-import { useEffect, useState } from 'preact/hooks'
 import { useFilsnap } from 'filsnap-adapter-react'
+import { useEffect, useState } from 'preact/hooks'
 import ConnectFEVM from './components/connect-fevm.jsx'
 import Connect from './components/connect.jsx'
 import Forward from './components/forward.tsx'
@@ -31,11 +31,13 @@ export function App() {
           'TXT'
         )
         setCid(dnsRecord[0][0].replace('dnslink=/ipfs/', ''))
-      } catch {}
+      } catch {
+        // noop
+      }
     }
 
     main()
-  }, [])
+  }, [setCid])
 
   return (
     <main class="App">

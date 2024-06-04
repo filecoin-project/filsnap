@@ -1,6 +1,6 @@
+import { clsx } from 'clsx'
 import { useFilsnap } from 'filsnap-adapter-react'
 import { Token } from 'iso-filecoin/token'
-import { clsx } from 'clsx'
 import ExplorerLink from './explorer-link.jsx'
 
 /**
@@ -14,7 +14,11 @@ export default function Connect() {
 
   if (!isConnected) {
     out = (
-      <button data-testid="connect-snap" onClick={() => connect()}>
+      <button
+        type="button"
+        data-testid="connect-snap"
+        onClick={() => connect()}
+      >
         Connect
       </button>
     )
@@ -39,7 +43,7 @@ export default function Connect() {
     out = (
       <>
         <h3>Native Account</h3>
-        <div title={account.balance + ' attoFIL'}>
+        <div title={`${account.balance} attoFIL`}>
           <b>
             {account
               ? Token.fromAttoFIL(account.balance).toFIL().toFormat()

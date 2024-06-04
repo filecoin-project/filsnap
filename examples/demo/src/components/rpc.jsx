@@ -1,6 +1,6 @@
+import { useFilsnap } from 'filsnap-adapter-react'
 /* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
-import { useFilsnap } from 'filsnap-adapter-react'
 
 const Account = () => {
   const { isLoading, snap } = useFilsnap()
@@ -19,37 +19,37 @@ const Account = () => {
 
   const handleGetAddress = async () => {
     const addressResponse = await snap?.getAddress()
-    if (addressResponse && addressResponse.result) {
+    if (addressResponse?.result) {
       setAddress(addressResponse.result)
     }
-    if (addressResponse && addressResponse.error) {
+    if (addressResponse?.error) {
       setError(addressResponse.error.message)
     }
   }
 
   const handleGetBalance = async () => {
     const response = await snap?.getBalance()
-    if (response && response.result) {
+    if (response?.result) {
       setBalance(response.result)
     }
-    if (response && response.error) {
+    if (response?.error) {
       setError(response.error.message)
     }
   }
 
   const handleGetPublicKey = async () => {
     const response = await snap?.getPublicKey()
-    if (response && response.result) {
+    if (response?.result) {
       setPublicKey(response.result)
     }
-    if (response && response.error) {
+    if (response?.error) {
       setError(response.error.message)
     }
   }
 
   const handleExportPrivateKey = async () => {
     const response = await snap?.exportPrivateKey()
-    if (response && response.error) {
+    if (response?.error) {
       setError(response.error?.message)
     }
   }
@@ -60,6 +60,7 @@ const Account = () => {
       {error && <code data-testid="error">{error}</code>}
       <br />
       <button
+        type="button"
         data-testid="get-address"
         onClick={handleGetAddress}
         disabled={isLoading}
@@ -69,6 +70,7 @@ const Account = () => {
       <code data-testid="address-result">{address}</code>
       <br />
       <button
+        type="button"
         data-testid="get-balance"
         onClick={handleGetBalance}
         disabled={isLoading}
@@ -78,6 +80,7 @@ const Account = () => {
       <code data-testid="balance-result">{balance}</code>
       <br />
       <button
+        type="button"
         data-testid="get-public-key"
         onClick={handleGetPublicKey}
         disabled={isLoading}
@@ -86,12 +89,17 @@ const Account = () => {
       </button>
       <code data-testid="public-key-result">{publicKey}</code>
       <br />
-      <button data-testid="get-private-key" onClick={handleExportPrivateKey}>
+      <button
+        type="button"
+        data-testid="get-private-key"
+        onClick={handleExportPrivateKey}
+      >
         Get Private Key
       </button>
 
       <br />
       <button
+        type="button"
         data-testid="get-private-key"
         onClick={() => snap?.switchOrAddChain('testnet')}
         disabled={isLoading}

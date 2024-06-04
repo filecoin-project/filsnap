@@ -1,11 +1,11 @@
+import { useFilsnap } from 'filsnap-adapter-react'
+import { Token } from 'iso-filecoin/token'
+import type { JSX } from 'preact'
 /* eslint-disable unicorn/no-useless-undefined */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useEffect, useState } from 'preact/hooks'
-import { useFilsnap } from 'filsnap-adapter-react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { Token } from 'iso-filecoin/token'
-import type { JSX } from 'preact'
 
 interface Inputs {
   recipient: string

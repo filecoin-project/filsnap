@@ -1,8 +1,8 @@
 import { clsx } from 'clsx'
+import { useFilsnap } from 'filsnap-adapter-react'
 import { useAccount, useBalance, useConnect } from 'wagmi'
 import { filecoin, filecoinCalibration } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { useFilsnap } from 'filsnap-adapter-react'
 import ExplorerLink from './explorer-link.jsx'
 
 /**
@@ -30,7 +30,11 @@ export default function ConnectFEVM() {
     formatUnits: 'ether',
   })
 
-  let out = <button onClick={() => connect()}>Connect to Filecoin EVM</button>
+  let out = (
+    <button type="button" onClick={() => connect()}>
+      Connect to Filecoin EVM
+    </button>
+  )
   if (isConnected) {
     out = (
       <>
