@@ -1,6 +1,6 @@
-import { z } from 'zod'
 import { Schemas } from 'iso-filecoin/message'
 import { parseDerivationPath } from 'iso-filecoin/utils'
+import { z } from 'zod'
 import type { Json } from './types'
 
 const alphabet =
@@ -50,7 +50,7 @@ export const snapConfig = z.object({
 
           return true
         },
-        { message: `Invalid characters` }
+        { message: 'Invalid characters' }
       ),
   }),
   network,

@@ -1,6 +1,6 @@
+import { useFilsnap } from 'filsnap-adapter-react'
 /* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
-import { useFilsnap } from 'filsnap-adapter-react'
 
 // @ts-ignore-next-line
 const SignMessage = () => {

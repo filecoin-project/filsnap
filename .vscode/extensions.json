@@ -1,7 +1,6 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "biomejs.biome",
     "github.vscode-pull-request-github",
     "yoavbls.pretty-ts-errors"
   ]

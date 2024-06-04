@@ -10,8 +10,8 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "format": "prettier --write '**/*.{js,ts,jsx,tsx,yml,json,css}' --ignore-path .gitignore",
-    "format:check": "prettier --check '**/*.{js,ts,jsx,tsx,yml,json,css}' --ignore-path .gitignore",
+    "fix": "biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "check-staged": "biome check --no-errors-on-unmatched --files-ignore-unknown=true --staged .",
     "clean": "rm -rf docs node_modules pnpm-lock.yaml packages/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules,.wireit} examples/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules,.wireit}",
     "build": "pnpm -r --if-present run build",
     "lint": "pnpm -r --if-present run lint",
@@ -19,31 +19,17 @@
     "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.3",
+    "@hugomrdias/configs": "^0.1.7",
     "depcheck": "^1.4.7",
-    "hd-scripts": "^9.0.6",
-    "lint-staged": "^15.2.2",
-    "prettier": "3.2.5",
     "simple-git-hooks": "^2.10.0",
     "typedoc": "^0.25.10",
     "typedoc-plugin-missing-exports": "^2.2.0",
     "typedoc-plugin-zod": "^1.1.2",
-    "typescript": "5.3.3",
+    "typescript": "5.4.5",
     "wireit": "^0.14.4"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx,yml,json,css}": "prettier --write",
-    "*": "eslint --fix"
-  },
-  "prettier": "hd-scripts/prettier.config.js",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/hd-scripts/eslint/index.js"
-    ],
-    "ignorePatterns": [
-      "docs"
-    ]
+    "pre-commit": "pnpm run check-staged"
   }
 }

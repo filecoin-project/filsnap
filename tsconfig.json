@@ -1,5 +1,5 @@
 {
-  "extends": "hd-scripts/tsconfig.json",
+  "extends": "@hugomrdias/configs/tsconfig",
   "typedocOptions": {
     "entryPointStrategy": "packages",
     "entryPoints": [
@@ -7,6 +7,8 @@
       "packages/adapter",
       "packages/adapter-react"
     ],
+    "excludeExternals": true,
+    "sourceLinkExternal": true,
     "darkHighlightTheme": "github-dark",
     "navigationLinks": {
       "Github": "https://github.com/filecoin-project/filsnap"

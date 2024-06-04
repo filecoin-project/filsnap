@@ -1,15 +1,15 @@
-import { Token } from 'iso-filecoin/token'
 import { filForwarderMetadata, getRequestProvider } from 'filsnap-adapter'
+import * as Address from 'iso-filecoin/address'
+import { PROTOCOL_INDICATOR } from 'iso-filecoin/address'
+import { Token } from 'iso-filecoin/token'
 import {
+  http,
   createPublicClient,
   createWalletClient,
   custom,
   getContract,
-  http,
 } from 'viem'
 import { filecoinCalibration } from 'viem/chains'
-import * as Address from 'iso-filecoin/address'
-import { PROTOCOL_INDICATOR } from 'iso-filecoin/address'
 
 /**
  * Transfer FIL from a 0x address to an f1/t1 address.
@@ -76,24 +76,19 @@ interface FormElements extends HTMLFormControlsCollection {
   recipient: HTMLInputElement
 }
 
-// False positive
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-const form = document.querySelector('#transfer-form')! as HTMLFormElement
-const txLink = document.querySelector('#tx-link')!
-// False positive
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-const submitButton = document.querySelector(
-  '#submit-button'
-)! as HTMLButtonElement
+const form = document.querySelector('#transfer-form')
+const txLink = document.querySelector('#tx-link')
+const submitButton = document.querySelector('#submit-button')
 
-form.addEventListener('submit', (event) => {
+form?.addEventListener('submit', (event) => {
   // Prevent navigation on submit
   event.preventDefault()
 
-  const elements = form.elements as FormElements
+  const elements = form?.elements as FormElements
 
   // Get the amount to transfer from the form and parse it
-  let recipient
+
+  let recipient: Address.IAddress
   try {
     recipient = Address.from(elements.recipient.value)
   } catch (error) {
@@ -103,7 +98,7 @@ form.addEventListener('submit', (event) => {
   }
 
   // Get the amount to transfer from the form and parse it
-  let amount
+  let amount: Token
   try {
     amount = Token.fromFIL(elements.amount.value)
   } catch (error) {

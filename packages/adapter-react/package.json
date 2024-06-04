@@ -28,7 +28,7 @@
   "module": "./src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
     "test": "wireit"
   },
   "wireit": {
@@ -57,21 +57,10 @@
     "preact": "^10.19.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "5.3.3"
+    "typescript": "5.4.5"
   },
   "publishConfig": {
     "provenance": true
-  },
-  "eslintConfig": {
-    "extends": [
-      "../../node_modules/hd-scripts/eslint/preact.js"
-    ],
-    "env": {
-      "mocha": true
-    },
-    "ignorePatterns": [
-      "dist"
-    ]
   },
   "depcheck": {
     "specials": [
@@ -83,7 +72,6 @@
     ],
     "ignores": [
       "@types/*",
-      "hd-scripts",
       "assert",
       "mocha",
       "preact",

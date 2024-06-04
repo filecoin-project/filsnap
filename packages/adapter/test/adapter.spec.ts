@@ -13,6 +13,7 @@ async function setupExtraExtensions(
 ) {
   for (const [key, value] of Object.entries(data)) {
     if (key === rainbowExtensionId) {
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       const page = (value as any).page
       await page.getByTestId('create-wallet-button').click()
       await page.getByTestId('skip-button').click()
@@ -131,7 +132,7 @@ fixture = createFixture({
 })
 fixture.test(
   'should enable error when flask is not installed',
-  async ({ metamask, page, extraExtensions }) => {
+  async ({ page, extraExtensions }) => {
     await extraExtensions(setupExtraExtensions)
 
     await fixture

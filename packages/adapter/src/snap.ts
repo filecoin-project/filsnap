@@ -49,8 +49,8 @@ export class FilsnapAdapter {
    * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
    */
   static async isAvailable(
-    snapId: string = 'npm:filsnap',
-    snapVersion: string = '*'
+    snapId = 'npm:filsnap',
+    snapVersion = '*'
   ): Promise<boolean> {
     const hasSnaps = await FilsnapAdapter.hasSnaps()
     if (!hasSnaps) {
@@ -58,6 +58,7 @@ export class FilsnapAdapter {
     }
 
     const provider = await FilsnapAdapter.getProvider()
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const snaps: Record<string, any> =
       (await provider.request({ method: 'wallet_getSnaps' })) ?? {}
 
@@ -80,8 +81,8 @@ export class FilsnapAdapter {
    */
   static async connect(
     config: Parameters<FilSnapMethods['fil_configure']>[1],
-    snapId: string = 'npm:filsnap',
-    snapVersion: string = '*'
+    snapId = 'npm:filsnap',
+    snapVersion = '*'
   ): Promise<FilsnapAdapter> {
     const hasSnaps = await FilsnapAdapter.hasSnaps()
     if (!hasSnaps) {
@@ -107,6 +108,8 @@ export class FilsnapAdapter {
     }
     // @ts-expect-error - TS doesn't know that `snaps[snapId]` is not null
     const { version } = snaps[snapId]
+    // @ts-export-error - improve the provider typings
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const adapter = new FilsnapAdapter(snapId, version)
     const result = await adapter.configure(config)
 

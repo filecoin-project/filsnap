@@ -24,7 +24,7 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,ts}' && prettier --check '**/*.{js,ts,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
     "build": "wireit",
     "test": "wireit"
   },
@@ -56,26 +56,10 @@
     "@playwright/test": "^1.42.1",
     "@types/node": "^20.11.24",
     "metamask-testing-tools": "^1.2.1",
-    "typescript": "5.3.3"
+    "typescript": "5.4.5"
   },
   "publishConfig": {
     "provenance": true
-  },
-  "eslintConfig": {
-    "extends": [
-      "../../node_modules/hd-scripts/eslint/index.js"
-    ],
-    "rules": {
-      "unicorn/no-null": "off",
-      "jsdoc/require-returns": "off",
-      "import/extensions": [
-        "error",
-        "never"
-      ]
-    },
-    "ignorePatterns": [
-      "dist"
-    ]
   },
   "depcheck": {
     "specials": [
@@ -87,7 +71,6 @@
     ],
     "ignores": [
       "@types/*",
-      "hd-scripts",
       "assert",
       "@metamask/snaps-cli",
       "playwright-test"

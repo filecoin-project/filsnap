@@ -1,12 +1,9 @@
 import { createFixture } from 'metamask-testing-tools'
-import {
-  type ConfigureRequest,
-  type ConfigureResponse,
-} from '../src/rpc/configure'
+import type { ConfigureRequest, ConfigureResponse } from '../src/rpc/configure'
 
 const { test, expect } = createFixture({
   isolated: true,
-  download: {
+  downloadOptions: {
     flask: true,
   },
   snap: {

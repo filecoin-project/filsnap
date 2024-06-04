@@ -1,12 +1,12 @@
-// @ts-expect-error - no types for this package
-import merge from 'merge-options'
 import { copyable, panel, text } from '@metamask/snaps-sdk'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
-import { snapConfig } from '../schemas'
-import { configFromNetwork, serializeError, snapDialog } from '../utils'
-import type { SnapConfig, SnapContext, SnapResponse } from '../types'
+// @ts-expect-error - no types for this package
+import merge from 'merge-options'
 import { getAccountSafe } from '../account'
+import { snapConfig } from '../schemas'
+import type { SnapConfig, SnapContext, SnapResponse } from '../types'
+import { configFromNetwork, serializeError, snapDialog } from '../utils'
 
 // Types
 export type ConfigureParams = Partial<SnapConfig>

@@ -3,9 +3,9 @@ import type {
   OnTransactionResponse,
 } from '@metamask/snaps-sdk'
 import { heading, panel, text } from '@metamask/snaps-sdk'
-import { type Hex, fromHex } from 'viem'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
+import { type Hex, fromHex } from 'viem'
 import { decodeFunctionData } from 'viem'
 import { filForwarderMetadata } from './filforwarder'
 
@@ -28,13 +28,11 @@ function invalidTransferMessage(message: string): OnTransactionResponse {
 function humanReadableNetwork(chainId: string): string {
   if (chainId === filForwarderMetadata.chainIds.filecoinMainnet) {
     return 'Filecoin Mainnet'
-  } else if (
-    chainId === filForwarderMetadata.chainIds.filecoinCalibrationTestnet
-  ) {
-    return 'Filecoin Calibration Testnet'
-  } else {
-    throw new Error(`Unknown chain ID: ${chainId}`)
   }
+  if (chainId === filForwarderMetadata.chainIds.filecoinCalibrationTestnet) {
+    return 'Filecoin Calibration Testnet'
+  }
+  throw new Error(`Unknown chain ID: ${chainId}`)
 }
 
 /**
@@ -73,27 +71,27 @@ export const onTransaction: OnTransactionHandler = async ({
     return null
   }
 
-  let transferAmount
+  let transferAmount: Token
   try {
     transferAmount = new Token(fromHex(transaction.value as Hex, 'bigint'))
   } catch (error) {
     console.error(error)
     return invalidTransferMessage(
-      `Transfer amount is missing from the transaction.`
+      'Transfer amount is missing from the transaction.'
     )
   }
 
-  let recipient
+  let recipient: Address.IAddress
   try {
     const callData = decodeFunctionData({
       abi: filForwarderMetadata.abi,
       data: transaction.data as Hex,
     })
     if (callData.functionName !== 'forward') {
-      return invalidTransferMessage(`Transaction tries to call wrong method.`)
+      return invalidTransferMessage('Transaction tries to call wrong method.')
     }
     if (callData.args === undefined || callData.args.length !== 1) {
-      return invalidTransferMessage(`Missing recipient in transaction.`)
+      return invalidTransferMessage('Missing recipient in transaction.')
     }
 
     const isMainNet = chainId === filForwarderMetadata.chainIds.filecoinMainnet
@@ -103,7 +101,7 @@ export const onTransaction: OnTransactionHandler = async ({
     )
   } catch (error) {
     console.error(error)
-    return invalidTransferMessage(`Transaction recipient is invalid.`)
+    return invalidTransferMessage('Transaction recipient is invalid.')
   }
 
   return {

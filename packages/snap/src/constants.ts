@@ -18,7 +18,7 @@ export const testnetConfig: SnapConfig = {
   network: 'testnet',
   rpc: {
     token: '',
-    url: `https://api.calibration.node.glif.io`,
+    url: 'https://api.calibration.node.glif.io',
   },
   unit: {
     decimals: 18,

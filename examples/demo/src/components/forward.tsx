@@ -2,13 +2,13 @@
 
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
+import { filForwarderMetadata } from 'filsnap-adapter'
+import { useFilsnap } from 'filsnap-adapter-react'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
+import type { JSX } from 'preact'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { useContractWrite } from 'wagmi'
-import { useFilsnap } from 'filsnap-adapter-react'
-import { filForwarderMetadata } from 'filsnap-adapter'
-import type { JSX } from 'preact'
 
 interface Inputs {
   recipient: string
@@ -34,7 +34,7 @@ function Forward(): JSX.Element {
     formState: { errors },
   } = useForm<Inputs>()
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (write != null) {
       const { recipient, amount } = data
       write({

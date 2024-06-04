@@ -9,7 +9,7 @@
   "keywords": [],
   "main": "src/main.jsx",
   "scripts": {
-    "lint": "tsc --build && eslint '**/*.{js,jsx,ts,tsx}' && prettier --check '**/*.{js,jsx,ts,tsx,yml,json}' --ignore-path ../../.gitignore",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
     "build": "vite build --force",
     "dev": "vite --force",
     "serve": "vite preview --port 3000"
@@ -49,31 +49,15 @@
     "filsnap-adapter": "*",
     "iso-base": "^2.0.1",
     "iso-filecoin": "^4.0.3",
-    "prettier": "3.2.5",
     "viem": "^1.16.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
+    "@biomejs/biome": "^1.7.3",
+    "@hugomrdias/configs": "^0.1.7",
     "@types/node": "^20.11.24",
-    "hd-scripts": "^9.0.6",
-    "typescript": "5.3.3",
+    "typescript": "5.4.5",
     "vite": "^4.4.11",
     "wireit": "^0.14.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/hd-scripts/eslint/preact.js"
-    ],
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "jsdoc/require-returns": "off",
-      "unicorn/no-null": "off",
-      "no-alert": "off",
-      "no-console": "off"
-    },
-    "ignorePatterns": [
-      "dist"
-    ]
   }
 }
