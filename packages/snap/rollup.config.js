@@ -23,7 +23,6 @@ export default defineConfig({
       exclude: ['test/**/*'],
       transforms: ['typescript'],
     }),
-    // @ts-ignore
     snaps.default({
       eval: true,
       stripComments: true,
