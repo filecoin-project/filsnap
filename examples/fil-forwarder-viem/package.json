@@ -47,17 +47,17 @@
   },
   "dependencies": {
     "filsnap-adapter": "*",
-    "iso-base": "^2.0.1",
+    "iso-base": "^4.0.0",
     "iso-filecoin": "^4.0.3",
-    "viem": "^1.16.2"
+    "viem": "^2.13.5"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@biomejs/biome": "^1.7.3",
     "@hugomrdias/configs": "^0.1.7",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.14.1",
     "typescript": "5.4.5",
-    "vite": "^4.4.11",
+    "vite": "^5.2.12",
     "wireit": "^0.14.4"
   }
 }
