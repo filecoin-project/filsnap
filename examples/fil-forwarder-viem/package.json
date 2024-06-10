@@ -52,7 +52,7 @@
     "viem": "^2.13.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
+    "@babel/core": "^7.24.7",
     "@biomejs/biome": "^1.7.3",
     "@hugomrdias/configs": "^0.1.7",
     "@types/node": "^20.14.1",
