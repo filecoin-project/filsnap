@@ -108,6 +108,7 @@
       "bin"
     ],
     "ignores": [
+      "@metamask/approval-controller",
       "@types/*",
       "assert",
       "sirv-cli",
