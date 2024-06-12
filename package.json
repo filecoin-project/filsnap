@@ -10,8 +10,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "fix": "biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true .",
-    "check-staged": "biome check --no-errors-on-unmatched --files-ignore-unknown=true --staged .",
+    "fix": "biome check --fix --no-errors-on-unmatched --files-ignore-unknown=true",
     "clean": "rm -rf docs node_modules pnpm-lock.yaml packages/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules,.wireit} examples/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules,.wireit}",
     "build": "pnpm -r --if-present run build",
     "lint": "pnpm -r --if-present run lint",
@@ -19,8 +18,8 @@
     "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.7.3",
-    "@hugomrdias/configs": "^0.1.7",
+    "@biomejs/biome": "^1.8.1",
+    "@hugomrdias/configs": "^0.1.8",
     "depcheck": "^1.4.7",
     "simple-git-hooks": "^2.10.0",
     "typedoc": "^0.25.10",
@@ -30,6 +29,6 @@
     "wireit": "^0.14.4"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm run check-staged"
+    "pre-commit": "pnpm exec biome check --no-errors-on-unmatched --files-ignore-unknown=true --staged"
   }
 }
