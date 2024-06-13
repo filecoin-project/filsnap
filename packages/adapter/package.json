@@ -67,7 +67,8 @@
       "@types/*",
       "assert",
       "@metamask/snaps-cli",
-      "playwright-test"
+      "playwright-test",
+      "@metamask/approval-controller"
     ]
   }
 }
