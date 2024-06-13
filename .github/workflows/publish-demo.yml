@@ -2,7 +2,8 @@ name: Publish Demo
 env:
   CI: true
   FORCE_COLOR: 1
-on: [push]
+on: 
+  workflow_dispatch:
 jobs:
   publish:
     runs-on: ubuntu-latest
