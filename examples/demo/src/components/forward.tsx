@@ -8,7 +8,7 @@ import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
 import type { JSX } from 'preact'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { useContractWrite } from 'wagmi'
+import { useWriteContract } from 'wagmi'
 
 interface Inputs {
   recipient: string
@@ -20,12 +20,7 @@ interface Inputs {
  */
 function Forward(): JSX.Element {
   const { account } = useFilsnap()
-  const { data, isLoading, isSuccess, error, write } = useContractWrite({
-    address: filForwarderMetadata.contractAddress,
-    abi: filForwarderMetadata.abi,
-    functionName: 'forward',
-    value: 0n,
-  })
+  const { data, isPending, writeContract, error } = useWriteContract()
 
   const {
     register,
@@ -35,9 +30,12 @@ function Forward(): JSX.Element {
   } = useForm<Inputs>()
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    if (write != null) {
+    if (writeContract != null) {
       const { recipient, amount } = data
-      write({
+      writeContract({
+        address: filForwarderMetadata.contractAddress,
+        abi: filForwarderMetadata.abi,
+        functionName: 'forward',
         value: Token.fromFIL(amount).toBigInt(),
         args: [Address.from(recipient).toContractDestination()],
       })
@@ -48,7 +46,7 @@ function Forward(): JSX.Element {
   return (
     <div class="Box Cell100">
       <h3>Forward ⨎ </h3>
-      {error != null && <code data-testid="error">{error.message}</code>}
+      {error && <code data-testid="error">{error.message}</code>}
       <form
         /*
       // @ts-expect-error - preact */
@@ -59,7 +57,7 @@ function Forward(): JSX.Element {
         </label>
         <input
           style={{ width: '100%' }}
-          disabled={isLoading}
+          disabled={isPending}
           placeholder="f0, f1, f2, f3, f4"
           {...register('recipient', { required: true })}
         />
@@ -72,7 +70,7 @@ function Forward(): JSX.Element {
           Amount
         </label>
         <input
-          disabled={isLoading}
+          disabled={isPending}
           placeholder="FIL"
           {...register('amount', { required: true })}
         />
@@ -82,12 +80,12 @@ function Forward(): JSX.Element {
           </div>
         )}
 
-        <button type="submit" data-testid="send-tx" disabled={isLoading}>
-          {isLoading ? 'Forwarding...' : 'Forward'}
+        <button type="submit" data-testid="send-tx" disabled={isPending}>
+          {isPending ? 'Forwarding...' : 'Forward'}
         </button>
       </form>
 
-      {isSuccess && data && (
+      {data && (
         <small>
           {' '}
           Tx:{' '}
@@ -95,13 +93,13 @@ function Forward(): JSX.Element {
             target="_blank"
             rel="noreferrer"
             title="View on Glif explorer"
-            href={`https://explorer.glif.io/tx/${data?.hash}/?network=${
+            href={`https://explorer.glif.io/tx/${data}/?network=${
               account?.config.network === 'mainnet'
                 ? 'mainnet'
                 : 'calibrationnet'
             }`}
           >
-            {data?.hash}
+            {data}
           </a>
         </small>
       )}

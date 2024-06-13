@@ -1,28 +1,13 @@
-import { render } from 'preact'
 import './styles/index.css'
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { FilsnapProvider } from 'filsnap-adapter-react'
-import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { filecoin, filecoinCalibration } from 'wagmi/chains'
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
+import { render } from 'preact'
+
+import { WagmiProvider } from 'wagmi'
 import { App } from './app.jsx'
+import { configWagmi } from './config.js'
 
-const { publicClient, webSocketPublicClient } = configureChains(
-  [filecoinCalibration, filecoin],
-  [
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        http: chain.rpcUrls.default.http[0],
-      }),
-    }),
-  ]
-)
-
-const configWagmi = createConfig({
-  autoConnect: true,
-  publicClient,
-  webSocketPublicClient,
-})
+const queryClient = new QueryClient()
 
 /** @type {Partial<import('filsnap-adapter-react').FilsnapProviderProps['config']>} */
 const config = {
@@ -37,11 +22,13 @@ const appEl = document.getElementById('app')
 
 if (appEl) {
   render(
-    <WagmiConfig config={configWagmi}>
-      <FilsnapProvider snapId={SNAP_ID} snapVersion=">=0.5.0" config={config}>
-        <App />
-      </FilsnapProvider>
-    </WagmiConfig>,
+    <WagmiProvider config={configWagmi}>
+      <QueryClientProvider client={queryClient}>
+        <FilsnapProvider snapId={SNAP_ID} snapVersion=">=0.5.0" config={config}>
+          <App />
+        </FilsnapProvider>
+      </QueryClientProvider>
+    </WagmiProvider>,
     appEl
   )
 }

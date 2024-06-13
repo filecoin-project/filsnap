@@ -9,14 +9,14 @@
   "keywords": [],
   "main": "src/main.jsx",
   "scripts": {
-    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "build": "wireit",
     "dev": "wireit",
     "serve": "wireit"
   },
   "wireit": {
     "build": {
-      "command": "vite build --force",
+      "command": "vite build",
       "dependencies": [
         "../../packages/adapter:build"
       ],
@@ -38,7 +38,7 @@
       "service": true
     },
     "dev": {
-      "command": "vite --force",
+      "command": "vite",
       "dependencies": [
         "../../packages/adapter:build",
         "../../packages/snap:serve"
@@ -49,6 +49,7 @@
   "dependencies": {
     "@acab/reset.css": "^0.10.0",
     "@preact/signals": "^1.2.2",
+    "@tanstack/react-query": "^5.45.0",
     "clsx": "^2.1.0",
     "dns-over-http-resolver": "^3.0.2",
     "filsnap-adapter": "*",
