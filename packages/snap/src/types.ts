@@ -1,4 +1,12 @@
-import type { SnapsProvider } from '@metamask/snaps-sdk'
+import type {
+  GetSnapsParams,
+  JsonRpcError,
+  JsonRpcParams,
+  JsonRpcRequest,
+  Snap,
+  SnapMethods,
+  SnapsProvider,
+} from '@metamask/snaps-sdk'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { z } from 'zod'
 import type { configure } from './rpc/configure'
@@ -89,14 +97,61 @@ export interface FilSnapMethods {
   fil_getAccountInfo: typeof getAccountInfo
 }
 
+/**
+ * Snaps Provider request types
+ *
+ * @see https://github.com/MetaMask/snaps/blob/main/packages/snaps-sdk/src/types/methods/methods.ts
+ */
+
+export type Method<
+  MethodName extends string,
+  Params extends JsonRpcParams,
+> = Partial<JsonRpcRequest> & Params extends never
+  ? {
+      method: MethodName
+    }
+  : {
+      method: MethodName
+      params: Params
+    }
+
+/**
+ * Patched GetSnapsResult
+ */
+type GetSnapsResult = Record<
+  string,
+  | {
+      error: JsonRpcError
+    }
+  | Snap
+>
+
+export type AddEthereumChainParameter = {
+  chainId: string
+  chainName: string
+  rpcUrls: string[]
+  blockExplorerUrls: string[]
+  nativeCurrency: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  iconUrls: string[]
+}
+
+export type CustomSnapsMethos = SnapMethods & {
+  wallet_getSnaps: [GetSnapsParams, GetSnapsResult]
+  wallet_switchEthereumChain: [{ chainId: string }[], null]
+  wallet_addEthereumChain: [[AddEthereumChainParameter], null]
+}
+
 export type RequestWithFilSnap = <
-  T,
-  Method,
-  SnapMethod extends keyof FilSnapMethods,
+  MethodName extends keyof CustomSnapsMethos,
+  SnapMethod extends keyof FilSnapMethods = keyof FilSnapMethods,
 >(
-  args: Method extends 'wallet_invokeSnap'
+  args: MethodName extends 'wallet_invokeSnap'
     ? {
-        method: Method
+        method: MethodName
         params: {
           request: Parameters<FilSnapMethods[SnapMethod]>[1] extends undefined
             ? {
@@ -109,12 +164,7 @@ export type RequestWithFilSnap = <
           snapId: string
         }
       }
-    : {
-        /** The RPC method to request. */
-        method: string
-        /** The params of the RPC method, if any. */
-        params?: unknown[] | Record<string, unknown>
-      }
-) => SnapMethod extends keyof FilSnapMethods
+    : Method<MethodName, CustomSnapsMethos[MethodName][0]>
+) => MethodName extends 'wallet_invokeSnap'
   ? ReturnType<FilSnapMethods[SnapMethod]>
-  : Promise<T>
+  : Promise<CustomSnapsMethos[MethodName][1]>

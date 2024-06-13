@@ -24,9 +24,9 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "build": "wireit",
-    "test": "wireit"
+    "test": "playwright test"
   },
   "wireit": {
     "build": {
@@ -39,17 +39,11 @@
       "output": [
         "dist/**"
       ]
-    },
-    "test": {
-      "command": "playwright test",
-      "dependencies": [
-        "../../examples/demo:dev",
-        "../snap:serve"
-      ]
     }
   },
   "dependencies": {
     "@metamask/approval-controller": "^6.0.0",
+    "@metamask/sdk": "^0.20.5",
     "filsnap": "workspace:^",
     "iso-filecoin": "^4.0.3"
   },

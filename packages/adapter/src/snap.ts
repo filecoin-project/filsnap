@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { FilSnapMethods, Network, SnapConfig } from 'filsnap'
 import { RPC } from 'iso-filecoin/rpc'
-import { getRequestProvider } from './get-request-provider'
 import type { Provider } from './get-request-provider'
+import { getRequestProvider } from './get-request-provider'
 
 export class FilsnapAdapter {
   readonly snapId: string
@@ -58,11 +57,14 @@ export class FilsnapAdapter {
     }
 
     const provider = await FilsnapAdapter.getProvider()
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const snaps: Record<string, any> =
-      (await provider.request({ method: 'wallet_getSnaps' })) ?? {}
+    const snaps = await provider.request({ method: 'wallet_getSnaps' })
 
     const snap = snaps[snapId]
+
+    if (snap == null || 'error' in snap) {
+      return false
+    }
+
     const isSnapBlocked = snap?.blocked === true
     const isSnapEnabled = snap?.enabled === true
     const isVersionMatch = snapVersion === '*' || snap?.version === snapVersion
@@ -92,25 +94,28 @@ export class FilsnapAdapter {
     }
 
     const provider = await FilsnapAdapter.getProvider()
-    const snaps =
-      (await provider.request({
-        method: 'wallet_requestSnaps',
-        params: {
-          [snapId]: {
-            version: snapVersion,
-          },
+    const snaps = await provider.request({
+      method: 'wallet_requestSnaps',
+      params: {
+        [snapId]: {
+          version: snapVersion,
         },
-      })) ?? {}
+      },
+    })
+    const snap = snaps[snapId]
 
-    // @ts-expect-error - simple enough check
-    if (snaps[snapId] == null) {
+    if (snap == null) {
       throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
     }
-    // @ts-expect-error - TS doesn't know that `snaps[snapId]` is not null
-    const { version } = snaps[snapId]
-    // @ts-export-error - improve the provider typings
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const adapter = new FilsnapAdapter(snapId, version)
+
+    if ('error' in snap) {
+      throw new Error(
+        `Failed to connect to snap ${snapId} ${snapVersion} with error ${snap.error.message}`
+      )
+    }
+
+    const adapter = new FilsnapAdapter(snapId, snap.version)
+
     const result = await adapter.configure(config)
 
     if (result.error) {
@@ -145,7 +150,6 @@ export class FilsnapAdapter {
       network: this.config.network,
     })
   }
-
   /**
    * Configure the snap
    *
@@ -383,8 +387,8 @@ export class FilsnapAdapter {
       }
     }
 
+    const provider = await FilsnapAdapter.getProvider()
     try {
-      const provider = await FilsnapAdapter.getProvider()
       await provider.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: config.chainId }],
@@ -397,7 +401,7 @@ export class FilsnapAdapter {
       // This error code indicates that the chain has not been added to MetaMask.
       if (err.code === 4902) {
         try {
-          await ethereum.request({
+          await provider.request({
             method: 'wallet_addEthereumChain',
             params: [config],
           })
