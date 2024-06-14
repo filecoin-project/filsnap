@@ -6,6 +6,7 @@
   "include": ["src", "test"],
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {
+    "entryPointStrategy": "resolve",
     "entryPoints": ["src/index.js"],
     "includeVersion": true,
     "internalModule": "<internal>",
