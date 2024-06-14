@@ -49,8 +49,8 @@ async function transfer(
   const contract = getContract({
     address: filForwarderMetadata.contractAddress,
     abi: filForwarderMetadata.abi,
-    publicClient,
-    walletClient: metaMaskClient,
+    client: publicClient,
+    // walletClient: metaMaskClient,
   })
 
   // Call the FilForwarder contract's forward method to make the transfer
@@ -76,9 +76,11 @@ interface FormElements extends HTMLFormControlsCollection {
   recipient: HTMLInputElement
 }
 
-const form = document.querySelector('#transfer-form')
-const txLink = document.querySelector('#tx-link')
-const submitButton = document.querySelector('#submit-button')
+const form = document.querySelector('#transfer-form') as HTMLFormElement
+const txLink = document.querySelector('#tx-link') as HTMLAnchorElement
+const submitButton = document.querySelector(
+  '#submit-button'
+) as HTMLButtonElement
 
 form?.addEventListener('submit', (event) => {
   // Prevent navigation on submit
