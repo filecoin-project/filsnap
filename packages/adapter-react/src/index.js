@@ -12,7 +12,7 @@ const FilsnapContext =
   )({
     isLoading: true,
     isConnected: false,
-    hasFlask: false,
+    hasSnaps: false,
     error: undefined,
     snap: undefined,
     connect: () => Promise.resolve(),
@@ -42,7 +42,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
   )
   const [isConnected, setIsConnected] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(true)
-  const [hasFlask, setHasFlask] = React.useState(false)
+  const [hasSnaps, setHasSnaps] = React.useState(false)
   const [snapConfig, setSnapConfig] =
     /** @type {typeof React.useState<Partial<import('filsnap-adapter').SnapConfig>>} */ (
       React.useState
@@ -62,8 +62,8 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       if (mounted) {
         setError(undefined)
         try {
-          const hasFlask = await FilsnapAdapter.hasSnaps()
-          setHasFlask(hasFlask)
+          const hasSnaps = await FilsnapAdapter.hasSnaps()
+          setHasSnaps(hasSnaps)
         } catch (error) {
           const err = /** @type {Error} */ (error)
           setError(err)
@@ -114,7 +114,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       return {
         isLoading: true,
         isConnected: false,
-        hasFlask: false,
+        hasSnaps: false,
         error: undefined,
         snap: undefined,
         account: undefined,
@@ -122,11 +122,11 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
         setSnapConfig,
       }
     }
-    if (!hasFlask) {
+    if (!hasSnaps) {
       return {
         isLoading: false,
         isConnected: false,
-        hasFlask: false,
+        hasSnaps: false,
         error: undefined,
         snap: undefined,
         account: undefined,
@@ -135,11 +135,11 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       }
     }
 
-    if (hasFlask && !isConnected) {
+    if (hasSnaps && !isConnected) {
       return {
         isLoading: false,
         isConnected: false,
-        hasFlask: true,
+        hasSnaps: true,
         error,
         snap: undefined,
         account: undefined,
@@ -148,11 +148,11 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       }
     }
 
-    if (hasFlask && !isConnected && error) {
+    if (hasSnaps && !isConnected && error) {
       return {
         isLoading: false,
         isConnected: false,
-        hasFlask: true,
+        hasSnaps: true,
         error,
         snap: undefined,
         account: undefined,
@@ -165,7 +165,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       return {
         isLoading: false,
         isConnected: false,
-        hasFlask: false,
+        hasSnaps: false,
         error,
         snap: undefined,
         account: undefined,
@@ -178,7 +178,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
       return {
         isLoading: false,
         isConnected: false,
-        hasFlask,
+        hasSnaps: hasSnaps,
         error,
         snap: undefined,
         account: undefined,
@@ -190,7 +190,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
     return {
       isLoading,
       isConnected: true,
-      hasFlask: true,
+      hasSnaps: true,
       error,
       snap,
       account,
@@ -201,7 +201,7 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
     account,
     connect,
     error,
-    hasFlask,
+    hasSnaps,
     isConnected,
     isLoading,
     snap,

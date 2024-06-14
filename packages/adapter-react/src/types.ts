@@ -15,7 +15,7 @@ export type FilsnapContext =
   | {
       isLoading: true
       isConnected: false
-      hasFlask: false
+      hasSnaps: false
       snap: undefined
       account: undefined
       error: undefined
@@ -26,7 +26,7 @@ export type FilsnapContext =
   | {
       isLoading: false
       isConnected: false
-      hasFlask: false
+      hasSnaps: false
       snap: undefined
       account: undefined
       error: undefined
@@ -37,7 +37,7 @@ export type FilsnapContext =
   | {
       isLoading: false
       isConnected: false
-      hasFlask: true
+      hasSnaps: true
       snap: undefined
       account: undefined
       error: undefined
@@ -48,7 +48,7 @@ export type FilsnapContext =
   | {
       isLoading: false
       isConnected: false
-      hasFlask: true
+      hasSnaps: true
       snap: undefined
       account: undefined
       error: Error
@@ -59,7 +59,7 @@ export type FilsnapContext =
   | {
       isLoading: false
       isConnected: false
-      hasFlask: false
+      hasSnaps: false
       snap: undefined
       account: undefined
       error: Error
@@ -70,7 +70,7 @@ export type FilsnapContext =
   | {
       isLoading: false
       isConnected: true
-      hasFlask: true
+      hasSnaps: true
       snap: FilsnapAdapter
       account: AccountInfo
       error: undefined
