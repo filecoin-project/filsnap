@@ -7,6 +7,11 @@
   --toastify-color-dark: #161f27;
 }
 
+.Toastify__close-button > svg {
+  max-inline-size: none;
+}
+
+
 @media (prefers-color-scheme: dark) {
   ::selection {
     /* chrome for some reason doesnt inherit the custom variable here */

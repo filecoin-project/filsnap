@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-
 import { filForwarderMetadata } from 'filsnap-adapter'
 import { useFilsnap } from 'filsnap-adapter-react'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
 import type { JSX } from 'preact'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { useWriteContract } from 'wagmi'
 
 interface Inputs {
@@ -21,6 +18,10 @@ interface Inputs {
 function Forward(): JSX.Element {
   const { account } = useFilsnap()
   const { data, isPending, writeContract, error } = useWriteContract()
+
+  if (error) {
+    toast.error(error.message, { autoClose: false })
+  }
 
   const {
     register,
@@ -46,7 +47,6 @@ function Forward(): JSX.Element {
   return (
     <div class="Box Cell100">
       <h3>Forward ⨎ </h3>
-      {error && <code data-testid="error">{error.message}</code>}
       <form
         /*
       // @ts-expect-error - preact */
