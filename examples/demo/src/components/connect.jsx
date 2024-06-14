@@ -1,14 +1,19 @@
 import { clsx } from 'clsx'
 import { useFilsnap } from 'filsnap-adapter-react'
 import { Token } from 'iso-filecoin/token'
+import { toast } from 'react-toastify'
 import ExplorerLink from './explorer-link.jsx'
 
 /**
  * Connect to the network.
  */
 export default function Connect() {
-  const { isLoading, hasFlask, isConnected, connect, account, error } =
+  const { isLoading, hasSnaps, isConnected, connect, account, error } =
     useFilsnap()
+
+  if (error) {
+    toast.error(error.message)
+  }
 
   let out = null
 
@@ -24,16 +29,16 @@ export default function Connect() {
     )
   }
 
-  if (!hasFlask) {
+  if (!hasSnaps) {
     out = (
       <div data-testid="install-mm-flask">
-        Install Metamask{' '}
+        Install{' '}
         <a
-          href="https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
+          href="https://chromewebstore.google.com/detail/nkbihfbeogaeaoehlefnkodbefgpgknn"
           target="_blank"
           rel="noreferrer"
         >
-          Flask
+          Metamask
         </a>
       </div>
     )
@@ -62,16 +67,6 @@ export default function Connect() {
     out = <div>Loading...</div>
   }
 
-  if (error) {
-    out = (
-      <>
-        <h3>
-          Error <br />
-        </h3>
-        <p>{error.message}</p>
-      </>
-    )
-  }
   return (
     <div class={clsx('Cell75', 'Box', !isConnected && 'u-AlignCenter')}>
       {out}

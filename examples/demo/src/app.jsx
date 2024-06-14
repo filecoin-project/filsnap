@@ -1,6 +1,8 @@
 import Resolver from 'dns-over-http-resolver'
 import { useFilsnap } from 'filsnap-adapter-react'
 import { useEffect, useState } from 'preact/hooks'
+import { ToastContainer } from 'react-toastify'
+
 import ConnectFEVM from './components/connect-fevm.jsx'
 import Connect from './components/connect.jsx'
 import Forward from './components/forward.tsx'
@@ -138,6 +140,7 @@ export function App() {
           </ul>
         </div>
       </div>
+      <ToastContainer theme="dark" position="bottom-right" />
     </main>
   )
 }

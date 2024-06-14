@@ -1,6 +1,12 @@
 @import '@acab/reset.css';
 @import 'water.css';
 
+@import 'react-toastify/dist/ReactToastify.css';
+
+:root {
+  --toastify-color-dark: #161f27;
+}
+
 @media (prefers-color-scheme: dark) {
   ::selection {
     /* chrome for some reason doesnt inherit the custom variable here */
