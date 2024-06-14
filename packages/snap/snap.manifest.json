@@ -7,7 +7,7 @@
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "+8ktkERxVbff5KyrDBWC7mbbTwiqAYLQZF7V7V2Hz/I=",
+    "shasum": "6GovfZSiJnq/MqMiHmWG0BUHzaHMIvX/Vn//OEZ3KbQ=",
     "location": {
       "npm": {
         "filePath": "dist/snap.js",
@@ -20,10 +20,8 @@
   "initialPermissions": {
     "endowment:network-access": {},
     "endowment:rpc": {
-      "dapps": true,
-      "snaps": true
+      "dapps": true
     },
-    "endowment:transaction-insight": {},
     "snap_dialog": {},
     "snap_getBip44Entropy": [
       {

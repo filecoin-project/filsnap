@@ -25,7 +25,8 @@ export type {
   SnapConfig,
 } from './types'
 
-export { onTransaction } from './transaction-insight'
+// Disable transaction insight for now
+// export { onTransaction } from './transaction-insight'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
