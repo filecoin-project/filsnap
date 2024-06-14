@@ -1,11 +1,4 @@
-import {
-  address,
-  copyable,
-  heading,
-  panel,
-  row,
-  text,
-} from '@metamask/snaps-sdk'
+import { copyable, heading, panel, row, text } from '@metamask/snaps-sdk'
 import { dequal } from 'dequal/lite'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'

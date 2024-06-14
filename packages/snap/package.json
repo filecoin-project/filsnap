@@ -47,7 +47,7 @@
   ],
   "scripts": {
     "ts-build": "tsc --build",
-    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "test": "playwright test",
     "build": "wireit",
     "serve": "wireit"
