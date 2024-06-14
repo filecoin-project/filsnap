@@ -1,4 +1,11 @@
-import { copyable, divider, heading, panel, text } from '@metamask/snaps-sdk'
+import {
+  copyable,
+  divider,
+  heading,
+  panel,
+  row,
+  text,
+} from '@metamask/snaps-sdk'
 import { base64pad } from 'iso-base/rfc4648'
 import * as Address from 'iso-filecoin/address'
 import { Message, Schemas } from 'iso-filecoin/message'
@@ -96,22 +103,25 @@ export async function signMessage(
       copyable(message.to),
       divider(),
       heading('Details'),
-      text(`Gas _(estimated ${config.unit?.symbol ?? 'FIL'})_:`),
-      copyable(
-        gas.toFIL().toFormat({
-          decimalPlaces: config.unit?.decimals,
-        })
+      row(
+        'Estimated gas:',
+        text(
+          `${gas.toFIL().toFormat({
+            decimalPlaces: config.unit?.decimals,
+          })} ${config.unit?.symbol ?? 'FIL'}`
+        )
       ),
-      text(`Total _(amount + gas ${config.unit?.symbol ?? 'FIL'})_:`),
-      copyable(
-        total.toFIL().toFormat({
-          decimalPlaces: config.unit?.decimals,
-        })
+
+      row(
+        'Estimated total (amount + gas):',
+        text(
+          `${total.toFIL().toFormat({
+            decimalPlaces: config.unit?.decimals,
+          })} ${config.unit?.symbol ?? 'FIL'}`
+        )
       ),
-      text('API:'),
-      copyable(config.rpc.url),
-      text('Network:'),
-      copyable(config.network),
+      row('API:', text(config.rpc.url)),
+      row('Network:', text(config.network)),
     ]),
   })
 

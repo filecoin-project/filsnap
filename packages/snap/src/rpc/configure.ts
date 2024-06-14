@@ -1,6 +1,15 @@
-import { copyable, panel, text } from '@metamask/snaps-sdk'
+import {
+  address,
+  copyable,
+  heading,
+  panel,
+  row,
+  text,
+} from '@metamask/snaps-sdk'
+import { dequal } from 'dequal/lite'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
+
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
 import { getAccountSafe } from '../account'
@@ -71,26 +80,36 @@ export async function configure(
     )
   }
 
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config && dequal(config, _params.data)) {
+    return { result: _params.data, error: null }
+  }
+
   const account = await getAccountSafe(snap, _params.data)
 
   const conf = await snapDialog(ctx.snap, {
     type: 'confirmation',
     content: panel([
-      text(
-        `Do you want to connect **Account ${accountNumber}** _${account.address.toString()}_ to **${
-          ctx.origin
-        }**?`
-      ),
-      text('Derivation Path:'),
-      copyable(derivationPath),
-      text('API:'),
-      copyable(url),
-      text('Network:'),
-      copyable(network),
-      text('Unit Decimals:'),
-      copyable(unit?.decimals.toString() ?? 'N/A'),
-      text('Unit Symbol:'),
-      copyable(unit?.symbol ?? 'N/A'),
+      heading('Connection request'),
+      text(`**${ctx.origin}** wants to connect with your Filecoin account.`),
+      text(`Account ${accountNumber}`),
+      copyable(`${account.address.toString()}`),
+      row('Derivation Path:', text(derivationPath)),
+      row('API:', text(url)),
+      row('Network:', text(network)),
+      row('Unit Decimals:', text(unit?.decimals.toString() ?? 'N/A')),
+      row('Unit Symbol:', text(unit?.symbol ?? 'N/A')),
+      // text('Derivation Path:'),
+      // copyable(derivationPath),
+      // text('API:'),
+      // copyable(url),
+      // text('Network:'),
+      // copyable(network),
+      // text('Unit Decimals:'),
+      // copyable(unit?.decimals.toString() ?? 'N/A'),
+      // text('Unit Symbol:'),
+      // copyable(unit?.symbol ?? 'N/A'),
     ]),
   })
 

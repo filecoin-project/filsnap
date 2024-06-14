@@ -23,6 +23,7 @@ export type {
   Network,
   RequestWithFilSnap,
   SnapConfig,
+  Snap,
 } from './types'
 
 // Disable transaction insight for now
