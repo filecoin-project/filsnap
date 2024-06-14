@@ -117,3 +117,16 @@ h4 {
 .u-FullWidth {
   width: 100%;
 }
+
+.icon {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+
+.icon-copy {
+  cursor: pointer
+}
+.icon-copy:active {
+  scale: 1.1; 
+}
