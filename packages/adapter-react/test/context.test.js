@@ -22,7 +22,7 @@ it('should stop loading', async () => {
   await waitFor(
     () => {
       assert.strictEqual(result.current.isLoading, false)
-      assert.strictEqual(result.current.hasFlask, false)
+      assert.strictEqual(result.current.hasSnaps, false)
     },
     { timeout: 2000 }
   )
@@ -36,7 +36,7 @@ it('should still be stopped after rerender', async () => {
   await waitFor(
     () => {
       assert.strictEqual(result.current.isLoading, false)
-      assert.strictEqual(result.current.hasFlask, false)
+      assert.strictEqual(result.current.hasSnaps, false)
     },
     { timeout: 2000 }
   )
@@ -44,5 +44,5 @@ it('should still be stopped after rerender', async () => {
   rerender()
 
   assert.strictEqual(result.current.isLoading, false)
-  assert.strictEqual(result.current.hasFlask, false)
+  assert.strictEqual(result.current.hasSnaps, false)
 })

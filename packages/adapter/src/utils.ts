@@ -1,4 +1,4 @@
-import type { RequestWithFilSnap } from 'filsnap'
+import type { RequestWithFilSnap, Snap } from 'filsnap'
 
 export interface Provider {
   isMetaMask: boolean
@@ -57,4 +57,63 @@ export async function getRequestProvider(timeout = 1000): Promise<Provider> {
       reject(new Error('Provider request timed out.'))
     }, timeout)
   })
+}
+
+export async function getSnap(
+  provider: Provider,
+  snapId = 'npm:filsnap',
+  snapVersion = '*'
+): Promise<Snap> {
+  const snaps = await provider.request({ method: 'wallet_getSnaps' })
+  const snap = snaps[snapId]
+
+  // try to install the snap
+  if (snap == null) {
+    try {
+      const snaps = await provider.request({
+        method: 'wallet_requestSnaps',
+        params: {
+          [snapId]: {
+            version: snapVersion,
+          },
+        },
+      })
+      const snap = snaps[snapId]
+      if (snap == null) {
+        throw new Error(`Failed to install to snap ${snapId} ${snapVersion}`)
+      }
+
+      if ('error' in snap) {
+        throw new Error(
+          `Failed to install to snap ${snapId} ${snapVersion} with error ${snap.error.message}`
+        )
+      }
+      return snap
+    } catch (error) {
+      const err = error as Error
+      throw new Error(
+        `Failed to install to snap ${snapId} ${snapVersion} with error ${err.message}`
+      )
+    }
+  }
+
+  if ('error' in snap) {
+    throw new Error(
+      `Failed to connect to snap ${snapId} ${snapVersion} with error ${snap.error.message}`
+    )
+  }
+
+  if (snap.blocked === true) {
+    throw new Error(`Snap ${snapId} ${snapVersion} is blocked`)
+  }
+
+  if (snap.enabled === false) {
+    throw new Error(`Snap ${snapId} ${snapVersion} is not enabled`)
+  }
+
+  // if (snapVersion !== '*' && snap.version !== snapVersion) {
+  //   throw new Error(`Snap ${snapId} ${snapVersion} is not the correct version`)
+  // }
+
+  return snap
 }

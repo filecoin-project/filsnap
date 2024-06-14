@@ -47,7 +47,7 @@
   ],
   "scripts": {
     "ts-build": "tsc --build",
-    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "test": "playwright test",
     "build": "wireit",
     "serve": "wireit"
@@ -79,6 +79,7 @@
   "dependencies": {
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-sdk": "^4.4.2",
+    "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.0.3",
     "merge-options": "^3.0.4",

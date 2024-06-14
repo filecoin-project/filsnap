@@ -27,6 +27,7 @@ export type Json = Literal | { [key: string]: Json } | Json[]
 export type SnapConfig = z.infer<typeof snapConfig>
 export type MessageStatus = z.infer<typeof messageStatus>
 export type Account = ReturnType<typeof accountFromPrivateKey>
+export type { Snap } from '@metamask/snaps-sdk'
 
 // Snap types
 export interface AccountInfo {

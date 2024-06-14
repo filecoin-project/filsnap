@@ -1,5 +1,6 @@
 import { useFilsnap } from 'filsnap-adapter-react'
 import * as Address from 'iso-filecoin/address'
+import { CopyIcon } from './icons'
 
 /**
  *
@@ -11,6 +12,10 @@ export default function ExplorerLink({ address, chain }) {
   const { account } = useFilsnap()
 
   if (!address) return null
+
+  function onCopy(address) {
+    navigator.clipboard.writeText(address)
+  }
 
   if (chain === 'filecoin') {
     const fAddress = Address.from(address, account?.config.network).toString()
@@ -25,7 +30,8 @@ export default function ExplorerLink({ address, chain }) {
           }`}
         >
           {fAddress || 'unknown'}
-        </a>
+        </a>{' '}
+        <CopyIcon width={16} height={16} onClick={() => onCopy(fAddress)} />
       </div>
     )
   }
@@ -41,7 +47,8 @@ export default function ExplorerLink({ address, chain }) {
         }`}
       >
         {address || 'unknown'}
-      </a>
+      </a>{' '}
+      <CopyIcon width={16} height={16} onClick={() => onCopy(address)} />
     </div>
   )
 }

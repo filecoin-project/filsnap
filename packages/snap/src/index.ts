@@ -23,9 +23,11 @@ export type {
   Network,
   RequestWithFilSnap,
   SnapConfig,
+  Snap,
 } from './types'
 
-export { onTransaction } from './transaction-insight'
+// Disable transaction insight for now
+// export { onTransaction } from './transaction-insight'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,

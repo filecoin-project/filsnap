@@ -12,6 +12,7 @@ export default function Connect() {
     useFilsnap()
 
   if (error) {
+    console.error(error)
     toast.error(error.message)
   }
 
