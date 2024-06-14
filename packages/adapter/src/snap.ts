@@ -1,7 +1,7 @@
 import type { FilSnapMethods, Network, SnapConfig } from 'filsnap'
 import { RPC } from 'iso-filecoin/rpc'
-import type { Provider } from './get-request-provider'
-import { getRequestProvider } from './get-request-provider'
+import type { Provider } from './utils'
+import { getRequestProvider, getSnap } from './utils'
 
 export class FilsnapAdapter {
   readonly snapId: string
@@ -94,28 +94,8 @@ export class FilsnapAdapter {
     }
 
     const provider = await FilsnapAdapter.getProvider()
-    const snaps = await provider.request({
-      method: 'wallet_requestSnaps',
-      params: {
-        [snapId]: {
-          version: snapVersion,
-        },
-      },
-    })
-    const snap = snaps[snapId]
-
-    if (snap == null) {
-      throw new Error(`Failed to connect to snap ${snapId} ${snapVersion}`)
-    }
-
-    if ('error' in snap) {
-      throw new Error(
-        `Failed to connect to snap ${snapId} ${snapVersion} with error ${snap.error.message}`
-      )
-    }
-
+    const snap = await getSnap(provider, snapId, snapVersion)
     const adapter = new FilsnapAdapter(snapId, snap.version)
-
     const result = await adapter.configure(config)
 
     if (result.error) {
