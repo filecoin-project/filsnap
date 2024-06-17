@@ -42,7 +42,7 @@
     }
   },
   "dependencies": {
-    "@metamask/approval-controller": "^6.0.0",
+    "@metamask/approval-controller": "^7.0.0",
     "filsnap": "workspace:^",
     "iso-filecoin": "^4.0.3"
   },
