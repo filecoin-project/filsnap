@@ -49,7 +49,7 @@
     "filsnap-adapter": "*",
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.0.3",
-    "viem": "^2.13.8"
+    "viem": "^2.16.5"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
