@@ -33,6 +33,6 @@ jobs:
       #     https://dweb.link/ipfs/${{ steps.fission.outputs.app_cid }}
       #     " >> $GITHUB_STEP_SUMMARY
       - name: Deploy
-        run: pnpx wrangler pages publish examples/demo/dist --project-name filsnap --branch main
+        run: pnpx wrangler pages deploy examples/demo/dist --project-name filsnap --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
