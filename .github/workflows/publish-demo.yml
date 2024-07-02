@@ -21,14 +21,19 @@ jobs:
       - run: pnpm -r --filter demo run build
         env:
           GITHUB_WORKFLOW_ID: ${{ github.run_id }}
-      - uses: fission-suite/publish-action@v1.2.8
-        id: fission
+      # - uses: fission-suite/publish-action@v1.2.8
+      #   id: fission
+      #   with:
+      #     machine_key: ${{ secrets.FISSION_MACHINE_KEY }}
+      #     workdir: examples/demo
+      # - name: Add url to GITHUB_STEP_SUMMARY
+      #   run: |
+      #     echo "
+      #     ### App URL 🌐
+      #     https://dweb.link/ipfs/${{ steps.fission.outputs.app_cid }}
+      #     " >> $GITHUB_STEP_SUMMARY
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
         with:
-          machine_key: ${{ secrets.FISSION_MACHINE_KEY }}
-          workdir: examples/demo
-      - name: Add url to GITHUB_STEP_SUMMARY
-        run: |
-          echo "
-          ### App URL 🌐
-          https://dweb.link/ipfs/${{ steps.fission.outputs.app_cid }}
-          " >> $GITHUB_STEP_SUMMARY
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy examples/demo/dist --project-name filsnap --branch main
