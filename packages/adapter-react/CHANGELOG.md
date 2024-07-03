@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v1.0.0...filsnap-adapter-react-v1.0.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* bump react adapter ([1491274](https://github.com/filecoin-project/filsnap/commit/149127448432f968b182f1a85ba9929bee02f319))
+
 ## [1.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.1.1...filsnap-adapter-react-v1.0.0) (2024-07-03)
 
 
