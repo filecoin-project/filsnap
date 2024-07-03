@@ -1,7 +1,7 @@
 {
   "name": "filsnap-adapter-react",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Context and hook for filsnap adapter.",
   "author": "Protocol Labs",
   "license": "(Apache-2.0 AND MIT)",
