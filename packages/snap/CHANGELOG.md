@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.0.2...filsnap-v1.0.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* add proper types to the provider ([429bbcf](https://github.com/filecoin-project/filsnap/commit/429bbcf30435dd1fe3f91d568ac844ec91a475cc))
+* cache config and use row() in UI ([25de01f](https://github.com/filecoin-project/filsnap/commit/25de01fcb1fe1d02726f1a5b5cd24dc15d9fc9b2)), closes [#173](https://github.com/filecoin-project/filsnap/issues/173)
+* disable transation insights for now ([f0c1da8](https://github.com/filecoin-project/filsnap/commit/f0c1da8d9108fb00a6fa63331a59c1cb72572426))
+* snaps, iso-filecoin and other dep updates ([158696f](https://github.com/filecoin-project/filsnap/commit/158696fce26f1ac108707715495d1b34e3a44101))
+
 ## [1.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.0.1...filsnap-v1.0.2) (2024-03-07)
 
 
