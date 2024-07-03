@@ -18,14 +18,14 @@
     "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.1",
+    "@biomejs/biome": "^1.8.3",
     "@hugomrdias/configs": "^0.1.8",
     "depcheck": "^1.4.7",
     "simple-git-hooks": "^2.10.0",
-    "typedoc": "^0.25.10",
-    "typedoc-plugin-missing-exports": "^2.2.0",
-    "typedoc-plugin-zod": "^1.1.2",
-    "typescript": "5.4.5",
+    "typedoc": "^0.26.3",
+    "typedoc-plugin-missing-exports": "^3.0.0",
+    "typedoc-plugin-zod": "^1.2.0",
+    "typescript": "5.5.3",
     "wireit": "^0.14.4"
   },
   "simple-git-hooks": {

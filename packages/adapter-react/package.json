@@ -47,17 +47,17 @@
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.0",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^20.14.2",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.9",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "assert": "^2.1.0",
-    "mocha": "^10.3.0",
+    "mocha": "^10.6.0",
     "playwright-test": "^14.1.1",
-    "preact": "^10.19.6",
+    "preact": "^10.22.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "5.4.5"
+    "typescript": "5.5.3"
   },
   "publishConfig": {
     "provenance": true
