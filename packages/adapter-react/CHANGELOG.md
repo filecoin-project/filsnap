@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.1.1...filsnap-adapter-react-v1.0.0) (2024-07-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* changed hasFlask to hasSnaps
+
+### Features
+
+* changed hasFlask to hasSnaps ([5317272](https://github.com/filecoin-project/filsnap/commit/5317272144a5746f6a042dda7f9eedd53d643a90))
+
+
+### Bug Fixes
+
+* snaps, iso-filecoin and other dep updates ([158696f](https://github.com/filecoin-project/filsnap/commit/158696fce26f1ac108707715495d1b34e3a44101))
+
 ## [0.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v0.1.0...filsnap-adapter-react-v0.1.1) (2024-03-06)
 
 
