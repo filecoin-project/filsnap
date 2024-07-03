@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v1.0.1...filsnap-adapter-v1.0.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* add proper types to the provider ([429bbcf](https://github.com/filecoin-project/filsnap/commit/429bbcf30435dd1fe3f91d568ac844ec91a475cc))
+* improve connection logic to not force install ([6cc4f1f](https://github.com/filecoin-project/filsnap/commit/6cc4f1fb8d32b6c86924ede567d72529a8a3584a))
+* snaps, iso-filecoin and other dep updates ([158696f](https://github.com/filecoin-project/filsnap/commit/158696fce26f1ac108707715495d1b34e3a44101))
+
 ## [1.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v1.0.0...filsnap-adapter-v1.0.1) (2024-03-07)
 
 
