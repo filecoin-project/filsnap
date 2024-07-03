@@ -10,13 +10,13 @@
   "main": "src/main.jsx",
   "scripts": {
     "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
-    "build": "vite build --force",
-    "dev": "vite --force",
+    "build": "vite build",
+    "dev": "vite",
     "serve": "vite preview --port 3000"
   },
   "wireit": {
     "build": {
-      "command": "vite build --force",
+      "command": "vite build",
       "dependencies": [
         "../../packages/adapter:build"
       ],
@@ -38,7 +38,7 @@
       "service": true
     },
     "dev": {
-      "command": "vite --force",
+      "command": "vite",
       "dependencies": [
         "../../packages/adapter:build"
       ],
@@ -48,16 +48,16 @@
   "dependencies": {
     "filsnap-adapter": "*",
     "iso-base": "^4.0.0",
-    "iso-filecoin": "^4.0.3",
-    "viem": "^2.13.8"
+    "iso-filecoin": "^4.1.0",
+    "viem": "^2.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
-    "@biomejs/biome": "^1.8.1",
+    "@biomejs/biome": "^1.8.3",
     "@hugomrdias/configs": "^0.1.8",
-    "@types/node": "^20.14.2",
-    "typescript": "5.4.5",
-    "vite": "^5.2.13",
+    "@types/node": "^20.14.9",
+    "typescript": "5.5.3",
+    "vite": "^5.3.3",
     "wireit": "^0.14.4"
   }
 }
