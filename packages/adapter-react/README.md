@@ -35,7 +35,7 @@ function Main() {
 import { useFilsnap } from 'filsnap-adapter-react'
 
 function App() {
-  const { isLoading, hasFlask, isConnected, connect, account, error } =
+  const { isLoading, hasSnaps, isConnected, connect, account, error } =
     useFilsnap()
 
   if (isLoading) {
