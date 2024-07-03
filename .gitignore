@@ -9,3 +9,4 @@ test-results
 .rollup.cache
 playwright-report
 .wireit
+.wrangler
