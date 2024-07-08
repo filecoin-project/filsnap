@@ -84,7 +84,7 @@
     "iso-filecoin": "^4.1.0",
     "merge-options": "^3.0.4",
     "sirv-cli": "^2.0.2",
-    "viem": "^2.17.0",
+    "viem": "^2.17.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
