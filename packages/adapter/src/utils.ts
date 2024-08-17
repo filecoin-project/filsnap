@@ -65,6 +65,7 @@ export async function getSnap(
   snapVersion = '*'
 ): Promise<Snap> {
   const snaps = await provider.request({ method: 'wallet_getSnaps' })
+
   const snap = snaps[snapId]
 
   // try to install the snap

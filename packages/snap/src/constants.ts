@@ -1,5 +1,6 @@
 import type { SnapConfig } from './types'
 
+export const INTERNAL_CONFIG = '__INTERNAL_CONFIG__'
 export const mainnetConfig: SnapConfig = {
   derivationPath: "m/44'/461'/0'/0/0",
   network: 'mainnet',

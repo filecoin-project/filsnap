@@ -41,7 +41,11 @@
       "command": "vite",
       "dependencies": [
         "../../packages/adapter:build",
-        "../../packages/snap:serve"
+        "../../packages/snap:build",
+        {
+          "script": "../../packages/snap:serve",
+          "cascade": false
+        }
       ],
       "service": true
     }

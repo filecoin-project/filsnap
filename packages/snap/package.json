@@ -1,7 +1,7 @@
 {
   "name": "filsnap",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Connect to Filecoin dapps using Metamask. Manage Filecoin accounts, send FIL to Native and FEVM accounts and enable FEVM transaction insights.",
   "author": "Protocol Labs",
   "license": "(Apache-2.0 AND MIT)",
@@ -66,7 +66,7 @@
       ]
     },
     "serve": {
-      "command": "sirv --port 8081",
+      "command": "sirv --port 8081 --dev",
       "dependencies": [
         {
           "script": "build",
@@ -79,6 +79,7 @@
   "dependencies": {
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-sdk": "^6.0.0",
+    "@paulmillr/qr": "^0.2.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.1.0",

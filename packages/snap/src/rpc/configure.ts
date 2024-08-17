@@ -93,16 +93,6 @@ export async function configure(
       row('Network:', text(network)),
       row('Unit Decimals:', text(unit?.decimals.toString() ?? 'N/A')),
       row('Unit Symbol:', text(unit?.symbol ?? 'N/A')),
-      // text('Derivation Path:'),
-      // copyable(derivationPath),
-      // text('API:'),
-      // copyable(url),
-      // text('Network:'),
-      // copyable(network),
-      // text('Unit Decimals:'),
-      // copyable(unit?.decimals.toString() ?? 'N/A'),
-      // text('Unit Symbol:'),
-      // copyable(unit?.symbol ?? 'N/A'),
     ]),
   })
 
