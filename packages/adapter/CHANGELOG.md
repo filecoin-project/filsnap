@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v1.0.2...filsnap-adapter-v2.0.0) (2024-09-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* add reconnect, disconnect and changeChain, add better getProvider and new connector to manage provider
+
+### Features
+
+* add reconnect, disconnect and changeChain, add better getProvider and new connector to manage provider ([94f8792](https://github.com/filecoin-project/filsnap/commit/94f8792ef962336609b7e9303c785800e469a76f))
+* **snap:** add basic onHomePage and onInstall handlers ([ad5f28c](https://github.com/filecoin-project/filsnap/commit/ad5f28c19c913cfe1a45a1bf769fca5397373417))
+
+
+### Bug Fixes
+
+* keep trying to find mm provider ([6f0096f](https://github.com/filecoin-project/filsnap/commit/6f0096f44bd59183c301ec602e1291b3f4a0f577))
+
 ## [1.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v1.0.1...filsnap-adapter-v1.0.2) (2024-07-03)
 
 
