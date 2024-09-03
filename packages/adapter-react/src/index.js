@@ -1,57 +1,79 @@
 /* eslint-disable unicorn/no-useless-undefined */
-import { FilsnapAdapter } from 'filsnap-adapter'
+import { FilsnapAdapter, createConnector, getProvider } from 'filsnap-adapter'
 import * as React from 'react'
 
 /**
+ * @typedef {import('./types.js').FilsnapContext} FilsnapContext
  * @typedef {import('./types.js').FilsnapProviderProps} FilsnapProviderProps
  */
 
+/**
+ * @import {ConfigureFn, ConnectFn, FilsnapContext, FilsnapProviderProps} from './types.js'
+ * @import {SnapConfig, AccountInfo, EIP1193Provider} from 'filsnap-adapter'
+ */
+
+/**
+ * Filsnap React Context
+ */
 const FilsnapContext =
-  /** @type {typeof React.createContext<import('./types.js').FilsnapContext>} */ (
+  /** @type {typeof React.createContext<FilsnapContext>} */ (
     React.createContext
   )({
+    config: {},
     isLoading: true,
+    isConfiguring: false,
+    isConnecting: false,
+    isPending: false,
     isConnected: false,
-    hasSnaps: false,
     error: undefined,
     snap: undefined,
-    connect: () => Promise.resolve(),
     account: undefined,
-    setSnapConfig: () => {
-      // noop
-    },
+    provider: undefined,
+    connect: () => Promise.resolve(),
+    configure: () => Promise.resolve(),
+    disconnect: () => Promise.resolve(),
   })
 
 /**
  *
- * @param {import('./types.js').FilsnapProviderProps & {children : React.ReactNode}} props
- * @returns {React.FunctionComponentElement<React.ProviderProps<import('./types.js').FilsnapContext>>}
+ * @param {React.PropsWithChildren<FilsnapProviderProps>} props
+ * @returns {React.FunctionComponentElement<React.ProviderProps<FilsnapContext>>}
  */
-export function FilsnapProvider({ snapId, snapVersion, config, children }) {
+export function FilsnapProvider({
+  snapId,
+  snapVersion,
+  config,
+  children,
+  reconnectOnMount = true,
+  syncWithProvider = true,
+}) {
   // State
   const [error, setError] = /** @type {typeof React.useState<Error>} */ (
     React.useState
   )()
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [isConnecting, setIsConnecting] = React.useState(false)
+  const [isConfiguring, setIsConfiguring] = React.useState(false)
+
   const [snap, setSnap] = /** @type {typeof React.useState<FilsnapAdapter>} */ (
     React.useState
   )()
   const [account, setAccount] = React.useState(
-    /** @type {import('filsnap-adapter').AccountInfo | undefined | null} */ (
-      undefined
-    )
+    /** @type {AccountInfo | undefined | null} */ (undefined)
   )
-  const [isConnected, setIsConnected] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(true)
-  const [hasSnaps, setHasSnaps] = React.useState(false)
   const [snapConfig, setSnapConfig] =
-    /** @type {typeof React.useState<Partial<import('filsnap-adapter').SnapConfig>>} */ (
-      React.useState
-    )(config)
+    /** @type {typeof React.useState<Partial<SnapConfig>>} */ (React.useState)(
+      config
+    )
 
-  // Effects
-  React.useEffect(() => {
-    setIsConnected(false)
-  }, [])
+  const [provider, setProvider] =
+    /** @type {typeof React.useState<EIP1193Provider|undefined>} */ (
+      React.useState
+    )(undefined)
+  const [connector, setConnector] =
+    /** @type {typeof React.useState<ReturnType<createConnector>|undefined>} */ (
+      React.useState
+    )(undefined)
 
   React.useEffect(() => {
     let mounted = true
@@ -59,17 +81,44 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
      * Setup the adapter
      */
     async function setup() {
-      if (mounted) {
-        setError(undefined)
-        try {
-          const hasSnaps = await FilsnapAdapter.hasSnaps()
-          setHasSnaps(hasSnaps)
-        } catch (error) {
-          const err = /** @type {Error} */ (error)
-          setError(err)
-        } finally {
-          setIsLoading(false)
+      setError(undefined)
+      try {
+        const provider = await getProvider()
+        const connector = createConnector({
+          provider,
+        })
+
+        if (mounted) {
+          setConnector(connector)
+          setProvider(provider)
         }
+
+        // Reconnect on mount
+        if (reconnectOnMount) {
+          const data = await FilsnapAdapter.reconnect({
+            snapId,
+            snapVersion,
+            provider,
+          })
+
+          if (data) {
+            if (data && mounted) {
+              setSnap(data.adapter)
+              setAccount(data.account)
+              setSnapConfig(data.account.config)
+              if (syncWithProvider) {
+                await connector.connect({
+                  network: data.account.config.network,
+                })
+              }
+            }
+          }
+        }
+      } catch (error) {
+        const err = /** @type {Error} */ (error)
+        setError(err)
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -79,133 +128,268 @@ export function FilsnapProvider({ snapId, snapVersion, config, children }) {
     return () => {
       mounted = false
     }
-  }, [setError])
+  }, [
+    snapId,
+    snapVersion,
+    reconnectOnMount,
+    syncWithProvider,
+    setError,
+    setSnap,
+    setProvider,
+    setSnapConfig,
+    setConnector,
+  ])
+
+  /**
+   * Handle chain changes effect
+   */
+  React.useEffect(() => {
+    /**
+     * Handle chain changes
+     *
+     * @param {string} chainId
+     */
+    async function onChainChange(chainId) {
+      if (snap) {
+        try {
+          const network = connector?.chainIdtoNetwork(chainId)
+
+          if (network === snapConfig.network) {
+            return
+          }
+
+          setIsConfiguring(true)
+
+          const data = await snap.changeChain(chainId)
+
+          if (data.error) {
+            return setError(
+              new Error(data.error.message, { cause: data.error })
+            )
+          }
+          const account = await snap.getAccountInfo()
+          if (account.error) {
+            return setError(
+              new Error(account.error.message, { cause: account.error })
+            )
+          }
+
+          setSnapConfig(data.result)
+          setAccount(account.result)
+        } catch (error) {
+          const err = /** @type {Error} */ (error)
+          setError(err)
+        } finally {
+          setIsConfiguring(false)
+        }
+      }
+    }
+
+    /**
+     * @param {any[]} accounts
+     */
+    function onAccountsChanged(accounts) {
+      if (accounts.length === 0) {
+        // Disconnected
+        setError(undefined)
+        setSnap(undefined)
+        setAccount(undefined)
+        if (provider) {
+          provider.removeListener('chainChanged', onChainChange)
+          provider.removeListener('accountsChanged', onAccountsChanged)
+        }
+      }
+    }
+
+    if (provider) {
+      provider.on('chainChanged', onChainChange)
+      provider.on('accountsChanged', onAccountsChanged)
+    }
+
+    return () => {
+      if (provider) {
+        provider.removeListener('chainChanged', onChainChange)
+        provider.removeListener('accountsChanged', onAccountsChanged)
+      }
+    }
+  }, [provider, snap, snapConfig, connector, setError, setSnapConfig, setSnap])
 
   // Callbacks
+  /**
+   * Connect to the snap
+   * @type {ConnectFn}
+   */
   const connect = React.useCallback(
-    async (
-      /** @type {Partial<import('filsnap-adapter').SnapConfig> | undefined} */ _config = snapConfig
-    ) => {
-      setIsLoading(true)
-      setError(undefined)
+    async (options = {}) => {
+      const { config } = {
+        config: snapConfig,
+        ...options,
+      }
+
+      const onError = (/** @type {Error} */ err) => {
+        setError(err)
+        options.onError?.(err)
+        options.onSettled?.(undefined, err)
+        setIsConnecting(false)
+      }
+      const onSuccess = (/** @type {AccountInfo} */ account) => {
+        options.onSuccess?.(account)
+        options.onSettled?.(account)
+        setIsConnecting(false)
+      }
+
+      setIsConnecting(true)
+
       try {
-        const snap = await FilsnapAdapter.connect(_config, snapId, snapVersion)
-        const account = await snap.getAccountInfo()
-        if (account.error) {
-          setError(new Error(account.error.message, { cause: account.error }))
+        if (!provider) {
+          return onError(new Error('Provider not found'))
         }
 
-        setSnap(snap)
+        const adapter = await FilsnapAdapter.connect({
+          config,
+          snapId,
+          snapVersion,
+          provider,
+        })
+        const account = await adapter.getAccountInfo()
+        if (account.error) {
+          return onError(
+            new Error(account.error.message, { cause: account.error })
+          )
+        }
+        if (syncWithProvider && connector) {
+          await connector.connect({
+            network: account.result?.config.network,
+          })
+        }
+
+        setSnap(adapter)
         setAccount(account.result)
-        setIsConnected(true)
+        setSnapConfig(account.result?.config)
+        onSuccess(account.result)
       } catch (error) {
         const err = /** @type {Error} */ (error)
-        setError(err)
-      } finally {
-        setIsLoading(false)
+        onError(err)
       }
     },
-    [snapConfig, snapId, snapVersion, setSnap, setError]
+    [
+      snapId,
+      snapVersion,
+      snapConfig,
+      provider,
+      connector,
+      syncWithProvider,
+      setError,
+      setSnap,
+      setSnapConfig,
+    ]
   )
+  /**
+   * Configure the snap
+   * @type {ConfigureFn}
+   */
+  const configure = React.useCallback(
+    async (options) => {
+      const { config } = {
+        ...options,
+      }
+
+      setIsConfiguring(true)
+      const onError = (/** @type {Error} */ err) => {
+        setError(err)
+        options.onError?.(err)
+        options.onSettled?.(undefined, err)
+        setIsConfiguring(false)
+      }
+      const onSuccess = (/** @type {Partial<SnapConfig>} */ config) => {
+        options.onSuccess?.(config)
+        options.onSettled?.(config)
+        setIsConfiguring(false)
+      }
+
+      try {
+        if (snap) {
+          const configure = await snap.configure(config)
+          if (configure.error) {
+            onError(
+              new Error(configure.error.message, { cause: configure.error })
+            )
+            return
+          }
+          const account = await snap.getAccountInfo()
+          if (account.error) {
+            onError(new Error(account.error.message, { cause: account.error }))
+            return
+          }
+
+          if (syncWithProvider && connector) {
+            await connector.switchChain(configure.result.network)
+          }
+
+          setAccount(account.result)
+          setSnapConfig(configure.result)
+          onSuccess(configure.result)
+        } else {
+          setSnapConfig(config)
+          if (syncWithProvider && connector) {
+            await connector.switchChain(config.network)
+          }
+          onSuccess(config)
+        }
+      } catch (error) {
+        const err = /** @type {Error} */ (error)
+        onError(err)
+        return
+      }
+    },
+    [snap, syncWithProvider, connector, setSnapConfig, setError]
+  )
+
+  /**
+   * Disconnect from the snap
+   */
+  const disconnect = React.useCallback(async () => {
+    if (snap) {
+      await snap.disconnect()
+    }
+    if (syncWithProvider && connector) {
+      await connector.disconnect()
+    }
+
+    setError(undefined)
+    setSnap(undefined)
+    setAccount(undefined)
+  }, [snap, syncWithProvider, connector, setError, setSnap])
 
   /** @type {import('./types.js').FilsnapContext} */
   const value = React.useMemo(() => {
-    if (isLoading) {
-      return {
-        isLoading: true,
-        isConnected: false,
-        hasSnaps: false,
-        error: undefined,
-        snap: undefined,
-        account: undefined,
-        connect,
-        setSnapConfig,
-      }
-    }
-    if (!hasSnaps) {
-      return {
-        isLoading: false,
-        isConnected: false,
-        hasSnaps: false,
-        error: undefined,
-        snap: undefined,
-        account: undefined,
-        connect,
-        setSnapConfig,
-      }
-    }
-
-    if (hasSnaps && !isConnected) {
-      return {
-        isLoading: false,
-        isConnected: false,
-        hasSnaps: true,
-        error,
-        snap: undefined,
-        account: undefined,
-        connect,
-        setSnapConfig,
-      }
-    }
-
-    if (hasSnaps && !isConnected && error) {
-      return {
-        isLoading: false,
-        isConnected: false,
-        hasSnaps: true,
-        error,
-        snap: undefined,
-        account: undefined,
-        connect,
-        setSnapConfig,
-      }
-    }
-
-    if (error) {
-      return {
-        isLoading: false,
-        isConnected: false,
-        hasSnaps: false,
-        error,
-        snap: undefined,
-        account: undefined,
-        connect,
-        setSnapConfig,
-      }
-    }
-
-    if (!snap || !account) {
-      return {
-        isLoading: false,
-        isConnected: false,
-        hasSnaps: hasSnaps,
-        error,
-        snap: undefined,
-        account: undefined,
-        connect,
-        setSnapConfig,
-      }
-    }
-
     return {
       isLoading,
-      isConnected: true,
-      hasSnaps: true,
+      isConfiguring,
+      isConnecting,
+      isPending: isConnecting || isConfiguring || isLoading,
+      isConnected: snap != null,
       error,
       snap,
       account,
+      config: snapConfig,
+      provider,
       connect,
-      setSnapConfig,
+      configure,
+      disconnect,
     }
   }, [
-    account,
-    connect,
-    error,
-    hasSnaps,
-    isConnected,
     isLoading,
+    isConfiguring,
+    isConnecting,
+    error,
     snap,
-    setSnapConfig,
+    account,
+    snapConfig,
+    provider,
+    connect,
+    configure,
+    disconnect,
   ])
 
   return React.createElement(FilsnapContext.Provider, { value }, children)
