@@ -33,8 +33,8 @@ export async function getProvider(timeout = 1000): Promise<EIP1193Provider> {
           break
         }
         default: {
-          console.error('Provider not supported or not found.', rdns)
-          reject(new Error('Provider not supported or not found.'))
+          // console.error('Provider not supported or not found.', rdns)
+          // reject(new Error('Provider not supported or not found.'))
           break
         }
       }

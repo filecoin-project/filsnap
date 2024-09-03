@@ -26,7 +26,7 @@
   "scripts": {
     "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "build": "wireit",
-    "test": "playwright test"
+    "test": "pnpm run build && playwright test"
   },
   "wireit": {
     "build": {
