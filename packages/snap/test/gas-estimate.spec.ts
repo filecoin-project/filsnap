@@ -15,6 +15,7 @@ const { test, expect } = createFixture({
   },
 })
 test.beforeAll(async ({ metamask, page }) => {
+  await metamask.page.getByTestId('confirmation-submit-button').click()
   const req = metamask.invokeSnap({
     request: {
       method: 'fil_configure',
@@ -26,7 +27,6 @@ test.beforeAll(async ({ metamask, page }) => {
   })
 
   const dialog = await metamask.waitForDialog('confirmation')
-  await dialog.getByTestId('confirmation-submit-button').click()
   await dialog.getByTestId('confirmation-submit-button').click()
 
   await req

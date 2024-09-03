@@ -42,16 +42,16 @@
     }
   },
   "dependencies": {
-    "@metamask/approval-controller": "^7.0.2",
+    "@metamask/approval-controller": "^7.0.3",
     "@metamask/snaps-sdk": "^6.3.0",
     "filsnap": "workspace:^",
     "iso-filecoin": "^4.1.0",
-    "viem": "^2.20.1"
+    "viem": "^2.21.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.46.1",
     "@types/node": "^22.5.2",
-    "metamask-testing-tools": "^2.0.0",
+    "metamask-testing-tools": "^2.0.1",
     "typescript": "5.5.4"
   },
   "publishConfig": {
