@@ -46,7 +46,7 @@
     "@metamask/snaps-sdk": "^6.3.0",
     "filsnap": "workspace:^",
     "iso-filecoin": "^4.1.0",
-    "viem": "^2.20.1"
+    "viem": "^2.21.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.46.1",
