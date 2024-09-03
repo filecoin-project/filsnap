@@ -13,6 +13,7 @@ const { test, expect } = createFixture({
 
 test.describe('fil_configure', () => {
   test('should get configure for testnet', async ({ metamask, page }) => {
+    await metamask.page.getByTestId('confirmation-submit-button').click()
     const req = metamask.invokeSnap<ConfigureResponse>({
       request: {
         method: 'fil_configure',
@@ -24,7 +25,6 @@ test.describe('fil_configure', () => {
     })
 
     const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByTestId('confirmation-submit-button').click()
     await dialog.getByTestId('confirmation-submit-button').click()
 
     const response = await req
@@ -40,6 +40,7 @@ test.describe('fil_configure', () => {
   })
 
   test('should get configure for main', async ({ metamask, page }) => {
+    await metamask.page.getByTestId('confirmation-submit-button').click()
     const req = metamask.invokeSnap<ConfigureResponse>({
       request: {
         method: 'fil_configure',
@@ -51,7 +52,6 @@ test.describe('fil_configure', () => {
     })
 
     const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByTestId('confirmation-submit-button').click()
     await dialog.getByTestId('confirmation-submit-button').click()
 
     const response = await req

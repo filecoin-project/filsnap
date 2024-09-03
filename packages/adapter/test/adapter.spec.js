@@ -2,7 +2,6 @@ import { createFixture } from 'metamask-testing-tools'
 
 const SNAP_ID = 'local:http://localhost:8081'
 const SNAP_VERSION = '*'
-const METAMASK_VERSION = 'v11.16.5'
 const RAINBOW_PASSWORD = '12345678'
 const RAINBOW_EXTENSION_ID = 'opfgelmcmbiajamepnmloijbpoleiama'
 
@@ -25,7 +24,6 @@ async function setupExtraExtensions(data) {
 let fixture = createFixture({
   downloadOptions: {
     flask: true,
-    tag: METAMASK_VERSION,
   },
 })
 
@@ -54,7 +52,6 @@ fixture = createFixture({
   isolated: true,
   downloadOptions: {
     flask: true,
-    tag: METAMASK_VERSION,
   },
   snap: {
     id: SNAP_ID,
@@ -77,18 +74,20 @@ fixture = createFixture({
   downloadOptions: {
     flask: true,
     extensionsIds: [RAINBOW_EXTENSION_ID],
-    tag: METAMASK_VERSION,
-  },
-  snap: {
-    id: SNAP_ID,
-    version: SNAP_VERSION,
   },
 })
 
 fixture.test(
   'should start connect to snap when flask is installed alongside rainbow wallet',
   async ({ metamask, page }) => {
-    await metamask.setupExtraExtensions(setupExtraExtensions)
+    await metamask.setup({ setupExtraExtensions })
+    await metamask.installSnap({
+      id: SNAP_ID,
+      version: SNAP_VERSION,
+      page,
+    })
+
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog('confirmation')

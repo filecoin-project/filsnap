@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.0.3...filsnap-v1.1.0) (2024-09-03)
+
+
+### Features
+
+* **snap:** add basic onHomePage and onInstall handlers ([ad5f28c](https://github.com/filecoin-project/filsnap/commit/ad5f28c19c913cfe1a45a1bf769fca5397373417))
+
+
+### Bug Fixes
+
+* moved provider type to adapter, updated to mm v12 ([56da6b5](https://github.com/filecoin-project/filsnap/commit/56da6b5cafe7ea85ef1b9944dd828c8ae30f483b))
+
 ## [1.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.0.2...filsnap-v1.0.3) (2024-07-03)
 
 
