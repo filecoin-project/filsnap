@@ -22,11 +22,11 @@
     "@hugomrdias/configs": "^0.1.8",
     "depcheck": "^1.4.7",
     "simple-git-hooks": "^2.10.0",
-    "typedoc": "^0.26.3",
+    "typedoc": "^0.26.6",
     "typedoc-plugin-missing-exports": "^3.0.0",
-    "typedoc-plugin-zod": "^1.2.0",
-    "typescript": "5.5.3",
-    "wireit": "^0.14.4"
+    "typedoc-plugin-zod": "^1.2.1",
+    "typescript": "5.5.4",
+    "wireit": "^0.14.8"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec biome check --no-errors-on-unmatched --files-ignore-unknown=true --staged"

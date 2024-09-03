@@ -16,7 +16,7 @@ interface Inputs {
  * Send fil to an address
  */
 function Send(): JSX.Element {
-  const { isLoading, snap, account } = useFilsnap()
+  const { isPending: isLoading, snap, account } = useFilsnap()
   const [isEstimating, setIsEstimating] = useState<boolean>(false)
   const [isSending, setIsSending] = useState<boolean>(false)
   const [estimate, setEstimate] = useState<string>()

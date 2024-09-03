@@ -33,7 +33,7 @@
   max-width: 100vw;
   max-width: 100dvw;
   margin: 20px auto;
-  padding: 0 10px;
+  padding: 0 20px;
   word-wrap: break-word;
   flex-direction: column;
 }

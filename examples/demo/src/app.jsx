@@ -1,11 +1,11 @@
-import Resolver from 'dns-over-http-resolver'
+import { clsx } from 'clsx'
 import { useFilsnap } from 'filsnap-adapter-react'
-import { useEffect, useState } from 'preact/hooks'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 
-import ConnectFEVM from './components/connect-fevm.jsx'
-import Connect from './components/connect.jsx'
+import ConnectAll from './components/connect-all.jsx'
 import Forward from './components/forward.tsx'
+import InstallMetamask from './components/install-mm.jsx'
+import Links from './components/links.jsx'
 import Network from './components/network.jsx'
 import Account from './components/rpc.jsx'
 import Send from './components/send.tsx'
@@ -15,43 +15,40 @@ import SignMessage from './components/sign-message.jsx'
  * App component.
  */
 export function App() {
-  const { isConnected, snap } = useFilsnap()
-  const [cid, setCid] = /** @type {typeof useState<string>} */ (useState)()
-  useEffect(() => {
-    /**
-     *
-     */
-    async function main() {
-      try {
-        if (window.location.host.includes('ipfs.dweb.link')) {
-          const cid = window.location.host.split('.')[0]
-          setCid(cid)
-          return
-        }
-        const dnsRecord = await new Resolver().resolve(
-          `_dnslink.${window.location.host}`,
-          'TXT'
-        )
-        setCid(dnsRecord[0][0].replace('dnslink=/ipfs/', ''))
-      } catch {
-        // noop
-      }
-    }
+  const { isLoading, isConnected, snap, provider, error } = useFilsnap()
 
-    main()
-  }, [setCid])
+  if (error) {
+    console.error(error)
+    toast.error(error.message, { toastId: error.message })
+  }
 
   return (
     <main class="App">
       <h1>⨎ Filecoin Wallet</h1>
       <div class="Grid">
-        <Connect />
-        <Network />
-        {isConnected && (
+        {isLoading && (
+          <div
+            class={clsx(
+              'Cell100',
+              'Box',
+
+              'u-AlignCenter'
+            )}
+          >
+            <div>Loading...</div>
+          </div>
+        )}
+        {!provider && !isLoading && <InstallMetamask />}
+        {provider && !isLoading && (
           <>
-            <Send />
-            <ConnectFEVM />
-            <Forward />
+            <Network />
+            <ConnectAll />
+          </>
+        )}
+        {isConnected && <Send />}
+        {isConnected && <Forward />}
+        {snap && (
+          <>
             <details class="Cell100">
               <summary>Advanced</summary>
               <Account />
@@ -59,86 +56,7 @@ export function App() {
             </details>
           </>
         )}
-        <div class="Cell100 Box">
-          <h3>Links</h3>
-          <ul>
-            <li>
-              {' '}
-              Docs:{' '}
-              <a
-                target="_blank"
-                href="https://filecoin-project.github.io/filsnap/"
-                rel="noreferrer"
-              >
-                filecoin-project.github.io/filsnap
-              </a>
-            </li>
-            <li>
-              {' '}
-              Github:{' '}
-              <a
-                target="_blank"
-                href="https://github.com/filecoin-project/filsnap"
-                rel="noreferrer"
-              >
-                github.com/filecoin-project/filsnap
-              </a>
-            </li>
-            <li>
-              {' '}
-              CID:{' '}
-              <a
-                target="_blank"
-                href={`https://${cid}.ipfs.dweb.link/`}
-                rel="noreferrer"
-              >
-                {cid || 'unknown'}
-              </a>
-            </li>
-            <li>
-              {' '}
-              Release Job:{' '}
-              <a
-                target="_blank"
-                href={`https://github.com/filecoin-project/filsnap/actions/runs/${
-                  import.meta.env.GITHUB_WORKFLOW_ID
-                }`}
-                rel="noreferrer"
-              >
-                {import.meta.env.GITHUB_WORKFLOW_ID || 'unknown'}
-              </a>
-            </li>
-            <li>
-              {' '}
-              Git:{' '}
-              <code>
-                {import.meta.env.GIT_BRANCH}{' '}
-                <a
-                  title="Commit hash"
-                  target="_blank"
-                  href={`https://github.com/filecoin-project/filsnap/commit/${
-                    import.meta.env.GIT_COMMIT_HASH
-                  }`}
-                  rel="noreferrer"
-                >
-                  {import.meta.env.GIT_COMMIT_HASH.slice(0, 7)}
-                </a>{' '}
-                {import.meta.env.GIT_DATE}
-              </code>
-            </li>
-            <li>
-              {' '}
-              Snap:{' '}
-              <a
-                target="_blank"
-                href={`https://www.npmjs.com/package/filsnap/v/${snap?.snapVersion}#user-content-provenance`}
-                rel="noreferrer"
-              >
-                {snap?.snapVersion || 'unknown'}
-              </a>
-            </li>
-          </ul>
-        </div>
+        <Links />
       </div>
       <ToastContainer theme="dark" position="bottom-right" />
     </main>

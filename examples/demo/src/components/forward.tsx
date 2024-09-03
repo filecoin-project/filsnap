@@ -16,8 +16,15 @@ interface Inputs {
  * Send fil to an address
  */
 function Forward(): JSX.Element {
-  const { account } = useFilsnap()
-  const { data, isPending, writeContract, error } = useWriteContract()
+  const { account, isPending: isSnapPending } = useFilsnap()
+  const {
+    data,
+    isPending: isConstractPending,
+    writeContract,
+    error,
+  } = useWriteContract()
+
+  const isPending = isConstractPending || isSnapPending
 
   if (error) {
     toast.error(error.message, { autoClose: false })
@@ -81,7 +88,7 @@ function Forward(): JSX.Element {
         )}
 
         <button type="submit" data-testid="send-tx" disabled={isPending}>
-          {isPending ? 'Forwarding...' : 'Forward'}
+          {isConstractPending ? 'Forwarding...' : 'Forward'}
         </button>
       </form>
 

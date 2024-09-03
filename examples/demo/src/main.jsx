@@ -13,6 +13,7 @@ const queryClient = new QueryClient()
 const config = {
   network: 'testnet',
 }
+
 const SNAP_ID = import.meta.env.DEV
   ? 'local:http://localhost:8081'
   : 'npm:filsnap'

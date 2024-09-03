@@ -3,10 +3,10 @@ import { filecoin, filecoinCalibration } from 'wagmi/chains'
 import { injected } from 'wagmi/connectors'
 
 export const configWagmi = createConfig({
-  chains: [filecoin, filecoinCalibration],
+  chains: [filecoinCalibration, filecoin],
   transports: {
-    [filecoin.id]: http(),
     [filecoinCalibration.id]: http(),
+    [filecoin.id]: http(),
   },
   connectors: [injected()],
 })
