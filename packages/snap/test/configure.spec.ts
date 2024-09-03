@@ -5,7 +5,6 @@ const { test, expect } = createFixture({
   isolated: true,
   downloadOptions: {
     flask: true,
-    tag: 'v11.16.5',
   },
   snap: {
     id: 'local:http://localhost:8081',
@@ -25,7 +24,8 @@ test.describe('fil_configure', () => {
     })
 
     const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    await dialog.getByTestId('confirmation-submit-button').click()
+    await dialog.getByTestId('confirmation-submit-button').click()
 
     const response = await req
     expect(response.result).toStrictEqual({
@@ -51,7 +51,8 @@ test.describe('fil_configure', () => {
     })
 
     const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    await dialog.getByTestId('confirmation-submit-button').click()
+    await dialog.getByTestId('confirmation-submit-button').click()
 
     const response = await req
     expect(response.result).toStrictEqual({

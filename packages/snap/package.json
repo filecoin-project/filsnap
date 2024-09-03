@@ -77,30 +77,30 @@
     }
   },
   "dependencies": {
-    "@metamask/key-tree": "^9.0.0",
-    "@metamask/snaps-sdk": "^6.0.0",
+    "@metamask/key-tree": "^9.1.2",
+    "@metamask/snaps-sdk": "^6.3.0",
     "@paulmillr/qr": "^0.2.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.1.0",
     "merge-options": "^3.0.4",
     "sirv-cli": "^2.0.2",
-    "viem": "^2.17.0",
+    "viem": "^2.20.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@metamask/approval-controller": "^7.0.0",
+    "@metamask/approval-controller": "^7.0.2",
     "@metamask/snaps-rollup-plugin": "^3.0.0",
-    "@playwright/test": "^1.45.1",
+    "@playwright/test": "^1.46.1",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-sucrase": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.4",
-    "metamask-testing-tools": "^1.2.6",
-    "playwright-test": "^14.1.1",
-    "rollup": "^4.12.0",
-    "type-fest": "^4.21.0",
-    "typescript": "5.5.3"
+    "metamask-testing-tools": "^2.0.0",
+    "playwright-test": "^14.1.4",
+    "rollup": "^4.21.2",
+    "type-fest": "^4.26.0",
+    "typescript": "5.5.4"
   },
   "publishConfig": {
     "provenance": true

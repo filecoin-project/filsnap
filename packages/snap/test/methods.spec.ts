@@ -17,7 +17,6 @@ const { test, expect } = createFixture({
   isolated: false,
   downloadOptions: {
     flask: true,
-    tag: 'v11.16.5',
   },
   snap: {
     id: 'local:http://localhost:8081',
@@ -25,6 +24,7 @@ const { test, expect } = createFixture({
 })
 
 test.beforeAll(async ({ metamask, page }) => {
+  await metamask.page.getByTestId('confirmation-submit-button').click()
   const req = metamask.invokeSnap({
     request: {
       method: 'fil_configure',
@@ -36,8 +36,7 @@ test.beforeAll(async ({ metamask, page }) => {
   })
 
   const dialog = await metamask.waitForDialog('confirmation')
-  await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
-
+  await dialog.getByTestId('confirmation-submit-button').click()
   await req
 })
 
@@ -74,11 +73,11 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const dialog1 = await metamask.waitForDialog('confirmation')
-    await dialog1.getByRole('button').filter({ hasText: 'Approve' }).click()
+    let popup = await metamask.waitForDialog('confirmation')
+    await popup.getByTestId('confirmation-submit-button').click()
+    popup = await metamask.waitForDialog('confirmation')
+    await popup.getByTestId('confirmation-submit-button').click()
 
-    const dialog2 = await metamask.waitForDialog('confirmation')
-    await dialog2.locator('.confirmation-footer__actions > button').click()
     const { result } = await privateKey
 
     expect(result).toBe(true)
@@ -104,8 +103,8 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const popup = await metamask.waitForDialog('confirmation')
+    await popup.getByTestId('confirmation-submit-button').click()
     const { result } = await signRaw
 
     expect(result).toStrictEqual(
@@ -141,8 +140,8 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const popup = await metamask.waitForDialog('confirmation')
+    await popup.getByTestId('confirmation-submit-button').click()
     const { result } = await sign
 
     if (result == null) {
@@ -179,8 +178,8 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+    const popup = await metamask.waitForDialog('confirmation')
+    await popup.getByTestId('confirmation-submit-button').click()
     const signedMessageResponse = await invoke
 
     if (signedMessageResponse.error != null) {

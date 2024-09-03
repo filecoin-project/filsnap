@@ -6,7 +6,6 @@ const { test, expect } = createFixture({
   isolated: false,
   downloadOptions: {
     flask: true,
-    tag: 'v11.16.5',
   },
   snap: {
     id: 'local:http://localhost:8081',

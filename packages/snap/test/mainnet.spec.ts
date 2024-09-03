@@ -5,7 +5,6 @@ const { test, expect } = createFixture({
   isolated: false,
   downloadOptions: {
     flask: true,
-    tag: 'v11.16.5',
   },
   snap: {
     id: 'local:http://localhost:8081',
@@ -24,7 +23,8 @@ test.beforeAll(async ({ metamask, page }) => {
   })
 
   const dialog = await metamask.waitForDialog('confirmation')
-  await dialog.getByRole('button').filter({ hasText: 'Approve' }).click()
+  await dialog.getByTestId('confirmation-submit-button').click()
+  await dialog.getByTestId('confirmation-submit-button').click()
 
   await req
 })

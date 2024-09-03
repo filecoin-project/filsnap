@@ -39,9 +39,9 @@ export type {
   AccountInfo,
   FilSnapMethods,
   Network,
-  RequestWithFilSnap,
   SnapConfig,
   Snap,
+  SnapError,
 } from './types'
 
 // Disable transaction insight for now
