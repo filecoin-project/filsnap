@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v1.0.1...filsnap-adapter-react-v2.0.0) (2024-09-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* add configure and disconnect methods, support reconnect on mount and sync with provider
+
+### Features
+
+* add configure and disconnect methods, support reconnect on mount and sync with provider ([443465b](https://github.com/filecoin-project/filsnap/commit/443465b6f75a35ca7e48222a6691c6a4f4af50e5))
+
 ## [1.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v1.0.0...filsnap-adapter-react-v1.0.1) (2024-07-03)
 
 
