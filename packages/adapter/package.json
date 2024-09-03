@@ -42,15 +42,17 @@
     }
   },
   "dependencies": {
-    "@metamask/approval-controller": "^7.0.0",
+    "@metamask/approval-controller": "^7.0.2",
+    "@metamask/snaps-sdk": "^6.3.0",
     "filsnap": "workspace:^",
-    "iso-filecoin": "^4.1.0"
+    "iso-filecoin": "^4.1.0",
+    "viem": "^2.20.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.1",
-    "@types/node": "^20.14.9",
-    "metamask-testing-tools": "^1.2.6",
-    "typescript": "5.5.3"
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.2",
+    "metamask-testing-tools": "^2.0.0",
+    "typescript": "5.5.4"
   },
   "publishConfig": {
     "provenance": true

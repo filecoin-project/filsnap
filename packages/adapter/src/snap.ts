@@ -1,75 +1,60 @@
-import type { FilSnapMethods, Network, SnapConfig } from 'filsnap'
+import type { AccountInfo, FilSnapMethods, Snap, SnapConfig } from 'filsnap'
 import { RPC } from 'iso-filecoin/rpc'
-import type { Provider } from './utils'
-import { getRequestProvider, getSnap } from './utils'
+import { metamask } from './chains'
+import type { EIP1193Provider } from './types'
+import { getOrInstallSnap, getSnap } from './utils'
+
+export type FilsnapAdapterOptions = {
+  /**
+   * EIP-1193 provider
+   */
+  provider: EIP1193Provider
+  /**
+   * Snap info from `wallet_getSnaps`
+   */
+  snap: Snap
+}
+
+export type ConnectOptions = {
+  /**
+   * @default 'npm:filsnap'
+   */
+  snapId?: string
+  /**
+   * @default '*'
+   */
+  snapVersion?: string
+  /**
+   * EIP-1193 provider
+   */
+  provider: EIP1193Provider
+  /**
+   * Snap config
+   */
+  config: Partial<SnapConfig>
+}
+
+/**
+ * Generic result with error
+ */
+export type MaybeResult<ResultType = unknown, ErrorType = Error> =
+  | {
+      error: ErrorType
+      result?: undefined
+    }
+  | {
+      result: ResultType
+      error?: undefined
+    }
 
 export class FilsnapAdapter {
-  readonly snapId: string
-  readonly snapVersion: string
-  private static provider: Provider
+  readonly snap: Snap
+  readonly provider: EIP1193Provider
   config: SnapConfig | undefined
 
-  public constructor(snapId: string, snapVersion: string) {
-    this.snapId = snapId
-    this.snapVersion = snapVersion
-  }
-
-  static async getProvider(): Promise<Provider> {
-    if (!FilsnapAdapter.provider) {
-      FilsnapAdapter.provider = await getRequestProvider()
-    }
-    return FilsnapAdapter.provider
-  }
-
-  /**
-   * Check if Metamask has Snaps API
-   */
-  static async hasSnaps(): Promise<boolean> {
-    const provider = await FilsnapAdapter.getProvider()
-
-    if (!provider || !provider.isMetaMask) {
-      return false
-    }
-
-    try {
-      await provider.request({
-        method: 'wallet_getSnaps',
-      })
-      return true
-    } catch {
-      return false
-    }
-  }
-
-  /**
-   * Check if Filsnap is installed and enabled
-   *
-   * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
-   * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
-   */
-  static async isAvailable(
-    snapId = 'npm:filsnap',
-    snapVersion = '*'
-  ): Promise<boolean> {
-    const hasSnaps = await FilsnapAdapter.hasSnaps()
-    if (!hasSnaps) {
-      return false
-    }
-
-    const provider = await FilsnapAdapter.getProvider()
-    const snaps = await provider.request({ method: 'wallet_getSnaps' })
-
-    const snap = snaps[snapId]
-
-    if (snap == null || 'error' in snap) {
-      return false
-    }
-
-    const isSnapBlocked = snap?.blocked === true
-    const isSnapEnabled = snap?.enabled === true
-    const isVersionMatch = snapVersion === '*' || snap?.version === snapVersion
-
-    return !isSnapBlocked && isSnapEnabled && isVersionMatch
+  public constructor(options: FilsnapAdapterOptions) {
+    this.snap = options.snap
+    this.provider = options.provider
   }
 
   /**
@@ -77,26 +62,21 @@ export class FilsnapAdapter {
    *
    * @throws Error if Metamask is not installed
    *
-   * @param config - Snap config
-   * @param snapId - Snap ID to check for. Defaults to `npm:filsnap` which is the default ID for the Filsnap snap.
-   * @param snapVersion - Snap version to check for. Defaults to `*` which matches any version.
+   * @param options - Connect options
    */
-  static async connect(
-    config: Parameters<FilSnapMethods['fil_configure']>[1],
-    snapId = 'npm:filsnap',
-    snapVersion = '*'
-  ): Promise<FilsnapAdapter> {
-    const hasSnaps = await FilsnapAdapter.hasSnaps()
-    if (!hasSnaps) {
-      throw new Error(
-        'Metamask does not have the Snaps API. Please update to the latest version.'
-      )
-    }
+  static async connect(options: ConnectOptions): Promise<FilsnapAdapter> {
+    // connect to snap
+    const snap = await getOrInstallSnap(
+      options.provider,
+      options.snapId,
+      options.snapVersion
+    )
 
-    const provider = await FilsnapAdapter.getProvider()
-    const snap = await getSnap(provider, snapId, snapVersion)
-    const adapter = new FilsnapAdapter(snapId, snap.version)
-    const result = await adapter.configure(config)
+    const adapter = new FilsnapAdapter({
+      provider: options.provider,
+      snap,
+    })
+    const result = await adapter.configure(options.config)
 
     if (result.error) {
       throw new Error(result.error.message)
@@ -105,13 +85,41 @@ export class FilsnapAdapter {
     return adapter
   }
 
-  /**
-   * Check dapp is connected to Filsnap
-   *
-   * @returns `true` if connected to Filsnap, `false` otherwise
-   */
-  isConnected(): boolean {
-    return this.config != null
+  static async reconnect(options: Omit<ConnectOptions, 'config'>): Promise<
+    | {
+        adapter: FilsnapAdapter
+        account: AccountInfo
+      }
+    | undefined
+  > {
+    const snap = await getSnap(
+      options.provider,
+      options.snapId,
+      options.snapVersion
+    )
+
+    if (snap) {
+      const adapter = new FilsnapAdapter({
+        snap,
+        provider: options.provider,
+      })
+      const info = await adapter.getAccountInfo()
+      if (info.error) {
+        throw new Error(info.error.message, { cause: info.error })
+      }
+      return { adapter, account: info.result }
+    }
+  }
+
+  async disconnect(): Promise<void> {
+    await this.provider.request({
+      method: 'wallet_revokePermissions',
+      params: [
+        {
+          wallet_snap: {},
+        },
+      ],
+    })
   }
 
   /**
@@ -136,24 +144,56 @@ export class FilsnapAdapter {
    * @param params - {@link FilSnapMethods.fil_configure} params
    */
   async configure(
-    params: Parameters<FilSnapMethods['fil_configure']>[1]
+    params: Parameters<FilSnapMethods['fil_configure']>[1] = {}
   ): ReturnType<FilSnapMethods['fil_configure']> {
-    const provider = await FilsnapAdapter.getProvider()
-    const config = await provider.request({
+    const config = await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_configure',
           params,
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
 
-    if (config.result != null) {
+    if (config.result) {
       this.config = config.result
     }
 
+    return config
+  }
+
+  /**
+   * Change the chain
+   *
+   * @param chain - Chain to switch to
+   */
+  async changeChain(
+    chain: string | number
+  ): ReturnType<FilSnapMethods['fil_configure']> {
+    let network = this.config?.network
+
+    if (
+      chain === metamask.testnet.chainId ||
+      chain === 314_159 ||
+      chain === 'testnet'
+    ) {
+      network = 'testnet'
+    }
+
+    if (
+      chain === metamask.mainnet.chainId ||
+      chain === 314 ||
+      chain === 'mainnet'
+    ) {
+      network = 'mainnet'
+    }
+
+    if (this.config && this.config.network === network) {
+      return { result: this.config, error: null }
+    }
+    const config = await this.configure({ network })
     return config
   }
 
@@ -163,16 +203,21 @@ export class FilsnapAdapter {
    * @see {@link FilSnapMethods.fil_getAccountInfo}
    */
   async getAccountInfo(): ReturnType<FilSnapMethods['fil_getAccountInfo']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    const info = await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_getAccountInfo',
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
+
+    if (info.result) {
+      this.config = info.result.config
+    }
+
+    return info
   }
 
   /**
@@ -181,14 +226,13 @@ export class FilsnapAdapter {
    * @see {@link FilSnapMethods.fil_getAddress}
    */
   async getAddress(): ReturnType<FilSnapMethods['fil_getAddress']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_getAddress',
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -199,14 +243,13 @@ export class FilsnapAdapter {
    * @see {@link FilSnapMethods.fil_getPublicKey}
    */
   async getPublicKey(): ReturnType<FilSnapMethods['fil_getPublicKey']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_getPublicKey',
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -217,14 +260,13 @@ export class FilsnapAdapter {
    * @see {@link FilSnapMethods.fil_exportPrivateKey}
    */
   async exportPrivateKey(): ReturnType<FilSnapMethods['fil_exportPrivateKey']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_exportPrivateKey',
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -235,14 +277,13 @@ export class FilsnapAdapter {
    * @see {@link FilSnapMethods.fil_getBalance}
    */
   async getBalance(): ReturnType<FilSnapMethods['fil_getBalance']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_getBalance',
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -255,15 +296,14 @@ export class FilsnapAdapter {
   async signMessage(
     params: Parameters<FilSnapMethods['fil_signMessage']>[1]
   ): ReturnType<FilSnapMethods['fil_signMessage']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_signMessage',
           params,
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -276,15 +316,14 @@ export class FilsnapAdapter {
   async signMessageRaw(
     params: Parameters<FilSnapMethods['fil_signMessageRaw']>[1]
   ): ReturnType<FilSnapMethods['fil_signMessageRaw']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_signMessageRaw',
           params,
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -297,15 +336,14 @@ export class FilsnapAdapter {
   async sendMessage(
     params: Parameters<FilSnapMethods['fil_sendMessage']>[1]
   ): ReturnType<FilSnapMethods['fil_sendMessage']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_sendMessage',
           params,
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
   }
@@ -320,77 +358,15 @@ export class FilsnapAdapter {
   async calculateGasForMessage(
     params: Parameters<FilSnapMethods['fil_getGasForMessage']>[1]
   ): ReturnType<FilSnapMethods['fil_getGasForMessage']> {
-    const provider = await FilsnapAdapter.getProvider()
-    return await provider.request({
+    return await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
           method: 'fil_getGasForMessage',
           params,
         },
-        snapId: this.snapId,
+        snapId: this.snap.id,
       },
     })
-  }
-
-  /**
-   * Switch to or add a different network
-   *
-   * @param network - Network to switch to. Defaults to `mainnet`
-   */
-  async switchOrAddChain(network: Network): Promise<void> {
-    let config = {
-      chainId: '0x13A',
-      chainName: 'Filecoin',
-      rpcUrls: ['https://api.node.glif.io/rpc/v1'],
-      blockExplorerUrls: ['https://filfox.info', 'https://explorer.glif.io/'],
-      nativeCurrency: {
-        name: 'Filecoin',
-        symbol: 'FIL',
-        decimals: 18,
-      },
-      iconUrls: ['https://filsnap.fission.app/filecoin-logo.svg'],
-    }
-
-    if (network === 'testnet') {
-      config = {
-        chainId: '0x4CB2F',
-        chainName: 'Filecoin Calibration testnet',
-        rpcUrls: ['https://api.calibration.node.glif.io/rpc/v1'],
-        blockExplorerUrls: ['https://filfox.info', 'https://explorer.glif.io/'],
-        nativeCurrency: {
-          name: 'Filecoin',
-          symbol: 'tFIL',
-          decimals: 18,
-        },
-        iconUrls: ['https://filsnap.fission.app/filecoin-logo.svg'],
-      }
-    }
-
-    const provider = await FilsnapAdapter.getProvider()
-    try {
-      await provider.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: config.chainId }],
-      })
-    } catch (switchError) {
-      const err = switchError as Error & {
-        code: number
-      }
-
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (err.code === 4902) {
-        try {
-          await provider.request({
-            method: 'wallet_addEthereumChain',
-            params: [config],
-          })
-        } catch (error) {
-          throw new Error('Failed to add chain to MetaMask.', { cause: error })
-        }
-      } else {
-        throw new Error('Failed to add switch to MetaMask.', { cause: err })
-      }
-    }
   }
 }
