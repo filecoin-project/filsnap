@@ -7,7 +7,7 @@
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "4Hli2ldMXbJmpDd2+MHqlCDBk2zoU2jT5quO3ZyFuh0=",
+    "shasum": "xECCljVDj9hrAjy97R9YhEDM2rDOo2ZlGxgjo2Q/PZk=",
     "location": {
       "npm": {
         "filePath": "dist/snap.js",
@@ -18,7 +18,8 @@
     }
   },
   "initialConnections": {
-    "http://localhost:5173": {}
+    "https://filsnap.dev": {},
+    "https://www.glif.io/": {}
   },
   "initialPermissions": {
     "endowment:page-home": {},
