@@ -58,6 +58,6 @@
     "@types/node": "^22.5.2",
     "typescript": "5.5.4",
     "vite": "^5.4.3",
-    "wireit": "^0.14.8"
+    "wireit": "^0.14.9"
   }
 }
