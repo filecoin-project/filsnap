@@ -55,7 +55,7 @@
     "@babel/core": "^7.25.2",
     "@biomejs/biome": "^1.8.3",
     "@hugomrdias/configs": "^0.1.8",
-    "@types/node": "^22.5.2",
+    "@types/node": "^22.5.4",
     "typescript": "5.5.4",
     "vite": "^5.4.3",
     "wireit": "^0.14.8"
