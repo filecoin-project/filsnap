@@ -90,7 +90,7 @@
   },
   "devDependencies": {
     "@metamask/approval-controller": "^7.0.3",
-    "@metamask/snaps-rollup-plugin": "^3.0.0",
+    "@metamask/snaps-rollup-plugin": "^4.1.2",
     "@playwright/test": "^1.46.1",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
