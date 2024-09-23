@@ -25,7 +25,13 @@ if (appEl) {
   render(
     <WagmiProvider config={configWagmi}>
       <QueryClientProvider client={queryClient}>
-        <FilsnapProvider snapId={SNAP_ID} snapVersion=">=0.5.0" config={config}>
+        <FilsnapProvider
+          snapId={SNAP_ID}
+          snapVersion=">=0.5.0"
+          config={config}
+          reconnectOnMount={true}
+          syncWithProvider={true}
+        >
           <App />
         </FilsnapProvider>
       </QueryClientProvider>

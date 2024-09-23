@@ -1,4 +1,4 @@
-import { filForwarderMetadata, getRequestProvider } from 'filsnap-adapter'
+import { filForwarderMetadata, getProvider } from 'filsnap-adapter'
 import * as Address from 'iso-filecoin/address'
 import { PROTOCOL_INDICATOR } from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
@@ -29,7 +29,7 @@ async function transfer(
     throw new Error('Recipient must be a testnet address')
   }
 
-  const provider = await getRequestProvider()
+  const provider = await getProvider()
 
   // RPC client for requests that needs to be signed
   const metaMaskClient = createWalletClient({
