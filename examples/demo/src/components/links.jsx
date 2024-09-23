@@ -14,7 +14,10 @@ export default function Links() {
      */
     async function main() {
       try {
-        if (window.location.host.includes('ipfs.dweb.link')) {
+        if (
+          window.location.host.includes('ipfs.dweb.link') ||
+          window.location.host.includes('ipfs.w3s.link')
+        ) {
           const cid = window.location.host.split('.')[0]
           setCid(cid)
           return
@@ -24,8 +27,9 @@ export default function Links() {
           'TXT'
         )
         setCid(dnsRecord[0][0].replace('dnslink=/ipfs/', ''))
-      } catch {
+      } catch (error) {
         // noop
+        console.error(error)
       }
     }
 
