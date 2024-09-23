@@ -54,7 +54,11 @@ export async function getAccount(
 export async function getAccountSafe(
   snap: SnapsProvider,
   config: SnapConfig
-): Promise<{ address: AddressSecp256k1 | AddressBLS; pubKey: Uint8Array }> {
+): Promise<{
+  address: AddressSecp256k1 | AddressBLS
+  pubKey: Uint8Array
+  accountNumber: number
+}> {
   const { derivationPath } = config
   const {
     coinType,
@@ -94,5 +98,5 @@ export async function getAccountSafe(
   // @ts-expect-error - deref account
   account = null
 
-  return { address, pubKey }
+  return { address, pubKey, accountNumber }
 }

@@ -46,7 +46,6 @@
     "filecoin-logo.svg"
   ],
   "scripts": {
-    "ts-build": "tsc --build",
     "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "test": "playwright test",
     "build": "wireit",
@@ -54,19 +53,19 @@
   },
   "wireit": {
     "build": {
-      "command": "rollup -c",
+      "command": "mm-snap build",
       "files": [
         "src/**/*.ts",
+        "src/**/*.tsx",
         "tsconfig.json",
-        "rollup.config.js",
-        "snap.manifest.json"
+        "snap.config.ts"
       ],
       "output": [
         "dist/snap.js"
       ]
     },
     "serve": {
-      "command": "sirv --port 8081 --dev",
+      "command": "mm-snap serve --port 8081",
       "dependencies": [
         {
           "script": "build",
@@ -78,29 +77,24 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^9.1.2",
-    "@metamask/snaps-sdk": "^6.3.0",
+    "@metamask/snaps-sdk": "^6.5.1",
     "@paulmillr/qr": "^0.2.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.1.0",
     "merge-options": "^3.0.4",
-    "sirv-cli": "^2.0.2",
-    "viem": "^2.21.1",
+    "viem": "^2.21.12",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@metamask/approval-controller": "^7.0.3",
-    "@metamask/snaps-rollup-plugin": "^3.0.0",
-    "@playwright/test": "^1.46.1",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-sucrase": "^5.0.2",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@metamask/snaps-cli": "^6.3.3",
+    "@playwright/test": "^1.47.2",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.4",
     "metamask-testing-tools": "^2.0.1",
-    "playwright-test": "^14.1.4",
-    "rollup": "^4.21.2",
-    "type-fest": "^4.26.0",
-    "typescript": "5.5.4"
+    "playwright-test": "^14.1.6",
+    "type-fest": "^4.26.1",
+    "typescript": "5.6.2"
   },
   "publishConfig": {
     "provenance": true
@@ -113,7 +107,6 @@
       "@metamask/approval-controller",
       "@types/*",
       "assert",
-      "sirv-cli",
       "playwright-test",
       "mocha"
     ]

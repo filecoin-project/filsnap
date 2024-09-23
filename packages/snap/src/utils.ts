@@ -1,4 +1,5 @@
 import type { NodeType, Panel, SnapsProvider } from '@metamask/snaps-sdk'
+import { Token } from 'iso-filecoin/token'
 import type { Jsonify } from 'type-fest'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
@@ -173,4 +174,10 @@ export async function snapDialog(
   })
 
   return result === true
+}
+
+export function formatFIL(value: string, config: SnapConfig): string {
+  return `${Token.fromAttoFIL(value)
+    .toFIL()
+    .toFormat({ decimalPlaces: config.unit?.decimals })} ${config.unit?.symbol}`
 }

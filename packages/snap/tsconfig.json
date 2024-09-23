@@ -1,9 +1,11 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "jsx": "react-jsxdev",
+    "jsxImportSource": "@metamask/snaps-sdk"
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "snap.manifest.json"],
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {
     "entryPointStrategy": "resolve",
