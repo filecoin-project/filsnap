@@ -1,3 +1,4 @@
+import { Resolver } from 'dns-over-http-resolver'
 import { useFilsnap } from 'filsnap-adapter-react'
 import { useEffect, useState } from 'preact/hooks'
 
