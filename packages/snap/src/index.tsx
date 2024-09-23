@@ -7,7 +7,6 @@ import type {
 import encodeQR from '@paulmillr/qr'
 import { hex } from 'iso-base/rfc4648'
 import { RPC } from 'iso-filecoin/rpc'
-import { parseDerivationPath } from 'iso-filecoin/utils'
 
 import { getAccountInfo } from './rpc/get-account'
 import type {
@@ -162,7 +161,6 @@ export const onHomePage: OnHomePageHandler = async () => {
   }
 
   const account = await getAccountSafe(snap, config)
-  const { account: accountNumber } = parseDerivationPath(config.derivationPath)
   let qr = encodeQR(account.address.toString(), 'svg')
 
   qr = qr.replace(
@@ -186,7 +184,7 @@ export const onHomePage: OnHomePageHandler = async () => {
     content: (
       <HomePage
         address={account.address.toString()}
-        accountNumber={accountNumber}
+        accountNumber={account.accountNumber}
         balance={balance.result}
         config={config}
         qr={qr}

@@ -9,7 +9,7 @@
   "exclude": ["node_modules", "dist", "out"],
   "typedocOptions": {
     "entryPointStrategy": "resolve",
-    "entryPoints": ["src/index.ts"],
+    "entryPoints": ["src/index.tsx"],
     "includeVersion": true,
     "internalModule": "<internal>",
     "excludeExternals": true
