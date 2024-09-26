@@ -1,4 +1,3 @@
-import { copyable, heading, panel, row, text } from '@metamask/snaps-sdk'
 import { dequal } from 'dequal/lite'
 import { RPC } from 'iso-filecoin/rpc'
 import { parseDerivationPath } from 'iso-filecoin/utils'
@@ -6,9 +5,10 @@ import { parseDerivationPath } from 'iso-filecoin/utils'
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
 import { getAccountSafe } from '../account'
+import { Configure } from '../components/configure'
 import { snapConfig } from '../schemas'
 import type { SnapConfig, SnapContext, SnapResponse } from '../types'
-import { configFromNetwork, serializeError, snapDialog } from '../utils'
+import { configFromNetwork, serializeError } from '../utils'
 
 // Types
 export type ConfigureParams = Partial<SnapConfig>
@@ -42,7 +42,6 @@ export async function configure(
     derivationPath,
     rpc: { url, token },
     network,
-    unit,
   } = _params.data
 
   const { coinType, account: accountNumber } =
@@ -81,19 +80,19 @@ export async function configure(
 
   const account = await getAccountSafe(snap, _params.data)
 
-  const conf = await snapDialog(ctx.snap, {
-    type: 'confirmation',
-    content: panel([
-      heading('Connection request'),
-      text(`**${ctx.origin}** wants to connect with your Filecoin account.`),
-      text(`Account ${accountNumber}`),
-      copyable(`${account.address.toString()}`),
-      row('Derivation Path:', text(derivationPath)),
-      row('API:', text(url)),
-      row('Network:', text(network)),
-      row('Unit Decimals:', text(unit?.decimals.toString() ?? 'N/A')),
-      row('Unit Symbol:', text(unit?.symbol ?? 'N/A')),
-    ]),
+  const conf = await ctx.snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: (
+        <Configure
+          accountNumber={accountNumber}
+          address={account.address.toString()}
+          config={_params.data}
+          origin={ctx.origin}
+        />
+      ),
+    },
   })
 
   if (conf) {

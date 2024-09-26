@@ -1,5 +1,4 @@
-import type { NodeType, Panel, SnapsProvider } from '@metamask/snaps-sdk'
-import { Token } from 'iso-filecoin/token'
+import { Token, type Value } from 'iso-filecoin/token'
 import type { Jsonify } from 'type-fest'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
@@ -85,98 +84,10 @@ export function serializeError(
   }
 }
 
-type DialogContent =
-  | {
-      type: 'alert'
-      content:
-        | Panel
-        | {
-            value: string
-            type: NodeType.Copyable
-          }
-        | {
-            type: NodeType.Divider
-          }
-        | {
-            value: string
-            type: NodeType.Heading
-          }
-        | {
-            type: NodeType.Spinner
-          }
-        | {
-            value: string
-            type: NodeType.Text
-          }
-    }
-  | {
-      type: 'confirmation'
-      content:
-        | Panel
-        | {
-            value: string
-            type: NodeType.Copyable
-          }
-        | {
-            type: NodeType.Divider
-          }
-        | {
-            value: string
-            type: NodeType.Heading
-          }
-        | {
-            type: NodeType.Spinner
-          }
-        | {
-            value: string
-            type: NodeType.Text
-          }
-    }
-  | {
-      type: 'prompt'
-      content:
-        | Panel
-        | {
-            value: string
-            type: NodeType.Copyable
-          }
-        | {
-            type: NodeType.Divider
-          }
-        | {
-            value: string
-            type: NodeType.Heading
-          }
-        | {
-            type: NodeType.Spinner
-          }
-        | {
-            value: string
-            type: NodeType.Text
-          }
-      placeholder?: string | undefined
-    }
-
 /**
- * Show a dialog to the user
- *
- * @param snap - The snap itself
- * @param params - The dialog content
- * @see https://docs.metamask.io/snaps/reference/rpc-api/#snap_dialog
+ * Formats attoFIL to FIL using the specified configuration
  */
-export async function snapDialog(
-  snap: SnapsProvider,
-  params: DialogContent
-): Promise<boolean> {
-  const result = await snap.request({
-    method: 'snap_dialog',
-    params,
-  })
-
-  return result === true
-}
-
-export function formatFIL(value: string, config: SnapConfig): string {
+export function formatFIL(value: Value, config: SnapConfig): string {
   return `${Token.fromAttoFIL(value)
     .toFIL()
     .toFormat({ decimalPlaces: config.unit?.decimals })} ${config.unit?.symbol}`

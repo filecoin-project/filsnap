@@ -1,22 +1,13 @@
-import {
-  copyable,
-  divider,
-  heading,
-  panel,
-  row,
-  text,
-} from '@metamask/snaps-sdk'
 import { base64pad } from 'iso-base/rfc4648'
 import * as Address from 'iso-filecoin/address'
 import { Message, Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
-import { Token } from 'iso-filecoin/token'
-import { parseDerivationPath } from 'iso-filecoin/utils'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
 import { getAccount } from '../account'
+import { SignMessageDialog, SignRawDialog } from '../components/sign'
 import type { SnapContext, SnapResponse } from '../types'
-import { serializeError, snapDialog } from '../utils'
+import { serializeError } from '../utils'
 import type { SignedMessage } from './send-message'
 
 // Schemas
@@ -86,43 +77,19 @@ export async function signMessage(
     method: _params.data.method,
   }).prepare(rpc)
 
-  const gas = Token.fromAttoFIL(message.gasPremium).mul(message.gasLimit)
-  const total = Token.fromAttoFIL(message.value).add(gas)
-  const { account: accountNumber } = parseDerivationPath(config.derivationPath)
-  const conf = await snapDialog(ctx.snap, {
-    type: 'confirmation',
-    content: panel([
-      heading(`Request from ${ctx.origin}`),
-      text(
-        `Send **${Token.fromAttoFIL(message.value).toFIL().toString()} ${
-          config.unit?.symbol ?? 'FIL'
-        }** from Account ${accountNumber}`
+  const conf = await ctx.snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: (
+        <SignMessageDialog
+          accountNumber={account.accountNumber}
+          message={message}
+          config={config}
+          origin={ctx.origin}
+        />
       ),
-      copyable(message.from),
-      text('to'),
-      copyable(message.to),
-      divider(),
-      heading('Details'),
-      row(
-        'Estimated gas:',
-        text(
-          `${gas.toFIL().toFormat({
-            decimalPlaces: config.unit?.decimals,
-          })} ${config.unit?.symbol ?? 'FIL'}`
-        )
-      ),
-
-      row(
-        'Estimated total (amount + gas):',
-        text(
-          `${total.toFIL().toFormat({
-            decimalPlaces: config.unit?.decimals,
-          })} ${config.unit?.symbol ?? 'FIL'}`
-        )
-      ),
-      row('API:', text(config.rpc.url)),
-      row('Network:', text(config.network)),
-    ]),
+    },
   })
 
   if (conf) {
@@ -170,17 +137,19 @@ export async function signMessageRaw(
   const { message } = _params.data
 
   const account = await getAccount(snap, config)
-  const { account: accountNumber } = parseDerivationPath(config.derivationPath)
 
-  const conf = await snapDialog(ctx.snap, {
-    type: 'confirmation',
-    content: panel([
-      heading(`Request from ${ctx.origin}`),
-      text(
-        `Do you want to sign this message with **Account ${accountNumber}** _${account.address.toString()}_?`
+  const conf = await ctx.snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: (
+        <SignRawDialog
+          origin={ctx.origin}
+          accountNumber={account.accountNumber}
+          message={message}
+        />
       ),
-      copyable(message),
-    ]),
+    },
   })
 
   if (conf) {

@@ -2,6 +2,7 @@ import type { SnapsProvider } from '@metamask/snaps-sdk'
 
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 
+import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
 import type { z } from 'zod'
 import type { configure } from './rpc/configure'
 import type { exportPrivateKey } from './rpc/export-private-key'
@@ -24,6 +25,16 @@ export type Account = ReturnType<typeof accountFromPrivateKey>
 export type { Snap } from '@metamask/snaps-sdk'
 
 // Snap types
+export interface AccountSafe {
+  address: AddressSecp256k1 | AddressBLS
+  pubKey: Uint8Array
+  accountNumber: number
+  path: string | undefined
+}
+
+export interface AccountPrivate extends Account {
+  accountNumber: number
+}
 export interface AccountInfo {
   address: string
   pubKey: string

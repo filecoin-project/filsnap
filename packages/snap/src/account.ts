@@ -1,9 +1,8 @@
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 import type { SnapsProvider } from '@metamask/snaps-sdk'
-import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { accountFromPrivateKey } from 'iso-filecoin/wallet'
-import type { Account, SnapConfig } from './types'
+import type { AccountPrivate, AccountSafe, SnapConfig } from './types'
 
 /**
  * Return derived Account from seed.
@@ -14,7 +13,7 @@ import type { Account, SnapConfig } from './types'
 export async function getAccount(
   snap: SnapsProvider,
   config: SnapConfig
-): Promise<Account> {
+): Promise<AccountPrivate> {
   const { derivationPath } = config
   const { coinType, account, change, addressIndex } =
     parseDerivationPath(derivationPath)
@@ -38,11 +37,14 @@ export async function getAccount(
   }
   const privateKeyBuffer = privateKey.subarray(0, 32)
 
-  return accountFromPrivateKey(
-    privateKeyBuffer,
-    'SECP256K1',
-    isFilecoinMainnet ? 'mainnet' : 'testnet'
-  )
+  return {
+    ...accountFromPrivateKey(
+      privateKeyBuffer,
+      'SECP256K1',
+      isFilecoinMainnet ? 'mainnet' : 'testnet'
+    ),
+    accountNumber: account,
+  }
 }
 
 /**
@@ -54,11 +56,7 @@ export async function getAccount(
 export async function getAccountSafe(
   snap: SnapsProvider,
   config: SnapConfig
-): Promise<{
-  address: AddressSecp256k1 | AddressBLS
-  pubKey: Uint8Array
-  accountNumber: number
-}> {
+): Promise<AccountSafe> {
   const { derivationPath } = config
   const {
     coinType,
@@ -98,5 +96,5 @@ export async function getAccountSafe(
   // @ts-expect-error - deref account
   account = null
 
-  return { address, pubKey, accountNumber }
+  return { address, pubKey, accountNumber, path: account.path }
 }

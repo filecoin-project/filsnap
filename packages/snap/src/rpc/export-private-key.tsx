@@ -1,9 +1,8 @@
-import { copyable, divider, panel, text } from '@metamask/snaps-sdk'
 import { base64pad } from 'iso-base/rfc4648'
-import { parseDerivationPath } from 'iso-filecoin/utils'
 import { getAccount } from '../account'
+import { ExportConfirm, PrivateKeyExport } from '../components/export'
 import type { SnapContext, SnapResponse } from '../types'
-import { serializeError, snapDialog } from '../utils'
+import { serializeError } from '../utils'
 
 // Types
 export type ExportPrivateKeyResponse = SnapResponse<boolean>
@@ -31,29 +30,28 @@ export async function exportPrivateKey(
 
   const account = await getAccount(snap, config)
 
-  const { account: accountNumber } = parseDerivationPath(config.derivationPath)
-  const conf = await snapDialog(ctx.snap, {
-    type: 'confirmation',
-    content: panel([
-      text(
-        `Do you want to export **Account ${accountNumber}** _${account.address.toString()}_ your private key?`
+  const conf = await ctx.snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: (
+        <ExportConfirm
+          address={account.address.toString()}
+          accountNumber={account.accountNumber}
+        />
       ),
-      divider(),
-      text(
-        'Warning: Never disclose this key. Anyone with your private keys can steal any assets held in your account.'
-      ),
-    ]),
+    },
   })
 
   if (conf) {
-    await snapDialog(ctx.snap, {
-      type: 'alert',
-      content: panel([
-        text(
-          `Private key for **Account ${accountNumber}** _${account.address.toString()}_`
+    await ctx.snap.request({
+      method: 'snap_dialog',
+      params: {
+        type: 'alert',
+        content: (
+          <PrivateKeyExport privateKey={base64pad.encode(account.privateKey)} />
         ),
-        copyable(base64pad.encode(account.privateKey)),
-      ]),
+      },
     })
 
     return { result: true, error: null }

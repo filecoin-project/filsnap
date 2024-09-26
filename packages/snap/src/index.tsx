@@ -101,6 +101,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
           request.params as SignMessageRawParams
         )
       }
+
       case 'fil_sendMessage': {
         return await sendMessage(context, request.params as SignedMessage)
       }
