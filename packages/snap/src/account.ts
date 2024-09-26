@@ -92,9 +92,10 @@ export async function getAccountSafe(
 
   const address = account.address
   const pubKey = account.pubKey
+  const path = account.path
 
   // @ts-expect-error - deref account
   account = null
 
-  return { address, pubKey, accountNumber, path: account.path }
+  return { address, pubKey, accountNumber, path }
 }
