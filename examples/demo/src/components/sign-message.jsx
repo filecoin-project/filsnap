@@ -17,8 +17,8 @@ const SignMessage = () => {
     event.preventDefault()
 
     const data = new FormData(event.currentTarget)
+
     const response = await snap?.signMessageRaw({
-      // @ts-ignore
       message: data.get('messageToSign') || '',
     })
     if (response) {

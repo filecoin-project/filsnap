@@ -48,13 +48,11 @@ export function App() {
         {isConnected && <Send />}
         {isConnected && <Forward />}
         {snap && (
-          <>
-            <details class="Cell100">
-              <summary>Advanced</summary>
-              <Account />
-              <SignMessage />
-            </details>
-          </>
+          <details class="Cell100">
+            <summary>Advanced</summary>
+            <Account />
+            <SignMessage />
+          </details>
         )}
         <Links />
       </div>

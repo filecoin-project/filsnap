@@ -49,15 +49,15 @@
     "filsnap-adapter": "^2.0.0",
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.1.0",
-    "viem": "^2.21.12"
+    "viem": "^2.21.14"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@biomejs/biome": "^1.8.3",
-    "@hugomrdias/configs": "^0.1.8",
-    "@types/node": "^22.5.5",
+    "@biomejs/biome": "^1.9.2",
+    "@hugomrdias/configs": "^0.1.9",
+    "@types/node": "^22.7.0",
     "typescript": "5.6.2",
-    "vite": "^5.4.7",
+    "vite": "^5.4.8",
     "wireit": "^0.14.8"
   }
 }

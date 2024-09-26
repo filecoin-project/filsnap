@@ -68,7 +68,7 @@ export default function Links() {
           CID:{' '}
           <a
             target="_blank"
-            href={`https://${cid}.ipfs.dweb.link/`}
+            href={`https://${cid}.ipfs.w3s.link/`}
             rel="noreferrer"
           >
             {cid || 'unknown'}

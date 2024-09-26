@@ -1,7 +1,7 @@
-@import '@acab/reset.css';
-@import 'water.css';
+@import "@acab/reset.css";
+@import "water.css";
 
-@import 'react-toastify/dist/ReactToastify.css';
+@import "react-toastify/dist/ReactToastify.css";
 
 :root {
   --toastify-color-dark: #161f27;
@@ -10,7 +10,6 @@
 .Toastify__close-button > svg {
   max-inline-size: none;
 }
-
 
 @media (prefers-color-scheme: dark) {
   ::selection {
@@ -123,10 +122,9 @@ h4 {
   vertical-align: text-bottom;
 }
 
-
 .icon-copy {
-  cursor: pointer
+  cursor: pointer;
 }
 .icon-copy:active {
-  scale: 1.1; 
+  scale: 1.1;
 }
