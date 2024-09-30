@@ -77,7 +77,7 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^9.1.2",
-    "@metamask/snaps-sdk": "^6.6.0",
+    "@metamask/snaps-sdk": "^6.7.0",
     "@paulmillr/qr": "^0.2.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
