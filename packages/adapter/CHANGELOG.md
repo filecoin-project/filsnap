@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.0...filsnap-adapter-v2.0.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* fix chain names to avoid metamask warnings ([814317f](https://github.com/filecoin-project/filsnap/commit/814317f1cee92cd40061837ac1e5a6837f4cf108))
+
 ## [2.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v1.0.2...filsnap-adapter-v2.0.0) (2024-09-03)
 
 
