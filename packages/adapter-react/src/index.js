@@ -158,6 +158,10 @@ export function FilsnapProvider({
             return
           }
 
+          if (network === undefined) {
+            return await disconnect()
+          }
+
           setIsConfiguring(true)
 
           const data = await snap.changeChain(chainId)
