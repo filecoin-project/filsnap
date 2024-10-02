@@ -1,7 +1,7 @@
 export const metamask = {
   mainnet: {
     chainId: '0x13a',
-    chainName: 'Filecoin',
+    chainName: 'Filecoin - Mainnet',
     rpcUrls: ['https://api.node.glif.io/rpc/v1'],
     blockExplorerUrls: ['https://filfox.info', 'https://explorer.glif.io/'],
     nativeCurrency: {
@@ -14,7 +14,7 @@ export const metamask = {
 
   testnet: {
     chainId: '0x4cb2f',
-    chainName: 'Filecoin Calibration',
+    chainName: 'Filecoin - Calibration testnet',
     rpcUrls: ['https://api.calibration.node.glif.io/rpc/v1'],
     blockExplorerUrls: ['https://filfox.info', 'https://explorer.glif.io/'],
     nativeCurrency: {
