@@ -70,7 +70,7 @@ export type Promisable<T> = T | Promise<T>
  * @param options - The connector options.
  */
 export function createConnector(options: ConnectorOptions) {
-  let currentNetwork: Network
+  let currentNetwork: Network | undefined
   const { provider } = options
 
   let onAccountsChanged: ((accounts: string[]) => void) | undefined
@@ -130,6 +130,7 @@ export function createConnector(options: ConnectorOptions) {
 
       // switch to chain
       currentNetwork = this.chainIdtoNetwork(await this.getChainId())
+
       await this.switchChain(options.network ?? currentNetwork)
       return { accounts, network: currentNetwork }
     },
@@ -161,15 +162,23 @@ export function createConnector(options: ConnectorOptions) {
       return await provider.request({ method: 'eth_chainId' })
     },
 
-    chainIdtoNetwork(chainId: string) {
+    /**
+     *
+     * @param chainId
+     * @returns  Returns mainnet, testnet or undefined if not a filecoin chain
+     */
+    chainIdtoNetwork(chainId: string): Network | undefined {
       return chainId === metamask.testnet.chainId
         ? 'testnet'
         : chainId === metamask.mainnet.chainId
           ? 'mainnet'
-          : currentNetwork
+          : undefined
     },
 
-    async switchChain(network: Network = currentNetwork) {
+    async switchChain(network: Network | undefined = currentNetwork) {
+      if (network === undefined) {
+        network = 'mainnet'
+      }
       const config = network === 'testnet' ? metamask.testnet : metamask.mainnet
 
       if (currentNetwork === network) {
@@ -252,6 +261,7 @@ export function createConnector(options: ConnectorOptions) {
     },
 
     onChainChanged(chainId: string) {
+      currentNetwork = this.chainIdtoNetwork(chainId)
       options.onChainChanged?.(chainId)
     },
 
