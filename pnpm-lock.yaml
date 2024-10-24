@@ -260,11 +260,11 @@ importers:
         specifier: ^1.48.1
         version: 1.48.1
       '@types/react':
-        specifier: 18.3.12
-        version: 18.3.12
+        specifier: 18.2.14
+        version: 18.2.14
       '@types/react-dom':
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 18.2.4
+        version: 18.2.4
       metamask-testing-tools:
         specifier: ^2.0.1
         version: 2.0.1(@babel/runtime@7.25.9)(@metamask/approval-controller@7.1.0)(webextension-polyfill@0.10.0)
@@ -2237,14 +2237,23 @@ packages:
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
 
+  '@types/react-dom@18.2.4':
+    resolution: {integrity: sha512-G2mHoTMTL4yoydITgOGwWdWMVd8sNgyEP85xVmMKAPUBwQWm9wBPQUmvbeF4V3WBY1P7mmL4BkjQ0SqUpf1snw==}
+
   '@types/react-dom@18.3.1':
     resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
+
+  '@types/react@18.2.14':
+    resolution: {integrity: sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==}
 
   '@types/react@18.3.12':
     resolution: {integrity: sha512-D2wOSq/d6Agt28q7rSI3jhU7G6aiuzljDGZ2hTZHIkrTLUI+AF3WMeKkEZ9nN2fkBAlcktT6vcZjDFiIhMYEQw==}
 
   '@types/retry@0.12.2':
     resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
+
+  '@types/scheduler@0.23.0':
+    resolution: {integrity: sha512-YIoDCTH3Af6XM5VuwGG/QL/CJqga1Zm3NkU3HZ4ZHK2fRMPYP1VczsTUqtsf43PH/iJNVlPHAo2oWX7BSdB2Hw==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -8549,9 +8558,19 @@ snapshots:
 
   '@types/prop-types@15.7.13': {}
 
+  '@types/react-dom@18.2.4':
+    dependencies:
+      '@types/react': 18.3.12
+
   '@types/react-dom@18.3.1':
     dependencies:
       '@types/react': 18.3.12
+
+  '@types/react@18.2.14':
+    dependencies:
+      '@types/prop-types': 15.7.13
+      '@types/scheduler': 0.23.0
+      csstype: 3.1.3
 
   '@types/react@18.3.12':
     dependencies:
@@ -8559,6 +8578,8 @@ snapshots:
       csstype: 3.1.3
 
   '@types/retry@0.12.2': {}
+
+  '@types/scheduler@0.23.0': {}
 
   '@types/stack-utils@2.0.3': {}
 
