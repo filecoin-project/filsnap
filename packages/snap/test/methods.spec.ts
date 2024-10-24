@@ -35,8 +35,7 @@ test.beforeAll(async ({ metamask, page }) => {
     page,
   })
 
-  const dialog = await metamask.waitForDialog('confirmation')
-  await dialog.getByTestId('confirmation-submit-button').click()
+  await metamask.waitForConfirmation()
   await req
 })
 
@@ -73,10 +72,8 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    let popup = await metamask.waitForDialog('confirmation')
-    await popup.getByTestId('confirmation-submit-button').click()
-    popup = await metamask.waitForDialog('confirmation')
-    await popup.getByTestId('confirmation-submit-button').click()
+    await metamask.waitForConfirmation()
+    await metamask.waitForConfirmation()
 
     const { result } = await privateKey
 
@@ -103,8 +100,7 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const popup = await metamask.waitForDialog('confirmation')
-    await popup.getByTestId('confirmation-submit-button').click()
+    await metamask.waitForConfirmation()
     const { result } = await signRaw
 
     expect(result).toStrictEqual(
@@ -140,8 +136,7 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const popup = await metamask.waitForDialog('confirmation')
-    await popup.getByTestId('confirmation-submit-button').click()
+    await metamask.waitForConfirmation()
     const { result } = await sign
 
     if (result == null) {
@@ -178,8 +173,7 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    const popup = await metamask.waitForDialog('confirmation')
-    await popup.getByTestId('confirmation-submit-button').click()
+    await metamask.waitForConfirmation()
     const signedMessageResponse = await invoke
 
     if (signedMessageResponse.error != null) {

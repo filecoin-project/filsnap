@@ -26,9 +26,7 @@ test.beforeAll(async ({ metamask, page }) => {
     page,
   })
 
-  const dialog = await metamask.waitForDialog('confirmation')
-  await dialog.getByTestId('confirmation-submit-button').click()
-
+  await metamask.waitForConfirmation()
   await req
 })
 test.describe('fil_getGasForMessage', () => {

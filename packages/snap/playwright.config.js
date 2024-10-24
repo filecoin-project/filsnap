@@ -6,7 +6,7 @@ export default defineConfig({
   timeout: process.env.CI ? 60 * 1000 : 30 * 1000,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 1,
-  workers: process.env.CI ? 1 : 1,
+  workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? [['html'], ['list']] : 'list',
   use: {
     baseURL: 'http://example.org',

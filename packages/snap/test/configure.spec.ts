@@ -24,8 +24,7 @@ test.describe('fil_configure', () => {
       page,
     })
 
-    const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByTestId('confirmation-submit-button').click()
+    await metamask.waitForConfirmation()
 
     const response = await req
     expect(response.result).toStrictEqual({
@@ -51,8 +50,7 @@ test.describe('fil_configure', () => {
       page,
     })
 
-    const dialog = await metamask.waitForDialog('confirmation')
-    await dialog.getByTestId('confirmation-submit-button').click()
+    await metamask.waitForConfirmation()
 
     const response = await req
     expect(response.result).toStrictEqual({
