@@ -87,7 +87,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "^6.5.0",
+    "@metamask/snaps-cli": "6.3.3",
     "@playwright/test": "^1.48.1",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
