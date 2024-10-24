@@ -32,7 +32,7 @@ fixture.test(
   async ({ metamask, page }) => {
     await page.getByTestId('connect-snap').click()
 
-    const dialog = await metamask.waitForDialog('experimental-area')
+    const dialog = await metamask.waitForDialog('**/experimental-area')
     await fixture.expect(dialog.getByTestId('experimental-area')).toBeVisible()
   }
 )
@@ -43,7 +43,7 @@ fixture.test(
     await metamask.setup()
     await page.getByTestId('connect-snap').click()
 
-    const dialog = await metamask.waitForDialog('snaps-connect')
+    const dialog = await metamask.waitForDialog('**/snaps-connect')
     fixture.expect(dialog).toBeDefined()
   }
 )
@@ -64,7 +64,9 @@ fixture.test(
   async ({ metamask, page }) => {
     await page.getByTestId('connect-snap').click()
 
-    const dialog = await metamask.waitForDialog('confirmation')
+    const dialog = await metamask.waitForDialog((url) => {
+      return url.hash.includes('confirmation')
+    })
     fixture.expect(dialog).toBeDefined()
   }
 )
@@ -90,7 +92,9 @@ fixture.test(
     await page.reload()
     await page.getByTestId('connect-snap').click()
 
-    const dialog = await metamask.waitForDialog('confirmation')
+    const dialog = await metamask.waitForDialog((url) => {
+      return url.hash.includes('confirmation')
+    })
     fixture.expect(dialog).toBeDefined()
   }
 )
