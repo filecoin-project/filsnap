@@ -122,7 +122,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 }
 
 export const onInstall: OnInstallHandler = async () => {
-  const config = configFromNetwork('testnet')
+  const config = configFromNetwork('mainnet')
   const state = new State(snap)
   await state.set(INTERNAL_CONFIG, config)
 
@@ -136,6 +136,13 @@ export const onInstall: OnInstallHandler = async () => {
 }
 
 export const onUpdate: OnUpdateHandler = async () => {
+  const config = configFromNetwork('mainnet')
+  const state = new State(snap)
+
+  if (!(await state.has(INTERNAL_CONFIG))) {
+    await state.set(INTERNAL_CONFIG, config)
+  }
+
   await snap.request({
     method: 'snap_dialog',
     params: {
