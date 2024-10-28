@@ -68,7 +68,7 @@
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.9",
+    "@babel/core": "^7.26.0",
     "@biomejs/biome": "^1.9.4",
     "@hugomrdias/configs": "^0.1.9",
     "@preact/preset-vite": "^2.9.1",

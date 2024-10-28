@@ -52,7 +52,7 @@
     "viem": "^2.21.15"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.9",
+    "@babel/core": "^7.26.0",
     "@biomejs/biome": "^1.9.4",
     "@hugomrdias/configs": "^0.1.9",
     "@types/node": "^22.7.9",
