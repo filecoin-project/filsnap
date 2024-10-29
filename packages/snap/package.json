@@ -1,7 +1,7 @@
 {
   "name": "filsnap",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Connect to Filecoin dapps using Metamask. Manage Filecoin accounts, send FIL to Native and FEVM accounts and enable FEVM transaction insights.",
   "author": "Protocol Labs",
   "license": "(Apache-2.0 AND MIT)",
@@ -50,7 +50,7 @@
     "test": "wireit",
     "build": "wireit",
     "serve": "wireit",
-    "watch": "pnpm run serve & pnpx onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed"
+    "watch": "pnpm run serve & onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed -j 1"
   },
   "wireit": {
     "build": {
