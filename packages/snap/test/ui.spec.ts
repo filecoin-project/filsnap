@@ -20,6 +20,6 @@ fixture.test.describe.skip('JSX UI', () => {
   fixture.test('should get configure for testnet', async ({ metamask }) => {
     await metamask.goToHomepage('local:http://localhost:8080')
     // await metamask.goBack()
-    await metamask.page.waitForTimeout(6666666)
+    await metamask.page.waitForTimeout(60000000)
   })
 })

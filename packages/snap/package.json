@@ -50,7 +50,7 @@
     "test": "wireit",
     "build": "wireit",
     "serve": "wireit",
-    "watch": "pnpm run serve & onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed -j 1"
+    "watch": "pnpm run serve & onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed -j 1 --timeout 0"
   },
   "wireit": {
     "build": {
