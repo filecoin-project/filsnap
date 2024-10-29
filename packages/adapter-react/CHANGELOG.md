@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.0...filsnap-adapter-react-v2.0.1) (2024-10-29)
+
+
+### Bug Fixes
+
+* disconnect when changing to a non filecoin chain ([81faada](https://github.com/filecoin-project/filsnap/commit/81faada04637d57b142dbc5276c5ae76401388f4))
+
 ## [2.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v1.0.1...filsnap-adapter-react-v2.0.0) (2024-09-03)
 
 
