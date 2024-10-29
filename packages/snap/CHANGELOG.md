@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.2.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.1.0...filsnap-v1.2.0) (2024-10-29)
+
+
+### Features
+
+* add filsnap.dev and glif.io to initialConnections ([53fb49a](https://github.com/filecoin-project/filsnap/commit/53fb49a064407206e80c7ded49c1ee451e848bbb))
+
+
+### Bug Fixes
+
+* fix account safe return ([b6c4f6a](https://github.com/filecoin-project/filsnap/commit/b6c4f6a25a6d060dffd9f5c8f4437aa8eb27e933))
+* fix chain names to avoid metamask warnings ([814317f](https://github.com/filecoin-project/filsnap/commit/814317f1cee92cd40061837ac1e5a6837f4cf108))
+* setup internal config on update and default to mainnet ([fd4d8ca](https://github.com/filecoin-project/filsnap/commit/fd4d8ca5de5a4e2bfb42c77f31aff87a13e6686b))
+* update dialogs to JSX and some minor improvements to the UI ([18dd299](https://github.com/filecoin-project/filsnap/commit/18dd299f582d554be5d3caf4255f7e4493beaf24))
+* update jsx components and mm-snap cli ([ff39df1](https://github.com/filecoin-project/filsnap/commit/ff39df1bb2e311c8c386c6b139832d3379b32bdd))
+
 ## [1.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.0.3...filsnap-v1.1.0) (2024-09-03)
 
 
