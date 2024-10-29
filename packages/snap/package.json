@@ -47,9 +47,10 @@
   ],
   "scripts": {
     "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
-    "test": "playwright test",
+    "test": "wireit",
     "build": "wireit",
-    "serve": "wireit"
+    "serve": "wireit",
+    "watch": "pnpm run serve & pnpx onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed"
   },
   "wireit": {
     "build": {
@@ -61,15 +62,23 @@
         "snap.config.ts"
       ],
       "output": [
-        "dist/snap.js"
+        "dist/snap.js",
+        "snap.manifest.json"
+      ],
+      "clean": false
+    },
+    "test": {
+      "command": "playwright test",
+      "dependencies": [
+        "build"
       ]
     },
     "serve": {
-      "command": "mm-snap serve --port 8081",
+      "command": "mm-snap serve",
       "dependencies": [
         {
           "script": "build",
-          "cascade": false
+          "cascade": true
         }
       ],
       "service": true
@@ -83,15 +92,16 @@
     "iso-base": "^4.0.0",
     "iso-filecoin": "^4.1.0",
     "merge-options": "^3.0.4",
-    "viem": "^2.21.15",
+    "viem": "^2.21.36",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "6.3.3",
-    "@playwright/test": "^1.48.1",
+    "@metamask/snaps-cli": "6.5.1",
+    "@playwright/test": "^1.48.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.4",
-    "metamask-testing-tools": "^2.1.0",
+    "metamask-testing-tools": "^2.2.2",
+    "onchange": "^7.1.0",
     "playwright-test": "^14.1.6",
     "type-fest": "^4.26.1",
     "typescript": "5.6.3"

@@ -5,17 +5,20 @@ export default defineConfig({
   testDir: './test',
   timeout: process.env.CI ? 60 * 1000 : 30 * 1000,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 2 : undefined,
   // workers: process.env.CI ? 1 : undefined,
+  maxFailures: process.env.CI ? 0 : 1,
   reporter: process.env.CI ? [['html'], ['list']] : 'list',
   use: {
     baseURL: 'http://example.org',
     trace: 'on-first-retry',
     colorScheme: 'dark',
     browserName: 'chromium',
+    // viewport: { width: 500, height: 1280 },
   },
   webServer: {
-    command: 'pnpm run build && mm-snap serve --port 8081',
-    url: 'http://localhost:8081/dist/snap.js',
+    command: 'pnpm run build && pnpm exec mm-snap serve',
+    url: 'http://localhost:8080/dist/snap.js',
+    reuseExistingServer: !process.env.CI,
   },
 })
