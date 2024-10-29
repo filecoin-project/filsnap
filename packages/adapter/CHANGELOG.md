@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.1...filsnap-adapter-v2.0.2) (2024-10-29)
+
+
+### Bug Fixes
+
+* support undefined network when not filecoin chain ([d1ed11d](https://github.com/filecoin-project/filsnap/commit/d1ed11d249f753e8854382fef0f6403a5e1e5eae))
+
 ## [2.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.0...filsnap-adapter-v2.0.1) (2024-10-02)
 
 
