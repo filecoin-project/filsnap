@@ -52,7 +52,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "assert": "^2.1.0",
-    "mocha": "^10.7.3",
+    "mocha": "^10.8.2",
     "playwright-test": "^14.1.6",
     "preact": "^10.24.3",
     "react": "^18.2.0",
