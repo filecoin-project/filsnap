@@ -90,7 +90,7 @@
     "@paulmillr/qr": "^0.2.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
-    "iso-filecoin": "^4.1.0",
+    "iso-filecoin": "^5.0.0",
     "merge-options": "^3.0.4",
     "viem": "^2.21.36",
     "zod": "^3.22.4"
