@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.48.2",
-    "@types/node": "^22.8.2",
+    "@types/node": "^22.9.3",
     "metamask-testing-tools": "^2.2.2",
     "typescript": "5.6.3"
   },
