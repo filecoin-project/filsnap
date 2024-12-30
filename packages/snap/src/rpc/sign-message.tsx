@@ -1,4 +1,5 @@
 import { base64pad } from 'iso-base/rfc4648'
+import { utf8 } from 'iso-base/utf8'
 import * as Address from 'iso-filecoin/address'
 import { Message, Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
@@ -99,7 +100,7 @@ export async function signMessage(
       result: {
         message,
         signature: {
-          data: base64pad.encode(sig),
+          data: base64pad.encode(sig.data),
           type: 'SECP256K1',
         },
       },
@@ -153,10 +154,10 @@ export async function signMessageRaw(
   })
 
   if (conf) {
-    const sig = sign(account.privateKey, 'SECP256K1', message)
+    const sig = sign(account.privateKey, 'SECP256K1', utf8.decode(message))
     return {
       error: null,
-      result: base64pad.encode(sig),
+      result: base64pad.encode(sig.data),
     }
   }
 

@@ -104,7 +104,7 @@ test.describe('filsnap testnet', () => {
     const { result } = await signRaw
 
     expect(result).toStrictEqual(
-      'BjNeqpqxb9CdnxVbE3J8YGHMg9kZjAz95mnnlASUSGgluIhTvaNRB5/Qx5/dKXqzBvpSclOXQfkeeRvqvo3jqAA='
+      'WNtAyos6hGibMdT1XXIJTLLTXYg1nWrtKL7fcL/8jMQDSf72NYlbfxZojWPNJVbbrDCeZVXLygtgZt+ttPVv7AE='
     )
   })
 
