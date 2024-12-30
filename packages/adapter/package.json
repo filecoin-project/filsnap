@@ -45,14 +45,14 @@
     "@metamask/approval-controller": "^7.1.1",
     "@metamask/snaps-sdk": "^6.6.0",
     "filsnap": "workspace:^",
-    "iso-filecoin": "^4.1.0",
-    "viem": "^2.21.36"
+    "iso-filecoin": "^5.1.1",
+    "viem": "^2.21.59"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.2",
-    "@types/node": "^22.8.2",
-    "metamask-testing-tools": "^2.2.2",
-    "typescript": "5.6.3"
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2",
+    "metamask-testing-tools": "^2.2.3",
+    "typescript": "5.7.2"
   },
   "publishConfig": {
     "provenance": true

@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-useless-undefined */
 import { FilsnapAdapter, createConnector, getProvider } from 'filsnap-adapter'
 import * as React from 'react'
 
@@ -37,7 +36,6 @@ const FilsnapContext =
 /**
  *
  * @param {React.PropsWithChildren<FilsnapProviderProps>} props
- * @returns {React.FunctionComponentElement<React.ProviderProps<FilsnapContext>>}
  */
 export function FilsnapProvider({
   snapId,
