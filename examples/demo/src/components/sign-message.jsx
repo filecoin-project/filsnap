@@ -1,5 +1,4 @@
 import { useFilsnap } from 'filsnap-adapter-react'
-/* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
 
 // @ts-ignore-next-line
@@ -12,14 +11,14 @@ const SignMessage = () => {
     /** @type {string | undefined } */ (undefined)
   )
 
-  /** @type {import('preact/src/jsx.js').JSXInternal.GenericEventHandler<HTMLFormElement>} */
+  /** @type {import('preact').JSX.SubmitEventHandler<HTMLFormElement>} */
   async function handleSubmit(event) {
     event.preventDefault()
 
     const data = new FormData(event.currentTarget)
 
     const response = await snap?.signMessageRaw({
-      message: data.get('messageToSign') || '',
+      message: data.get('messageToSign')?.toString() || '',
     })
     if (response) {
       setSignature(response?.result)

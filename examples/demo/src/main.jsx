@@ -1,3 +1,4 @@
+// @ts-nocheck
 import './styles/index.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { FilsnapProvider } from 'filsnap-adapter-react'
@@ -15,10 +16,9 @@ const config = {
 }
 
 const SNAP_ID = import.meta.env.DEV
-  ? 'local:http://localhost:8081'
+  ? 'local:http://localhost:8080'
   : 'npm:filsnap'
 
-// eslint-disable-next-line unicorn/prefer-query-selector
 const appEl = document.getElementById('app')
 
 if (appEl) {

@@ -13,6 +13,9 @@ export default function ExplorerLink({ address, chain }) {
 
   if (!address) return null
 
+  /**
+   * @param {string} address
+   */
   function onCopy(address) {
     navigator.clipboard.writeText(address)
   }

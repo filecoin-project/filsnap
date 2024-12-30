@@ -1,10 +1,10 @@
-/**
- *
- * @param {object} param0
- * @param {number} [param0.width]
- * @param {number} [param0.height]
- */
-export function CopyIcon({ width = 24, height = 24, ...rest }) {
+import type { JSX } from 'preact'
+
+export function CopyIcon({
+  width = 24,
+  height = 24,
+  ...rest
+}: JSX.SVGAttributes<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

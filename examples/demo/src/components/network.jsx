@@ -13,9 +13,11 @@ export default function Connect() {
         id="network"
         disabled={isPending}
         onChange={(event) => {
-          const value = event?.currentTarget.value
+          const network = /** @type {import('iso-filecoin/types').Network} */ (
+            event?.currentTarget.value
+          )
           configure({
-            config: { network: value },
+            config: { network },
           })
         }}
         class="u-FullWidth"

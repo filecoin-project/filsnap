@@ -11,6 +11,9 @@
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "resolveJsonModule": true,
+    /* JavaScript Support */
+    "allowJs": true,
+    "checkJs": true,
     // Type Checking
     "strict": true,
     "noImplicitReturns": false,

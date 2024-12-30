@@ -5,7 +5,7 @@ import { useAccount, useBalance } from 'wagmi'
 import ExplorerLink from './explorer-link.jsx'
 
 /**
- * @typedef {import('filsnap-adapter-react').} FilsnapContext
+ * @typedef {import('filsnap-adapter-react').FilsnapContext} FilsnapContext
  */
 
 /**
@@ -51,11 +51,11 @@ export default function ConnectAll() {
             {account
               ? Token.fromAttoFIL(account.balance).toFIL().toFormat()
               : 'unknown'}{' '}
-            {config.unit.symbol}
+            {config?.unit?.symbol}
           </b>
         </div>
         <span data-testid="account-info">
-          <ExplorerLink address={account.address} chain="filecoin" />
+          <ExplorerLink address={account?.address} chain="filecoin" />
         </span>
         <br />
         <h3>FEVM Account</h3>
