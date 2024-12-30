@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.2.0...filsnap-v1.3.0) (2024-12-30)
+
+
+### Features
+
+* add filforwarder transaction insights ([abf7d5a](https://github.com/filecoin-project/filsnap/commit/abf7d5abd08da94e4855ff0cdafba2a4c713ebf1))
+
+
+### Bug Fixes
+
+* update to iso-filecoin 5.x ([ff08149](https://github.com/filecoin-project/filsnap/commit/ff08149b125d521cfb6488292fa9eabc1a3233db))
+
 ## [1.2.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.1.0...filsnap-v1.2.0) (2024-10-29)
 
 
