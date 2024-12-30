@@ -1,21 +1,28 @@
-import {
-  Box,
-  Heading,
-  Row,
-  type SnapComponent,
-  Text,
-} from '@metamask/snaps-sdk/jsx'
-
+import { Box, Image, type SnapComponent, Text } from '@metamask/snaps-sdk/jsx'
+import iconError from '../svg/error.svg'
 type ErrorBoxProps = {
-  error: string
+  name: string
+  message?: string
 }
-export const ErrorBox: SnapComponent<ErrorBoxProps> = ({ error }) => {
+export const ErrorBox: SnapComponent<ErrorBoxProps> = ({ name, message }) => {
+  if (message != null) {
+    return (
+      <Box>
+        <Box direction="horizontal">
+          <Image src={iconError} />
+          <Text color="error">{name}</Text>
+        </Box>
+        <Text color="muted">{message}</Text>
+      </Box>
+    )
+  }
+
   return (
     <Box>
-      <Heading>Error</Heading>
-      <Row label="Message:" variant="critical">
-        <Text>{error}</Text>
-      </Row>
+      <Box direction="horizontal">
+        <Image src={iconError} />
+        <Text color="error">{name}</Text>
+      </Box>
     </Box>
   )
 }

@@ -41,7 +41,7 @@ export type {
 } from './types'
 
 // Disable transaction insight for now
-// export { onTransaction } from './transaction-insight'
+export { onTransaction } from './transaction-insight'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
@@ -164,7 +164,7 @@ export const onHomePage: OnHomePageHandler = async () => {
 
   if (config === undefined) {
     return {
-      content: <ErrorBox error={'Error no config!'} />,
+      content: <ErrorBox name={'Error no config!'} />,
     }
   }
 
@@ -183,9 +183,7 @@ export const onHomePage: OnHomePageHandler = async () => {
   const balance = await rpc.balance(account.address.toString())
   if (balance.error != null) {
     return {
-      content: (
-        <ErrorBox error={`Error calling RPC ${balance.error.message}`} />
-      ),
+      content: <ErrorBox name={`Error calling RPC ${balance.error.message}`} />,
     }
   }
   return {
