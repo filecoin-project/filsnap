@@ -91,7 +91,7 @@
     "@paulmillr/qr": "^0.3.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
-    "iso-filecoin": "^5.1.1",
+    "iso-filecoin": "^6.0.0",
     "merge-options": "^3.0.4",
     "viem": "^2.21.59",
     "zod": "^3.24.1"
