@@ -7,6 +7,10 @@ const config: SnapConfig = {
   },
   polyfills: {
     buffer: true,
+    process: true,
+  },
+  environment: {
+    SNAP_ENV: process.env.SNAP_ENV,
   },
   server: {
     port: 8080,

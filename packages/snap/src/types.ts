@@ -5,7 +5,7 @@ import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
 import type { MessageObj } from 'iso-filecoin/types'
 import type { z } from 'zod'
-import type { configure } from './rpc/configure'
+import type { configure, getConfig } from './rpc/configure'
 import type { exportPrivateKey } from './rpc/export-private-key'
 import type { getGasForMessage } from './rpc/gas-for-message'
 import type { getAccountInfo } from './rpc/get-account'
@@ -92,6 +92,7 @@ export type GetPublicResponse = SnapResponse<string>
  * Should always return a promise as this is on the metamask side
  */
 export interface FilSnapMethods {
+  fil_getConfig: typeof getConfig
   fil_configure: typeof configure
   fil_getAddress: (snap: SnapsProvider) => Promise<GetAddressResponse>
   fil_getPublicKey: (snap: SnapsProvider) => Promise<GetPublicResponse>
