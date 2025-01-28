@@ -238,7 +238,7 @@ const homepage = createFixture({
 })
 
 homepage.test.describe('JSX UI Homepage', () => {
-  homepage.test.beforeEach(async ({ metamask, page }) => {
+  homepage.test.beforeEach(async ({ metamask }) => {
     // Install popup
     await metamask.page.getByTestId('confirmation-submit-button').click()
   })
