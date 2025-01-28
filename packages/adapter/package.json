@@ -45,7 +45,7 @@
     "@metamask/approval-controller": "^7.1.1",
     "@metamask/snaps-sdk": "^6.6.0",
     "filsnap": "workspace:^",
-    "iso-filecoin": "^6.0.0",
+    "iso-filecoin": "^6.0.1",
     "viem": "^2.21.59"
   },
   "devDependencies": {
