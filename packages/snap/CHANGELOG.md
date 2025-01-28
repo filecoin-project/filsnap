@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.0...filsnap-v1.4.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* update snap platform version to 6.16.0 ([25fc79c](https://github.com/filecoin-project/filsnap/commit/25fc79c73880aab99a6a85ed5a3d18c8bde5922a))
+
 ## [1.4.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.3.0...filsnap-v1.4.0) (2025-01-28)
 
 
