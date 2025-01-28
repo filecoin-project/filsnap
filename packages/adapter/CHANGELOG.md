@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.2...filsnap-adapter-v2.0.3) (2025-01-28)
+
+
+### Bug Fixes
+
+* upgrade iso-filecoin 6.x ([e56434b](https://github.com/filecoin-project/filsnap/commit/e56434b345633fc927278a04084bc23b809565cc))
+
 ## [2.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.1...filsnap-adapter-v2.0.2) (2024-10-29)
 
 
