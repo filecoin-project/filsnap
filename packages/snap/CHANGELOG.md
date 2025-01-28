@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.3.0...filsnap-v1.4.0) (2025-01-28)
+
+
+### Features
+
+* add new design jsx components ([744ffee](https://github.com/filecoin-project/filsnap/commit/744ffee051bc1491790a69c97222aa4f8309946b))
+* add new homepage with receive and send features and update all UI components ([9b20a8c](https://github.com/filecoin-project/filsnap/commit/9b20a8ce6cd466be79065f5b0138fa5c5c6ce156))
+* add new method `fil_getConfig` ([43a28f1](https://github.com/filecoin-project/filsnap/commit/43a28f10e96995ea41f47ee62802c741d0ee11e4))
+* update insights ui to new design and avoid insights when no origin config ([653ac4e](https://github.com/filecoin-project/filsnap/commit/653ac4e7e26a970a99c79b8af9d11f6f6ff5047f))
+
+
+### Bug Fixes
+
+* upgrade iso-filecoin 6.x ([e56434b](https://github.com/filecoin-project/filsnap/commit/e56434b345633fc927278a04084bc23b809565cc))
+
 ## [1.3.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.2.0...filsnap-v1.3.0) (2024-12-30)
 
 
