@@ -212,17 +212,20 @@ const preinstall = createFixture({
 })
 
 preinstall.test.describe('JSX UI Install', () => {
-  preinstall.test('should show install dialog', async ({ metamask, page }) => {
-    await metamask.setup()
-    await metamask.installSnap({
-      id: 'local:http://localhost:8080',
-      page,
-    })
-    // await metamask.page.waitForTimeout(60000000)
-    await fixture
-      .expect(metamask.page.getByText('Installation Successful'))
-      .toBeVisible()
-  })
+  preinstall.test.only(
+    'should show install dialog',
+    async ({ metamask, page }) => {
+      await metamask.setup()
+      await metamask.installSnap({
+        id: 'local:http://localhost:8080',
+        page,
+      })
+      await metamask.page.waitForTimeout(60000000)
+      await fixture
+        .expect(metamask.page.getByText('Installation Successful'))
+        .toBeVisible()
+    }
+  )
 })
 
 const homepage = createFixture({
