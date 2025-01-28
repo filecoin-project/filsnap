@@ -105,7 +105,6 @@ export const onTransaction: OnTransactionHandler = async ({
     }
   } catch (error) {
     const err = error as Error
-    console.error(error)
     return {
       content: <ErrorBox name={err.name} message={err.message} />,
     }
