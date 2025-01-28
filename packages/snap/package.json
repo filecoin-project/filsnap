@@ -92,26 +92,26 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^10.0.2",
-    "@metamask/snaps-sdk": "^6.6.0",
+    "@metamask/snaps-sdk": "^6.16.0",
     "@paulmillr/qr": "^0.3.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.0",
-    "iso-filecoin": "^6.0.0",
+    "iso-filecoin": "^6.0.1",
     "merge-options": "^3.0.4",
-    "viem": "^2.21.59",
+    "viem": "^2.22.16",
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "6.5.1",
-    "@playwright/test": "^1.48.2",
+    "@metamask/snaps-cli": "6.6.1",
+    "@playwright/test": "^1.50.0",
     "@sayfer_io/snapper": "^0.18.13",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.4",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
     "metamask-testing-tools": "^2.2.2",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.6",
-    "type-fest": "^4.26.1",
-    "typescript": "5.7.2"
+    "type-fest": "^4.33.0",
+    "typescript": "5.7.3"
   },
   "publishConfig": {
     "provenance": true
