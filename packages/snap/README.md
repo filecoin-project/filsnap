@@ -86,6 +86,7 @@ We recommend using [`filsnap-adapter`](../adapter) to interact with filsnap for 
 
 ### RPC Methods
 
+- `fil_getConfig` - Get the configuration of the snap.
 - `fil_configure` - Configure the snap.
 - `fil_getBalance` - Get the balance of the connected account.
 - `fil_getAddress` - Get the address of the connected account.
@@ -129,13 +130,19 @@ sequenceDiagram
 - Multiple accounts are not supported yet. Only the first account is used.
   - One workaround currently supported is to use the derivation path from the configuration to get the account you want to use.
 - Ledger is not supported, this is a **Metamask limitation**.
-- There's no UI native in the extension for the user to interact with the snap, this is a **Metamask limitation**.
-- Transaction insights are supported but forces the Filsnap tab to be opened even if the snap doesn't return any data. This is a **Metamask limitation**.
 
 ## Recommendations for future work
 
 - Add support for multiple accounts.
 - Sync with Metamask team to work through the limitations.
+
+## Development
+
+```bash
+
+// run snapper before publishing
+pnpm exec snapper --path . --ignoreDetectors ESLinting 
+```
 
 ## Contributing
 
