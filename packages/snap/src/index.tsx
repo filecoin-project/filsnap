@@ -7,7 +7,6 @@ import {
   UserInputEventType,
 } from '@metamask/snaps-sdk'
 import { hex } from 'iso-base/rfc4648'
-import { RPC } from 'iso-filecoin/rpc'
 
 import { getAccountInfo } from './rpc/get-account'
 import type {
@@ -21,7 +20,7 @@ import { configFromNetwork, serializeError } from './utils'
 
 import { getAccountSafe } from './account'
 import { INTERNAL_CONFIG } from './constants'
-import { configure } from './rpc/configure'
+import { configure, getConfig } from './rpc/configure'
 import { exportPrivateKey } from './rpc/export-private-key'
 import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
@@ -64,6 +63,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
 
     switch (request.method) {
+      case 'fil_getConfig': {
+        return await getConfig(context)
+      }
       case 'fil_configure': {
         return await configure(context, request.params as Partial<SnapConfig>)
       }

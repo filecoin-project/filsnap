@@ -5,7 +5,7 @@ import { parseDerivationPath } from 'iso-filecoin/utils'
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
 import { getAccountSafe } from '../account'
-import { Configure } from '../components/configure'
+import { Configure } from '../components/dialog-configure'
 import { snapConfig } from '../schemas'
 import type { SnapConfig, SnapContext, SnapResponse } from '../types'
 import { configFromNetwork, serializeError } from '../utils'
@@ -100,4 +100,21 @@ export async function configure(
     return { result: _params.data, error: null }
   }
   return serializeError('User denied configuration')
+}
+
+/**
+ * Configures the snap with the provided configuration
+ *
+ * @param ctx - Snap context
+ */
+export async function getConfig(
+  ctx: SnapContext
+): Promise<SnapResponse<SnapConfig | null>> {
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config) {
+    return { result: config, error: null }
+  }
+
+  return { result: null, error: null }
 }
