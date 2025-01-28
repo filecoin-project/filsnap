@@ -50,9 +50,7 @@ export const onTransaction: OnTransactionHandler = async ({
   const state = new State(snap)
   const config = await state.get(transactionOrigin)
   if (!config) {
-    return {
-      content: <ErrorBox name={'Internal error'} message={'Missing config'} />,
-    }
+    return null
   }
 
   // Don't show any insights if the transaction is not a FIL transfer.
@@ -107,7 +105,6 @@ export const onTransaction: OnTransactionHandler = async ({
     }
   } catch (error) {
     const err = error as Error
-    console.error(error)
     return {
       content: <ErrorBox name={err.name} message={err.message} />,
     }
