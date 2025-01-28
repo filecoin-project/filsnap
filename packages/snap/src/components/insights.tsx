@@ -1,16 +1,16 @@
 import {
-  Bold,
+  Address,
   Box,
-  Copyable,
-  Divider,
   Heading,
-  Icon,
   Link,
+  Row,
   type SnapComponent,
   Text,
 } from '@metamask/snaps-sdk/jsx'
+import * as Icons from '../svg'
 import type { SnapConfig } from '../types'
-import { formatFIL } from '../utils'
+import { addressToCaip10, explorerAddressLink, formatFIL } from '../utils'
+import { ListHeader } from './header'
 
 type ErrorBoxProps = {
   config: SnapConfig
@@ -25,7 +25,7 @@ export const Insights: SnapComponent<ErrorBoxProps> = ({
   return (
     <Box>
       <Heading>FilForwarder Transaction</Heading>
-      <Text>
+      <Text color="alternative">
         The FilForwarder smart contract enables FEVM users to send their FIL
         safely and securely to other addresses in the Filecoin ecosystem. Review
         the <Link href="https://github.com/FilOzone/FilForwarder">source</Link>{' '}
@@ -35,19 +35,17 @@ export const Insights: SnapComponent<ErrorBoxProps> = ({
         </Link>{' '}
         for more information.
       </Text>
-      <Divider />
-      <Box direction="horizontal">
-        <Icon name="user" size="md" />
-        <Text>Recipient</Text>
-      </Box>
-      <Copyable value={address} />
-      <Box direction="horizontal">
-        <Text>
-          <Bold>⨎</Bold>
-        </Text>
-        <Text>Amount</Text>
-      </Box>
-      <Text color="muted">{formatFIL(amount, config)}</Text>
+      <ListHeader icon={Icons.settings} tooltip="FilForwarder call parameters">
+        Details
+      </ListHeader>
+      <Row label="Recipient" tooltip="Recipient's address in robust format">
+        <Link href={explorerAddressLink(address, 'testnet')}>
+          <Address address={addressToCaip10(address)} />
+        </Link>
+      </Row>
+      <Row label="Amount" tooltip="Amount of FIL your sending to the recipient">
+        <Text>{formatFIL(amount, config)}</Text>
+      </Row>
     </Box>
   )
 }
