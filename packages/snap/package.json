@@ -50,7 +50,7 @@
     "test": "wireit",
     "build": "wireit",
     "serve": "wireit",
-    "watch": "pnpm run serve & onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed -j 1 --timeout 0"
+    "watch": "pnpm run serve & SNAP_ENV=test onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed -j 1 --timeout 0"
   },
   "wireit": {
     "build": {
@@ -66,10 +66,14 @@
         "dist/snap.js",
         "snap.manifest.json"
       ],
-      "clean": false
+      "clean": false,
+      "env": {
+        "SNAP_ENV": {"external": true }
+      }
     },
     "test": {
       "command": "playwright test",
+     
       "dependencies": [
         "build"
       ]

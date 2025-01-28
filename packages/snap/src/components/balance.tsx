@@ -12,7 +12,7 @@ type HomePageProps = {
 export const Balance: SnapComponent<HomePageProps> = ({ balance, config }) => {
   return (
     <Box direction="horizontal">
-      <SvgIcon icon={iconFilecoin} alt="Filecoin" height={24} width={24} />
+      <SvgIcon icon={iconFilecoin} alt="Filecoin" />
       <Tooltip content={<Text>{formatFIL(balance, config)}</Text>}>
         <Text>
           {formatFIL(balance, {

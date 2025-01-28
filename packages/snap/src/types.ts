@@ -3,6 +3,7 @@ import type { SnapsProvider } from '@metamask/snaps-sdk'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 
 import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
+import type { MessageObj } from 'iso-filecoin/types'
 import type { z } from 'zod'
 import type { configure } from './rpc/configure'
 import type { exportPrivateKey } from './rpc/export-private-key'
@@ -22,7 +23,7 @@ export type Json = Literal | { [key: string]: Json } | Json[]
 export type SnapConfig = z.infer<typeof snapConfig>
 export type MessageStatus = z.infer<typeof messageStatus>
 export type Account = ReturnType<typeof accountFromPrivateKey>
-export type { Snap } from '@metamask/snaps-sdk'
+export type { Snap, InterfaceContext } from '@metamask/snaps-sdk'
 
 // Snap types
 export interface AccountSafe {
@@ -101,4 +102,13 @@ export interface FilSnapMethods {
   fil_signMessageRaw: typeof signMessageRaw
   fil_sendMessage: typeof sendMessage
   fil_getAccountInfo: typeof getAccountInfo
+}
+
+// UI Types
+export interface HomepageContext extends Record<string, Json> {
+  config: SnapConfig
+  account: number
+  address: string
+  balance: string
+  sendMessage: MessageObj | null
 }

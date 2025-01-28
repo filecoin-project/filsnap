@@ -1,10 +1,11 @@
-import type {
-  OnHomePageHandler,
-  OnInstallHandler,
-  OnRpcRequestHandler,
-  OnUpdateHandler,
+import {
+  type OnHomePageHandler,
+  type OnInstallHandler,
+  type OnRpcRequestHandler,
+  type OnUpdateHandler,
+  type OnUserInputHandler,
+  UserInputEventType,
 } from '@metamask/snaps-sdk'
-import encodeQR from '@paulmillr/qr'
 import { hex } from 'iso-base/rfc4648'
 import { RPC } from 'iso-filecoin/rpc'
 
@@ -15,7 +16,7 @@ import type {
 } from './rpc/sign-message'
 import { signMessage, signMessageRaw } from './rpc/sign-message'
 import { State } from './state'
-import type { SnapConfig, SnapContext } from './types'
+import type { HomepageContext, SnapConfig, SnapContext } from './types'
 import { configFromNetwork, serializeError } from './utils'
 
 import { getAccountSafe } from './account'
@@ -26,8 +27,15 @@ import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
 import { type SignedMessage, sendMessage } from './rpc/send-message'
 
-import { ErrorBox } from './components/error'
-import { HomePage } from './components/homepage'
+import { updateWithError } from './components/error'
+import {
+  HomepageEvents,
+  createHomepage,
+  onNetworkChange,
+  updateHomepage,
+} from './components/homepage'
+import { onReceive } from './components/homepage-receive'
+import { onSend, onSendConfirm, onSendResult } from './components/homepage-send'
 import { OnInstall } from './components/on-install'
 import { OnUpdate } from './components/on-update'
 
@@ -159,42 +167,102 @@ export const onUpdate: OnUpdateHandler = async () => {
  * @see https://docs.metamask.io/snaps/reference/exports/#onhomepage
  */
 export const onHomePage: OnHomePageHandler = async () => {
-  const state = new State(snap)
-  const config = await state.get(INTERNAL_CONFIG)
-
-  if (config === undefined) {
-    return {
-      content: <ErrorBox name={'Error no config!'} />,
-    }
-  }
-
-  const account = await getAccountSafe(snap, config)
-  let qr = encodeQR(account.address.toString(), 'svg')
-
-  qr = qr.replace(
-    'version="1.1"',
-    'version="1.1" style="background-color:white; width:20px; height:20px;"'
-  )
-
-  const rpc = new RPC({
-    api: config.rpc.url,
-    network: config.network,
+  const { ui, context } = await createHomepage()
+  const interfaceId = await snap.request({
+    method: 'snap_createInterface',
+    params: {
+      ui,
+      context,
+    },
   })
-  const balance = await rpc.balance(account.address.toString())
-  if (balance.error != null) {
-    return {
-      content: <ErrorBox name={`Error calling RPC ${balance.error.message}`} />,
-    }
-  }
   return {
-    content: (
-      <HomePage
-        address={account.address.toString()}
-        accountNumber={account.accountNumber}
-        balance={balance.result}
-        config={config}
-        qr={qr}
-      />
-    ),
+    id: interfaceId,
+  }
+}
+
+/**
+ * Handles user input
+ */
+export const onUserInput: OnUserInputHandler = async ({
+  id,
+  event,
+  context,
+}) => {
+  // force context to be object to avoid types issues
+  if (context === null) {
+    context = {}
+  }
+  try {
+    // Handle homepage events
+    if (event.name?.startsWith('homepage')) {
+      const ctx = context as HomepageContext
+      if (
+        event.type === UserInputEventType.InputChangeEvent &&
+        event.name === HomepageEvents.changeNetwork
+      ) {
+        await onNetworkChange(id, event, ctx)
+        return
+      }
+
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.receive
+      ) {
+        await onReceive(id, ctx)
+        return
+      }
+
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.send
+      ) {
+        await onSend(id, ctx)
+        return
+      }
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.sendConfirm
+      ) {
+        await onSendConfirm(id, ctx)
+        return
+      }
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.sendResult
+      ) {
+        await onSendResult(id, ctx)
+        return
+      }
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.backToSend
+      ) {
+        await onSend(id, ctx)
+        return
+      }
+
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.back
+      ) {
+        await updateHomepage(id, ctx)
+        return
+      }
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      updateWithError(id, context, {
+        name: error.name,
+        message: error.message,
+        back: HomepageEvents.backToSend,
+      })
+      return
+    }
+    updateWithError(id, context, {
+      name: 'Unknown Error',
+      // @ts-expect-error - no types
+      message: error.toString(),
+      back: HomepageEvents.back,
+    })
   }
 }

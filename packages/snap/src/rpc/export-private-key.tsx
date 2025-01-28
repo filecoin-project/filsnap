@@ -1,6 +1,6 @@
 import { base64pad } from 'iso-base/rfc4648'
 import { getAccount } from '../account'
-import { ExportConfirm, PrivateKeyExport } from '../components/export'
+import { ExportConfirm, PrivateKeyExport } from '../components/dialog-export'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
 
@@ -36,6 +36,8 @@ export async function exportPrivateKey(
       type: 'confirmation',
       content: (
         <ExportConfirm
+          config={config}
+          origin={ctx.origin}
           address={account.address.toString()}
           accountNumber={account.accountNumber}
         />

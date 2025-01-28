@@ -14,7 +14,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     colorScheme: 'dark',
     browserName: 'chromium',
-    // viewport: { width: 500, height: 1280 },
+    viewport: { width: 1280, height: 1280 },
   },
   webServer: {
     command: 'pnpm run build && pnpm exec mm-snap serve',

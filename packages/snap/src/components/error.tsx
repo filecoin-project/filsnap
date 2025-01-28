@@ -1,14 +1,9 @@
-import {
-  Box,
-  Button,
-  Image,
-  Section,
-  type SnapComponent,
-  Text,
-} from '@metamask/snaps-sdk/jsx'
-import iconError from '../svg/error.svg'
-import type { HomepageContext } from '../types'
-import { Spacer } from './spacer'
+import { Box, Section, type SnapComponent, Text } from '@metamask/snaps-sdk/jsx'
+import * as Icons from '../svg'
+import type { InterfaceContext } from '../types'
+import { ButtonSvgIcon } from './button-svg-icon'
+import { Footer } from './footer'
+import { Header } from './header'
 
 export type ErrorBoxProps = {
   name: string
@@ -22,28 +17,29 @@ export const ErrorBox: SnapComponent<ErrorBoxProps> = ({
 }) => {
   return (
     <Box>
-      <Section direction="vertical" alignment="center">
-        <Box direction="horizontal">
-          <Image src={iconError} />
-          <Text color="error">{name ?? 'Unknown Error'}</Text>
-        </Box>
-        {message ? <Text color="muted">{message}</Text> : null}
-        {back ? (
-          <Box direction="horizontal" alignment="center">
-            <Spacer unit={3} />
-            <Button type="button" name={back}>
-              Back
-            </Button>
-          </Box>
-        ) : null}
-      </Section>
+      <Header icon={Icons.error} iconSize={24} iconColor="error">
+        {name ?? 'Unknown Error'}
+      </Header>
+      {message ? (
+        <Section direction="vertical" alignment="center">
+          <Text color="alternative">{message}</Text>
+        </Section>
+      ) : null}
+
+      {back ? (
+        <Footer>
+          <ButtonSvgIcon icon={Icons.x} name={back}>
+            Close
+          </ButtonSvgIcon>
+        </Footer>
+      ) : null}
     </Box>
   )
 }
 
 export function updateWithError(
   id: string,
-  context: HomepageContext,
+  context: InterfaceContext,
   props: ErrorBoxProps
 ) {
   return snap.request({

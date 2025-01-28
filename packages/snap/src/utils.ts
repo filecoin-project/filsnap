@@ -31,7 +31,6 @@ export function configFromNetwork(networkName?: Network): SnapConfig {
  * @returns An object containing all the JSON-serializable properties.
  */
 function serializeObject(object: Record<PropertyKey, unknown>): Json {
-  // eslint-disable-next-line unicorn/no-array-reduce
   return Object.getOwnPropertyNames(object).reduce<Record<string, Json>>(
     (acc, key) => {
       const value = object[key]
@@ -91,4 +90,39 @@ export function formatFIL(value: Value, config: SnapConfig): string {
   return `${Token.fromAttoFIL(value)
     .toFIL()
     .toFormat({ decimalPlaces: config.unit?.decimals })} ${config.unit?.symbol}`
+}
+
+/**
+ * Formats attoFIL to FIL short format
+ */
+export function formatFILShort(value: Value, config: SnapConfig): string {
+  return `${Token.fromAttoFIL(value)
+    .toFIL()
+    .toFormat({ decimalPlaces: 4 })} ${config.unit?.symbol}`
+}
+
+export function addressToCaip10(
+  address: string
+): `${string}:${string}:${string}` | `0x${string}` {
+  if (address.startsWith('f')) {
+    return `fil:f:${address}`
+  }
+  if (address.startsWith('t')) {
+    return `fil:t:${address}`
+  }
+  if (address.startsWith('0x')) {
+    return address as `0x${string}`
+  }
+  throw new Error(`Failed to parse ${address} into a CAP10 address`)
+}
+
+export function explorerAddressLink(address: string, network: Network): string {
+  if (network === 'mainnet') {
+    return `https://beryx.io/fil/mainnet/address/${address}`
+  }
+  if (network === 'testnet') {
+    return `https://beryx.io/fil/calibration/address/${address}`
+  }
+
+  throw new Error(`Failed to create explorer link for ${address}`)
 }

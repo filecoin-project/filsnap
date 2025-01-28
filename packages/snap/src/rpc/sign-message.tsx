@@ -6,7 +6,10 @@ import { RPC } from 'iso-filecoin/rpc'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
 import { getAccount } from '../account'
-import { SignMessageDialog, SignRawDialog } from '../components/sign'
+import {
+  SignMessageDialog,
+  SignTransactionDialog,
+} from '../components/dialog-sign'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
 import type { SignedMessage } from './send-message'
@@ -83,7 +86,7 @@ export async function signMessage(
     params: {
       type: 'confirmation',
       content: (
-        <SignMessageDialog
+        <SignTransactionDialog
           accountNumber={account.accountNumber}
           message={message}
           config={config}
@@ -144,7 +147,8 @@ export async function signMessageRaw(
     params: {
       type: 'confirmation',
       content: (
-        <SignRawDialog
+        <SignMessageDialog
+          address={account.address.toString()}
           origin={ctx.origin}
           accountNumber={account.accountNumber}
           message={message}
