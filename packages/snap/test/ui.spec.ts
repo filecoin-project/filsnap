@@ -226,7 +226,7 @@ preinstall.test.describe('JSX UI Install', () => {
 })
 
 const homepage = createFixture({
-  isolated: false,
+  isolated: true,
   downloadOptions: {
     flask: true,
   },
