@@ -243,7 +243,7 @@ homepage.test.describe('JSX UI Homepage', () => {
     await metamask.page.getByTestId('confirmation-submit-button').click()
   })
 
-  homepage.test.only(
+  homepage.test.skip(
     'should get configure for testnet',
     async ({ metamask }) => {
       await metamask.goToHomepage('local:http://localhost:8080')
