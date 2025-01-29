@@ -60,8 +60,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       iso-filecoin:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^6.1.1
+        version: 6.1.1
       preact:
         specifier: ^10.25.4
         version: 10.25.4
@@ -118,8 +118,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       iso-filecoin:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^6.1.1
+        version: 6.1.1
       viem:
         specifier: ^2.22.16
         version: 2.22.16(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
@@ -158,8 +158,8 @@ importers:
         specifier: workspace:^
         version: link:../snap
       iso-filecoin:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^6.1.1
+        version: 6.1.1
       viem:
         specifier: ^2.22.16
         version: 2.22.16(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
@@ -238,8 +238,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       iso-filecoin:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^6.1.1
+        version: 6.1.1
       merge-options:
         specifier: ^3.0.4
         version: 3.0.4
@@ -4351,8 +4351,8 @@ packages:
   iso-filecoin@4.1.0:
     resolution: {integrity: sha512-jUtgWHC2I0j+0WtjhoRc321Mdo54/ntKbLZ1Ad1Ptq55N6RoHL2rJHp0RvPmjtCHlKc++DfMJnO4nWLwFVFr2g==}
 
-  iso-filecoin@6.0.1:
-    resolution: {integrity: sha512-Oy6mtJCLMqZVzQlN1h6uYnKL2K41BB7wrmLcw1HKV9qtJKXxRZCel1OF5zgrv+/wHN685Xes5xPvGrD2ogMMXw==}
+  iso-filecoin@6.1.1:
+    resolution: {integrity: sha512-1oyaD7AZQFK5+W+j9ngRI8LnPigPJS5enYkEulUMkUSTPEBX+oStQr6avflRJFIEHqtREmsxMcxGnbayTxLWpw==}
 
   iso-kv@3.0.3:
     resolution: {integrity: sha512-NVW7TJGiTbDlfBclLJeGqGLvZhgMu02tPId6ghLEygCVgitp3946TM6HJordcSbyJbD0wRzByilRYK/GY8dKlw==}
@@ -12263,7 +12263,7 @@ snapshots:
       iso-web: 1.0.6
       zod: 3.24.1
 
-  iso-filecoin@6.0.1:
+  iso-filecoin@6.1.1:
     dependencies:
       '@ipld/dag-cbor': 9.2.2
       '@noble/curves': 1.8.1

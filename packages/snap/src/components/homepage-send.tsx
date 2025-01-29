@@ -18,6 +18,7 @@ import {
   Tooltip,
 } from '@metamask/snaps-sdk/jsx'
 import * as FilAddress from 'iso-filecoin/address'
+import * as Chains from 'iso-filecoin/chains'
 import { Message } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
 import { Token } from 'iso-filecoin/token'
@@ -123,7 +124,7 @@ export const SendReview: SnapComponent<SendReviewProps> = ({
         <Text color="alternative"> {config.rpc.url}</Text>
       </Row>
       <Row label="Network">
-        <Text color="alternative"> {config.network}</Text>
+        <Text color="alternative"> {Chains[config.network].name}</Text>
       </Row>
     </Section>
   )
