@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.1...filsnap-v1.4.2) (2025-01-29)
+
+
+### Bug Fixes
+
+* use chain human readable name ([f23114d](https://github.com/filecoin-project/filsnap/commit/f23114d5dba6392443d750c8eb31fe385fccc65d))
+
 ## [1.4.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.0...filsnap-v1.4.1) (2025-01-28)
 
 
