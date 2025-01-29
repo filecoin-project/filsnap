@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.2...filsnap-v1.4.3) (2025-01-29)
+
+
+### Bug Fixes
+
+* change configure dialog to human chain name ([ab5c323](https://github.com/filecoin-project/filsnap/commit/ab5c323d848516e183fc4ad1329c1b985473cb0a))
+
 ## [1.4.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.1...filsnap-v1.4.2) (2025-01-29)
 
 
