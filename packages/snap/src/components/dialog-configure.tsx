@@ -11,6 +11,7 @@ import {
 import iconConnect from '../svg/connect.svg'
 import iconWallet from '../svg/wallet.svg'
 
+import * as Chains from 'iso-filecoin/chains'
 import iconSettings from '../svg/settings.svg'
 import type { SnapConfig } from '../types'
 import { addressToCaip10, explorerAddressLink } from '../utils'
@@ -63,7 +64,7 @@ export const Configure: SnapComponent<ConfigureProps> = ({
           <Text color="alternative">{config.rpc.url}</Text>
         </Row>
         <Row label="Network">
-          <Text color="alternative">{config.network}</Text>
+          <Text color="alternative">{Chains[config.network].name}</Text>
         </Row>
         <Row label="Unit Decimals">
           <Text color="alternative">
