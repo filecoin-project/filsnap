@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.3...filsnap-v1.4.4) (2025-01-30)
+
+
+### Bug Fixes
+
+* revert to platform 6.13.0 ([cc8eb64](https://github.com/filecoin-project/filsnap/commit/cc8eb64e69a11e26b8bbbfa2874750c0e80b81b6))
+
 ## [1.4.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.2...filsnap-v1.4.3) (2025-01-29)
 
 
