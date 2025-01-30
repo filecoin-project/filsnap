@@ -226,8 +226,8 @@ importers:
         specifier: ^10.0.2
         version: 10.0.2
       '@metamask/snaps-sdk':
-        specifier: ^6.16.0
-        version: 6.16.0(webextension-polyfill@0.12.0)
+        specifier: 6.13.0
+        version: 6.13.0(webextension-polyfill@0.12.0)
       '@paulmillr/qr':
         specifier: ^0.3.0
         version: 0.3.0
@@ -1682,6 +1682,10 @@ packages:
 
   '@metamask/snaps-rpc-methods@11.10.0':
     resolution: {integrity: sha512-jNYlYXsk2x2HS/GHH+NyVRFsFQKztCLA3bVr582h2CpLfJX7PWbMk+lAmMZGczb77y40I7A+9dm94Ln7W3VczQ==}
+    engines: {node: ^18.16 || >=20}
+
+  '@metamask/snaps-sdk@6.13.0':
+    resolution: {integrity: sha512-WXNt0XZSnmgbwgETL0RiRvl0CMa78ZA1zLS0olK8QR/+9zcPCSrh68v1lVAa+LcctvzpRJ8NiRAar2fRBthqyw==}
     engines: {node: ^18.16 || >=20}
 
   '@metamask/snaps-sdk@6.14.0':
@@ -8618,6 +8622,17 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
+  '@metamask/snaps-sdk@6.13.0(webextension-polyfill@0.12.0)':
+    dependencies:
+      '@metamask/key-tree': 10.0.2
+      '@metamask/providers': 18.3.1(webextension-polyfill@0.12.0)
+      '@metamask/rpc-errors': 7.0.2
+      '@metamask/superstruct': 3.1.0
+      '@metamask/utils': 10.0.1
+    transitivePeerDependencies:
+      - supports-color
+      - webextension-polyfill
+
   '@metamask/snaps-sdk@6.14.0(webextension-polyfill@0.12.0)':
     dependencies:
       '@metamask/key-tree': 10.0.2
@@ -11773,7 +11788,7 @@ snapshots:
   filsnap@1.2.0(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0):
     dependencies:
       '@metamask/key-tree': 9.1.2
-      '@metamask/snaps-sdk': 6.14.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.16.0(webextension-polyfill@0.12.0)
       '@paulmillr/qr': 0.2.1
       dequal: 2.0.3
       iso-base: 4.0.0
