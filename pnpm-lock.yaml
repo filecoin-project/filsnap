@@ -152,8 +152,8 @@ importers:
         specifier: ^7.1.2
         version: 7.1.2
       '@metamask/snaps-sdk':
-        specifier: ^6.16.0
-        version: 6.16.0(webextension-polyfill@0.12.0)
+        specifier: 6.13.0
+        version: 6.13.0(webextension-polyfill@0.12.0)
       filsnap:
         specifier: workspace:^
         version: link:../snap
@@ -11788,7 +11788,7 @@ snapshots:
   filsnap@1.2.0(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0):
     dependencies:
       '@metamask/key-tree': 9.1.2
-      '@metamask/snaps-sdk': 6.16.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.13.0(webextension-polyfill@0.12.0)
       '@paulmillr/qr': 0.2.1
       dequal: 2.0.3
       iso-base: 4.0.0
