@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.4](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.3...filsnap-adapter-v2.0.4) (2025-01-31)
+
+
+### Bug Fixes
+
+* revert to platform 6.13.0 ([f9ca421](https://github.com/filecoin-project/filsnap/commit/f9ca421d402ced509eeff5c1e9db350902a99579))
+* use chain definitions from iso-filecoin ([307658f](https://github.com/filecoin-project/filsnap/commit/307658fc001cb20cc33d5d40e3aadfe03d9b832a))
+* use chain human readable name ([f23114d](https://github.com/filecoin-project/filsnap/commit/f23114d5dba6392443d750c8eb31fe385fccc65d))
+
 ## [2.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.2...filsnap-adapter-v2.0.3) (2025-01-28)
 
 
