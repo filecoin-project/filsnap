@@ -62,7 +62,7 @@
     "preact": "^10.25.4",
     "react-hook-form": "^7.54.2",
     "react-toastify": "^10.0.5",
-    "viem": "^2.22.16",
+    "viem": "^2.23.0",
     "wagmi": "^2.14.9",
     "water.css": "^2.1.1"
   },
