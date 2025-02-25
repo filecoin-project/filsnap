@@ -10,7 +10,10 @@ export const signedMessage = z.object({
   message: Schemas.message,
   signature: z.object({
     type: z.literal('SECP256K1'),
-    data: z.string(),
+    /**
+     * base64pad encoded signature
+     */
+    data: z.string().base64(),
   }),
 })
 
