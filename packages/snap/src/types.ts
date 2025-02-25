@@ -27,15 +27,22 @@ export type { Snap, InterfaceContext } from '@metamask/snaps-sdk'
 
 // Snap types
 export interface AccountSafe {
-  address: AddressSecp256k1 | AddressBLS
+  address: IAddress
   pubKey: Uint8Array
+  /**
+   * Address index from the BIP44 derivation path
+   */
   accountNumber: number
-  path: string | undefined
+  /**
+   * BIP44 derivation path
+   */
+  path: string
 }
 
-export interface AccountPrivate extends Account {
-  accountNumber: number
+export interface AccountPrivate extends AccountSafe {
+  privateKey: Uint8Array
 }
+
 export interface AccountInfo {
   address: string
   pubKey: string
@@ -103,6 +110,7 @@ export interface FilSnapMethods {
   fil_signMessageRaw: typeof signMessageRaw
   fil_sendMessage: typeof sendMessage
   fil_getAccountInfo: typeof getAccountInfo
+  fil_getAccount: typeof filGetAccount
 }
 
 // UI Types

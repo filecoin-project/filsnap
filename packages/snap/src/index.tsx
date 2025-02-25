@@ -72,6 +72,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       case 'fil_getAccountInfo': {
         return await getAccountInfo(context)
       }
+      case 'fil_getAccount': {
+        return await filGetAccount(context)
+      }
       case 'fil_getAddress': {
         const config = await state.get(origin)
 

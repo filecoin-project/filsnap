@@ -5,12 +5,12 @@ import { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { AccountPrivate, AccountSafe, SnapConfig } from './types'
 
 /**
- * Return derived Account from seed.
+ * Return derived Account from seed with private key.
  *
  * @param snap - Snaps object
  * @param config - Snap configuration
  */
-export async function getAccount(
+export async function getAccountWithPrivateKey(
   snap: SnapsProvider,
   config: SnapConfig
 ): Promise<AccountPrivate> {
@@ -36,14 +36,17 @@ export async function getAccount(
     throw new Error('Private key not found')
   }
   const privateKeyBuffer = privateKey.subarray(0, 32)
-
+  const acc = accountFromPrivateKey(
+    privateKeyBuffer,
+    'SECP256K1',
+    isFilecoinMainnet ? 'mainnet' : 'testnet'
+  )
   return {
-    ...accountFromPrivateKey(
-      privateKeyBuffer,
-      'SECP256K1',
-      isFilecoinMainnet ? 'mainnet' : 'testnet'
-    ),
-    accountNumber: account,
+    address: acc.address,
+    pubKey: acc.publicKey,
+    privateKey: privateKeyBuffer,
+    path: derivationPath,
+    accountNumber: addressIndex,
   }
 }
 
@@ -58,12 +61,8 @@ export async function getAccountSafe(
   config: SnapConfig
 ): Promise<AccountSafe> {
   const { derivationPath } = config
-  const {
-    coinType,
-    account: accountNumber,
-    change,
-    addressIndex,
-  } = parseDerivationPath(derivationPath)
+  const { coinType, account, change, addressIndex } =
+    parseDerivationPath(derivationPath)
   const isFilecoinMainnet = coinType === 461
   const bip44Node = await snap.request({
     method: 'snap_getBip44Entropy',
@@ -73,7 +72,7 @@ export async function getAccountSafe(
   })
 
   const addressKeyDeriver = await getBIP44AddressKeyDeriver(bip44Node, {
-    account: accountNumber,
+    account,
     change,
   })
   const extendedPrivateKey = await addressKeyDeriver(addressIndex)
@@ -84,18 +83,17 @@ export async function getAccountSafe(
   }
   const privateKeyBuffer = privateKey.subarray(0, 32)
 
-  let account = accountFromPrivateKey(
+  let acc = accountFromPrivateKey(
     privateKeyBuffer,
     'SECP256K1',
     isFilecoinMainnet ? 'mainnet' : 'testnet'
   )
 
-  const address = account.address
-  const pubKey = account.pubKey
-  const path = account.path
+  const address = acc.address
+  const pubKey = acc.publicKey
 
   // @ts-expect-error - deref account
-  account = null
+  acc = null
 
-  return { address, pubKey, accountNumber, path }
+  return { address, pubKey, accountNumber: addressIndex, path: derivationPath }
 }

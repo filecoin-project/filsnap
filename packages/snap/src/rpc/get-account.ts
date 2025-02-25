@@ -1,3 +1,4 @@
+import { hex } from 'iso-base/rfc4648'
 import { RPC } from 'iso-filecoin/rpc'
 import type { Jsonify } from 'type-fest'
 import { getAccountSafe } from '../account'
@@ -8,7 +9,7 @@ import { serializeError } from '../utils'
 export type GetAccountInfoResponse = SnapResponse<AccountInfo>
 
 /**
- * Get the balance of the current account
+ * Get the account info and balance of the current account
  *
  * @param ctx - Snaps context
  * @returns Balance of the account in attoFIL
@@ -42,6 +43,45 @@ export async function getAccountInfo(
       pubKey: account.pubKey.toString(),
       balance: balance.result,
       config,
+    },
+  }
+}
+
+export interface IAccountSerialized {
+  address: string
+  /**
+   * Hex encoded public key
+   */
+  publicKey: string
+  path: string
+  type: 'SECP256K1'
+}
+
+/**
+ * RPC method to get the account info of the current account
+ *
+ * @param ctx - Snaps context
+ */
+export async function filGetAccount(
+  ctx: SnapContext
+): Promise<SnapResponse<Jsonify<IAccountSerialized>>> {
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
+
+  const account = await getAccountSafe(snap, config)
+
+  return {
+    error: null,
+    result: {
+      address: account.address.toString(),
+      publicKey: hex.encode(account.pubKey),
+      path: config.derivationPath,
+      type: 'SECP256K1',
     },
   }
 }
