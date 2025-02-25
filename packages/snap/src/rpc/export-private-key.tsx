@@ -1,4 +1,5 @@
 import { base64pad } from 'iso-base/rfc4648'
+import { accountToLotus } from 'iso-filecoin/wallet'
 import { getAccountWithPrivateKey } from '../account'
 import { ExportConfirm, PrivateKeyExport } from '../components/dialog-export'
 import type { SnapContext, SnapResponse } from '../types'
@@ -51,7 +52,15 @@ export async function exportPrivateKey(
       params: {
         type: 'alert',
         content: (
-          <PrivateKeyExport privateKey={base64pad.encode(account.privateKey)} />
+          <PrivateKeyExport
+            privateKey={base64pad.encode(account.privateKey)}
+            lotusPrivateKey={accountToLotus({
+              address: account.address,
+              privateKey: account.privateKey,
+              publicKey: account.pubKey,
+              type: 'SECP256K1',
+            })}
+          />
         ),
       },
     })

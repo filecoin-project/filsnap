@@ -1,5 +1,5 @@
 import { createFixture } from 'metamask-testing-tools'
-import type { getConfig } from '../src/rpc/configure'
+import type { filGetConfig } from '../src/rpc/configure'
 import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
 import type {
   SignMessageRawRequest,
@@ -24,7 +24,7 @@ fixture.test.describe('JSX UI Dialogs', () => {
     // Install popup
     await metamask.page.getByTestId('confirmation-submit-button').click()
 
-    const config = await metamask.invokeSnap<ReturnType<typeof getConfig>>({
+    const config = await metamask.invokeSnap<ReturnType<typeof filGetConfig>>({
       request: {
         method: 'fil_getConfig',
       },
@@ -46,7 +46,7 @@ fixture.test.describe('JSX UI Dialogs', () => {
   })
 
   fixture.test('API fil_configure dialog UI', async ({ metamask, page }) => {
-    const config = await metamask.invokeSnap<ReturnType<typeof getConfig>>({
+    const config = await metamask.invokeSnap<ReturnType<typeof filGetConfig>>({
       request: {
         method: 'fil_getConfig',
       },

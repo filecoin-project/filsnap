@@ -60,10 +60,12 @@ export const ExportConfirm: SnapComponent<ExportConfirmProps> = ({
 
 type PrivateKeyExportProps = {
   privateKey: string
+  lotusPrivateKey: string
 }
 
 export const PrivateKeyExport: SnapComponent<PrivateKeyExportProps> = ({
   privateKey,
+  lotusPrivateKey,
 }) => {
   return (
     <Box>
@@ -78,7 +80,10 @@ export const PrivateKeyExport: SnapComponent<PrivateKeyExportProps> = ({
           </Text>
         </Box>
 
+        <Text color="alternative"> Raw base64 encoded private key:</Text>
         <Copyable value={privateKey} sensitive />
+        <Text color="alternative"> Lotus hex encoded private key:</Text>
+        <Copyable value={lotusPrivateKey} sensitive />
       </Section>
     </Box>
   )
