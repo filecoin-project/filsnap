@@ -1,8 +1,18 @@
+import { pathFromNetwork } from 'iso-filecoin/adapters/common.js'
 import { Token, type Value } from 'iso-filecoin/token'
+import { parseDerivationPath } from 'iso-filecoin/utils'
 import type { Jsonify } from 'type-fest'
+import type { ZodError } from 'zod'
+import { fromError, isZodErrorLike } from 'zod-validation-error'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
-import type { Json, Network, SnapConfig, SnapResponseError } from './types'
+import type {
+  Config,
+  Json,
+  Network,
+  SnapConfig,
+  SnapResponseError,
+} from './types'
 
 /**
  * Get default configuration by network name
@@ -30,7 +40,10 @@ export function configFromNetwork(networkName?: Network): SnapConfig {
  * @param object - The object in question.
  * @returns An object containing all the JSON-serializable properties.
  */
-function serializeObject(object: Record<PropertyKey, unknown>): Json {
+function serializeObject(object: unknown): Record<string, Json> {
+  if (!isObject(object)) {
+    return {}
+  }
   return Object.getOwnPropertyNames(object).reduce<Record<string, Json>>(
     (acc, key) => {
       const value = object[key]
@@ -69,16 +82,39 @@ export function serializeError(
   msg: string,
   data?: unknown
 ): Jsonify<SnapResponseError> {
+  if (isZodErrorLike(data)) {
+    data = fromError(data)
+  }
+
   const _data = isObject(data) ? serializeObject(data) : null
-  // @ts-expect-error - no types
-  const hasMessage = _data?.message != null && typeof _data.message === 'string'
-  // @ts-expect-error - no types
+  const hasMessage =
+    _data && 'message' in _data && typeof _data.message === 'string'
   const _msg = (hasMessage ? _data.message : '') as string
   return {
     result: null,
     error: {
       message: msg + (hasMessage ? ` - ${_msg}` : ''),
       data: _data,
+    },
+  }
+}
+
+/**
+ * Serialize an error into a SnapError.
+ * If the error is an object, it will be serialized into a JSON object.
+ *
+ * @param msg - Error message
+ * @param data - Error data
+ */
+export function serializeValidationError(
+  err: ZodError
+): Jsonify<SnapResponseError> {
+  const error = fromError(err)
+  return {
+    result: null,
+    error: {
+      message: error.message,
+      data: serializeObject(error),
     },
   }
 }
