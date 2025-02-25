@@ -1,29 +1,27 @@
 import type { SnapsProvider } from '@metamask/snaps-sdk'
-
+import type { IAddress, MessageObj } from 'iso-filecoin/types'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
-
-import type { AddressBLS, AddressSecp256k1 } from 'iso-filecoin/address'
-import type { MessageObj } from 'iso-filecoin/types'
 import type { z } from 'zod'
-import type { configure, getConfig } from './rpc/configure'
+import type { configure, filGetConfig, filSetConfig } from './rpc/configure'
 import type { exportPrivateKey } from './rpc/export-private-key'
 import type { getGasForMessage } from './rpc/gas-for-message'
-import type { getAccountInfo } from './rpc/get-account'
+import type { filGetAccount, getAccountInfo } from './rpc/get-account'
 import type { getBalance } from './rpc/get-balance'
 import type { sendMessage } from './rpc/send-message'
 import type { signMessage, signMessageRaw } from './rpc/sign-message'
-import type { literal, messageStatus, snapConfig } from './schemas'
+import type { config, literal, messageStatus, snapConfig } from './schemas'
 import type { State } from './state'
 
 export type { MessageObj, Network } from 'iso-filecoin/types'
+export type { Snap, InterfaceContext } from '@metamask/snaps-sdk'
 
 // Schema types
 export type Literal = z.infer<typeof literal>
 export type Json = Literal | { [key: string]: Json } | Json[]
 export type SnapConfig = z.infer<typeof snapConfig>
+export type Config = z.infer<typeof config>
 export type MessageStatus = z.infer<typeof messageStatus>
 export type Account = ReturnType<typeof accountFromPrivateKey>
-export type { Snap, InterfaceContext } from '@metamask/snaps-sdk'
 
 // Snap types
 export interface AccountSafe {
@@ -99,7 +97,8 @@ export type GetPublicResponse = SnapResponse<string>
  * Should always return a promise as this is on the metamask side
  */
 export interface FilSnapMethods {
-  fil_getConfig: typeof getConfig
+  fil_getConfig: typeof filGetConfig
+  fil_setConfig: typeof filSetConfig
   fil_configure: typeof configure
   fil_getAddress: (snap: SnapsProvider) => Promise<GetAddressResponse>
   fil_getPublicKey: (snap: SnapsProvider) => Promise<GetPublicResponse>

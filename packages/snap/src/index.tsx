@@ -8,19 +8,19 @@ import {
 } from '@metamask/snaps-sdk'
 import { hex } from 'iso-base/rfc4648'
 
-import { getAccountInfo } from './rpc/get-account'
+import { filGetAccount, getAccountInfo } from './rpc/get-account'
 import type {
   SignMessageParams,
   SignMessageRawParams,
 } from './rpc/sign-message'
 import { signMessage, signMessageRaw } from './rpc/sign-message'
 import { State } from './state'
-import type { HomepageContext, SnapConfig, SnapContext } from './types'
+import type { Config, HomepageContext, SnapConfig, SnapContext } from './types'
 import { configFromNetwork, serializeError } from './utils'
 
 import { getAccountSafe } from './account'
 import { INTERNAL_CONFIG } from './constants'
-import { configure, getConfig } from './rpc/configure'
+import { configure, filGetConfig, filSetConfig } from './rpc/configure'
 import { exportPrivateKey } from './rpc/export-private-key'
 import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
@@ -45,6 +45,8 @@ export type {
   SnapConfig,
   Snap,
   SnapError,
+  SnapResponse,
+  SnapResponseError,
 } from './types'
 
 // Disable transaction insight for now
@@ -64,7 +66,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
     switch (request.method) {
       case 'fil_getConfig': {
-        return await getConfig(context)
+        return await filGetConfig(context)
+      }
+      case 'fil_setConfig': {
+        return await filSetConfig(context, request.params as Partial<Config>)
       }
       case 'fil_configure': {
         return await configure(context, request.params as Partial<SnapConfig>)

@@ -4,11 +4,19 @@ import { parseDerivationPath } from 'iso-filecoin/utils'
 
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
+import type { Jsonify } from 'type-fest'
 import { getAccountSafe } from '../account'
 import { Configure } from '../components/dialog-configure'
-import { snapConfig } from '../schemas'
-import type { SnapConfig, SnapContext, SnapResponse } from '../types'
-import { configFromNetwork, serializeError } from '../utils'
+import { config, snapConfig } from '../schemas'
+import type { Config, SnapConfig, SnapContext, SnapResponse } from '../types'
+import {
+  configFromNetwork,
+  configToSnapConfig,
+  serializeError,
+  serializeValidationError,
+  snapConfigToConfig,
+} from '../utils'
+import { type IAccountSerialized, filGetAccount } from './get-account'
 
 // Types
 export type ConfigureParams = Partial<SnapConfig>
@@ -103,11 +111,11 @@ export async function configure(
 }
 
 /**
- * Configures the snap with the provided configuration
+ * RPC method to get the current configuration
  *
  * @param ctx - Snap context
  */
-export async function getConfig(
+export async function filGetConfig(
   ctx: SnapContext
 ): Promise<SnapResponse<SnapConfig | null>> {
   const config = await ctx.state.get(ctx.origin)
@@ -117,4 +125,104 @@ export async function getConfig(
   }
 
   return { result: null, error: null }
+}
+
+/**
+ * RPC method to set the configuration
+ */
+export async function filSetConfig(
+  ctx: SnapContext,
+  params?: Partial<Config>
+): Promise<
+  SnapResponse<{
+    config: SnapConfig
+    account: Jsonify<IAccountSerialized>
+  }>
+> {
+  // Make sure rpcUrl is set if network is provided
+  if (params?.network && params.rpcUrl == null) {
+    params.rpcUrl = configFromNetwork(params?.network).rpc.url
+  }
+  const internalState = await ctx.state.get(ctx.origin)
+  const defaultState = internalState ?? configFromNetwork()
+
+  // Merge everything together
+  const newConfig = config.safeParse(
+    merge(snapConfigToConfig(defaultState), params)
+  )
+  if (!newConfig.success) {
+    return serializeValidationError(newConfig.error)
+  }
+
+  const newSnapConfig = configToSnapConfig(newConfig.data)
+
+  // Confirm rpc url matches network
+  if (params?.rpcUrl || newSnapConfig.network !== defaultState.network) {
+    const rpc = new RPC({
+      token: newSnapConfig.rpc.token,
+      api: newSnapConfig.rpc.url,
+      network: newSnapConfig.network,
+    })
+    const networkName = await rpc.networkName()
+    if (networkName.error) {
+      return serializeError(
+        'RPC call to "StateNetworkName" failed',
+        networkName.error
+      )
+    }
+
+    if (newSnapConfig.network !== networkName.result) {
+      return serializeError(
+        'Mismatch between configured network and network provided by RPC'
+      )
+    }
+  }
+
+  // If the state is already set, don't update it and avoid prompting
+  if (internalState && dequal(internalState, newSnapConfig)) {
+    const account = await filGetAccount(ctx)
+    if (account.error) {
+      return account
+    }
+    return {
+      result: {
+        account: account.result,
+        config: internalState,
+      },
+      error: null,
+    }
+  }
+
+  // Show prompt to confirm new config
+  const account = await getAccountSafe(snap, newSnapConfig)
+  const conf = await ctx.snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: (
+        <Configure
+          accountNumber={account.accountNumber}
+          address={account.address.toString()}
+          config={newSnapConfig}
+          origin={ctx.origin}
+        />
+      ),
+    },
+  })
+
+  if (conf) {
+    await ctx.state.set(ctx.origin, newSnapConfig)
+    const account = await filGetAccount(ctx)
+    if (account.error) {
+      return account
+    }
+    return {
+      result: {
+        account: account.result,
+        config: newSnapConfig,
+      },
+      error: null,
+    }
+  }
+  return serializeError('User denied configuration')
 }

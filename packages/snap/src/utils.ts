@@ -126,3 +126,36 @@ export function explorerAddressLink(address: string, network: Network): string {
 
   throw new Error(`Failed to create explorer link for ${address}`)
 }
+
+/**
+ * Converts a Config to an SnapConfig
+ */
+export function configToSnapConfig(conf: Config): SnapConfig {
+  return {
+    derivationPath: pathFromNetwork(conf.network, conf.index),
+    rpc: {
+      url: conf.rpcUrl,
+      token: conf.rpcToken,
+    },
+    network: conf.network,
+    unit: {
+      decimals: conf.decimals,
+      symbol: conf.symbol,
+    },
+  }
+}
+
+/**
+ * Converts a SnapConfig to a Config
+ */
+export function snapConfigToConfig(conf: SnapConfig): Config {
+  const { addressIndex } = parseDerivationPath(conf.derivationPath)
+  return {
+    network: conf.network,
+    rpcUrl: conf.rpc.url,
+    rpcToken: conf.rpc.token,
+    index: addressIndex,
+    symbol: conf.unit?.symbol || 'FIL',
+    decimals: conf.unit?.decimals || 18,
+  }
+}

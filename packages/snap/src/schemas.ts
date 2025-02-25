@@ -1,7 +1,7 @@
 import { Schemas } from 'iso-filecoin/message'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { z } from 'zod'
-import type { Json } from './types'
+import type { Json, Network } from './types'
 
 const alphabet =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=+/'
@@ -16,7 +16,36 @@ const unitConfiguration = z.object({
   symbol: z.enum(['FIL', 'tFIL']),
 })
 
-export const network = z.enum(['mainnet', 'testnet'])
+export const network: z.ZodType<Network> = z.enum(['mainnet', 'testnet'])
+
+export const config = z.object({
+  /**
+   * RPC URL to be used must be a valid URL and match the network
+   */
+  rpcUrl: z.string().url().trim(),
+  /**
+   * Bearer token used to make authenticated requests to the RPC URL
+   */
+  rpcToken: z.string().trim(),
+  /**
+   * Network to be used
+   *
+   * @default mainnet
+   */
+  network: network,
+  /**
+   * Derivation path address index
+   */
+  index: z.number().nonnegative().int().safe(),
+  /**
+   * Symbol of the token to be used in the UI
+   */
+  symbol: z.enum(['FIL', 'tFIL']),
+  /**
+   * Number of decimals of the token to be used in the UI
+   */
+  decimals: z.number().positive().int().lte(18),
+})
 
 export const snapConfig = z.object({
   /**
