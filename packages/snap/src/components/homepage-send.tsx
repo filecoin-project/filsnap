@@ -25,7 +25,7 @@ import { Token } from 'iso-filecoin/token'
 import { signMessage as filSignMessage } from 'iso-filecoin/wallet'
 import type { Jsonify } from 'type-fest'
 import { z } from 'zod'
-import { getAccount } from '../account'
+import { getAccountWithPrivateKey } from '../account'
 import iconFilecoin from '../svg/filecoin-logo.svg'
 import type { HomepageContext, MessageObj, SnapConfig } from '../types'
 import {
@@ -367,7 +367,7 @@ export async function onSendResult(id: string, context: HomepageContext) {
   await updateWithProgress(id, context)
 
   const message = new Message(context.sendMessage)
-  const account = await getAccount(snap, config)
+  const account = await getAccountWithPrivateKey(snap, config)
   const sig = filSignMessage(account.privateKey, 'SECP256K1', message)
   const msgPush = await rpc.pushMessage({
     msg: message,

@@ -5,7 +5,7 @@ import { Message, Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
 import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
 import { z } from 'zod'
-import { getAccount } from '../account'
+import { getAccountWithPrivateKey } from '../account'
 import {
   SignMessageDialog,
   SignTransactionDialog,
@@ -63,7 +63,7 @@ export async function signMessage(
     )
   }
 
-  const account = await getAccount(snap, config)
+  const account = await getAccountWithPrivateKey(snap, config)
   const rpc = new RPC({
     api: config.rpc.url,
     network: config.network,
@@ -140,7 +140,7 @@ export async function signMessageRaw(
 
   const { message } = _params.data
 
-  const account = await getAccount(snap, config)
+  const account = await getAccountWithPrivateKey(snap, config)
 
   const conf = await ctx.snap.request({
     method: 'snap_dialog',

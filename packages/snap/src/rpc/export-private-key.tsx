@@ -1,5 +1,5 @@
 import { base64pad } from 'iso-base/rfc4648'
-import { getAccount } from '../account'
+import { getAccountWithPrivateKey } from '../account'
 import { ExportConfirm, PrivateKeyExport } from '../components/dialog-export'
 import type { SnapContext, SnapResponse } from '../types'
 import { serializeError } from '../utils'
@@ -28,7 +28,7 @@ export async function exportPrivateKey(
     )
   }
 
-  const account = await getAccount(snap, config)
+  const account = await getAccountWithPrivateKey(snap, config)
 
   const conf = await ctx.snap.request({
     method: 'snap_dialog',
