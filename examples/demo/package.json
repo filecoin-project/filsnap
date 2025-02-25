@@ -52,30 +52,30 @@
   },
   "dependencies": {
     "@acab/reset.css": "^0.11.0",
-    "@tanstack/react-query": "^5.65.1",
+    "@tanstack/react-query": "^5.66.8",
     "clsx": "^2.1.0",
-    "dns-over-http-resolver": "^3.0.3",
+    "dns-over-http-resolver": "^3.0.5",
     "filsnap-adapter": "workspace:*",
     "filsnap-adapter-react": "workspace:*",
-    "iso-base": "^4.0.0",
-    "iso-filecoin": "^6.1.1",
-    "preact": "^10.25.4",
+    "iso-base": "^4.0.2",
+    "iso-filecoin": "^7.0.2",
+    "preact": "^10.26.2",
     "react-hook-form": "^7.54.2",
-    "react-toastify": "^10.0.5",
-    "viem": "^2.22.16",
-    "wagmi": "^2.14.9",
+    "react-toastify": "^11.0.3",
+    "viem": "^2.23.3",
+    "wagmi": "^2.14.11",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.7",
+    "@babel/core": "^7.26.9",
     "@biomejs/biome": "^1.9.4",
     "@hugomrdias/configs": "^0.1.9",
-    "@preact/preset-vite": "^2.9.3",
-    "@types/node": "^22.12.0",
+    "@preact/preset-vite": "^2.10.1",
+    "@types/node": "^22.13.4",
     "tiny-git-rev-sync": "^0.1.0",
     "typescript": "5.7.3",
     "vite": "^5.4.10",
-    "wireit": "^0.14.8"
+    "wireit": "^0.14.11"
   },
   "depcheck": {
     "specials": [
