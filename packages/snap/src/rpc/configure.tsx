@@ -170,10 +170,12 @@ export async function filSetConfig(
         networkName.error
       )
     }
+    const networkFromRpc =
+      networkName.result === 'mainnet' ? 'mainnet' : 'testnet'
 
-    if (newSnapConfig.network !== networkName.result) {
+    if (newSnapConfig.network !== networkFromRpc) {
       return serializeError(
-        'Mismatch between configured network and network provided by RPC'
+        `Mismatch between configured network and network provided by RPC. ${newSnapConfig.network} ${newSnapConfig.rpc.url} ${networkName.result}`
       )
     }
   }
