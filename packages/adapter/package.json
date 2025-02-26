@@ -46,7 +46,7 @@
     "@metamask/snaps-sdk": "6.18.0",
     "filsnap": "workspace:^",
     "iso-base": "^4.0.2",
-    "iso-filecoin": "^7.0.2",
+    "iso-filecoin": "^7.1.0",
     "viem": "^2.23.3"
   },
   "devDependencies": {
