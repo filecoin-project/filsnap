@@ -1,8 +1,18 @@
-import type { AccountInfo, FilSnapMethods, Snap, SnapConfig } from 'filsnap'
+import type {
+  AccountInfo,
+  FilSnapMethods,
+  Snap,
+  SnapConfig,
+  SnapResponse,
+} from 'filsnap'
+import { hex } from 'iso-base/rfc4648'
+import { fromString } from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
-import { metamask } from './chains'
+import type { IAccount, Network } from 'iso-filecoin/types'
+import { getNetworkFromChainId, parseDerivationPath } from 'iso-filecoin/utils'
+import type { SetRequired } from 'type-fest'
 import type { EIP1193Provider } from './types'
-import { getOrInstallSnap, getSnap } from './utils'
+import { getOrInstallSnap, getProvider, getSnap } from './utils'
 
 export type FilsnapAdapterOptions = {
   /**
@@ -26,6 +36,8 @@ export type ConnectOptions = {
   snapVersion?: string
   /**
    * EIP-1193 provider
+   *
+   * @see use {@link getProvider} to resolve the metamask provider
    */
   provider: EIP1193Provider
   /**
@@ -51,7 +63,6 @@ export class FilsnapAdapter {
   readonly snap: Snap
   readonly provider: EIP1193Provider
   config: SnapConfig | undefined
-
   public constructor(options: FilsnapAdapterOptions) {
     this.snap = options.snap
     this.provider = options.provider
@@ -111,6 +122,9 @@ export class FilsnapAdapter {
     }
   }
 
+  /**
+   * Disconnect provider
+   */
   async disconnect(): Promise<void> {
     await this.provider.request({
       method: 'wallet_revokePermissions',
@@ -120,6 +134,8 @@ export class FilsnapAdapter {
         },
       ],
     })
+
+    this.config = undefined
   }
 
   /**
@@ -150,108 +166,133 @@ export class FilsnapAdapter {
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_configure',
-          params,
+          method: 'fil_setConfig',
+          params: {
+            network: params.network,
+            symbol: params.unit?.symbol,
+            decimals: params.unit?.decimals,
+            index: params.derivationPath
+              ? parseDerivationPath(params.derivationPath).addressIndex
+              : undefined,
+            rpcUrl: params.rpc?.url,
+            rpcToken: params.rpc?.token,
+          },
         },
         snapId: this.snap.id,
       },
     })
-
-    if (config.result) {
-      this.config = config.result
+    if (config.error) {
+      return config
     }
 
-    return config
+    this.config = config.result.config
+
+    return { result: this.config, error: null }
   }
 
   /**
-   * Change the chain
-   *
-   * @param chain - Chain to switch to
+   * Change network
    */
-  async changeChain(
-    chain: string | number
-  ): ReturnType<FilSnapMethods['fil_configure']> {
-    let network = this.config?.network
-
-    if (
-      chain === metamask.testnet.chainId ||
-      chain === 314_159 ||
-      chain === 'testnet'
-    ) {
-      network = 'testnet'
-    }
-
-    if (
-      chain === metamask.mainnet.chainId ||
-      chain === 314 ||
-      chain === 'mainnet'
-    ) {
-      network = 'mainnet'
-    }
-
-    if (this.config && this.config.network === network) {
-      return { result: this.config, error: null }
-    }
-    const config = await this.configure({ network })
-    return config
-  }
-
-  /**
-   * Request account info from the snap
-   *
-   * @see {@link FilSnapMethods.fil_getAccountInfo}
-   */
-  async getAccountInfo(): ReturnType<FilSnapMethods['fil_getAccountInfo']> {
-    const info = await this.provider.request({
+  async changeNetwork(
+    network: Network
+  ): Promise<
+    SnapResponse<{ network: Network; account: SetRequired<IAccount, 'path'> }>
+  > {
+    const out = await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_getAccountInfo',
+          method: 'fil_setConfig',
+          params: {
+            network,
+          },
         },
         snapId: this.snap.id,
       },
     })
-
-    if (info.result) {
-      this.config = info.result.config
+    if (out.error) {
+      return out
     }
 
-    return info
+    this.config = out.result.config
+
+    return {
+      error: null,
+      result: {
+        network,
+        account: {
+          address: fromString(out.result.account.address),
+          publicKey: hex.decode(out.result.account.publicKey),
+          path: out.result.account.path,
+          type: out.result.account.type,
+        },
+      },
+    }
   }
 
   /**
-   * Request account address from the snap
-   *
-   * @see {@link FilSnapMethods.fil_getAddress}
+   * Derive new account using provided index
    */
-  async getAddress(): ReturnType<FilSnapMethods['fil_getAddress']> {
-    return await this.provider.request({
+  async deriveAccount(
+    index: number
+  ): Promise<SnapResponse<SetRequired<IAccount, 'path'>>> {
+    const out = await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_getAddress',
+          method: 'fil_setConfig',
+          params: {
+            index,
+          },
         },
         snapId: this.snap.id,
       },
     })
+
+    if (out.error) {
+      return out
+    }
+
+    this.config = out.result.config
+
+    return {
+      error: null,
+      result: {
+        address: fromString(out.result.account.address),
+        publicKey: hex.decode(out.result.account.publicKey),
+        path: out.result.account.path,
+        type: out.result.account.type,
+      },
+    }
   }
 
   /**
-   * Request account public key from the snap
-   *
-   * @see {@link FilSnapMethods.fil_getPublicKey}
+   * Get current account data
    */
-  async getPublicKey(): ReturnType<FilSnapMethods['fil_getPublicKey']> {
-    return await this.provider.request({
+  async getAccount(): Promise<SnapResponse<SetRequired<IAccount, 'path'>>> {
+    const out = await this.provider.request({
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_getPublicKey',
+          method: 'fil_getAccount',
         },
         snapId: this.snap.id,
       },
     })
+
+    if (out.error) {
+      return out
+    }
+
+    return {
+      error: null,
+      result: {
+        address: fromString(out.result.address),
+        publicKey: hex.decode(out.result.publicKey),
+        path: out.result.path,
+        type: out.result.type,
+      },
+    }
   }
 
   /**
@@ -289,7 +330,7 @@ export class FilsnapAdapter {
   }
 
   /**
-   * Sign a message
+   * Sign a Filecoin message
    *
    * @param params - {@link FilSnapMethods.fil_signMessage} params
    */
@@ -368,5 +409,98 @@ export class FilsnapAdapter {
         snapId: this.snap.id,
       },
     })
+  }
+
+  /**
+   * Request account info with balance from the snap
+   *
+   * @deprecated use {@link getAccount} instead
+   * @see {@link FilSnapMethods.fil_getAccountInfo}
+   */
+  async getAccountInfo(): ReturnType<FilSnapMethods['fil_getAccountInfo']> {
+    const info = await this.provider.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        request: {
+          method: 'fil_getAccountInfo',
+        },
+        snapId: this.snap.id,
+      },
+    })
+
+    if (info.result) {
+      this.config = info.result.config
+    }
+
+    return info
+  }
+
+  /**
+   * Request account address from the snap
+   *
+   * @deprecated use {@link getAccount} instead
+   * @see {@link FilSnapMethods.fil_getAddress}
+   */
+  async getAddress(): ReturnType<FilSnapMethods['fil_getAddress']> {
+    return await this.provider.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        request: {
+          method: 'fil_getAddress',
+        },
+        snapId: this.snap.id,
+      },
+    })
+  }
+
+  /**
+   * Request account public key from the snap
+   *
+   * @deprecated use {@link getAccount} instead
+   * @see {@link FilSnapMethods.fil_getPublicKey}
+   * @returns Hex encoded public key
+   * @example
+   * ```js
+   * const rsp = await adapter.getPublicKey()
+   * if (rsp.error) {
+   *    throw new Error(rsp.error.message, {cause: rsp.error.data})
+   * }
+   * const publicKey = hex.decode(rsp.result)
+   * ```
+   */
+  async getPublicKey(): ReturnType<FilSnapMethods['fil_getPublicKey']> {
+    return await this.provider.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        request: {
+          method: 'fil_getPublicKey',
+        },
+        snapId: this.snap.id,
+      },
+    })
+  }
+
+  /**
+   * Change the chain
+   *
+   * @deprecated use {@link changeNetwork} instead and use `getNetworkFromChainId` from 'iso-filecoin/utils'
+   * @param chain - Chain to switch to. Can be a chain id (0x13a) or id (314) or network name (mainnet)
+   */
+  async changeChain(
+    chain: string | number
+  ): ReturnType<FilSnapMethods['fil_configure']> {
+    const network = getNetworkFromChainId(chain)
+
+    if (this.config && this.config.network === network) {
+      return { result: this.config, error: null }
+    }
+    const config = await this.configure({ network })
+
+    if (config.error) {
+      return config
+    }
+    this.config = config.result
+
+    return config
   }
 }
