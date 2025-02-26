@@ -1,4 +1,9 @@
-import { FilsnapAdapter, createConnector, getProvider } from 'filsnap-adapter'
+import {
+  FilsnapAdapter,
+  chainIdtoNetwork,
+  createConnector,
+  getProvider,
+} from 'filsnap-adapter'
 import * as React from 'react'
 
 /**
@@ -150,7 +155,7 @@ export function FilsnapProvider({
     async function onChainChange(chainId) {
       if (snap) {
         try {
-          const network = connector?.chainIdtoNetwork(chainId)
+          const network = chainIdtoNetwork(chainId)
 
           if (network === snapConfig.network) {
             return
@@ -214,7 +219,7 @@ export function FilsnapProvider({
         provider.removeListener('accountsChanged', onAccountsChanged)
       }
     }
-  }, [provider, snap, snapConfig, connector, setError, setSnapConfig, setSnap])
+  }, [provider, snap, snapConfig, setError, setSnapConfig, setSnap])
 
   // Callbacks
   /**

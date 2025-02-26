@@ -65,6 +65,20 @@ type ConnectorOptions = {
 export type Promisable<T> = T | Promise<T>
 
 /**
+ * Converts a Chain ID to Filecoin Network
+ *
+ * @param chainId
+ * @returns  Returns mainnet, testnet or undefined if not a filecoin chain
+ */
+export function chainIdtoNetwork(chainId: string): Network | undefined {
+  return chainId === metamask.testnet.chainId
+    ? 'testnet'
+    : chainId === metamask.mainnet.chainId
+      ? 'mainnet'
+      : undefined
+}
+
+/**
  * Create a connector for the EIP-1193 provider.
  *
  * @param options - The connector options.
@@ -93,7 +107,7 @@ export function createConnector(options: ConnectorOptions) {
       }
 
       this.getChainId().then((chainId) => {
-        currentNetwork = this.chainIdtoNetwork(chainId)
+        currentNetwork = chainIdtoNetwork(chainId)
       })
 
       return this
@@ -129,7 +143,7 @@ export function createConnector(options: ConnectorOptions) {
       }
 
       // switch to chain
-      currentNetwork = this.chainIdtoNetwork(await this.getChainId())
+      currentNetwork = chainIdtoNetwork(await this.getChainId())
 
       await this.switchChain(options.network ?? currentNetwork)
       return { accounts, network: currentNetwork }
@@ -160,19 +174,6 @@ export function createConnector(options: ConnectorOptions) {
 
     async getChainId() {
       return await provider.request({ method: 'eth_chainId' })
-    },
-
-    /**
-     *
-     * @param chainId
-     * @returns  Returns mainnet, testnet or undefined if not a filecoin chain
-     */
-    chainIdtoNetwork(chainId: string): Network | undefined {
-      return chainId === metamask.testnet.chainId
-        ? 'testnet'
-        : chainId === metamask.mainnet.chainId
-          ? 'mainnet'
-          : undefined
     },
 
     async switchChain(network: Network | undefined = currentNetwork) {
@@ -261,7 +262,7 @@ export function createConnector(options: ConnectorOptions) {
     },
 
     onChainChanged(chainId: string) {
-      currentNetwork = this.chainIdtoNetwork(chainId)
+      currentNetwork = chainIdtoNetwork(chainId)
       options.onChainChanged?.(chainId)
     },
 
