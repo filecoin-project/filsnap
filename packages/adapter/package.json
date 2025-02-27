@@ -47,11 +47,11 @@
     "filsnap": "workspace:^",
     "iso-base": "^4.0.2",
     "iso-filecoin": "^7.1.0",
-    "viem": "^2.23.3"
+    "viem": "^2.23.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.50.1",
-    "@types/node": "^22.13.4",
+    "@types/node": "^22.13.5",
     "metamask-testing-tools": "^2.2.3",
     "type-fest": "^4.35.0",
     "typescript": "5.7.3"
