@@ -193,7 +193,10 @@ fixture.test.describe('JSX UI Dialogs', () => {
         .expect(metamask.page.getByText('Never disclose this key'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('Reveal sensitive content'))
+        .expect(metamask.page.getByText('Raw base64 encoded private key'))
+        .toBeVisible()
+      await fixture
+        .expect(metamask.page.getByText('Lotus hex encoded private key'))
         .toBeVisible()
       await metamask.page.getByTestId('confirmation-submit-button').click()
       // await metamask.page.waitForTimeout(60000000)
