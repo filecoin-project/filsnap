@@ -1,6 +1,14 @@
-import type { SnapsProvider } from '@metamask/snaps-sdk'
+import type {
+  CaipChainId,
+  OnSignatureResponse,
+  OnTransactionResponse,
+  Signature,
+  SnapsProvider,
+  Transaction,
+} from '@metamask/snaps-sdk'
 import type { IAddress, MessageObj } from 'iso-filecoin/types'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
+import type { Promisable } from 'type-fest'
 import type { z } from 'zod'
 import type { configure, filGetConfig, filSetConfig } from './rpc/configure'
 import type { exportPrivateKey } from './rpc/export-private-key'
@@ -121,3 +129,24 @@ export interface HomepageContext extends Record<string, Json> {
   balance: string
   sendMessage: MessageObj | null
 }
+
+export interface TransactionInsightsProps {
+  transaction: Transaction
+  chainId: CaipChainId
+  transactionOrigin?: string
+}
+
+export type TransactionInsightsHandler = (
+  props: TransactionInsightsProps,
+  config: SnapConfig
+) => Promisable<OnTransactionResponse | null>
+
+export interface SignatureInsightsProps {
+  signature: Signature
+  signatureOrigin?: string
+}
+
+export type SignatureInsightsHandler = (
+  props: SignatureInsightsProps,
+  config: SnapConfig
+) => Promisable<OnSignatureResponse | null>

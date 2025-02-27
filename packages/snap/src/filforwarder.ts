@@ -87,7 +87,7 @@ const chainIds = {
 }
 
 // FEVM FilForwarder contract metadata
-// Contract source: https://github.com/FILCAT/FilForwarder
+// Contract source: https://github.com/FilOzone/FilForwarder
 export const filForwarderMetadata = {
   abi,
   // The contract address is the same on all chains where the contract is deployed

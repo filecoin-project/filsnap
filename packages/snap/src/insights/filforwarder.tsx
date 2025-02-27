@@ -1,15 +1,11 @@
-import type {
-  OnTransactionHandler,
-  OnTransactionResponse,
-} from '@metamask/snaps-sdk'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
 import { type Hex, fromHex } from 'viem'
 import { decodeFunctionData } from 'viem'
-import { ErrorBox } from './components/error'
-import { Insights } from './components/insights'
-import { filForwarderMetadata } from './filforwarder'
-import { State } from './state'
+import { ErrorBox } from '../components/error'
+import { Insights } from '../components/insights'
+import { filForwarderMetadata } from '../filforwarder'
+import type { TransactionInsightsHandler } from '../types'
 
 /**
  * Chain matches
@@ -32,26 +28,21 @@ function contractAddressMatches(transactionTo: string | undefined): boolean {
   )
 }
 
-export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}): Promise<OnTransactionResponse | null> => {
-  if (!transactionOrigin) {
-    return {
-      content: (
-        <ErrorBox
-          name={'Internal error'}
-          message={'Missing transaction origin'}
-        />
-      ),
-    }
-  }
-  const state = new State(snap)
-  const config = await state.get(transactionOrigin)
-  if (!config) {
-    return null
-  }
+/**
+ * `handleFilFowarder` is an `InsightsHandler` implementation that provides insights for FIL forwarder transactions.
+ * It checks if the transaction is a FIL transfer on a supported chain and contract address,
+ * decodes the transaction data to extract the recipient and transfer amount,
+ * and renders an `Insights` component with the extracted information.
+ *
+ * @param props - The props containing transaction details and chain ID.
+ * @param config - The configuration object.
+ * @returns An object containing the `Insights` component or an `ErrorBox` if there's an issue.
+ */
+export const handleFilFowarder: TransactionInsightsHandler = (
+  props,
+  config
+) => {
+  const { chainId, transaction } = props
 
   // Don't show any insights if the transaction is not a FIL transfer.
   if (

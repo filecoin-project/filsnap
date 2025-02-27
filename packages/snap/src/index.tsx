@@ -2,6 +2,9 @@ import {
   type OnHomePageHandler,
   type OnInstallHandler,
   type OnRpcRequestHandler,
+  type OnSignatureHandler,
+  type OnTransactionHandler,
+  type OnTransactionResponse,
   type OnUpdateHandler,
   type OnUserInputHandler,
   UserInputEventType,
@@ -37,6 +40,8 @@ import { onReceive } from './components/homepage-receive'
 import { onSend, onSendConfirm, onSendResult } from './components/homepage-send'
 import { OnInstall } from './components/on-install'
 import { OnUpdate } from './components/on-update'
+import { handleBaseSignature } from './insights/base-signature'
+import { handleFilFowarder } from './insights/filforwarder'
 
 export type {
   AccountInfo,
@@ -48,9 +53,6 @@ export type {
   SnapResponse,
   SnapResponseError,
 } from './types'
-
-// Disable transaction insight for now
-export { onTransaction } from './transaction-insight'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
@@ -279,4 +281,66 @@ export const onUserInput: OnUserInputHandler = async ({
       back: HomepageEvents.back,
     })
   }
+}
+
+/**
+ * Handle transaction insights.
+ *
+ * @param params - The params including transaction, chainId and transactionOrigin.
+ * @param params.transaction - The transaction object.
+ * @param params.chainId - The chain ID.
+ * @param params.transactionOrigin - The transaction origin.
+ * @returns The transaction insights or null.
+ */
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}): Promise<OnTransactionResponse | null> => {
+  if (!transactionOrigin) {
+    return null
+  }
+  const state = new State(snap)
+  const config = await state.get(transactionOrigin)
+  if (!config) {
+    return null
+  }
+
+  const handlers = [handleFilFowarder]
+
+  let result = null
+  for (const handler of handlers) {
+    result = await handler({ chainId, transaction, transactionOrigin }, config)
+  }
+  return result
+}
+
+/**
+ * Handle signature insights.
+ *
+ * @param params - The params including signature, and signatureOrigin.
+ * @param params.signature - The signature object.
+ * @param params.signatureOrigin - The signature origin.
+ * @returns The signature insights or null.
+ */
+export const onSignature: OnSignatureHandler = async ({
+  signature,
+  signatureOrigin,
+}) => {
+  if (!signatureOrigin) {
+    return null
+  }
+  const state = new State(snap)
+  const config = await state.get(signatureOrigin)
+
+  if (!config) {
+    return null
+  }
+  const handlers = [handleBaseSignature]
+
+  let result = null
+  for (const handler of handlers) {
+    result = await handler({ signature, signatureOrigin }, config)
+  }
+  return result
 }

@@ -1,9 +1,11 @@
 import { useFilsnap } from 'filsnap-adapter-react'
 /* eslint-disable unicorn/no-useless-undefined */
 import { useState } from 'preact/hooks'
+import { useSignMessage } from 'wagmi'
 
 const Account = () => {
   const { isLoading, snap } = useFilsnap()
+  const { signMessage } = useSignMessage()
   const [error, setError] = useState(
     /** @type {string | undefined | null} */ (undefined)
   )
@@ -94,7 +96,14 @@ const Account = () => {
         data-testid="get-private-key"
         onClick={handleExportPrivateKey}
       >
-        Get Private Key
+        Get Private Key ddd
+      </button>
+      <br />
+      <button
+        type="button"
+        onClick={() => signMessage({ message: 'hello world' })}
+      >
+        Sign EVM message
       </button>
     </div>
   )

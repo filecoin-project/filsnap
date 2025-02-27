@@ -12,12 +12,23 @@ import type { SnapConfig } from '../types'
 import { addressToCaip10, explorerAddressLink, formatFIL } from '../utils'
 import { ListHeader } from './header'
 
-type ErrorBoxProps = {
+/**
+ * @property config - Snap configuration.
+ * @property address - Recipient address.
+ * @property amount - Amount being sent.
+ */
+type InsightsProps = {
   config: SnapConfig
   address: string
   amount: string
 }
-export const Insights: SnapComponent<ErrorBoxProps> = ({
+/**
+ * Insights component that displays transaction details.
+ *
+ * @param InsightsProps - The properties for the Insights component.
+ * @returns The Insights component.
+ */
+export const Insights: SnapComponent<InsightsProps> = ({
   amount,
   config,
   address,
@@ -39,7 +50,7 @@ export const Insights: SnapComponent<ErrorBoxProps> = ({
         Details
       </ListHeader>
       <Row label="Recipient" tooltip="Recipient's address in robust format">
-        <Link href={explorerAddressLink(address, 'testnet')}>
+        <Link href={explorerAddressLink(address, config.network)}>
           <Address address={addressToCaip10(address)} />
         </Link>
       </Row>
