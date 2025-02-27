@@ -13,7 +13,7 @@ import type {
   SignMessageParams,
   SignMessageRawParams,
 } from './rpc/sign-message'
-import { signMessage, signMessageRaw } from './rpc/sign-message'
+import { filSign, signMessage, signMessageRaw } from './rpc/sign-message'
 import { State } from './state'
 import type { Config, HomepageContext, SnapConfig, SnapContext } from './types'
 import { configFromNetwork, serializeError } from './utils'
@@ -118,6 +118,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
           context,
           request.params as SignMessageRawParams
         )
+      }
+
+      case 'fil_sign': {
+        return await filSign(context, request.params as { data: string })
       }
 
       case 'fil_sendMessage': {

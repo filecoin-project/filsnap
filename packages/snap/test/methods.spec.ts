@@ -1,3 +1,4 @@
+import { base64pad } from 'iso-base/rfc4648'
 import { createFixture } from 'metamask-testing-tools'
 import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
 import type { GetBalanceResponse } from '../src/rpc/get-balance'
@@ -89,6 +90,23 @@ test.describe('filsnap testnet', () => {
     })
 
     expect(result).toBeTruthy()
+  })
+
+  test('should sign bytes', async ({ metamask, page }) => {
+    const signRaw = metamask.invokeSnap<SignMessageRawResponse>({
+      request: {
+        method: 'fil_sign',
+        params: { data: base64pad.encode('hello') },
+      },
+      page,
+    })
+
+    await metamask.waitForConfirmation()
+    const { result } = await signRaw
+
+    expect(result).toStrictEqual(
+      '018138db7b1267f8a47a137ee18807971a51881aabb9e6c190c315ba98daaf7eed3fd664bba43d5b0a2056592049840305280b8748dae59714ea21599ae1397cbb01'
+    )
   })
 
   test('should sign raw message', async ({ metamask, page }) => {
