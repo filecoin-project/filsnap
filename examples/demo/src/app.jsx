@@ -47,11 +47,13 @@ export function App() {
         )}
         {isConnected && <Send />}
         {isConnected && <Forward />}
-        {snap && (
+        {true && (
           <details class="Cell100">
             <summary>Advanced</summary>
-            <Account />
-            <SignMessage />
+            <div class="Grid">
+              <Account />
+              <SignMessage />
+            </div>
           </details>
         )}
         <Links />

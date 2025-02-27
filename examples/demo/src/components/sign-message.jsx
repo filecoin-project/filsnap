@@ -1,4 +1,5 @@
 import { useFilsnap } from 'filsnap-adapter-react'
+import { utf8 } from 'iso-base/utf8'
 import { useState } from 'preact/hooks'
 
 // @ts-ignore-next-line
@@ -17,11 +18,11 @@ const SignMessage = () => {
 
     const data = new FormData(event.currentTarget)
 
-    const response = await snap?.signMessageRaw({
-      message: data.get('messageToSign')?.toString() || '',
-    })
+    const response = await snap?.sign(
+      utf8.decode(data.get('messageToSign')?.toString() || '')
+    )
     if (response) {
-      setSignature(response?.result)
+      setSignature(response?.result?.toLotusHex())
       setError(response.error?.message)
     }
   }
@@ -31,18 +32,17 @@ const SignMessage = () => {
       <h3>Signature</h3>
       {error && <code data-testid="error">{error}</code>}
       <form method="post" onSubmit={handleSubmit}>
-        <label>
-          Message to sign: <input name="messageToSign" />
-          <button
-            type="submit"
-            data-testid="get-public-key"
-            disabled={isLoading}
-          >
-            Sign Message
-          </button>
+        <label for="messageToSign" class="u-FullWidth">
+          Message to sign:
         </label>
+        <input name="messageToSign" class="u-FullWidth" />
+        <button type="submit" data-testid="get-public-key" disabled={isLoading}>
+          Sign Message
+        </button>
       </form>
-      <code data-testid="output">{signature}</code>
+      <textarea data-testid="output" class="u-FullWidth">
+        {signature}
+      </textarea>
     </div>
   )
 }
