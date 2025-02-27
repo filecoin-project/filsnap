@@ -98,7 +98,7 @@
     "iso-base": "^4.0.2",
     "iso-filecoin": "^7.1.0",
     "merge-options": "^3.0.4",
-    "viem": "^2.23.3",
+    "viem": "^2.23.5",
     "zod": "^3.24.2",
     "zod-validation-error": "^3.4.0"
   },
