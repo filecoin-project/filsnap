@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.5.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.4...filsnap-v1.5.0) (2025-02-27)
+
+
+### Features
+
+* add `fil_sign` to sign arbitrary bytes ([95bef4b](https://github.com/filecoin-project/filsnap/commit/95bef4bcf63c5509c80bb832931bc5d856047297))
+* add base64 validation to signature schema ([a14cd9f](https://github.com/filecoin-project/filsnap/commit/a14cd9f194c881cafd9083af280153b67d0b7e7d))
+* add lotus hex encoded private key export to the UI ([4395102](https://github.com/filecoin-project/filsnap/commit/4395102f49bb9fc5d95ec26d35e547fc102c68f9))
+* add support for multiple insights (transactions and signature) ([3d6cc28](https://github.com/filecoin-project/filsnap/commit/3d6cc2859d068fa6ee835064864230fca13a75fd))
+* new `fil_getAccount` method and normalize acount internally ([93354f0](https://github.com/filecoin-project/filsnap/commit/93354f052a663cb79aca41e2f019ad2afc66c135))
+* new `fil_getConfig` and  `fil_setConfig` to better handle the origin config ([7ac6774](https://github.com/filecoin-project/filsnap/commit/7ac6774e0497dfda690742a8654fc8663538ef67))
+
+
+### Bug Fixes
+
+* better error for zod validations ([2e46311](https://github.com/filecoin-project/filsnap/commit/2e46311642677968fa7390e655cd49a169b76b04))
+* fix rpc network name handling in `fil_setConfig` ([cb6cce5](https://github.com/filecoin-project/filsnap/commit/cb6cce571673b3de77dd9acb1200e2d1313a3a86))
+* remove schema coment that broke types ([739283f](https://github.com/filecoin-project/filsnap/commit/739283f7a893052d0fa725976c8efa5ab1b35d8c))
+* rename internal account methods ([57ac341](https://github.com/filecoin-project/filsnap/commit/57ac341f1c52a75049d1aa72e9b15d4fe4ef73bc))
+
 ## [1.4.4](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.4.3...filsnap-v1.4.4) (2025-01-30)
 
 
