@@ -5,9 +5,10 @@ import type {
   SnapConfig,
   SnapResponse,
 } from 'filsnap'
-import { hex } from 'iso-base/rfc4648'
+import { base64pad, hex } from 'iso-base/rfc4648'
 import { fromString } from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
+import { Signature } from 'iso-filecoin/signature'
 import type { IAccount, Network } from 'iso-filecoin/types'
 import { getNetworkFromChainId, parseDerivationPath } from 'iso-filecoin/utils'
 import type { SetRequired } from 'type-fest'
@@ -367,6 +368,35 @@ export class FilsnapAdapter {
         snapId: this.snap.id,
       },
     })
+  }
+
+  /**
+   * Sign arbitrary bytes
+   *
+   * @param data - Data to sign
+   */
+  async sign(data: Uint8Array): Promise<SnapResponse<Signature>> {
+    const sign = await this.provider.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        request: {
+          method: 'fil_sign',
+          params: {
+            data: base64pad.encode(data),
+          },
+        },
+        snapId: this.snap.id,
+      },
+    })
+
+    if (sign.error) {
+      return sign
+    }
+
+    return {
+      error: null,
+      result: Signature.fromLotusHex(sign.result),
+    }
   }
 
   /**
