@@ -96,7 +96,6 @@
     "@paulmillr/qr": "^0.3.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.0.2",
-    "iso-filecoin": "^7.1.0",
     "merge-options": "^3.0.4",
     "viem": "^2.23.5",
     "zod": "^3.24.2",
@@ -113,6 +112,9 @@
     "playwright-test": "^14.1.9",
     "type-fest": "^4.35.0",
     "typescript": "5.7.3"
+  },
+  "peerDependencies": {
+    "iso-filecoin": "7.x"
   },
   "publishConfig": {
     "provenance": true
