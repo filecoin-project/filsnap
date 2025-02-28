@@ -96,7 +96,7 @@ const Account = () => {
         data-testid="get-private-key"
         onClick={handleExportPrivateKey}
       >
-        Get Private Key ddd
+        Get Private Key
       </button>
       <br />
       <button
