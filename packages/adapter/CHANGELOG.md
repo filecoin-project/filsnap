@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.4...filsnap-adapter-v2.1.0) (2025-02-28)
+
+
+### Features
+
+* **adapter:** add `changeNetwork`, `deriveAccount`, `getAccount` methods ([1b6681a](https://github.com/filecoin-project/filsnap/commit/1b6681ab94e28fd121602f02695172d22ee984a4))
+* **adapter:** add new method `sign` to sign arbitrary bytes ([10cfecb](https://github.com/filecoin-project/filsnap/commit/10cfecb79b2f1f9a51dffa2ba38309d0ce634184))
+* add lotus hex encoded private key export to the UI ([4395102](https://github.com/filecoin-project/filsnap/commit/4395102f49bb9fc5d95ec26d35e547fc102c68f9))
+
+
+### Bug Fixes
+
+* move `chainIdtoNetwork`out of the connector ([4a1dc2a](https://github.com/filecoin-project/filsnap/commit/4a1dc2a34f10fce8b1882d592bf0130559f895be))
+
 ## [2.0.4](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.3...filsnap-adapter-v2.0.4) (2025-01-31)
 
 
