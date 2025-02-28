@@ -15,7 +15,7 @@ import SignMessage from './components/sign-message.jsx'
  * App component.
  */
 export function App() {
-  const { isLoading, isConnected, snap, provider, error } = useFilsnap()
+  const { isLoading, isConnected, provider, error } = useFilsnap()
 
   if (error) {
     console.error(error)

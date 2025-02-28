@@ -12,9 +12,9 @@
 You can install and use filsnap using the Metamask provider.
 
 ```js
-import { getRequestProvider } from 'filsnap-adapter'
+import { getProvider } from 'filsnap-adapter'
 
-const provider = await getRequestProvider()
+const provider = await getProvider()
 
 // Install filsnap
 try {
@@ -44,9 +44,9 @@ try {
 ```
 
 ```js
-import { getRequestProvider } from 'filsnap-adapter'
+import { getProvider } from 'filsnap-adapter'
 
-const provider = await getRequestProvider()
+const provider = await getProvider()
 // Get filsnap metadata
 const result = await provider.request({ method: 'wallet_getSnaps' })
 
@@ -87,16 +87,19 @@ We recommend using [`filsnap-adapter`](../adapter) to interact with filsnap for 
 ### RPC Methods
 
 - `fil_getConfig` - Get the configuration of the snap.
+- `fil_setConfig` - Set the configuration of the snap.
 - `fil_configure` - Configure the snap.
+- `fil_getAccount` - Get the account of the connected account.
+- `fil_signMessage` - Sign a message with the connected account.
+- `fil_sign`- Sign arbitrary data with the connected account.
 - `fil_getBalance` - Get the balance of the connected account.
+- `fil_getGasForMessage` - Get the gas for a message.
+- `fil_sendMessage` - Send a message.
+- `fil_exportPrivateKey` - Export the private key of the connected account.
+- `fil_signMessageRaw` - Sign a raw message (string) with the connected account.
 - `fil_getAddress` - Get the address of the connected account.
 - `fil_getPublicKey` - Get the public key of the connected account.
 - `fil_getAccountInfo` - Get the account info of the connected account.
-- `fil_getGasForMessage` - Get the gas for a message.
-- `fil_signMessage` - Sign a message with the connected account.
-- `fil_signMessageRaw` - Sign a raw message (string) with the connected account.
-- `fil_exportPrivateKey` - Export the private key of the connected account.
-- `fil_sendMessage` - Send a message.
 
 Check the full RPC methods documentation [here](https://filecoin-project.github.io/filsnap/interfaces/filsnap.FilSnapMethods.html).
 
