@@ -46,7 +46,7 @@
     }
   },
   "dependencies": {
-    "filsnap-adapter": "^2.0.4",
+    "filsnap-adapter": "^2.1.0",
     "iso-base": "^4.0.2",
     "iso-filecoin": "^7.1.0",
     "viem": "^2.23.5"
