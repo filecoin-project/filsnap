@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.1...filsnap-adapter-react-v2.0.2) (2025-02-28)
+
+
+### Bug Fixes
+
+* move `chainIdtoNetwork`out of the connector ([4a1dc2a](https://github.com/filecoin-project/filsnap/commit/4a1dc2a34f10fce8b1882d592bf0130559f895be))
+
 ## [2.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.0...filsnap-adapter-react-v2.0.1) (2024-10-29)
 
 
