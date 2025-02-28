@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.1.0...filsnap-adapter-v2.1.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* moved iso-filecoin to peer dependencies and some other to dev ([e9cfc33](https://github.com/filecoin-project/filsnap/commit/e9cfc337ea9d1901cc2ff7b07ef16b85a9f31ef2))
+
 ## [2.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.0.4...filsnap-adapter-v2.1.0) (2025-02-28)
 
 
