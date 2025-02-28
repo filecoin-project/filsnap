@@ -311,6 +311,9 @@ export const onTransaction: OnTransactionHandler = async ({
   let result = null
   for (const handler of handlers) {
     result = await handler({ chainId, transaction, transactionOrigin }, config)
+    if (result != null) {
+      break
+    }
   }
   return result
 }
@@ -341,6 +344,9 @@ export const onSignature: OnSignatureHandler = async ({
   let result = null
   for (const handler of handlers) {
     result = await handler({ signature, signatureOrigin }, config)
+    if (result != null) {
+      break
+    }
   }
   return result
 }
