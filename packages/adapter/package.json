@@ -1,7 +1,7 @@
 {
   "name": "filsnap-adapter",
   "type": "module",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "Adapter for installing Filsnap",
   "author": "Protocol Labs",
   "license": "(Apache-2.0 AND MIT)",
