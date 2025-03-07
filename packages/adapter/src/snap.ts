@@ -10,7 +10,7 @@ import { fromString } from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
 import { Signature } from 'iso-filecoin/signature'
 import type { IAccount, Network } from 'iso-filecoin/types'
-import { getNetworkFromChainId, parseDerivationPath } from 'iso-filecoin/utils'
+import { getNetworkFromChainId } from 'iso-filecoin/utils'
 import type { SetRequired } from 'type-fest'
 import type { EIP1193Provider } from './types'
 import { getOrInstallSnap, getProvider, getSnap } from './utils'
@@ -167,28 +167,17 @@ export class FilsnapAdapter {
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_setConfig',
-          params: {
-            network: params.network,
-            symbol: params.unit?.symbol,
-            decimals: params.unit?.decimals,
-            index: params.derivationPath
-              ? parseDerivationPath(params.derivationPath).addressIndex
-              : undefined,
-            rpcUrl: params.rpc?.url,
-            rpcToken: params.rpc?.token,
-          },
+          method: 'fil_configure',
+          params,
         },
         snapId: this.snap.id,
       },
     })
-    if (config.error) {
-      return config
+    if (config.result) {
+      this.config = config.result
     }
 
-    this.config = config.result.config
-
-    return { result: this.config, error: null }
+    return config
   }
 
   /**
