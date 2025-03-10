@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.2...filsnap-adapter-react-v2.0.3) (2025-03-10)
+
+
+### Bug Fixes
+
+* remove some files from been published ([1b51c49](https://github.com/filecoin-project/filsnap/commit/1b51c49f3201dafa5f4334be1ca211c873b8e4d8))
+
 ## [2.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.1...filsnap-adapter-react-v2.0.2) (2025-02-28)
 
 
