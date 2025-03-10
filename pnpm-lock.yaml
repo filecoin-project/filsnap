@@ -50,6 +50,9 @@ importers:
       dns-over-http-resolver:
         specifier: ^3.0.7
         version: 3.0.7
+      filsnap:
+        specifier: ^1.5.1
+        version: 1.5.1(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0)
       filsnap-adapter:
         specifier: workspace:*
         version: link:../../packages/adapter
@@ -267,7 +270,7 @@ importers:
         version: 1.50.1
       '@sayfer_io/snapper':
         specifier: ^0.19.0
-        version: 0.19.0(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(@swc/core@1.3.78)(@types/eslint@9.6.1)(@types/node@22.13.5)(bufferutil@4.0.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint@9.20.1))(utf-8-validate@5.0.10)
+        version: 0.19.0(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(@swc/core@1.3.78)(@types/eslint@9.6.1)(@types/node@22.13.5)(bufferutil@4.0.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint@9.20.1))(utf-8-validate@5.0.10)
       '@types/react':
         specifier: 18.2.14
         version: 18.2.14
@@ -3962,9 +3965,6 @@ packages:
 
   filsnap-adapter@2.1.0:
     resolution: {integrity: sha512-5GT4Hmgv79tf5nKu0gkOaVFLESoOEGuvKbDs5pmT/WoH98F14zTIyxcvCoBFrPMH1E/m9Yw6zm3SBljqQygveQ==}
-
-  filsnap@1.4.4:
-    resolution: {integrity: sha512-5RgOMRQUFZColZ3E2VkLhm4O4E9TfeUZp8p7ztzoQopCZTLP6v/ro/xczDfE+4EHlcLlV1wvzopxeo7t7XguTg==}
 
   filsnap@1.5.1:
     resolution: {integrity: sha512-YSYWC+x3oH/ekkfG777FHWARS36L9hWh1nEwGcm35qBYUNhc0ms2swvjGTA+ojtMr8GX0R7RbRogZyFEBPl/IQ==}
@@ -8622,43 +8622,6 @@ snapshots:
       - webextension-polyfill
       - webpack-cli
 
-  '@metamask/snaps-controllers@10.0.0(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)':
-    dependencies:
-      '@metamask/approval-controller': 7.1.3
-      '@metamask/base-controller': 8.0.0
-      '@metamask/json-rpc-engine': 10.0.3
-      '@metamask/json-rpc-middleware-stream': 8.0.7
-      '@metamask/key-tree': 10.0.2
-      '@metamask/object-multiplex': 2.1.0
-      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
-      '@metamask/phishing-controller': 12.3.2(@babel/runtime@7.26.9)
-      '@metamask/post-message-stream': 9.0.0
-      '@metamask/rpc-errors': 7.0.2
-      '@metamask/snaps-registry': 3.2.3
-      '@metamask/snaps-rpc-methods': 11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
-      '@metamask/snaps-utils': 9.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/utils': 11.2.0
-      '@xstate/fsm': 2.1.0
-      async-mutex: 0.5.0
-      browserify-zlib: 0.2.0
-      concat-stream: 2.0.0
-      fast-deep-equal: 3.1.3
-      get-npm-tarball-url: 2.1.0
-      immer: 9.0.21
-      luxon: 3.5.0
-      nanoid: 3.3.8
-      readable-stream: 3.6.2
-      readable-web-to-node-stream: 3.0.4
-      semver: 7.7.1
-      tar-stream: 3.1.7
-    optionalDependencies:
-      '@metamask/snaps-execution-environments': 6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-    transitivePeerDependencies:
-      - '@babel/runtime'
-      - supports-color
-      - webextension-polyfill
-
   '@metamask/snaps-controllers@10.0.0(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)':
     dependencies:
       '@metamask/approval-controller': 7.1.3
@@ -8771,12 +8734,12 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
-  '@metamask/snaps-jest@8.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)':
+  '@metamask/snaps-jest@8.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)':
     dependencies:
       '@jest/environment': 29.7.0
       '@jest/expect': 29.7.0
       '@jest/globals': 29.7.0
-      '@metamask/snaps-controllers': 10.0.0(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
+      '@metamask/snaps-controllers': 10.0.0(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
       '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-simulation': 2.2.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
@@ -9420,14 +9383,14 @@ snapshots:
 
   '@safe-global/safe-gateway-typescript-sdk@3.22.9': {}
 
-  '@sayfer_io/snapper@0.19.0(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(@swc/core@1.3.78)(@types/eslint@9.6.1)(@types/node@22.13.5)(bufferutil@4.0.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint@9.20.1))(utf-8-validate@5.0.10)':
+  '@sayfer_io/snapper@0.19.0(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(@swc/core@1.3.78)(@types/eslint@9.6.1)(@types/node@22.13.5)(bufferutil@4.0.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint@9.20.1))(utf-8-validate@5.0.10)':
     dependencies:
       '@babel/runtime': 7.26.9
       '@metamask/approval-controller': 7.1.3
       '@metamask/eslint-config': 14.0.0(eslint-config-prettier@9.1.0(eslint@9.20.1))(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint-plugin-jsdoc@50.6.3(eslint@9.20.1))(eslint-plugin-prettier@5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.20.1))(eslint@9.20.1)(prettier@3.5.1))(eslint-plugin-promise@7.2.1(eslint@9.20.1))(eslint@9.20.1)(prettier@3.5.1)
       '@metamask/eslint-config-typescript': 14.0.0(@metamask/eslint-config@14.0.0(eslint-config-prettier@9.1.0(eslint@9.20.1))(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint-plugin-jsdoc@50.6.3(eslint@9.20.1))(eslint-plugin-prettier@5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.20.1))(eslint@9.20.1)(prettier@3.5.1))(eslint-plugin-promise@7.2.1(eslint@9.20.1))(eslint@9.20.1)(prettier@3.5.1))(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint@9.20.1))(eslint-plugin-import-x@4.6.1(eslint@9.20.1)(typescript@5.7.3))(eslint-plugin-jsdoc@50.6.3(eslint@9.20.1))(eslint@9.20.1)(typescript-eslint@8.24.1(eslint@9.20.1)(typescript@5.7.3))(typescript@5.7.3)
       '@metamask/snaps-cli': 6.7.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-jest': 8.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
+      '@metamask/snaps-jest': 8.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
       '@metamask/snaps-simulation': 1.5.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@typescript-eslint/eslint-plugin': 8.24.1(@typescript-eslint/parser@8.24.1(eslint@9.20.1)(typescript@5.7.3))(eslint@9.20.1)(typescript@5.7.3)
       '@typescript-eslint/parser': 8.24.1(eslint@9.20.1)(typescript@5.7.3)
@@ -11991,7 +11954,7 @@ snapshots:
     dependencies:
       '@metamask/approval-controller': 7.1.3
       '@metamask/snaps-sdk': 6.13.0(webextension-polyfill@0.12.0)
-      filsnap: 1.4.4(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0)
+      filsnap: 1.5.1(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0)
       iso-filecoin: 6.1.1
       viem: 2.23.5(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.2)
     transitivePeerDependencies:
@@ -12017,24 +11980,6 @@ snapshots:
       - utf-8-validate
       - webextension-polyfill
       - zod
-
-  filsnap@1.4.4(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0):
-    dependencies:
-      '@metamask/key-tree': 10.0.2
-      '@metamask/snaps-sdk': 6.13.0(webextension-polyfill@0.12.0)
-      '@paulmillr/qr': 0.3.0
-      dequal: 2.0.3
-      iso-base: 4.0.2
-      iso-filecoin: 6.1.1
-      merge-options: 3.0.4
-      viem: 2.23.5(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.2)
-      zod: 3.24.2
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - typescript
-      - utf-8-validate
-      - webextension-polyfill
 
   filsnap@1.5.1(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.12.0):
     dependencies:

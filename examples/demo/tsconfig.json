@@ -31,6 +31,9 @@
   "references": [
     {
       "path": "../../packages/adapter-react"
+    },
+    {
+      "path": "../../packages/snap"
     }
   ],
   "exclude": ["node_modules", "dist", "out"]
