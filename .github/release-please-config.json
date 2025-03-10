@@ -1,6 +1,5 @@
 {
   "separate-pull-requests": true,
-  "bootstrap-sha": "331ff064afd1677eb451cd70d51e0769c99ea057",
   "release-type": "node",
   "packages": {
     "packages/adapter": {},
