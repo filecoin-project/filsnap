@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.2...filsnap-v1.5.3) (2025-03-10)
+
+
+### Bug Fixes
+
+* republish ([57540d8](https://github.com/filecoin-project/filsnap/commit/57540d889be56bb72afabdbac5549939f0b1cbed))
+
+## [1.5.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.1...filsnap-v1.5.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* moved iso-filecoin to peer dependencies ([5ce5bfb](https://github.com/filecoin-project/filsnap/commit/5ce5bfb8e7075c49ae34e5ea2da478eb030e3fc6))
+* **snap:** fix insights handlers to be first result wins ([5e2c58c](https://github.com/filecoin-project/filsnap/commit/5e2c58c6bc72fedd2798e37166a7ba1a907a1f62))
+
 ## [1.5.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.0...filsnap-v1.5.1) (2025-02-28)
 
 
