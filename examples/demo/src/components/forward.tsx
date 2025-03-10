@@ -1,5 +1,5 @@
-import { filForwarderMetadata } from 'filsnap-adapter'
 import { useFilsnap } from 'filsnap-adapter-react'
+import { filForwarderMetadata } from 'filsnap/filforwarder'
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
 import type { JSX } from 'preact'
