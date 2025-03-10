@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.2...filsnap-v1.5.3) (2025-03-10)
+
+
+### Bug Fixes
+
+* republish ([57540d8](https://github.com/filecoin-project/filsnap/commit/57540d889be56bb72afabdbac5549939f0b1cbed))
+
 ## [1.5.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.1...filsnap-v1.5.2) (2025-03-10)
 
 
