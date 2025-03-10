@@ -132,7 +132,6 @@ sequenceDiagram
 
 - Multiple accounts are not supported yet. Only the first account is used.
   - One workaround currently supported is to use the derivation path from the configuration to get the account you want to use.
-- Ledger is not supported, this is a **Metamask limitation**.
 
 ## Recommendations for future work
 
