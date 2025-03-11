@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.0.0...filsnap-adapter-v3.0.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* revert to mm sdk 6.17.1 ([18a68f3](https://github.com/filecoin-project/filsnap/commit/18a68f3f83b2a8513bad3dbe5f29598d08e91ad5))
+
 ## [3.0.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v2.1.1...filsnap-adapter-v3.0.0) (2025-03-10)
 
 
