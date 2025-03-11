@@ -1,5 +1,4 @@
 import type {
-  CaipChainId,
   OnSignatureResponse,
   OnTransactionResponse,
   Signature,
@@ -132,7 +131,7 @@ export interface HomepageContext extends Record<string, Json> {
 
 export interface TransactionInsightsProps {
   transaction: Transaction
-  chainId: CaipChainId
+  chainId: `${string}:${string}`
   transactionOrigin?: string
 }
 
