@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.4](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.3...filsnap-v1.5.4) (2025-03-11)
+
+
+### Bug Fixes
+
+* revert to mm sdk 6.17.1 ([18a68f3](https://github.com/filecoin-project/filsnap/commit/18a68f3f83b2a8513bad3dbe5f29598d08e91ad5))
+
 ## [1.5.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.2...filsnap-v1.5.3) (2025-03-10)
 
 
