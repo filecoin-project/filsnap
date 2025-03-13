@@ -168,8 +168,8 @@ importers:
         specifier: ^7.1.3
         version: 7.1.3
       '@metamask/snaps-sdk':
-        specifier: 6.17.1
-        version: 6.17.1(webextension-polyfill@0.12.0)
+        specifier: 6.19.0
+        version: 6.19.0(webextension-polyfill@0.12.0)
       '@playwright/test':
         specifier: ^1.50.1
         version: 1.50.1
@@ -238,8 +238,8 @@ importers:
         specifier: ^10.0.2
         version: 10.0.2
       '@metamask/snaps-sdk':
-        specifier: 6.17.1
-        version: 6.17.1(webextension-polyfill@0.12.0)
+        specifier: 6.19.0
+        version: 6.19.0(webextension-polyfill@0.12.0)
       '@paulmillr/qr':
         specifier: ^0.3.0
         version: 0.3.0
@@ -1605,6 +1605,10 @@ packages:
     resolution: {integrity: sha512-GFCPZfiiaJAjAXthdvgxa4/ZD41IOZyCVc5MjgWnzj6Euur5URPqhMuefak6hBtY/Hz50gbDwLn8ODj4hbFF3A==}
     engines: {node: ^18.20 || ^20.17 || >=22}
 
+  '@metamask/key-tree@10.1.0':
+    resolution: {integrity: sha512-IRPhStU3HFkajqjHWfMzYSWbKbh63PdJ7XptWKZP/xJO7fPioge8E+HvobBKxvgaOGLqDhEf/5feBh+2E7QHdg==}
+    engines: {node: ^18.20 || ^20.17 || >=22}
+
   '@metamask/number-to-bn@1.7.1':
     resolution: {integrity: sha512-qCN+Au4amvcVii2LdOJNndYhdmk5Lk9tlStJhKpZ8tGeYQDJTghqYXJuSUVPHvfl6FUfKY1i1Or2j2EbnEerSQ==}
     engines: {node: '>=8.17.0', npm: '>=6'}
@@ -1747,6 +1751,10 @@ packages:
 
   '@metamask/snaps-sdk@6.18.0':
     resolution: {integrity: sha512-RIESsNGJDkrpOCVkLdwoPBI3twH8st3qG4k3lYQ2yu9OC//18mORWiloKhPc61QyrD3l7Doo4D6AsWmSpMxlJQ==}
+    engines: {node: ^18.16 || >=20}
+
+  '@metamask/snaps-sdk@6.19.0':
+    resolution: {integrity: sha512-ErYv6veR2aOTFBqz/8WBwOVWtAtkSDUrHidEwPoh+J02sr+OBFcGDWRkVY4QMwKgyKHQrg6VUPoPo4rU6lVZ/Q==}
     engines: {node: ^18.16 || >=20}
 
   '@metamask/snaps-simulation@1.5.0':
@@ -4727,6 +4735,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.memoize@3.0.4:
     resolution: {integrity: sha512-eDn9kqrAmVUC1wmZvlQ6Uhde44n+tXpqPrN8olQJbttgh0oKclk+SF54P47VEGE9CEiMeRwAP8BaM7UHvBkz2A==}
@@ -8186,7 +8195,7 @@ snapshots:
 
   '@metamask/base-controller@7.1.1':
     dependencies:
-      '@metamask/utils': 11.0.1
+      '@metamask/utils': 11.2.0
       immer: 9.0.21
     transitivePeerDependencies:
       - supports-color
@@ -8347,7 +8356,7 @@ snapshots:
     dependencies:
       '@metamask/rpc-errors': 7.0.2
       '@metamask/safe-event-emitter': 3.1.2
-      '@metamask/utils': 11.0.1
+      '@metamask/utils': 11.2.0
     transitivePeerDependencies:
       - supports-color
 
@@ -8386,9 +8395,9 @@ snapshots:
 
   '@metamask/json-rpc-middleware-stream@8.0.6':
     dependencies:
-      '@metamask/json-rpc-engine': 10.0.2
+      '@metamask/json-rpc-engine': 10.0.3
       '@metamask/safe-event-emitter': 3.1.2
-      '@metamask/utils': 11.0.1
+      '@metamask/utils': 11.2.0
       readable-stream: 3.6.2
     transitivePeerDependencies:
       - supports-color
@@ -8412,6 +8421,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@metamask/key-tree@10.1.0':
+    dependencies:
+      '@metamask/scure-bip39': 2.1.1
+      '@metamask/utils': 11.2.0
+      '@noble/curves': 1.8.1
+      '@noble/hashes': 1.7.1
+      '@scure/base': 1.2.4
+    transitivePeerDependencies:
+      - supports-color
+
   '@metamask/number-to-bn@1.7.1':
     dependencies:
       bn.js: 5.2.1
@@ -8431,7 +8450,7 @@ snapshots:
       '@metamask/approval-controller': 7.1.3
       '@metamask/base-controller': 7.1.0
       '@metamask/controller-utils': 11.4.4(@babel/runtime@7.26.10)
-      '@metamask/json-rpc-engine': 10.0.2
+      '@metamask/json-rpc-engine': 10.0.3
       '@metamask/rpc-errors': 7.0.2
       '@metamask/utils': 10.0.1
       '@types/deep-freeze-strict': 1.1.2
@@ -8447,7 +8466,7 @@ snapshots:
       '@metamask/approval-controller': 7.1.3
       '@metamask/base-controller': 7.1.0
       '@metamask/controller-utils': 11.4.4(@babel/runtime@7.26.9)
-      '@metamask/json-rpc-engine': 10.0.2
+      '@metamask/json-rpc-engine': 10.0.3
       '@metamask/rpc-errors': 7.0.2
       '@metamask/utils': 10.0.1
       '@types/deep-freeze-strict': 1.1.2
@@ -8518,7 +8537,7 @@ snapshots:
       '@metamask/object-multiplex': 2.1.0
       '@metamask/rpc-errors': 7.0.2
       '@metamask/safe-event-emitter': 3.1.2
-      '@metamask/utils': 11.0.1
+      '@metamask/utils': 11.2.0
       detect-browser: 5.3.0
       extension-port-stream: 4.2.0(webextension-polyfill@0.12.0)
       fast-deep-equal: 3.1.3
@@ -8626,7 +8645,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.26.9(@babel/core@7.26.9)
       '@babel/preset-env': 7.26.9(@babel/core@7.26.9)
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.9)
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/snaps-webpack-plugin': 4.2.1(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
@@ -8688,7 +8707,7 @@ snapshots:
       '@metamask/base-controller': 8.0.0
       '@metamask/json-rpc-engine': 10.0.3
       '@metamask/json-rpc-middleware-stream': 8.0.7
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/object-multiplex': 2.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/phishing-controller': 12.3.2(@babel/runtime@7.26.9)
@@ -8696,7 +8715,7 @@ snapshots:
       '@metamask/rpc-errors': 7.0.2
       '@metamask/snaps-registry': 3.2.3
       '@metamask/snaps-rpc-methods': 11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 9.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/utils': 11.2.0
       '@xstate/fsm': 2.1.0
@@ -8725,7 +8744,7 @@ snapshots:
       '@metamask/base-controller': 8.0.0
       '@metamask/json-rpc-engine': 10.0.3
       '@metamask/json-rpc-middleware-stream': 8.0.7
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/object-multiplex': 2.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/phishing-controller': 12.3.2(@babel/runtime@7.26.9)
@@ -8733,7 +8752,7 @@ snapshots:
       '@metamask/rpc-errors': 7.0.2
       '@metamask/snaps-registry': 3.2.3
       '@metamask/snaps-rpc-methods': 11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 9.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/utils': 11.2.0
       '@xstate/fsm': 2.1.0
@@ -8762,7 +8781,7 @@ snapshots:
       '@metamask/base-controller': 7.1.1
       '@metamask/json-rpc-engine': 10.0.3
       '@metamask/json-rpc-middleware-stream': 8.0.7
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/object-multiplex': 2.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/phishing-controller': 12.3.2(@babel/runtime@7.26.9)
@@ -8770,7 +8789,7 @@ snapshots:
       '@metamask/rpc-errors': 7.0.2
       '@metamask/snaps-registry': 3.2.3
       '@metamask/snaps-rpc-methods': 11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/utils': 11.2.0
       '@xstate/fsm': 2.1.0
@@ -8800,7 +8819,7 @@ snapshots:
       '@metamask/post-message-stream': 9.0.0
       '@metamask/providers': 18.3.1(webextension-polyfill@0.12.0)
       '@metamask/rpc-errors': 7.0.2
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
@@ -8819,7 +8838,7 @@ snapshots:
       '@metamask/post-message-stream': 9.0.0
       '@metamask/providers': 20.0.0(webextension-polyfill@0.12.0)
       '@metamask/rpc-errors': 7.0.2
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 9.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
@@ -8837,7 +8856,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/globals': 29.7.0
       '@metamask/snaps-controllers': 10.0.0(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-simulation': 2.2.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
@@ -8874,10 +8893,10 @@ snapshots:
 
   '@metamask/snaps-rpc-methods@11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)':
     dependencies:
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.2
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 9.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
@@ -8891,7 +8910,7 @@ snapshots:
 
   '@metamask/snaps-sdk@6.13.0(webextension-polyfill@0.12.0)':
     dependencies:
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/providers': 18.3.1(webextension-polyfill@0.12.0)
       '@metamask/rpc-errors': 7.0.2
       '@metamask/superstruct': 3.1.0
@@ -8922,19 +8941,30 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
+  '@metamask/snaps-sdk@6.19.0(webextension-polyfill@0.12.0)':
+    dependencies:
+      '@metamask/key-tree': 10.1.0
+      '@metamask/providers': 20.0.0(webextension-polyfill@0.12.0)
+      '@metamask/rpc-errors': 7.0.2
+      '@metamask/superstruct': 3.1.0
+      '@metamask/utils': 11.2.0
+    transitivePeerDependencies:
+      - supports-color
+      - webextension-polyfill
+
   '@metamask/snaps-simulation@1.5.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)':
     dependencies:
       '@metamask/base-controller': 7.1.1
       '@metamask/eth-json-rpc-middleware': 15.2.0
       '@metamask/json-rpc-engine': 10.0.3
       '@metamask/json-rpc-middleware-stream': 8.0.7
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/phishing-controller': 12.3.2(@babel/runtime@7.26.9)
       '@metamask/snaps-controllers': 9.19.1(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
       '@metamask/snaps-execution-environments': 6.14.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/snaps-rpc-methods': 11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 10.0.1
@@ -8957,13 +8987,13 @@ snapshots:
       '@metamask/eth-json-rpc-middleware': 15.2.0
       '@metamask/json-rpc-engine': 10.0.3
       '@metamask/json-rpc-middleware-stream': 8.0.7
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/phishing-controller': 12.3.2(@babel/runtime@7.26.9)
       '@metamask/snaps-controllers': 10.0.0(@babel/runtime@7.26.9)(@metamask/snaps-execution-environments@7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0))(webextension-polyfill@0.12.0)
       '@metamask/snaps-execution-environments': 7.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/snaps-rpc-methods': 11.12.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 9.0.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
@@ -8985,12 +9015,12 @@ snapshots:
       '@babel/core': 7.26.9
       '@babel/types': 7.26.9
       '@metamask/base-controller': 7.1.1
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.2
       '@metamask/slip44': 4.1.0
       '@metamask/snaps-registry': 3.2.3
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
       '@noble/hashes': 1.7.1
@@ -9016,12 +9046,12 @@ snapshots:
       '@babel/core': 7.26.9
       '@babel/types': 7.26.7
       '@metamask/base-controller': 7.1.0
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.4(@babel/runtime@7.26.10)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.2
       '@metamask/slip44': 4.1.0
       '@metamask/snaps-registry': 3.2.2
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 10.0.1
       '@noble/hashes': 1.7.1
@@ -9047,12 +9077,12 @@ snapshots:
       '@babel/core': 7.26.9
       '@babel/types': 7.26.7
       '@metamask/base-controller': 7.1.0
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.4(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.2
       '@metamask/slip44': 4.1.0
       '@metamask/snaps-registry': 3.2.2
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 10.0.1
       '@noble/hashes': 1.7.1
@@ -9078,12 +9108,12 @@ snapshots:
       '@babel/core': 7.26.9
       '@babel/types': 7.26.9
       '@metamask/base-controller': 8.0.0
-      '@metamask/key-tree': 10.0.2
+      '@metamask/key-tree': 10.1.0
       '@metamask/permission-controller': 11.0.6(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.2
       '@metamask/slip44': 4.1.0
       '@metamask/snaps-registry': 3.2.3
-      '@metamask/snaps-sdk': 6.18.0(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/superstruct': 3.1.0
       '@metamask/utils': 11.2.0
       '@noble/hashes': 1.7.1
@@ -9106,7 +9136,7 @@ snapshots:
 
   '@metamask/snaps-webpack-plugin@4.2.1(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)':
     dependencies:
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.12.0)
+      '@metamask/snaps-sdk': 6.19.0(webextension-polyfill@0.12.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.26.9)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.12.0)
       '@metamask/utils': 11.2.0
       prettier: 2.8.8
@@ -12019,12 +12049,12 @@ snapshots:
 
   extension-port-stream@3.0.0:
     dependencies:
-      readable-stream: 3.6.2
+      readable-stream: 4.7.0
       webextension-polyfill: 0.10.0
 
   extension-port-stream@4.2.0(webextension-polyfill@0.12.0):
     dependencies:
-      readable-stream: 3.6.2
+      readable-stream: 4.7.0
       webextension-polyfill: 0.12.0
 
   fast-deep-equal@3.1.3: {}
