@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.0.1...filsnap-adapter-v3.0.2) (2025-03-13)
+
+
+### Bug Fixes
+
+* move filsnap to deps ([d483429](https://github.com/filecoin-project/filsnap/commit/d4834296a68bd32bb5f124a7026447f2ee79ebef))
+
 ## [3.0.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.0.0...filsnap-adapter-v3.0.1) (2025-03-11)
 
 
