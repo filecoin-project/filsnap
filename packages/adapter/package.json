@@ -48,6 +48,7 @@
     }
   },
   "dependencies": {
+    "filsnap": "workspace:*",
     "iso-base": "^4.0.2"
   },
   "devDependencies": {
@@ -55,7 +56,6 @@
     "@metamask/snaps-sdk": "6.17.1",
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.5",
-    "filsnap": "workspace:*",
     "metamask-testing-tools": "^2.2.3",
     "type-fest": "^4.35.0",
     "typescript": "5.7.3",
