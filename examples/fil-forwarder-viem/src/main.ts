@@ -1,4 +1,5 @@
-import { filForwarderMetadata, getProvider } from 'filsnap-adapter'
+import { getProvider } from 'filsnap-adapter'
+import { filForwarderMetadata } from 'filsnap/filforwarder'
 import * as Address from 'iso-filecoin/address'
 import { PROTOCOL_INDICATOR } from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
