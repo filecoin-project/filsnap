@@ -46,16 +46,16 @@
     }
   },
   "dependencies": {
-    "filsnap-adapter": "^3.0.1",
+    "filsnap-adapter": "^3.0.2",
     "iso-base": "^4.0.2",
-    "iso-filecoin": "^7.1.0",
-    "viem": "^2.23.5"
+    "iso-filecoin": "^7.1.1",
+    "viem": "^2.23.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.9",
+    "@babel/core": "^7.26.10",
     "@biomejs/biome": "^1.9.4",
     "@hugomrdias/configs": "^0.1.9",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.10",
     "filsnap": "^1.5.4",
     "typescript": "5.7.3",
     "vite": "^5.4.10",

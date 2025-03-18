@@ -97,6 +97,27 @@ export class FilsnapAdapter {
     return adapter
   }
 
+  /**
+   * Reconnects to an existing Filsnap installation
+   *
+   * @param options - Connect options without config
+   * @returns Adapter instance and account info if snap is installed, undefined otherwise
+   *
+   * @example
+   * ```ts
+   * import { FilsnapAdapter } from 'filsnap-adapter'
+   *
+   * const connection = await FilsnapAdapter.reconnect({
+   *   provider: window.ethereum,
+   *   snapId: 'npm:filsnap'
+   * })
+   *
+   * if (connection) {
+   *   const { adapter, account } = connection
+   *   console.log('Reconnected to account:', account.address)
+   * }
+   * ```
+   */
   static async reconnect(options: Omit<ConnectOptions, 'config'>): Promise<
     | {
         adapter: FilsnapAdapter
@@ -125,6 +146,17 @@ export class FilsnapAdapter {
 
   /**
    * Disconnect provider
+   *
+   * @example
+   * ```ts
+   * import { FilsnapAdapter } from 'filsnap-adapter'
+   *
+   * const adapter = await FilsnapAdapter.connect({
+   *   provider: window.ethereum,
+   *   snapId: 'npm:filsnap',
+   * })
+   * await adapter.disconnect()
+   * ```
    */
   async disconnect(): Promise<void> {
     await this.provider.request({
@@ -181,7 +213,24 @@ export class FilsnapAdapter {
   }
 
   /**
-   * Change network
+   * Change the current network and derive a new account for that network
+   *
+   * @param network - Network to switch to (mainnet, testnet, etc)
+   * @returns Response containing the new network and derived account
+   *
+   * @example
+   * ```ts
+   * import { FilsnapAdapter, getProvider } from 'filsnap-adapter'
+   *
+   * const adapter = await FilsnapAdapter.connect({
+   *   provider: getProvider(),
+   *   snapId: 'npm:filsnap',
+   *   config: { network: 'mainnet' },
+   * })
+   * const response = await adapter.changeNetwork('mainnet')
+   * console.log(response.result.network) // 'mainnet'
+   * console.log(response.result.account.address) // 'f1...'
+   * ```
    */
   async changeNetwork(
     network: Network
