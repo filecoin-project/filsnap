@@ -1,0 +1,30 @@
+{
+  "name": "insights-wagmi",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.69.0",
+    "filsnap-adapter": "workspace:*",
+    "iso-filecoin": "^7.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "viem": "~2.23.12",
+    "wagmi": "^2.14.15"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.2.0"
+  }
+}

@@ -52,19 +52,19 @@
   },
   "dependencies": {
     "@acab/reset.css": "^0.11.0",
-    "@tanstack/react-query": "^5.67.3",
+    "@tanstack/react-query": "^5.69.0",
     "clsx": "^2.1.0",
     "dns-over-http-resolver": "^3.0.8",
     "filsnap": "^1.5.4",
     "filsnap-adapter": "workspace:*",
     "filsnap-adapter-react": "workspace:*",
     "iso-base": "^4.0.2",
-    "iso-filecoin": "^7.1.1",
+    "iso-filecoin": "^7.1.2",
     "preact": "^10.26.4",
     "react-hook-form": "^7.54.2",
     "react-toastify": "^11.0.5",
-    "viem": "^2.23.10",
-    "wagmi": "^2.14.13",
+    "viem": "^2.23.12",
+    "wagmi": "^2.14.15",
     "water.css": "^2.1.1"
   },
   "devDependencies": {

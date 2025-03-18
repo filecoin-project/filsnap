@@ -97,7 +97,7 @@
     "dequal": "^2.0.3",
     "iso-base": "^4.0.2",
     "merge-options": "^3.0.4",
-    "viem": "^2.23.10",
+    "viem": "^2.23.12",
     "zod": "^3.24.2",
     "zod-validation-error": "^3.4.0"
   },
