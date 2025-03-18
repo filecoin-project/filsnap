@@ -2,6 +2,7 @@ import type { Snap } from '@metamask/snaps-sdk'
 import type { Network } from 'filsnap'
 
 import { metamask } from './chains'
+import { FilsnapAdapter } from './snap'
 import type { EIP1193Provider, EIP6963AnnounceProviderEvent } from './types'
 
 /**
@@ -459,4 +460,63 @@ export async function checkPermissions(
       wallet: false,
     }
   }
+}
+
+/**
+ * Synchronizes the provider with the FilsnapAdapter by setting up event listeners for chain and account changes.
+ * When accounts or chains change, it will automatically reconnect or update the adapter accordingly.
+ *
+ * @example
+ * ```ts twoslash
+ * import { syncProvider } from 'filsnap-adapter'
+ * import { injected } from 'wagmi/connectors'
+ *
+ * const provider = await injected().getProvider()
+ * syncProvider(provider)
+ * ```
+ *
+ * @param provider - The EIP1193 provider to sync
+ */
+export function syncProvider(provider: EIP1193Provider) {
+  if (!provider.isMetaMask) {
+    return
+  }
+  let adapter: FilsnapAdapter | undefined
+
+  function onChainChanged(chainId: string) {
+    if (adapter) {
+      adapter.changeNetwork(chainIdtoNetwork(chainId) ?? 'mainnet')
+    }
+  }
+
+  async function onAccountsChanged(accounts: string[]) {
+    if (accounts.length === 0) {
+      return
+    }
+    if (!adapter) {
+      const chainId = await provider.request({ method: 'eth_chainId' })
+      adapter = await FilsnapAdapter.connect({
+        provider,
+        snapId: 'npm:filsnap',
+        config: {
+          network: chainIdtoNetwork(chainId),
+        },
+      })
+    }
+  }
+
+  function onDisconnect() {
+    if (adapter) {
+      adapter.disconnect()
+      adapter = undefined
+    }
+    // clear adapter event listeners
+    provider.removeListener('chainChanged', onChainChanged)
+    provider.removeListener('accountsChanged', onAccountsChanged)
+    provider.removeListener('disconnect', onDisconnect)
+  }
+
+  provider.on('chainChanged', onChainChanged)
+  provider.on('accountsChanged', onAccountsChanged)
+  provider.on('disconnect', onDisconnect)
 }

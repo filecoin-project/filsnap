@@ -225,7 +225,7 @@ export class FilsnapAdapter {
    * const adapter = await FilsnapAdapter.connect({
    *   provider: getProvider(),
    *   snapId: 'npm:filsnap',
-   *   config: { network: 'mainnet' },
+   *   config: { network: 'testnet' },
    * })
    * const response = await adapter.changeNetwork('mainnet')
    * console.log(response.result.network) // 'mainnet'
