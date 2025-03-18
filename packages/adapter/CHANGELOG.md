@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.0.2...filsnap-adapter-v3.1.0) (2025-03-18)
+
+
+### Features
+
+* **adapter:** add syncProvider to sync filsnap with metamask ([cc1faca](https://github.com/filecoin-project/filsnap/commit/cc1facabbea3f5151bc023851e0ffd42133e939c))
+
 ## [3.0.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.0.1...filsnap-adapter-v3.0.2) (2025-03-13)
 
 
