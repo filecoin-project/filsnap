@@ -24,8 +24,8 @@
 
 ## Examples
 
-- [`demo`](https://github.com/filecoin-project/filsnap/tree/master/examples/demo) - Preact demo dapp using [filsnap-adapter](<[./packages/adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter)>) to interact with [filsnap](<[./packages/snap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap)>)
-- [`insights-wagmi`](https://github.com/filecoin-project/filsnap/tree/master/examples/insights-wagmi) - Wagmi example using filsnap to enable transaction insights for smart contract calls. 
+- [`demo`](https://github.com/filecoin-project/filsnap/tree/master/examples/demo) - Preact demo dapp using [filsnap-adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter) to interact with [filsnap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap)
+- [`insights-wagmi`](https://github.com/filecoin-project/filsnap/tree/master/examples/insights-wagmi) - Wagmi example using filsnap-adapter to enable transaction insights for smart contract calls. 
 - [`fil-forwarder-viem`](https://github.com/filecoin-project/filsnap/tree/master/examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
 - [Fund Ring](https://github.com/FundRing/fundring/tree/main/src/routes/filfund) - Svelte dapp [dapp](https://fundring.fission.app/) that using filsnap to fund projects with Filecoin.
 
