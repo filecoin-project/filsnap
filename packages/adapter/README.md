@@ -7,7 +7,6 @@
 
 > Adapter for [Filsnap](../snap/)
 
-Exposes a simple API to interact with the snap from a dapp and also Fil Forwarder contract metadata.
 
 ## Installation
 
@@ -22,12 +21,6 @@ This adapter interacts directly with the snap, so Metamask with support for Snap
 ```js
 import { FilsnapAdapter } from 'filsnap-adapter'
 
-const hasSnaps = await FilsnapAdapter.hasSnaps()
-if (!hasSnaps) {
-  console.error('Metamask with Snaps support is not installed')
-  return
-}
-
 const snap = await FilsnapAdapter.connect({ network: 'testnet' }, 'npm:filsnap')
 
 const { error, result } = await snap.getAddress()
@@ -38,11 +31,9 @@ if (error) {
   // t1d2xrzcslx7xlbbylc5c3d5lvandqw4iwl6epxba
 }
 
-const isAvailable = await FilsnapAdapter.isAvailable()
-// true
 ```
 
-Check out the [demo](../../examples/demo) for a working example and the [API](https://filecoin-project.github.io/filsnap/modules/filsnap_adapter.html) for more details.
+Check out the [demo](../../examples/demo) for a working example and the [API](https://filecoin-project.github.io/filsnap/modules/filsnap-adapter.html) for more details.
 
 ## Contributing
 
