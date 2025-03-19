@@ -1,6 +1,5 @@
-import { pathFromNetwork } from 'iso-filecoin/adapters/common.js'
 import { Token, type Value } from 'iso-filecoin/token'
-import { parseDerivationPath } from 'iso-filecoin/utils'
+import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
 import type { Jsonify } from 'type-fest'
 import type { ZodError } from 'zod'
 import { fromError, isZodErrorLike } from 'zod-validation-error'

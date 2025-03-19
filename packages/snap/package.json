@@ -104,14 +104,13 @@
   "devDependencies": {
     "@metamask/snaps-cli": "6.7.0",
     "@playwright/test": "^1.50.1",
-    "@sayfer_io/snapper": "^0.19.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.4",
     "metamask-testing-tools": "^2.2.2",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.9",
     "type-fest": "^4.37.0",
-    "typescript": "5.7.3"
+    "typescript": "5.8.2"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
@@ -128,8 +127,7 @@
       "@types/*",
       "assert",
       "playwright-test",
-      "mocha",
-      "@sayfer_io/snapper"
+      "mocha"
     ]
   }
 }
