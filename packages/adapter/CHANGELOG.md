@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.1.1...filsnap-adapter-v3.1.2) (2025-03-19)
+
+
+### Bug Fixes
+
+* tweaks to the readme ([b5cb18e](https://github.com/filecoin-project/filsnap/commit/b5cb18e635700a20bc8cf8b552a2000aa352d3b4))
+
 ## [3.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.1.0...filsnap-adapter-v3.1.1) (2025-03-19)
 
 
