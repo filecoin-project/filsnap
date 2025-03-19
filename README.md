@@ -1,17 +1,13 @@
-# ⨎ FilSnap Monorepo
+# ⨎ Filsnap
 
-Filecoin Metamask Snap and related packages to enable developers to add Filecoin integration to their dapps.
+[Filsnap](https://snaps.metamask.io/snap/npm/filsnap/) adds Filecoin support to the MetaMask extension.
 
-This Snap enables storage of native Filecoin private keys in Metamask's local vault, to support native Filecoin addresses (e.g. f1 addresses or t1 testnet addresses).
-
-For FEVM (Filecoin EVM) address support using Ethereum-style 0x addresses, you can also use regular Metamask directly **without** installing this Snap. 
-
-- If you're using FEVM, the Snap can also show your 0x address info and its equivalent Filecoin f410 address. (More info about 0x / f410 addresses can be found in the [Filecoin Docs - Ethereum Address Manager](https://docs.filecoin.io/smart-contracts/filecoin-evm-runtime/address-types#ethereum-address-manager).)
+Filecoin dapps can use MetaMask to connect Filecoin accounts and from the extension users can manage Filecoin accounts, send and receive FIL and enhance FEVM transaction/signature requests with Filecoin insights.
 
 ## Resources
 
-- [Filecoin MetaMask Snap Wallet Demo](https://filsnap.fission.app/)
-- [Filecoin Metamask Snap Docs](https://filecoin-project.github.io/filsnap/)
+- [Companion App](https://filsnap.dev/)
+- [Documentation](https://filecoin-project.github.io/filsnap/)
 
 ## Packages
 
@@ -22,6 +18,7 @@ For FEVM (Filecoin EVM) address support using Ethereum-style 0x addresses, you c
 ## Examples
 
 - [`demo`](https://github.com/filecoin-project/filsnap/tree/master/examples/demo) - Preact demo dapp using [filsnap-adapter](<[./packages/adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter)>) to interact with [filsnap](<[./packages/snap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap)>)
+- [`insights-wagmi`](https://github.com/filecoin-project/filsnap/tree/master/examples/insights-wagmi) - Wagmi example using filsnap to enable transaction insights for smart contract calls. 
 - [`fil-forwarder-viem`](https://github.com/filecoin-project/filsnap/tree/master/examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
 - [Fund Ring](https://github.com/FundRing/fundring/tree/main/src/routes/filfund) - Svelte dapp [dapp](https://fundring.fission.app/) that using filsnap to fund projects with Filecoin.
 
