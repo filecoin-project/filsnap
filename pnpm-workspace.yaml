@@ -2,4 +2,11 @@ packages:
   - packages/*
   - examples/*
 onlyBuiltDependencies:
+  - '@biomejs/biome'
   - esbuild
+  - simple-git-hooks
+ignoredBuiltDependencies:
+  - '@swc/core'
+  - bufferutil
+  - keccak
+  - utf-8-validate

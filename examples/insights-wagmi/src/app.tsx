@@ -20,7 +20,7 @@ export const config = createConfig({
   },
 })
 
-// automatically syncs with the provider with reconnect on mount
+// Automatically syncs with the provider with reconnect on mount
 syncWithProvider()
 
 function ConnectWallet() {

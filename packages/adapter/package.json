@@ -58,7 +58,7 @@
     "@types/node": "^22.13.10",
     "metamask-testing-tools": "^2.2.3",
     "type-fest": "^4.37.0",
-    "typescript": "5.7.3",
+    "typescript": "5.8.2",
     "viem": "^2.23.12"
   },
   "peerDependencies": {

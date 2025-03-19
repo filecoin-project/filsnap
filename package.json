@@ -22,10 +22,10 @@
     "@hugomrdias/configs": "^0.1.9",
     "depcheck": "^1.4.7",
     "simple-git-hooks": "^2.10.0",
-    "typedoc": "^0.27.9",
+    "typedoc": "^0.28.0",
     "typedoc-plugin-missing-exports": "^3.1.0",
     "typedoc-plugin-zod": "^1.4.0",
-    "typescript": "5.7.3",
+    "typescript": "5.8.2",
     "wireit": "^0.14.11"
   },
   "simple-git-hooks": {
