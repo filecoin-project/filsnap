@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.5](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.4...filsnap-v1.5.5) (2025-03-19)
+
+
+### Bug Fixes
+
+* move pathFromNetwork to new iso-filecoin entrypoint ([a9d0e43](https://github.com/filecoin-project/filsnap/commit/a9d0e43ad16d361da43f82b99e43e105187aaa24))
+
 ## [1.5.4](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.3...filsnap-v1.5.4) (2025-03-11)
 
 
