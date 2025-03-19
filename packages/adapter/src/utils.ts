@@ -2,7 +2,6 @@ import type { Snap } from '@metamask/snaps-sdk'
 import type { Network } from 'filsnap'
 
 import { metamask } from './chains'
-import { FilsnapAdapter } from './snap'
 import type { EIP1193Provider, EIP6963AnnounceProviderEvent } from './types'
 
 /**
@@ -55,16 +54,6 @@ export async function getProvider(timeout = 1000): Promise<EIP1193Provider> {
   })
 }
 
-type ConnectorOptions = {
-  provider: EIP1193Provider
-  onAccountsChanged?: (accounts: string[]) => void
-  onChainChanged?: (chainId: string) => void
-  onDisconnect?: () => void
-  onConnect?: () => void
-}
-
-export type Promisable<T> = T | Promise<T>
-
 /**
  * Converts a Chain ID to Filecoin Network
  *
@@ -77,222 +66,6 @@ export function chainIdtoNetwork(chainId: string): Network | undefined {
     : chainId === metamask.mainnet.chainId
       ? 'mainnet'
       : undefined
-}
-
-/**
- * Create a connector for the EIP-1193 provider.
- *
- * @param options - The connector options.
- */
-export function createConnector(options: ConnectorOptions) {
-  let currentNetwork: Network | undefined
-  const { provider } = options
-
-  let onAccountsChanged: ((accounts: string[]) => void) | undefined
-  let onChainChanged: ((chainId: string) => void) | undefined
-  let onDisconnect: (() => void) | undefined
-  let onConnect: (() => void) | undefined
-
-  return {
-    getProvider: () => provider,
-
-    setup() {
-      if (!onConnect) {
-        onConnect = this.onConnect.bind(this)
-        provider.on('connect', onConnect)
-      }
-
-      if (!onAccountsChanged) {
-        onAccountsChanged = this.onAccountsChanged.bind(this)
-        provider.on('accountsChanged', onAccountsChanged)
-      }
-
-      this.getChainId().then((chainId) => {
-        currentNetwork = chainIdtoNetwork(chainId)
-      })
-
-      return this
-    },
-
-    async connect(options: { network?: Network } = {}) {
-      // connect to wallet
-      const accounts = await provider.request({
-        method: 'eth_requestAccounts',
-      })
-
-      // Manage EIP-1193 event listeners
-      // https://eips.ethereum.org/EIPS/eip-1193#events
-
-      if (onConnect) {
-        provider.removeListener('connect', onConnect)
-        onConnect = undefined
-      }
-
-      if (!onAccountsChanged) {
-        onAccountsChanged = this.onAccountsChanged.bind(this)
-        provider.on('accountsChanged', onAccountsChanged)
-      }
-
-      if (!onChainChanged) {
-        onChainChanged = this.onChainChanged.bind(this)
-        provider.on('chainChanged', onChainChanged)
-      }
-
-      if (!onDisconnect) {
-        onDisconnect = this.onDisconnect.bind(this)
-        provider.on('disconnect', onDisconnect)
-      }
-
-      // switch to chain
-      currentNetwork = chainIdtoNetwork(await this.getChainId())
-
-      await this.switchChain(options.network ?? currentNetwork)
-      return { accounts, network: currentNetwork }
-    },
-
-    async disconnect() {
-      if (onChainChanged) {
-        provider.removeListener('chainChanged', onChainChanged)
-        onChainChanged = undefined
-      }
-      if (onDisconnect) {
-        provider.removeListener('disconnect', onDisconnect)
-        onDisconnect = undefined
-      }
-      if (!onConnect) {
-        onConnect = this.onConnect.bind(this)
-        provider.on('connect', onConnect)
-      }
-      await provider.request({
-        method: 'wallet_revokePermissions',
-        params: [
-          {
-            eth_accounts: {},
-          },
-        ],
-      })
-    },
-
-    async getChainId() {
-      return await provider.request({ method: 'eth_chainId' })
-    },
-
-    async switchChain(network: Network | undefined = currentNetwork) {
-      if (network === undefined) {
-        network = 'mainnet'
-      }
-      const config = network === 'testnet' ? metamask.testnet : metamask.mainnet
-
-      if (currentNetwork === network) {
-        return network
-      }
-
-      try {
-        await provider.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: config.chainId }],
-        })
-        currentNetwork = network
-        return currentNetwork
-      } catch (switchError) {
-        const err = switchError as Error & {
-          code: number
-        }
-
-        // This error code indicates that the chain has not been added to MetaMask.
-        if (err.code === 4902) {
-          try {
-            await provider.request({
-              method: 'wallet_addEthereumChain',
-              params: [config],
-            })
-            const currentChainId = await this.getChainId()
-            if (currentChainId !== config.chainId) {
-              throw new Error('User rejected switch after adding network.')
-            }
-            currentNetwork = network
-            return currentNetwork
-          } catch (error) {
-            throw new Error('Failed to add chain to MetaMask.', {
-              cause: error,
-            })
-          }
-        } else {
-          throw new Error('Failed to add/switch chain to MetaMask.', {
-            cause: err,
-          })
-        }
-      }
-    },
-
-    async getAccounts() {
-      return await provider.request({ method: 'eth_accounts' })
-    },
-
-    async onConnect() {
-      const accounts = await this.getAccounts()
-      if (accounts.length === 0) {
-        return
-      }
-
-      options.onConnect?.()
-
-      if (onConnect) {
-        provider.removeListener('connect', onConnect)
-        onConnect = undefined
-      }
-
-      if (!onAccountsChanged) {
-        onAccountsChanged = this.onAccountsChanged.bind(this)
-        provider.on('accountsChanged', onAccountsChanged)
-      }
-
-      if (!onChainChanged) {
-        onChainChanged = this.onChainChanged.bind(this)
-        provider.on('chainChanged', onChainChanged)
-      }
-
-      if (!onDisconnect) {
-        onDisconnect = this.onDisconnect.bind(this)
-        provider.on('disconnect', onDisconnect)
-      }
-    },
-
-    async permissions() {
-      return await checkPermissions(provider)
-    },
-
-    onChainChanged(chainId: string) {
-      currentNetwork = chainIdtoNetwork(chainId)
-      options.onChainChanged?.(chainId)
-    },
-
-    onAccountsChanged(accounts: string[]) {
-      if (accounts.length === 0) {
-        this.onDisconnect()
-      } else {
-        options.onAccountsChanged?.(accounts)
-      }
-    },
-
-    onDisconnect() {
-      options.onDisconnect?.()
-      if (onAccountsChanged) {
-        provider.removeListener('accountsChanged', onAccountsChanged)
-        onAccountsChanged = undefined
-      }
-
-      if (onChainChanged) {
-        provider.removeListener('chainChanged', onChainChanged)
-        onChainChanged = undefined
-      }
-
-      if (onDisconnect) {
-        provider.removeListener('disconnect', onDisconnect)
-        onDisconnect = undefined
-      }
-    },
-  }
 }
 
 /**
@@ -442,12 +215,15 @@ export async function checkPermissions(
     if (perms.length > 0) {
       for (const element of perms) {
         if (element.parentCapability === 'wallet_snap') {
-          // TODO check caveats for filsnap to make sure
-          snap = true
+          const hasFilsnap = element.caveats.some(
+            (caveat) => caveat.value['npm:filsnap']
+          )
+          if (hasFilsnap) {
+            snap = true
+          }
         }
 
         if (element.parentCapability === 'eth_accounts') {
-          // TODO check caveats for filsnap to make sure
           wallet = true
         }
       }
@@ -460,63 +236,4 @@ export async function checkPermissions(
       wallet: false,
     }
   }
-}
-
-/**
- * Synchronizes the provider with the FilsnapAdapter by setting up event listeners for chain and account changes.
- * When accounts or chains change, it will automatically reconnect or update the adapter accordingly.
- *
- * @example
- * ```ts twoslash
- * import { syncProvider } from 'filsnap-adapter'
- * import { injected } from 'wagmi/connectors'
- *
- * const provider = await injected().getProvider()
- * syncProvider(provider)
- * ```
- *
- * @param provider - The EIP1193 provider to sync
- */
-export function syncProvider(provider: EIP1193Provider) {
-  if (!provider.isMetaMask) {
-    return
-  }
-  let adapter: FilsnapAdapter | undefined
-
-  function onChainChanged(chainId: string) {
-    if (adapter) {
-      adapter.changeNetwork(chainIdtoNetwork(chainId) ?? 'mainnet')
-    }
-  }
-
-  async function onAccountsChanged(accounts: string[]) {
-    if (accounts.length === 0) {
-      return
-    }
-    if (!adapter) {
-      const chainId = await provider.request({ method: 'eth_chainId' })
-      adapter = await FilsnapAdapter.connect({
-        provider,
-        snapId: 'npm:filsnap',
-        config: {
-          network: chainIdtoNetwork(chainId),
-        },
-      })
-    }
-  }
-
-  function onDisconnect() {
-    if (adapter) {
-      adapter.disconnect()
-      adapter = undefined
-    }
-    // clear adapter event listeners
-    provider.removeListener('chainChanged', onChainChanged)
-    provider.removeListener('accountsChanged', onAccountsChanged)
-    provider.removeListener('disconnect', onDisconnect)
-  }
-
-  provider.on('chainChanged', onChainChanged)
-  provider.on('accountsChanged', onAccountsChanged)
-  provider.on('disconnect', onDisconnect)
 }
