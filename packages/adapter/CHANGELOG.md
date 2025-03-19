@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.1.0...filsnap-adapter-v3.1.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* **adapter:** improve createConnect and add syncWithProvider ([5f354b1](https://github.com/filecoin-project/filsnap/commit/5f354b1342b0c1973204f857bced71cb294ba451))
+
 ## [3.1.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.0.2...filsnap-adapter-v3.1.0) (2025-03-18)
 
 
