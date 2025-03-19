@@ -24,14 +24,16 @@
 
 ## Examples
 
-- [`demo`](https://github.com/filecoin-project/filsnap/tree/master/examples/demo) - Preact demo dapp using [filsnap-adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter) to interact with [filsnap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap)
-- [`insights-wagmi`](https://github.com/filecoin-project/filsnap/tree/master/examples/insights-wagmi) - Wagmi example using filsnap-adapter to enable transaction insights for smart contract calls. 
+- [`demo`](https://github.com/filecoin-project/filsnap/tree/master/examples/demo) - Preact demo dapp using [filsnap-adapter](https://github.com/filecoin-project/filsnap/tree/master/packages/adapter) to interact with [filsnap](https://github.com/filecoin-project/filsnap/tree/master/packages/snap).
+- [`insights-wagmi`](https://github.com/filecoin-project/filsnap/tree/master/examples/insights-wagmi) - Wagmi example using filsnap-adapter to enable transaction insights for smart contract calls.
 - [`fil-forwarder-viem`](https://github.com/filecoin-project/filsnap/tree/master/examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
 - [Fund Ring](https://github.com/FundRing/fundring/tree/main/src/routes/filfund) - Svelte dapp [dapp](https://fundring.fission.app/) that using filsnap to fund projects with Filecoin.
 
-### Checkout examples
+Clone any example in the `/examples` folder on StackBlitz using:
 
-You can use [Codesandbox](https://githubbox.com/filecoin-project/filsnap/tree/master/examples/demo) and start hacking right away.
+```text
+https://stackblitz.com/github/filecoin-project/filsnap/tree/master/examples/insights-wagmi
+```
 
 To clone it locally:
 
