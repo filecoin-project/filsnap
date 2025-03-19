@@ -1,8 +1,15 @@
 # ⨎ Filsnap
 
-[Filsnap](https://snaps.metamask.io/snap/npm/filsnap/) adds Filecoin support to the MetaMask extension.
+> A MetaMask [Snap](https://snaps.metamask.io/snap/npm/filsnap/) to add Filecoin support to the MetaMask extension.
 
-Filecoin dapps can use MetaMask to connect Filecoin accounts and from the extension users can manage Filecoin accounts, send and receive FIL and enhance FEVM transaction/signature requests with Filecoin insights.
+## Features
+
+- Enables dapps access to Filecoin accounts using Metamask.
+- Manage Filecoin accounts, check balance, address, export private key and more.
+- Send and receive FIL from native and FEVM addresses.
+- Sign Filecoin messages and arbitrary data.
+- Send Filecoin messages and estimate gas fees.
+- Filecoin insights for FEVM transaction/signature requests.
 
 ## Resources
 
