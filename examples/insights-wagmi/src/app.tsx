@@ -5,6 +5,7 @@ import { http, createConfig } from 'wagmi'
 import { filecoin, filecoinCalibration } from 'wagmi/chains'
 import { injected, metaMask } from 'wagmi/connectors'
 import './App.css'
+import { syncWithProvider } from 'filsnap-adapter'
 import { Account } from './account'
 import { WalletOptions } from './wallet-options'
 
@@ -18,6 +19,9 @@ export const config = createConfig({
     [filecoinCalibration.id]: http(),
   },
 })
+
+// automatically syncs with the provider with reconnect on mount
+syncWithProvider()
 
 function ConnectWallet() {
   const { isConnected } = useAccount()

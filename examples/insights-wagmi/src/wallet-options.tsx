@@ -1,5 +1,3 @@
-import type { EIP1193Provider } from 'filsnap-adapter'
-import { syncProvider } from 'filsnap-adapter'
 import * as React from 'react'
 import { type Connector, useConnect } from 'wagmi'
 
@@ -29,7 +27,6 @@ function WalletOption({
   React.useEffect(() => {
     ;(async () => {
       const provider = await connector.getProvider()
-      syncProvider(provider as EIP1193Provider)
       setReady(!!provider)
     })()
   }, [connector])
