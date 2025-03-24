@@ -24,8 +24,8 @@ importers:
         specifier: ^0.28.0
         version: 0.28.0(typescript@5.8.2)
       typedoc-plugin-missing-exports:
-        specifier: ^3.1.0
-        version: 3.1.0(typedoc@0.28.0(typescript@5.8.2))
+        specifier: ^4.0.0
+        version: 4.0.0(typedoc@0.28.0(typescript@5.8.2))
       typedoc-plugin-zod:
         specifier: ^1.4.0
         version: 1.4.0(typedoc@0.28.0(typescript@5.8.2))
@@ -1712,9 +1712,11 @@ packages:
 
   '@paulmillr/qr@0.2.1':
     resolution: {integrity: sha512-IHnV6A+zxU7XwmKFinmYjUcwlyK9+xkG3/s9KcQhI9BjQKycrJ1JRO+FbNYPwZiPKW3je/DR0k7w8/gLa5eaxQ==}
+    deprecated: 'The package is now available as "qr": npm install qr'
 
   '@paulmillr/qr@0.3.0':
     resolution: {integrity: sha512-3s/cagXuoXTA2gWSfSfJNanNgm2ifmqgoX8WLOs5//3qrIJ3WWHFjqFqCxvYGf46Afwv6PctT9eAOXLDGwp96Q==}
+    deprecated: 'The package is now available as "qr": npm install qr'
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -4853,10 +4855,10 @@ packages:
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  typedoc-plugin-missing-exports@3.1.0:
-    resolution: {integrity: sha512-Sogbaj+qDa21NjB3SlIw4JXSwmcl/WOjwiPNaVEcPhpNG/MiRTtpwV81cT7h1cbu9StpONFPbddYWR0KV/fTWA==}
+  typedoc-plugin-missing-exports@4.0.0:
+    resolution: {integrity: sha512-Z4ei+853xppDEhcqzyeyRs4+R0kUuKQWnMK1EtSTEd5LFkgkdW5Bdn8vfo/rsCGbYVJxOWU99fxgM1mROw5Fug==}
     peerDependencies:
-      typedoc: 0.26.x || 0.27.x
+      typedoc: ^0.28.1
 
   typedoc-plugin-zod@1.4.0:
     resolution: {integrity: sha512-Mr4hoEfjIR1xjp0RqtEyfba03NDUE4jLvgErg0VQz9L60eCVLcUrV0x+71+B7rykDMexrTx0I9Yk6SS0PuSbKw==}
@@ -10780,7 +10782,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typedoc-plugin-missing-exports@3.1.0(typedoc@0.28.0(typescript@5.8.2)):
+  typedoc-plugin-missing-exports@4.0.0(typedoc@0.28.0(typescript@5.8.2)):
     dependencies:
       typedoc: 0.28.0(typescript@5.8.2)
 
