@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.6.0...filsnap-v1.6.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* improve filforwarder copy ([9f28ca8](https://github.com/filecoin-project/filsnap/commit/9f28ca8e1e6e1cd10ce51d3288b9e5015415f025))
+
 ## [1.6.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.4...filsnap-v1.6.0) (2025-03-27)
 
 
