@@ -38,9 +38,10 @@ export const Insights: SnapComponent<InsightsProps> = ({
       <Heading>FilForwarder Transaction</Heading>
       <Text color="alternative">
         The FilForwarder smart contract enables FEVM users to send their FIL
-        safely and securely to other addresses in the Filecoin ecosystem. Review
-        the <Link href="https://github.com/FilOzone/FilForwarder">source</Link>{' '}
-        and onchain{' '}
+        safely and securely to other non-EVM addresses (e.g. f1/f2/f3) in the
+        Filecoin ecosystem. Review the{' '}
+        <Link href="https://github.com/FilOzone/FilForwarder">source</Link> and
+        onchain{' '}
         <Link href="https://beryx.io/fil/mainnet/address/f410ffm7pnedefg2ybn5sbag6lsujhpbifqrfspbcqna">
           deployment
         </Link>{' '}
