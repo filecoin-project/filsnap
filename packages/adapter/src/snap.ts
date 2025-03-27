@@ -282,6 +282,7 @@ export class FilsnapAdapter {
           method: 'fil_setConfig',
           params: {
             index,
+            network: this.config?.network ?? 'mainnet',
           },
         },
         snapId: this.snap.id,
