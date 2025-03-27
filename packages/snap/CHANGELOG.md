@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.4...filsnap-v1.6.0) (2025-03-27)
+
+
+### Features
+
+* improve setConfig, add changeNetwork and deriveAccount ([ff56678](https://github.com/filecoin-project/filsnap/commit/ff56678f797b2002f415508d75993c83f3eb2d58))
+
+
+### Bug Fixes
+
+* move pathFromNetwork to new iso-filecoin entrypoint ([a9d0e43](https://github.com/filecoin-project/filsnap/commit/a9d0e43ad16d361da43f82b99e43e105187aaa24))
+
 ## [1.5.4](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.5.3...filsnap-v1.5.4) (2025-03-11)
 
 
