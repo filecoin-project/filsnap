@@ -85,6 +85,7 @@ test.describe('fil_configure', () => {
 
     expect(response.result?.derivationPath).toStrictEqual("m/44'/1'/0'/0/0")
     expect(response.result?.network).toStrictEqual('testnet')
+    expect(response.result?.unit?.symbol).toStrictEqual('tFIL')
 
     const req1 = metamask.invokeSnap<
       ReturnType<FilSnapMethods['fil_setConfig']>
@@ -93,6 +94,7 @@ test.describe('fil_configure', () => {
         method: 'fil_setConfig',
         params: {
           index: 1,
+          network: 'testnet',
         } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
       },
       page,
@@ -102,13 +104,14 @@ test.describe('fil_configure', () => {
     const rsp1 = await req1
     expect(rsp1.result?.account.path).toStrictEqual("m/44'/1'/0'/0/1")
     expect(rsp1.result?.config.network).toStrictEqual('testnet')
-
+    expect(rsp1.result?.config.unit?.symbol).toStrictEqual('tFIL')
     const req2 = metamask.invokeSnap<
       ReturnType<FilSnapMethods['fil_setConfig']>
     >({
       request: {
         method: 'fil_setConfig',
         params: {
+          index: 1,
           network: 'mainnet',
         } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
       },
@@ -119,6 +122,7 @@ test.describe('fil_configure', () => {
     const rsp2 = await req2
     expect(rsp2.result?.account.path).toStrictEqual("m/44'/461'/0'/0/1")
     expect(rsp2.result?.config.network).toStrictEqual('mainnet')
+    expect(rsp2.result?.config.unit?.symbol).toStrictEqual('FIL')
   })
 
   test('should connect with fil_setConfig', async ({ metamask, page }) => {
@@ -127,6 +131,9 @@ test.describe('fil_configure', () => {
     >({
       request: {
         method: 'fil_setConfig',
+        params: {
+          network: 'mainnet',
+        } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
       },
       page,
     })
@@ -147,6 +154,7 @@ test.describe('fil_configure', () => {
       request: {
         method: 'fil_setConfig',
         params: {
+          network: 'mainnet',
           rpcUrl: 'https://api.calibration.node.glif.io',
         } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
       },
@@ -169,6 +177,9 @@ test.describe('fil_configure', () => {
     >({
       request: {
         method: 'fil_setConfig',
+        params: { network: 'mainnet' } satisfies Parameters<
+          FilSnapMethods['fil_setConfig']
+        >[1],
       },
       page,
     })
@@ -181,11 +192,219 @@ test.describe('fil_configure', () => {
     >({
       request: {
         method: 'fil_setConfig',
-        params: { network: 'mainnet' },
+        params: { network: 'mainnet' } satisfies Parameters<
+          FilSnapMethods['fil_setConfig']
+        >[1],
       },
       page,
     })
     const rsp2 = await req2
     expect(rsp2.result?.config.network).toStrictEqual('mainnet')
+  })
+
+  test('should fail to derive account with negative index', async ({
+    metamask,
+    page,
+  }) => {
+    const req1 = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_setConfig']>
+    >({
+      request: {
+        method: 'fil_setConfig',
+        params: {
+          network: 'mainnet',
+        } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
+      },
+      page,
+    })
+
+    await metamask.waitForConfirmation()
+    await req1
+
+    const deriveAccount = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_deriveAccount']>
+    >({
+      request: {
+        method: 'fil_deriveAccount',
+        params: {
+          index: -1,
+        } satisfies Parameters<FilSnapMethods['fil_deriveAccount']>[1],
+      },
+      page,
+    })
+
+    const deriveAccountRsp = await deriveAccount
+    expect(deriveAccountRsp.error).toBeDefined()
+    expect(deriveAccountRsp.error?.message).toStrictEqual(
+      'Validation error: Number must be greater than or equal to 0'
+    )
+  })
+
+  test('should fail to derive account without connect', async ({
+    metamask,
+    page,
+  }) => {
+    const deriveAccount = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_deriveAccount']>
+    >({
+      request: {
+        method: 'fil_deriveAccount',
+        params: {
+          index: 0,
+        } satisfies Parameters<FilSnapMethods['fil_deriveAccount']>[1],
+      },
+      page,
+    })
+
+    const deriveAccountRsp = await deriveAccount
+    expect(deriveAccountRsp.error).toBeDefined()
+    expect(deriveAccountRsp.error?.message).toStrictEqual(
+      'No configuration found. Connect to the wallet first'
+    )
+  })
+
+  test('should derive account without prompt if index is the same', async ({
+    metamask,
+    page,
+  }) => {
+    const req1 = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_setConfig']>
+    >({
+      request: {
+        method: 'fil_setConfig',
+        params: {
+          network: 'mainnet',
+          index: 0,
+        } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
+      },
+      page,
+    })
+
+    await metamask.waitForConfirmation()
+    await req1
+
+    const deriveAccount = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_deriveAccount']>
+    >({
+      request: {
+        method: 'fil_deriveAccount',
+        params: {
+          index: 0,
+        } satisfies Parameters<FilSnapMethods['fil_deriveAccount']>[1],
+      },
+      page,
+    })
+
+    const deriveAccountRsp = await deriveAccount
+    expect(deriveAccountRsp.result?.path).toStrictEqual("m/44'/461'/0'/0/0")
+  })
+
+  test('should derive account with prompt if index changed', async ({
+    metamask,
+    page,
+  }) => {
+    const req1 = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_setConfig']>
+    >({
+      request: {
+        method: 'fil_setConfig',
+        params: {
+          network: 'mainnet',
+          index: 0,
+        } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
+      },
+      page,
+    })
+
+    await metamask.waitForConfirmation()
+    await req1
+
+    const deriveAccount = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_deriveAccount']>
+    >({
+      request: {
+        method: 'fil_deriveAccount',
+        params: {
+          index: 1,
+        } satisfies Parameters<FilSnapMethods['fil_deriveAccount']>[1],
+      },
+      page,
+    })
+    await metamask.waitForConfirmation()
+    const deriveAccountRsp = await deriveAccount
+    expect(deriveAccountRsp.result?.path).toStrictEqual("m/44'/461'/0'/0/1")
+  })
+
+  test('should fail to change network without connect', async ({
+    metamask,
+    page,
+  }) => {
+    const changeNetwork = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_changeNetwork']>
+    >({
+      request: {
+        method: 'fil_changeNetwork',
+        params: {
+          network: 'mainnet',
+        } satisfies Parameters<FilSnapMethods['fil_changeNetwork']>[1],
+      },
+      page,
+    })
+
+    const changeNetworkRsp = await changeNetwork
+    expect(changeNetworkRsp.error).toBeDefined()
+    expect(changeNetworkRsp.error?.message).toStrictEqual(
+      'No configuration found. Connect to the wallet first'
+    )
+  })
+
+  test('should change network', async ({ metamask, page }) => {
+    const req1 = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_setConfig']>
+    >({
+      request: {
+        method: 'fil_setConfig',
+        params: {
+          network: 'mainnet',
+          index: 0,
+        } satisfies Parameters<FilSnapMethods['fil_setConfig']>[1],
+      },
+      page,
+    })
+
+    await metamask.waitForConfirmation()
+    await req1
+
+    const changeNetwork = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_changeNetwork']>
+    >({
+      request: {
+        method: 'fil_changeNetwork',
+        params: {
+          network: 'testnet',
+        } satisfies Parameters<FilSnapMethods['fil_changeNetwork']>[1],
+      },
+      page,
+    })
+
+    const changeNetworkRsp = await changeNetwork
+    expect(changeNetworkRsp.result?.network).toStrictEqual('testnet')
+    expect(changeNetworkRsp.result?.account.path).toStrictEqual(
+      "m/44'/1'/0'/0/0"
+    )
+
+    const config = metamask.invokeSnap<
+      ReturnType<FilSnapMethods['fil_getConfig']>
+    >({
+      request: {
+        method: 'fil_getConfig',
+      },
+      page,
+    })
+
+    const configRsp = await config
+    expect(configRsp.result?.unit?.symbol).toStrictEqual('tFIL')
+    expect(configRsp.result?.network).toStrictEqual('testnet')
+    expect(configRsp.result?.derivationPath).toStrictEqual("m/44'/1'/0'/0/0")
   })
 })

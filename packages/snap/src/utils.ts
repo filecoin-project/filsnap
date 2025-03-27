@@ -169,13 +169,13 @@ export function configToSnapConfig(conf: Config): SnapConfig {
   return {
     derivationPath: pathFromNetwork(conf.network, conf.index),
     rpc: {
-      url: conf.rpcUrl,
-      token: conf.rpcToken,
+      url: conf.rpcUrl ?? '',
+      token: conf.rpcToken ?? '',
     },
     network: conf.network,
     unit: {
-      decimals: conf.decimals,
-      symbol: conf.symbol,
+      decimals: conf.decimals ?? 18,
+      symbol: conf.symbol ?? 'FIL',
     },
   }
 }

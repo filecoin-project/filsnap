@@ -9,7 +9,13 @@ import type { IAddress, MessageObj } from 'iso-filecoin/types'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { Promisable } from 'type-fest'
 import type { z } from 'zod'
-import type { configure, filGetConfig, filSetConfig } from './rpc/configure'
+import type {
+  configure,
+  filChangeNetwork,
+  filDeriveAccount,
+  filGetConfig,
+  filSetConfig,
+} from './rpc/configure'
 import type { exportPrivateKey } from './rpc/export-private-key'
 import type { getGasForMessage } from './rpc/gas-for-message'
 import type { filGetAccount, getAccountInfo } from './rpc/get-account'
@@ -106,6 +112,8 @@ export type GetPublicResponse = SnapResponse<string>
 export interface FilSnapMethods {
   fil_getConfig: typeof filGetConfig
   fil_setConfig: typeof filSetConfig
+  fil_deriveAccount: typeof filDeriveAccount
+  fil_changeNetwork: typeof filChangeNetwork
   fil_configure: typeof configure
   fil_getAddress: (snap: SnapsProvider) => Promise<GetAddressResponse>
   fil_getPublicKey: (snap: SnapsProvider) => Promise<GetPublicResponse>

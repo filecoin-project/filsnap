@@ -22,11 +22,11 @@ export const config = z.object({
   /**
    * RPC URL to be used must be a valid URL and match the network
    */
-  rpcUrl: z.string().url().trim(),
+  rpcUrl: z.string().url().trim().optional(),
   /**
    * Bearer token used to make authenticated requests to the RPC URL
    */
-  rpcToken: z.string().trim(),
+  rpcToken: z.string().trim().optional(),
   /**
    * Network to be used
    *
@@ -36,15 +36,15 @@ export const config = z.object({
   /**
    * Derivation path address index
    */
-  index: z.number().nonnegative().int().safe(),
+  index: z.number().nonnegative().int().safe().default(0).optional(),
   /**
    * Symbol of the token to be used in the UI
    */
-  symbol: z.enum(['FIL', 'tFIL']),
+  symbol: z.enum(['FIL', 'tFIL']).optional(),
   /**
    * Number of decimals of the token to be used in the UI
    */
-  decimals: z.number().positive().int().lte(18),
+  decimals: z.number().positive().int().lte(18).optional(),
 })
 
 export const snapConfig = z.object({

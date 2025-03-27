@@ -18,12 +18,24 @@ import type {
 } from './rpc/sign-message'
 import { filSign, signMessage, signMessageRaw } from './rpc/sign-message'
 import { State } from './state'
-import type { Config, HomepageContext, SnapConfig, SnapContext } from './types'
+import type {
+  Config,
+  HomepageContext,
+  Network,
+  SnapConfig,
+  SnapContext,
+} from './types'
 import { configFromNetwork, serializeError } from './utils'
 
 import { getAccountSafe } from './account'
 import { INTERNAL_CONFIG } from './constants'
-import { configure, filGetConfig, filSetConfig } from './rpc/configure'
+import {
+  configure,
+  filChangeNetwork,
+  filDeriveAccount,
+  filGetConfig,
+  filSetConfig,
+} from './rpc/configure'
 import { exportPrivateKey } from './rpc/export-private-key'
 import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message'
 import { getBalance } from './rpc/get-balance'
@@ -67,11 +79,23 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
 
     switch (request.method) {
+      case 'fil_deriveAccount': {
+        return await filDeriveAccount(
+          context,
+          request.params as { index: number }
+        )
+      }
+      case 'fil_changeNetwork': {
+        return await filChangeNetwork(
+          context,
+          request.params as { network: Network }
+        )
+      }
       case 'fil_getConfig': {
         return await filGetConfig(context)
       }
       case 'fil_setConfig': {
-        return await filSetConfig(context, request.params as Partial<Config>)
+        return await filSetConfig(context, request.params as Config)
       }
       case 'fil_configure': {
         return await configure(context, request.params as Partial<SnapConfig>)
