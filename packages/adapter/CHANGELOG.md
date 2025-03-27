@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.1.2...filsnap-adapter-v3.1.3) (2025-03-27)
+
+
+### Bug Fixes
+
+* **adapter:** prepare for next version of setConfig ([3cd4cb2](https://github.com/filecoin-project/filsnap/commit/3cd4cb2d0073d8f5b9597c201fe4d2c9e6618795))
+
 ## [3.1.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.1.1...filsnap-adapter-v3.1.2) (2025-03-19)
 
 
