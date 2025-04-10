@@ -17,8 +17,8 @@ export default defineConfig({
   webServer: [
     {
       command:
-        'pnpm --filter filsnap run build && pnpm --filter filsnap exec mm-snap serve --port 8081',
-      url: 'http://localhost:8081/dist/snap.js',
+        'pnpm --filter filsnap run build && pnpm --filter filsnap exec mm-snap serve --port 8080',
+      url: 'http://localhost:8080/dist/snap.js',
     },
     {
       command: 'pnpm --filter demo exec vite',
