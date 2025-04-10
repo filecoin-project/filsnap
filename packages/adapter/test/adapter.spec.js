@@ -1,6 +1,6 @@
 import { createFixture } from 'metamask-testing-tools'
 
-const SNAP_ID = 'local:http://localhost:8081'
+const SNAP_ID = 'local:http://localhost:8080'
 const SNAP_VERSION = '*'
 const RAINBOW_PASSWORD = '12345678'
 const RAINBOW_EXTENSION_ID = 'opfgelmcmbiajamepnmloijbpoleiama'
