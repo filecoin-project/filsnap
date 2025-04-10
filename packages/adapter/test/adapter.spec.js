@@ -30,6 +30,7 @@ let fixture = createFixture({
 fixture.test(
   'should start connect to snap when flask is installed',
   async ({ metamask, page }) => {
+    await page.goto('/')
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog('**/experimental-area')
@@ -40,6 +41,7 @@ fixture.test(
 fixture.test(
   'should start enabling snap when metamask as an account',
   async ({ metamask, page }) => {
+    await page.goto('/')
     await metamask.setup()
     await page.getByTestId('connect-snap').click()
 
@@ -62,6 +64,7 @@ fixture = createFixture({
 fixture.test(
   'should show connect button when snap is installed',
   async ({ metamask, page }) => {
+    await page.goto('/')
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog((url) => {
@@ -88,7 +91,7 @@ fixture.test(
       version: SNAP_VERSION,
       page,
     })
-
+    await page.goto('/')
     await page.reload()
     await page.getByTestId('connect-snap').click()
 
