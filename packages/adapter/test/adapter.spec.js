@@ -22,6 +22,8 @@ async function setupExtraExtensions(data) {
 }
 
 let fixture = createFixture({
+  isolated: true,
+
   downloadOptions: {
     flask: true,
   },
@@ -30,7 +32,7 @@ let fixture = createFixture({
 fixture.test(
   'should start connect to snap when flask is installed',
   async ({ metamask, page }) => {
-    await page.goto('/')
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog('**/experimental-area')
@@ -41,8 +43,8 @@ fixture.test(
 fixture.test(
   'should start enabling snap when metamask as an account',
   async ({ metamask, page }) => {
-    await page.goto('/')
     await metamask.setup()
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog('**/snaps-connect')
@@ -64,7 +66,7 @@ fixture = createFixture({
 fixture.test(
   'should show connect button when snap is installed',
   async ({ metamask, page }) => {
-    await page.goto('/')
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog((url) => {
