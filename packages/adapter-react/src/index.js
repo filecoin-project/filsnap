@@ -167,7 +167,7 @@ export function FilsnapProvider({
 
           setIsConfiguring(true)
 
-          const data = await snap.changeChain(chainId)
+          const data = await snap.changeNetwork(network)
 
           if (data.error) {
             return setError(

@@ -7,6 +7,10 @@ import type {
 
 export interface FilsnapProviderProps {
   snapId: string
+  /**
+   * Don't specify this option, unless you know what you're doing and are trying to pin your adapter to a specific snap version
+   * @default MIN_SNAP_VERSION - Minimum supported snap version
+   */
   snapVersion?: string
   /**
    * Snap config
