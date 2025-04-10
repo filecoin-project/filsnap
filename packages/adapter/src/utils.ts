@@ -1,5 +1,6 @@
 import type { Snap } from '@metamask/snaps-sdk'
 import type { Network } from 'filsnap'
+import satisfies from 'semver/functions/satisfies'
 
 import { metamask } from './chains'
 import type { EIP1193Provider, EIP6963AnnounceProviderEvent } from './types'
@@ -149,9 +150,9 @@ export async function getSnap(
     throw new Error(`Snap ${snapId} ${snapVersion} is not enabled`)
   }
 
-  // if (snapVersion !== '*' && snap.version !== snapVersion) {
-  //   throw new Error(`Snap ${snapId} ${snapVersion} is not the correct version`)
-  // }
+  if (!satisfies(snap.version, snapVersion)) {
+    return undefined
+  }
 
   return snap
 }

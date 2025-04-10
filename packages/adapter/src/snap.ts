@@ -13,7 +13,7 @@ import type { IAccount, Network } from 'iso-filecoin/types'
 import { getNetworkFromChainId } from 'iso-filecoin/utils'
 import type { SetRequired } from 'type-fest'
 import type { EIP1193Provider } from './types'
-import { getOrInstallSnap, getProvider, getSnap } from './utils'
+import { getOrInstallSnap, getProvider } from './utils'
 
 export type FilsnapAdapterOptions = {
   /**
@@ -32,7 +32,7 @@ export type ConnectOptions = {
    */
   snapId?: string
   /**
-   * @default '*'
+   * @default MIN_SNAP_VERSION - Minimum supported snap version
    */
   snapVersion?: string
   /**
@@ -60,6 +60,11 @@ export type MaybeResult<ResultType = unknown, ErrorType = Error> =
       error?: undefined
     }
 
+const MIN_SNAP_VERSION = '1.6.x'
+
+/**
+ * Filsnap Adapter
+ */
 export class FilsnapAdapter {
   readonly snap: Snap
   readonly provider: EIP1193Provider
@@ -81,7 +86,7 @@ export class FilsnapAdapter {
     const snap = await getOrInstallSnap(
       options.provider,
       options.snapId,
-      options.snapVersion
+      options.snapVersion ?? MIN_SNAP_VERSION
     )
 
     const adapter = new FilsnapAdapter({
@@ -125,10 +130,10 @@ export class FilsnapAdapter {
       }
     | undefined
   > {
-    const snap = await getSnap(
+    const snap = await getOrInstallSnap(
       options.provider,
       options.snapId,
-      options.snapVersion
+      options.snapVersion ?? MIN_SNAP_VERSION
     )
 
     if (snap) {
@@ -241,7 +246,7 @@ export class FilsnapAdapter {
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_setConfig',
+          method: 'fil_changeNetwork',
           params: {
             network,
           },
@@ -253,7 +258,9 @@ export class FilsnapAdapter {
       return out
     }
 
-    this.config = out.result.config
+    if (this.config) {
+      this.config.network = out.result.network
+    }
 
     return {
       error: null,
@@ -279,10 +286,9 @@ export class FilsnapAdapter {
       method: 'wallet_invokeSnap',
       params: {
         request: {
-          method: 'fil_setConfig',
+          method: 'fil_deriveAccount',
           params: {
             index,
-            network: this.config?.network ?? 'mainnet',
           },
         },
         snapId: this.snap.id,
@@ -293,15 +299,17 @@ export class FilsnapAdapter {
       return out
     }
 
-    this.config = out.result.config
+    if (this.config) {
+      this.config.derivationPath = out.result.path
+    }
 
     return {
       error: null,
       result: {
-        address: fromString(out.result.account.address),
-        publicKey: hex.decode(out.result.account.publicKey),
-        path: out.result.account.path,
-        type: out.result.account.type,
+        address: fromString(out.result.address),
+        publicKey: hex.decode(out.result.publicKey),
+        path: out.result.path,
+        type: out.result.type,
       },
     }
   }
