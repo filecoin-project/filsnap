@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.3...filsnap-adapter-react-v2.0.4) (2025-04-10)
+
+
+### Bug Fixes
+
+* **react:** force min snap version from new adapter ([717d0cf](https://github.com/filecoin-project/filsnap/commit/717d0cf35d1b51cffb9a1836510cde217bd60142))
+
 ## [2.0.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.2...filsnap-adapter-react-v2.0.3) (2025-03-10)
 
 
