@@ -27,7 +27,6 @@ if (appEl) {
       <QueryClientProvider client={queryClient}>
         <FilsnapProvider
           snapId={SNAP_ID}
-          snapVersion=">=0.5.0"
           config={config}
           reconnectOnMount={true}
           syncWithProvider={true}
