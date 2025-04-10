@@ -1,6 +1,6 @@
 import { createFixture } from 'metamask-testing-tools'
 
-const SNAP_ID = 'local:http://localhost:8081'
+const SNAP_ID = 'local:http://localhost:8080'
 const SNAP_VERSION = '*'
 const RAINBOW_PASSWORD = '12345678'
 const RAINBOW_EXTENSION_ID = 'opfgelmcmbiajamepnmloijbpoleiama'
@@ -22,6 +22,8 @@ async function setupExtraExtensions(data) {
 }
 
 let fixture = createFixture({
+  isolated: true,
+
   downloadOptions: {
     flask: true,
   },
@@ -30,6 +32,7 @@ let fixture = createFixture({
 fixture.test(
   'should start connect to snap when flask is installed',
   async ({ metamask, page }) => {
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog('**/experimental-area')
@@ -41,6 +44,7 @@ fixture.test(
   'should start enabling snap when metamask as an account',
   async ({ metamask, page }) => {
     await metamask.setup()
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog('**/snaps-connect')
@@ -62,6 +66,7 @@ fixture = createFixture({
 fixture.test(
   'should show connect button when snap is installed',
   async ({ metamask, page }) => {
+    await page.reload()
     await page.getByTestId('connect-snap').click()
 
     const dialog = await metamask.waitForDialog((url) => {
@@ -88,7 +93,7 @@ fixture.test(
       version: SNAP_VERSION,
       page,
     })
-
+    await page.goto('/')
     await page.reload()
     await page.getByTestId('connect-snap').click()
 

@@ -28,8 +28,8 @@ if (appEl) {
         <FilsnapProvider
           snapId={SNAP_ID}
           config={config}
-          reconnectOnMount={true}
-          syncWithProvider={true}
+          reconnectOnMount={false}
+          syncWithProvider={false}
         >
           <App />
         </FilsnapProvider>
