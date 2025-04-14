@@ -52,7 +52,7 @@ importers:
         version: 3.0.10
       filsnap:
         specifier: ^1.6.0
-        version: 1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)
+        version: 1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
       filsnap-adapter:
         specifier: workspace:*
         version: link:../../packages/adapter
@@ -116,7 +116,7 @@ importers:
     dependencies:
       filsnap-adapter:
         specifier: ^3.1.2
-        version: 3.1.3(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)
+        version: 3.1.3(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
       iso-base:
         specifier: ^4.0.2
         version: 4.0.2
@@ -141,7 +141,7 @@ importers:
         version: 22.14.0
       filsnap:
         specifier: ^1.6.0
-        version: 1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)
+        version: 1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
       typescript:
         specifier: 5.8.2
         version: 5.8.2
@@ -156,7 +156,7 @@ importers:
         version: 5.72.2(react@19.1.0)
       filsnap-adapter:
         specifier: ^3.1.2
-        version: 3.1.3(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)
+        version: 3.1.3(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
       iso-filecoin:
         specifier: ^7.1.3
         version: 7.2.0
@@ -214,8 +214,8 @@ importers:
         specifier: ^7.1.3
         version: 7.1.3
       '@metamask/snaps-sdk':
-        specifier: 6.17.1
-        version: 6.17.1(webextension-polyfill@0.10.0)
+        specifier: 6.22.0
+        version: 6.22.0(webextension-polyfill@0.10.0)
       '@playwright/test':
         specifier: ^1.50.1
         version: 1.51.1
@@ -287,8 +287,8 @@ importers:
         specifier: ^10.0.2
         version: 10.1.1
       '@metamask/snaps-sdk':
-        specifier: 6.17.1
-        version: 6.17.1(webextension-polyfill@0.10.0)
+        specifier: 6.22.0
+        version: 6.22.0(webextension-polyfill@0.10.0)
       '@paulmillr/qr':
         specifier: ^0.3.0
         version: 0.3.0
@@ -1569,6 +1569,12 @@ packages:
     peerDependencies:
       webextension-polyfill: ^0.10.0 || ^0.11.0 || ^0.12.0
 
+  '@metamask/providers@21.0.0':
+    resolution: {integrity: sha512-qSKfQQYX4AsKxWcalJjmIce557wa9KWlRqSzMbmpcC2ULo3JlYCfJIi42u3mooaPxK2l+9AdtzLSVbLRsBYnPA==}
+    engines: {node: ^18.18 || >=20}
+    peerDependencies:
+      webextension-polyfill: ^0.10.0 || ^0.11.0 || ^0.12.0
+
   '@metamask/rpc-errors@6.4.0':
     resolution: {integrity: sha512-1ugFO1UoirU2esS3juZanS/Fo8C8XYocCuBpfZI5N7ECtoG+zu0wF+uWZASik6CkO6w9n/Iebt4iI4pT0vptpg==}
     engines: {node: '>=16.0.0'}
@@ -1618,6 +1624,10 @@ packages:
 
   '@metamask/snaps-sdk@6.17.1':
     resolution: {integrity: sha512-5eWXMBzmX2QOtHxKBsuEcm1+BjqkgPioEtmoaCkiBoWihJ4kh88Lh6OZUmZhPH6Kyo2MlrtdZ1RmYbq/rme2xg==}
+    engines: {node: ^18.16 || >=20}
+
+  '@metamask/snaps-sdk@6.22.0':
+    resolution: {integrity: sha512-xZNQJ0UNQ1+5oZsZ2gph+8kO1B1Gr5hyYvshM2hPlhbaMA7W9C4c7pUUAWw7BOJ0JrCDSnPY//o1pjImYKxNOg==}
     engines: {node: ^18.16 || >=20}
 
   '@metamask/snaps-utils@8.10.0':
@@ -6674,6 +6684,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@metamask/providers@21.0.0(webextension-polyfill@0.10.0)':
+    dependencies:
+      '@metamask/json-rpc-engine': 10.0.3
+      '@metamask/json-rpc-middleware-stream': 8.0.7
+      '@metamask/object-multiplex': 2.1.0
+      '@metamask/rpc-errors': 7.0.2
+      '@metamask/safe-event-emitter': 3.1.2
+      '@metamask/utils': 11.4.0
+      detect-browser: 5.3.0
+      extension-port-stream: 4.2.0(webextension-polyfill@0.10.0)
+      fast-deep-equal: 3.1.3
+      is-stream: 2.0.1
+      readable-stream: 3.6.2
+      webextension-polyfill: 0.10.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@metamask/rpc-errors@6.4.0':
     dependencies:
       '@metamask/utils': 9.3.0
@@ -6755,7 +6782,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.26.10(@babel/core@7.26.10)
       '@babel/preset-env': 7.26.9(@babel/core@7.26.10)
       '@babel/preset-typescript': 7.27.0(@babel/core@7.26.10)
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 6.22.0(webextension-polyfill@0.10.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.27.0)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/snaps-webpack-plugin': 4.2.1(@babel/runtime@7.27.0)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
@@ -6831,6 +6858,17 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
+  '@metamask/snaps-sdk@6.22.0(webextension-polyfill@0.10.0)':
+    dependencies:
+      '@metamask/key-tree': 10.1.1
+      '@metamask/providers': 21.0.0(webextension-polyfill@0.10.0)
+      '@metamask/rpc-errors': 7.0.2
+      '@metamask/superstruct': 3.2.1
+      '@metamask/utils': 11.4.0
+    transitivePeerDependencies:
+      - supports-color
+      - webextension-polyfill
+
   '@metamask/snaps-utils@8.10.0(@babel/runtime@7.27.0)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
       '@babel/core': 7.26.10
@@ -6841,7 +6879,7 @@ snapshots:
       '@metamask/rpc-errors': 7.0.2
       '@metamask/slip44': 4.1.0
       '@metamask/snaps-registry': 3.2.3
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 6.22.0(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.4.0
       '@noble/hashes': 1.7.1
@@ -6864,7 +6902,7 @@ snapshots:
 
   '@metamask/snaps-webpack-plugin@4.2.1(@babel/runtime@7.27.0)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
-      '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 6.22.0(webextension-polyfill@0.10.0)
       '@metamask/snaps-utils': 8.10.0(@babel/runtime@7.27.0)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/utils': 11.4.0
       prettier: 2.8.8
@@ -9050,9 +9088,9 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  filsnap-adapter@3.1.3(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10):
+  filsnap-adapter@3.1.3(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0):
     dependencies:
-      filsnap: 1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)
+      filsnap: 1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
       iso-base: 4.0.2
       iso-filecoin: 7.2.0
     transitivePeerDependencies:
@@ -9062,7 +9100,7 @@ snapshots:
       - utf-8-validate
       - webextension-polyfill
 
-  filsnap@1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10):
+  filsnap@1.6.1(bufferutil@4.0.9)(iso-filecoin@7.2.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0):
     dependencies:
       '@metamask/key-tree': 10.1.1
       '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.10.0)
