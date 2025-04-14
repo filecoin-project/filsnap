@@ -61,7 +61,7 @@
     "metamask-testing-tools": "^2.2.3",
     "type-fest": "^4.38.0",
     "typescript": "5.8.2",
-    "viem": "^2.24.1"
+    "viem": "^2.26.5"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
