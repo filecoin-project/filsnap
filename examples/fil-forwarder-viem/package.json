@@ -26,7 +26,7 @@
     "@hugomrdias/configs": "^0.1.9",
     "@types/node": "^22.13.14",
     "filsnap": "^1.6.0",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "vite": "^5.4.10"
   }
 }
