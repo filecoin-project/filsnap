@@ -60,7 +60,7 @@
     "@types/semver": "^7.7.0",
     "metamask-testing-tools": "^2.2.3",
     "type-fest": "^4.38.0",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "viem": "^2.24.1"
   },
   "peerDependencies": {

@@ -110,7 +110,7 @@
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.9",
     "type-fest": "^4.38.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
