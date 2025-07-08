@@ -21,12 +21,12 @@
     "viem": "^2.24.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.10",
+    "@babel/core": "^7.28.0",
     "@biomejs/biome": "^1.9.4",
     "@hugomrdias/configs": "^0.1.9",
-    "@types/node": "^22.13.14",
+    "@types/node": "^24.0.10",
     "filsnap": "^1.6.0",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "vite": "^5.4.10"
   }
 }

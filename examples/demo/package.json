@@ -68,15 +68,15 @@
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.10",
+    "@babel/core": "^7.28.0",
     "@biomejs/biome": "^1.9.4",
     "@hugomrdias/configs": "^0.1.9",
-    "@preact/preset-vite": "^2.10.1",
-    "@types/node": "^22.13.14",
+    "@preact/preset-vite": "^2.10.2",
+    "@types/node": "^24.0.10",
     "tiny-git-rev-sync": "^0.1.0",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "vite": "^5.4.10",
-    "wireit": "^0.14.11"
+    "wireit": "^0.14.12"
   },
   "depcheck": {
     "specials": [
