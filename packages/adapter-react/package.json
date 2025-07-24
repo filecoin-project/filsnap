@@ -53,13 +53,13 @@
   "devDependencies": {
     "@testing-library/react": "^16.2.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^24.0.10",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/node": "^24.1.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "assert": "^2.1.0",
     "mocha": "^11.7.1",
-    "playwright-test": "^14.1.9",
-    "preact": "^10.26.4",
+    "playwright-test": "^14.1.11",
+    "preact": "^10.26.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "5.8.3"
