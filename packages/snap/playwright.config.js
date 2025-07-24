@@ -10,15 +10,22 @@ export default defineConfig({
   maxFailures: process.env.CI ? 0 : 1,
   reporter: process.env.CI ? [['html'], ['list']] : 'list',
   use: {
-    baseURL: 'http://example.org',
+    baseURL: 'http://localhost:8081',
     trace: 'on-first-retry',
     colorScheme: 'dark',
     browserName: 'chromium',
     viewport: { width: 1280, height: 1280 },
   },
-  webServer: {
-    command: 'pnpm run build && pnpm exec mm-snap serve',
-    url: 'http://localhost:8080/dist/snap.js',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'pnpm run serve-static',
+      url: 'http://localhost:8081',
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: 'pnpm run build && pnpm exec mm-snap serve',
+      url: 'http://localhost:8080/dist/snap.js',
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 })
