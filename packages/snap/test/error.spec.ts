@@ -235,7 +235,7 @@ test.describe('API Errors', () => {
     })
 
     expect(error?.message).toContain(
-      'No configuration found for http://example.org. Connect to Filsnap first.'
+      'No configuration found for http://localhost:8081. Connect to Filsnap first.'
     )
   })
 
@@ -267,7 +267,7 @@ test.describe('API Errors', () => {
     })
 
     expect(error?.message).toContain(
-      'No configuration found for http://example.org. Connect to Filsnap first.'
+      'No configuration found for http://localhost:8081. Connect to Filsnap first.'
     )
   })
   test('should fail fil_sendMessage when not connected', async ({
@@ -282,7 +282,7 @@ test.describe('API Errors', () => {
     })
 
     expect(error?.message).toContain(
-      'No configuration found for http://example.org. Connect to Filsnap first.'
+      'No configuration found for http://localhost:8081. Connect to Filsnap first.'
     )
   })
 

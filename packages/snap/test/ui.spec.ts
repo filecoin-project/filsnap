@@ -78,7 +78,7 @@ fixture.test.describe('JSX UI Dialogs', () => {
       .expect(metamask.page.getByText('Connection Request'))
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText('from http://example.org'))
+      .expect(metamask.page.getByText('from http://localhost:8081'))
       .toBeVisible()
 
     await fixture
@@ -115,7 +115,7 @@ fixture.test.describe('JSX UI Dialogs', () => {
       .expect(metamask.page.getByText('Transaction Request'))
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText('from http://example.org'))
+      .expect(metamask.page.getByText('from http://localhost:8081'))
       .toBeVisible()
     await fixture
       .expect(
@@ -153,7 +153,7 @@ fixture.test.describe('JSX UI Dialogs', () => {
         .expect(metamask.page.getByText('Signature Request'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('from http://example.org'))
+        .expect(metamask.page.getByText('from http://localhost:8081'))
         .toBeVisible()
       await fixture.expect(metamask.page.getByText('0x1234')).toBeVisible()
 
@@ -180,7 +180,7 @@ fixture.test.describe('JSX UI Dialogs', () => {
         .expect(metamask.page.getByText('Private Key Export Request'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('from http://example.org'))
+        .expect(metamask.page.getByText('from http://localhost:8081'))
         .toBeVisible()
       await fixture.expect(metamask.page.getByText('Account 0')).toBeVisible()
 
