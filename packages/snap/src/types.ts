@@ -155,5 +155,5 @@ export interface SignatureInsightsProps {
 
 export type SignatureInsightsHandler = (
   props: SignatureInsightsProps,
-  config: SnapConfig
+  config?: SnapConfig
 ) => Promisable<OnSignatureResponse | null>

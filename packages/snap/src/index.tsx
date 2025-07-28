@@ -54,6 +54,7 @@ import { OnInstall } from './components/on-install'
 import { OnUpdate } from './components/on-update'
 import { handleBaseSignature } from './insights/base-signature'
 import { handleFilFowarder } from './insights/filforwarder'
+import { handleUcanSignature } from './insights/ucan-signature'
 
 export type {
   AccountInfo,
@@ -360,10 +361,7 @@ export const onSignature: OnSignatureHandler = async ({
   const state = new State(snap)
   const config = await state.get(signatureOrigin)
 
-  if (!config) {
-    return null
-  }
-  const handlers = [handleBaseSignature]
+  const handlers = [handleUcanSignature, handleBaseSignature]
 
   let result = null
   for (const handler of handlers) {
