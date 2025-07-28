@@ -39,7 +39,7 @@ export function configFromNetwork(networkName?: Network): SnapConfig {
  * @param object - The object in question.
  * @returns An object containing all the JSON-serializable properties.
  */
-function serializeObject(object: unknown): Record<string, Json> {
+export function serializeObject(object: unknown): Record<string, Json> {
   if (!isObject(object)) {
     return {}
   }
