@@ -53,26 +53,35 @@ type ListHeaderProps = {
   children: StringElement
   icon: string
   tooltip?: string
+  subtitle?: string
 }
 export const ListHeader: SnapComponent<ListHeaderProps> = ({
   icon,
   tooltip,
   children,
+  subtitle,
 }) => {
   return (
-    <Box direction="horizontal">
-      <SvgIcon icon={icon} color="alternative" />
-      {tooltip ? (
-        <Tooltip content={tooltip}>
+    <Box direction="vertical">
+      <Box direction="horizontal">
+        <SvgIcon icon={icon} color="alternative" />
+        {tooltip ? (
+          <Tooltip content={tooltip}>
+            <Text color="default">
+              <Bold>{children}</Bold>
+            </Text>
+          </Tooltip>
+        ) : (
           <Text color="default">
             <Bold>{children}</Bold>
           </Text>
-        </Tooltip>
-      ) : (
-        <Text color="default">
-          <Bold>{children}</Bold>
+        )}
+      </Box>
+      {subtitle ? (
+        <Text color="muted" size="sm">
+          {subtitle}
         </Text>
-      )}
+      ) : null}
     </Box>
   )
 }
