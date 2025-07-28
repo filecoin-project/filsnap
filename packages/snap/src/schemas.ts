@@ -1,7 +1,7 @@
 import { Schemas } from 'iso-filecoin/message'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { z } from 'zod'
-import type { Json, Network } from './types'
+import type { Network } from './types'
 
 const alphabet =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=+/'
@@ -22,7 +22,7 @@ export const config = z.object({
   /**
    * RPC URL to be used must be a valid URL and match the network
    */
-  rpcUrl: z.string().url().trim().optional(),
+  rpcUrl: z.url().trim().optional(),
   /**
    * Bearer token used to make authenticated requests to the RPC URL
    */
@@ -36,7 +36,7 @@ export const config = z.object({
   /**
    * Derivation path address index
    */
-  index: z.number().nonnegative().int().safe().default(0).optional(),
+  index: z.number().nonnegative().int().default(0).optional(),
   /**
    * Symbol of the token to be used in the UI
    */
@@ -51,21 +51,21 @@ export const snapConfig = z.object({
   /**
    * The derivation path for the account
    */
-  derivationPath: z.string().superRefine((val, ctx) => {
+  derivationPath: z.string().check((ctx) => {
     try {
-      const parsed = parseDerivationPath(val)
-      return parsed
+      const val = ctx.value
+      parseDerivationPath(val)
     } catch (error) {
       const err = error as Error
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+      ctx.issues.push({
+        code: 'custom',
         message: err.message,
+        input: ctx.value,
       })
-      return z.NEVER
     }
   }),
   rpc: z.object({
-    url: z.string().url().trim(),
+    url: z.url().trim(),
     token: z
       .string()
       .trim()
@@ -93,6 +93,4 @@ export const messageStatus = z.object({
 
 export const literal = z.union([z.string(), z.number(), z.boolean(), z.null()])
 
-export const json: z.ZodType<Json> = z.lazy(() =>
-  z.union([literal, z.array(json), z.record(json)])
-)
+export const json = z.json()

@@ -286,7 +286,7 @@ export async function filChangeNetwork(
   }
 }
 
-const schema = z.number().nonnegative().int().safe()
+const schema = z.number().nonnegative().int()
 
 /**
  * RPC method to change the network

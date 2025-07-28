@@ -216,58 +216,64 @@ function validateSendForm(form: unknown, context: HomepageContext) {
   const schema = z.object({
     to: z
       .string({
-        required_error: 'Recipient address is required',
-        invalid_type_error: 'Invalid recipient address',
+        error: (issue) =>
+          issue.input === undefined
+            ? 'Recipient address is required'
+            : 'Invalid recipient address',
       })
       .trim()
-      .superRefine((v, ctx) => {
+      .check((ctx) => {
+        const v = ctx.value
         if (v.startsWith('f') && context.config.network === 'testnet') {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: 'custom',
             message: 'Recipient address is invalid for testnet',
+            input: ctx.value,
           })
         }
 
         if (v.startsWith('t') && context.config.network === 'mainnet') {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: 'custom',
             message: 'Recipient address is invalid for mainnet',
+            input: ctx.value,
           })
         }
-      })
-      .refine(
-        (v) => {
-          try {
-            FilAddress.from(v, context.config.network)
-            return true
-          } catch {
-            return false
-          }
-        },
-        {
-          message: 'Recipient address could not be parsed into a valid address',
+
+        try {
+          FilAddress.from(v, context.config.network)
+        } catch {
+          ctx.issues.push({
+            code: 'custom',
+            message:
+              'Recipient address could not be parsed into a valid address',
+            input: ctx.value,
+          })
         }
-      ),
+      }),
     amount: z
       .string({
-        required_error: 'Amount is required',
-        invalid_type_error: 'Invalid amount',
+        error: (issue) =>
+          issue.input === undefined ? 'Amount is required' : 'Invalid amount',
       })
       .trim()
-      .superRefine((v, ctx) => {
+      .check((ctx) => {
+        const v = ctx.value
         const amount = Token.fromFIL(v)
 
         if (!amount.val.gt(Token.fromFIL('0').val)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: 'custom',
             message: 'Amount must be greater than 0',
+            input: ctx.value,
           })
         }
 
         if (!amount.val.lte(Token.fromAttoFIL(context.balance).val)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+          ctx.issues.push({
+            code: 'custom',
             message: 'Insufficient balance',
+            input: ctx.value,
           })
         }
       }),
