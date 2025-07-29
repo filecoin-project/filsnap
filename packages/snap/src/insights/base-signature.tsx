@@ -19,6 +19,10 @@ export const handleBaseSignature: SignatureInsightsHandler = async (
 ) => {
   const { signature } = props
 
+  if (config == null) {
+    return null
+  }
+
   const address = fromEthAddress(signature.from, config.network)
   const rpc = new RPC({
     api: config.rpc.url,
