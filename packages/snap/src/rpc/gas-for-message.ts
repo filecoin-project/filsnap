@@ -6,7 +6,7 @@ import * as Address from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
 import { getAccountSafe } from '../account'
 import type { SnapContext, SnapResponse } from '../types'
-import { serializeError } from '../utils'
+import { serializeError, serializeValidationError } from '../utils'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'
@@ -66,10 +66,7 @@ export async function getGasForMessage(
   }
   const _params = estimateParams.safeParse(params)
   if (!_params.success) {
-    return serializeError(
-      `Invalid params ${_params.error.message}`,
-      _params.error
-    )
+    return serializeValidationError(_params.error)
   }
 
   const { message, maxFee } = _params.data

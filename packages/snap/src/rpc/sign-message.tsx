@@ -57,10 +57,7 @@ export async function signMessage(
 
   const _params = signMessageParams.safeParse(params)
   if (!_params.success) {
-    return serializeError(
-      `Invalid params ${_params.error.message}`,
-      _params.error
-    )
+    return serializeValidationError(_params.error)
   }
 
   const account = await getAccountWithPrivateKey(snap, config)
@@ -132,10 +129,7 @@ export async function signMessageRaw(
   }
   const _params = signMessageRawParams.safeParse(params)
   if (!_params.success) {
-    return serializeError(
-      `Invalid params ${_params.error.message}`,
-      _params.error
-    )
+    return serializeValidationError(_params.error)
   }
 
   const { message } = _params.data

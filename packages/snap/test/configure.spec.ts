@@ -235,6 +235,7 @@ test.describe('fil_configure', () => {
 
     const deriveAccountRsp = await deriveAccount
     expect(deriveAccountRsp.error).toBeDefined()
+
     expect(deriveAccountRsp.error?.message).toStrictEqual(
       'Validation error: Number must be greater than or equal to 0'
     )

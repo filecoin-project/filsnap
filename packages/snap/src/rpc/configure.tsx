@@ -47,10 +47,7 @@ export async function configure(
     merge(configFromNetwork(params.network), params)
   )
   if (!_params.success) {
-    return serializeError(
-      `Invalid params ${_params.error.message}`,
-      _params.error
-    )
+    return serializeValidationError(_params.error)
   }
 
   const {
@@ -286,7 +283,9 @@ export async function filChangeNetwork(
   }
 }
 
-const schema = z.number().nonnegative().int()
+const schema = z.int().nonnegative({
+  error: 'Number must be greater than or equal to 0',
+})
 
 /**
  * RPC method to change the network
