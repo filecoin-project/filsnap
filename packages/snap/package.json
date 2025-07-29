@@ -92,7 +92,6 @@
     }
   },
   "dependencies": {
-    "@ipld/dag-cbor": "^9.2.4",
     "@metamask/key-tree": "^10.0.2",
     "@metamask/snaps-sdk": "6.17.1",
     "@paulmillr/qr": "^0.3.0",
@@ -132,7 +131,8 @@
       "@types/*",
       "assert",
       "playwright-test",
-      "mocha"
+      "mocha",
+      "prettier"
     ]
   }
 }
