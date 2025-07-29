@@ -117,6 +117,8 @@ test.describe('fil_getGasForMessage', () => {
     if (estimate.result != null) {
       throw new Error('Should fail')
     }
-    expect(estimate.error.message).toContain('Invalid params')
+    expect(estimate.error.message).toContain(
+      'Validation error: Invalid input at "message.value"'
+    )
   })
 })

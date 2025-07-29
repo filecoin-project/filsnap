@@ -116,7 +116,9 @@ test.describe('API Errors', () => {
       page,
     })
 
-    expect(response.error?.message).toContain('Invalid params')
+    expect(response.error?.message).toContain(
+      'Validation error: Invalid input at "network"'
+    )
   })
 
   test('should throw on invalid derivation path', async ({
