@@ -60,7 +60,7 @@ export type MaybeResult<ResultType = unknown, ErrorType = Error> =
       error?: undefined
     }
 
-const MIN_SNAP_VERSION = '1.6.x'
+const MIN_SNAP_VERSION = '>1.6.0'
 
 /**
  * Filsnap Adapter

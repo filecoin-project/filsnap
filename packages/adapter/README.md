@@ -7,7 +7,6 @@
 
 > Adapter for [Filsnap](../snap/)
 
-
 ## Installation
 
 ```bash
