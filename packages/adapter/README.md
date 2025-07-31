@@ -37,7 +37,7 @@ Check out the [demo](../../examples/demo) for a working example and the [API](ht
 
 ## Contributing
 
-Read contributing guidelines [here](../../.github/CONTRIBUTING.md).
+Read contributing [guidelines](../../.github/CONTRIBUTING.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/filecoin-project/filsnap)
 
