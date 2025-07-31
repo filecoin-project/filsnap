@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.2.0...filsnap-adapter-v3.3.0) (2025-07-31)
+
+
+### Features
+
+* FRC-102 ([fd37b4b](https://github.com/filecoin-project/filsnap/commit/fd37b4bf68fbd878eb0ec991be11f69258ff6ee6))
+
 ## [3.2.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.1.3...filsnap-adapter-v3.2.0) (2025-04-10)
 
 
