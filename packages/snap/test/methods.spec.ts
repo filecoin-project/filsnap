@@ -1,4 +1,7 @@
-import { base64pad } from 'iso-base/rfc4648'
+import { base64pad, hex } from 'iso-base/rfc4648'
+import { utf8 } from 'iso-base/utf8'
+import { Signature } from 'iso-filecoin/signature'
+import * as Wallet from 'iso-filecoin/wallet'
 import { createFixture } from 'metamask-testing-tools'
 import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
 import type { GetBalanceResponse } from '../src/rpc/get-balance'
@@ -107,6 +110,34 @@ test.describe('filsnap testnet', () => {
     expect(result).toStrictEqual(
       '018138db7b1267f8a47a137ee18807971a51881aabb9e6c190c315ba98daaf7eed3fd664bba43d5b0a2056592049840305280b8748dae59714ea21599ae1397cbb01'
     )
+  })
+
+  test('should sign personal bytes', async ({ metamask, page }) => {
+    const signRaw = metamask.invokeSnap<SignMessageRawResponse>({
+      request: {
+        method: 'fil_personalSign',
+        params: { data: base64pad.encode('hello') },
+      },
+      page,
+    })
+
+    await metamask.waitForConfirmation()
+    const { result } = await signRaw
+
+    if (result == null) {
+      throw new Error('Failed to sign message')
+    }
+
+    const signature = Signature.fromLotusHex(result)
+    const isValid = Wallet.personalVerify(
+      signature,
+      utf8.decode('hello'),
+      hex.decode(
+        '047d5c5bf2aeec3efaf909de110e34d0b8f50b490e1fe0d24b635cc270bfcb1dafc959e5abba30cf6b4d8029fc16f22eb0f8f137f0284113157766b5aa8a5fae76'
+      )
+    )
+
+    expect(isValid).toBe(true)
   })
 
   test('should sign raw message', async ({ metamask, page }) => {

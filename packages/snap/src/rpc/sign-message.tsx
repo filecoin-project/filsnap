@@ -3,7 +3,11 @@ import { utf8 } from 'iso-base/utf8'
 import * as Address from 'iso-filecoin/address'
 import { Message, Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
-import { signMessage as filSignMessage, sign } from 'iso-filecoin/wallet'
+import {
+  signMessage as filSignMessage,
+  personalSign,
+  sign,
+} from 'iso-filecoin/wallet'
 import { z } from 'zod'
 import { getAccountWithPrivateKey } from '../account'
 import {
@@ -112,6 +116,7 @@ export async function signMessage(
 /**
  * Sign a raw UTF-8 message
  *
+ * @deprecated Use {@link filSign} instead
  * @param ctx - Snap context
  * @param params - Parameters
  * @param params.message - The raw message
@@ -166,7 +171,7 @@ export const signBytesParams = z.object({
   /**
    * Base64 encoded bytes to sign
    */
-  data: z.string().base64(),
+  data: z.base64(),
 })
 
 /**
@@ -194,6 +199,7 @@ export async function filSign(
   }
 
   const { data } = _params.data
+  const decodedBytes = base64pad.decode(data)
 
   const account = await getAccountWithPrivateKey(snap, config)
 
@@ -206,14 +212,69 @@ export async function filSign(
           address={account.address.toString()}
           origin={ctx.origin}
           accountNumber={account.accountNumber}
-          message={data}
+          message={utf8.encode(decodedBytes)}
         />
       ),
     },
   })
 
   if (conf) {
-    const sig = sign(account.privateKey, 'SECP256K1', base64pad.decode(data))
+    const sig = sign(account.privateKey, 'SECP256K1', decodedBytes)
+    return {
+      error: null,
+      result: sig.toLotusHex(),
+    }
+  }
+
+  return serializeError('User denied message signing')
+}
+
+/**
+ * Sign a FRC-102 message
+ *
+ * @param ctx - Snap context
+ * @param params - Parameters
+ * @param params.data - bytes to sign in base64 format
+ * @returns Signature in Lotus format (hex encoded) {@link Signature.toLotusHex}
+ */
+export async function filPersonalSign(
+  ctx: SnapContext,
+  params: z.infer<typeof signBytesParams>
+): Promise<SignMessageRawResponse> {
+  const config = await ctx.state.get(ctx.origin)
+
+  if (config == null) {
+    return serializeError(
+      `No configuration found for ${ctx.origin}. Connect to Filsnap first.`
+    )
+  }
+  const _params = signBytesParams.safeParse(params)
+  if (!_params.success) {
+    return serializeValidationError(_params.error)
+  }
+
+  const { data } = _params.data
+  const decodedBytes = base64pad.decode(data)
+
+  const account = await getAccountWithPrivateKey(snap, config)
+
+  const conf = await ctx.snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'confirmation',
+      content: (
+        <SignMessageDialog
+          address={account.address.toString()}
+          origin={ctx.origin}
+          accountNumber={account.accountNumber}
+          message={utf8.encode(decodedBytes)}
+        />
+      ),
+    },
+  })
+
+  if (conf) {
+    const sig = personalSign(account.privateKey, 'SECP256K1', decodedBytes)
     return {
       error: null,
       result: sig.toLotusHex(),

@@ -16,7 +16,12 @@ import type {
   SignMessageParams,
   SignMessageRawParams,
 } from './rpc/sign-message'
-import { filSign, signMessage, signMessageRaw } from './rpc/sign-message'
+import {
+  filPersonalSign,
+  filSign,
+  signMessage,
+  signMessageRaw,
+} from './rpc/sign-message'
 import { State } from './state'
 import type {
   Config,
@@ -149,6 +154,13 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
       case 'fil_sign': {
         return await filSign(context, request.params as { data: string })
+      }
+
+      case 'fil_personalSign': {
+        return await filPersonalSign(
+          context,
+          request.params as { data: string }
+        )
       }
 
       case 'fil_sendMessage': {

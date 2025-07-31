@@ -21,7 +21,12 @@ import type { getGasForMessage } from './rpc/gas-for-message'
 import type { filGetAccount, getAccountInfo } from './rpc/get-account'
 import type { getBalance } from './rpc/get-balance'
 import type { sendMessage } from './rpc/send-message'
-import type { filSign, signMessage, signMessageRaw } from './rpc/sign-message'
+import type {
+  filPersonalSign,
+  filSign,
+  signMessage,
+  signMessageRaw,
+} from './rpc/sign-message'
 import type { config, literal, messageStatus, snapConfig } from './schemas'
 import type { State } from './state'
 
@@ -126,6 +131,7 @@ export interface FilSnapMethods {
   fil_getAccountInfo: typeof getAccountInfo
   fil_getAccount: typeof filGetAccount
   fil_sign: typeof filSign
+  fil_personalSign: typeof filPersonalSign
 }
 
 // UI Types
