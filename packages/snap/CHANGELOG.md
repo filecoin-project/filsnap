@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.7.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.6.1...filsnap-v1.7.0) (2025-07-31)
+
+
+### Features
+
+* added support for FRC-102 and sign msg UI should utf8 string ([836a910](https://github.com/filecoin-project/filsnap/commit/836a91051170d71f9300b7154688f3908f202ad7))
+* **snap:** add handleUcanSignature for UCAN insights ([a1efde5](https://github.com/filecoin-project/filsnap/commit/a1efde51edb32b0bb62fa4a2c57d5a57165a8bac))
+* **snap:** add optional subtitle to ListHeader component ([e2ef20b](https://github.com/filecoin-project/filsnap/commit/e2ef20bc45cb5965e531c3caa0bc783659bd9385))
+* **snap:** update to zod v4 ([372e427](https://github.com/filecoin-project/filsnap/commit/372e427129728329f1facbe63fb916a593fee44a))
+
+
+### Bug Fixes
+
+* default sig handler to only return with config ([17d2884](https://github.com/filecoin-project/filsnap/commit/17d28849632909224cf6053c49d367bc08d3b616))
+
 ## [1.6.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.6.0...filsnap-v1.6.1) (2025-03-27)
 
 
