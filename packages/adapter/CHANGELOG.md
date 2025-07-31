@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.0...filsnap-adapter-v3.3.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* **adapter:** update minimum snap version requirement ([57dffa1](https://github.com/filecoin-project/filsnap/commit/57dffa129dbdb98955ce8644f0b9cb7cd9507bc4))
+
 ## [3.3.0](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.2.0...filsnap-adapter-v3.3.0) (2025-07-31)
 
 
