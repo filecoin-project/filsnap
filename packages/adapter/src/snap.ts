@@ -400,6 +400,7 @@ export class FilsnapAdapter {
   /**
    * Sign a raw message
    *
+   * @deprecated Use {@link sign} instead
    * @param params - {@link FilSnapMethods.fil_signMessageRaw} params
    */
   async signMessageRaw(
@@ -428,6 +429,35 @@ export class FilsnapAdapter {
       params: {
         request: {
           method: 'fil_sign',
+          params: {
+            data: base64pad.encode(data),
+          },
+        },
+        snapId: this.snap.id,
+      },
+    })
+
+    if (sign.error) {
+      return sign
+    }
+
+    return {
+      error: null,
+      result: Signature.fromLotusHex(sign.result),
+    }
+  }
+
+  /**
+   * Sign FRC-102 message
+   *
+   * @param data - Data to sign
+   */
+  async personalSign(data: Uint8Array): Promise<SnapResponse<Signature>> {
+    const sign = await this.provider.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        request: {
+          method: 'fil_personalSign',
           params: {
             data: base64pad.encode(data),
           },
