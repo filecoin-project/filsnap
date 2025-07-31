@@ -101,7 +101,7 @@ We recommend using [`filsnap-adapter`](../adapter) to interact with filsnap for 
 - `fil_getPublicKey` - Get the public key of the connected account.
 - `fil_getAccountInfo` - Get the account info of the connected account.
 
-Check the full RPC methods documentation [here](https://filecoin-project.github.io/filsnap/interfaces/filsnap.FilSnapMethods.html).
+Check the full RPC methods [documentation](https://filecoin-project.github.io/filsnap/interfaces/filsnap.FilSnapMethods.html).
 
 ## Architecture
 
