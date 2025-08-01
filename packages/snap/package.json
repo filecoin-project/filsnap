@@ -105,10 +105,10 @@
   },
   "devDependencies": {
     "@metamask/snaps-cli": "8.1.1",
-    "@playwright/test": "^1.54.1",
+    "@playwright/test": "^1.54.2",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
-    "metamask-testing-tools": "^2.2.5",
+    "metamask-testing-tools": "^2.2.6",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.11",
     "prettier": "^3.6.2",

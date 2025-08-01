@@ -10,13 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.83.0",
-    "filsnap-adapter": "^3.2.0",
+    "@tanstack/react-query": "^5.84.0",
+    "filsnap-adapter": "^3.3.1",
     "iso-filecoin": "^7.4.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "viem": "~2.33.2",
-    "wagmi": "^2.16.0"
+    "wagmi": "^2.16.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
