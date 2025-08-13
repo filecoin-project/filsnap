@@ -79,12 +79,13 @@ export function chainIdtoNetwork(chainId: string): Network | undefined {
 export async function getOrInstallSnap(
   provider: EIP1193Provider,
   snapId = 'npm:filsnap',
-  snapVersion = '*'
+  snapVersion = '*',
+  forceInstall = false
 ): Promise<Snap> {
   const snap = await getSnap(provider, snapId, snapVersion)
 
   // try to install the snap
-  if (snap == null) {
+  if (snap == null || forceInstall) {
     try {
       const snaps = await provider.request({
         method: 'wallet_requestSnaps',
