@@ -55,11 +55,11 @@
     "@tanstack/react-query": "^5.85.0",
     "clsx": "^2.1.0",
     "dns-over-http-resolver": "^3.0.16",
-    "filsnap": "^1.7.0",
+    "filsnap": "workspace:*",
     "filsnap-adapter": "workspace:*",
     "filsnap-adapter-react": "workspace:*",
     "iso-base": "^4.1.0",
-    "iso-filecoin": "^7.4.0",
+    "iso-filecoin": "^7.4.1",
     "preact": "^10.27.0",
     "react-hook-form": "^7.62.0",
     "react-toastify": "^11.0.5",
@@ -75,7 +75,7 @@
     "@types/node": "^24.1.0",
     "tiny-git-rev-sync": "^0.1.0",
     "typescript": "5.8.3",
-    "vite": "^5.4.10",
+    "vite": "^7.1.2",
     "wireit": "^0.14.12"
   },
   "depcheck": {
