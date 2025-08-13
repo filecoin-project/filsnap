@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.1...filsnap-adapter-v3.3.2) (2025-08-13)
+
+
+### Bug Fixes
+
+* update viem dependency and add forceInstall option ([e6b3d92](https://github.com/filecoin-project/filsnap/commit/e6b3d92a45bb828047f2e7f82804b96c81273bbf))
+
 ## [3.3.1](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.0...filsnap-adapter-v3.3.1) (2025-07-31)
 
 
