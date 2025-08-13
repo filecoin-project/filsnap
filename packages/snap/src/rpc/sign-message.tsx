@@ -8,7 +8,7 @@ import {
   personalSign,
   sign,
 } from 'iso-filecoin/wallet'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import { getAccountWithPrivateKey } from '../account'
 import {
   SignMessageDialog,

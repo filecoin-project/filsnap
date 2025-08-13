@@ -1,6 +1,6 @@
 import { Schemas } from 'iso-filecoin/message'
 import type { Jsonify } from 'type-fest'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 import * as Address from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'

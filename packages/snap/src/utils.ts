@@ -1,8 +1,8 @@
 import { Token, type Value } from 'iso-filecoin/token'
 import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
 import type { Jsonify } from 'type-fest'
-import type { ZodError } from 'zod'
 import { fromError, isZodErrorLike } from 'zod-validation-error'
+import type { ZodError } from 'zod/v4'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
 import type {

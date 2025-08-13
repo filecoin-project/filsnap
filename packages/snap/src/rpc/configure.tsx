@@ -5,7 +5,7 @@ import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
 // @ts-expect-error - no types for this package
 import merge from 'merge-options'
 import type { Jsonify } from 'type-fest'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import { getAccountSafe } from '../account'
 import { Configure } from '../components/dialog-configure'
 import { config, snapConfig } from '../schemas'

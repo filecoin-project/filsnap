@@ -101,7 +101,6 @@
     "iso-ucan": "^0.2.1",
     "merge-options": "^3.0.4",
     "viem": "^2.33.3",
-    "zod": "^4.0.14",
     "zod-validation-error": "^4.0.1"
   },
   "devDependencies": {
@@ -118,7 +117,8 @@
     "typescript": "5.8.3"
   },
   "peerDependencies": {
-    "iso-filecoin": "7.x"
+    "iso-filecoin": "7.x",
+    "zod": "^3.25.0 || ^4.0.0"
   },
   "publishConfig": {
     "provenance": true

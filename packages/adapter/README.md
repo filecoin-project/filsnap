@@ -23,6 +23,7 @@ import { FilsnapAdapter } from 'filsnap-adapter'
 const snap = await FilsnapAdapter.connect({ network: 'testnet' }, 'npm:filsnap')
 
 const { error, result } = await snap.getAddress()
+
 if (error) {
   console.error(error)
 } else {
