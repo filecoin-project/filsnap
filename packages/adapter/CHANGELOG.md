@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.3](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.2...filsnap-adapter-v3.3.3) (2025-08-13)
+
+
+### Bug Fixes
+
+* zod v3-v4 ([82468ad](https://github.com/filecoin-project/filsnap/commit/82468adc0936d31c9520b14c3bdfd64405734425))
+
 ## [3.3.2](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.1...filsnap-adapter-v3.3.2) (2025-08-13)
 
 
