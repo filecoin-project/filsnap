@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.7.0...filsnap-v1.8.0) (2025-08-13)
+
+
+### Features
+
+* enhance insights and update dependencies ([c81fc01](https://github.com/filecoin-project/filsnap/commit/c81fc01936e66846eca1c3b7e427ca7a73ee016d))
+
+
+### Bug Fixes
+
+* zod v3-v4 ([82468ad](https://github.com/filecoin-project/filsnap/commit/82468adc0936d31c9520b14c3bdfd64405734425))
+
 ## [1.7.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.6.1...filsnap-v1.7.0) (2025-07-31)
 
 
