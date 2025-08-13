@@ -101,13 +101,14 @@
     "iso-ucan": "^0.2.1",
     "merge-options": "^3.0.4",
     "viem": "^2.33.3",
+    "zod": "^3.25.0",
     "zod-validation-error": "^4.0.1"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "8.1.1",
+    "@metamask/snaps-cli": "8.2.0",
     "@playwright/test": "^1.54.2",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
     "metamask-testing-tools": "^2.2.6",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.11",
@@ -117,8 +118,7 @@
     "typescript": "5.8.3"
   },
   "peerDependencies": {
-    "iso-filecoin": "7.x",
-    "zod": "^3.25.0 || ^4.0.0"
+    "iso-filecoin": "7.x"
   },
   "publishConfig": {
     "provenance": true
