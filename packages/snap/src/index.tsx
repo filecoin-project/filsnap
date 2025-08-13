@@ -60,6 +60,7 @@ import { OnUpdate } from './components/on-update'
 import { handleBaseSignature } from './insights/base-signature'
 import { handleFilFowarder } from './insights/filforwarder'
 import { handleUcanSignature } from './insights/ucan-signature'
+import { handleUsdfc } from './insights/usdfc'
 
 export type {
   AccountInfo,
@@ -339,11 +340,8 @@ export const onTransaction: OnTransactionHandler = async ({
   }
   const state = new State(snap)
   const config = await state.get(transactionOrigin)
-  if (!config) {
-    return null
-  }
 
-  const handlers = [handleFilFowarder]
+  const handlers = [handleFilFowarder, handleUsdfc]
 
   let result = null
   for (const handler of handlers) {

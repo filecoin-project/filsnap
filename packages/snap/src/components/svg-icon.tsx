@@ -1,4 +1,5 @@
 import { Box, Image, type SnapComponent } from '@metamask/snaps-sdk/jsx'
+import iconFilecoin from '../svg/filecoin-logo.svg'
 
 export type IconColors =
   | 'default'
@@ -7,6 +8,7 @@ export type IconColors =
   | 'error'
   | 'success'
   | 'warning'
+
 type HomePageProps = {
   icon: string
   alt?: string
@@ -68,3 +70,23 @@ export const SvgIcon: SnapComponent<HomePageProps> = ({
  * muted: #6A737D
  * alternative: #9EA6AE
  */
+
+type FilecoinIconProps = {
+  size?: number
+  inline?: boolean
+}
+
+/**
+ * Filecoin Icon
+ *
+ * @param props - The props containing the icon, alt, color, size, and inline.
+ * @returns The Filecoin icon.
+ */
+export const FilecoinIcon: SnapComponent<FilecoinIconProps> = ({
+  size = 16,
+  inline = false,
+}) => {
+  return (
+    <SvgIcon icon={iconFilecoin} alt="Filecoin" size={size} inline={inline} />
+  )
+}

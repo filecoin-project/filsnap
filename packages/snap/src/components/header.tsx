@@ -6,6 +6,7 @@ import {
   type SnapComponent,
   type StringElement,
   Text,
+  type TextChildren,
   Tooltip,
 } from '@metamask/snaps-sdk/jsx'
 import { type IconColors, SvgIcon } from './svg-icon'
@@ -82,6 +83,39 @@ export const ListHeader: SnapComponent<ListHeaderProps> = ({
           {subtitle}
         </Text>
       ) : null}
+    </Box>
+  )
+}
+
+type ListHeaderProps2 = {
+  children: StringElement
+  icon: string
+  tooltip?: string
+  subtitle?: TextChildren
+}
+export const ListHeader2: SnapComponent<ListHeaderProps2> = ({
+  icon,
+  tooltip,
+  children,
+  subtitle,
+}) => {
+  return (
+    <Box direction="vertical">
+      <Box direction="horizontal">
+        <SvgIcon icon={icon} color="alternative" />
+        {tooltip ? (
+          <Tooltip content={tooltip}>
+            <Text color="default">
+              <Bold>{children}</Bold>
+            </Text>
+          </Tooltip>
+        ) : (
+          <Text color="default">
+            <Bold>{children}</Bold>
+          </Text>
+        )}
+      </Box>
+      {subtitle ? subtitle : null}
     </Box>
   )
 }
