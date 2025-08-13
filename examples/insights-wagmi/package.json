@@ -12,7 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.85.0",
     "filsnap-adapter": "^3.3.4",
-    "iso-filecoin": "^7.4.1",
+    "iso-filecoin": "^7.4.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "viem": "~2.33.3",

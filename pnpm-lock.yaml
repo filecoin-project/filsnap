@@ -63,8 +63,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       iso-filecoin:
-        specifier: ^7.4.1
-        version: 7.4.1
+        specifier: ^7.4.2
+        version: 7.4.2
       preact:
         specifier: ^10.27.0
         version: 10.27.0
@@ -116,13 +116,13 @@ importers:
     dependencies:
       filsnap-adapter:
         specifier: ^3.3.4
-        version: 3.3.4(iso-filecoin@7.4.1)
+        version: 3.3.4(iso-filecoin@7.4.2)
       iso-base:
         specifier: ^4.1.0
         version: 4.1.0
       iso-filecoin:
-        specifier: ^7.4.1
-        version: 7.4.1
+        specifier: ^7.4.2
+        version: 7.4.2
       viem:
         specifier: ^2.33.3
         version: 2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)
@@ -141,7 +141,7 @@ importers:
         version: 24.2.1
       filsnap:
         specifier: ^1.8.0
-        version: 1.8.0(@tanstack/react-query@5.85.0(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.83.1)(@types/react@19.1.10)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(bufferutil@4.0.9)(iso-filecoin@7.4.1)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(wagmi@2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76))(zod@3.25.76)
+        version: 1.8.0(@tanstack/react-query@5.85.0(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.83.1)(@types/react@19.1.10)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(bufferutil@4.0.9)(iso-filecoin@7.4.2)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(wagmi@2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76))(zod@3.25.76)
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -156,10 +156,10 @@ importers:
         version: 5.85.0(react@19.1.1)
       filsnap-adapter:
         specifier: ^3.3.4
-        version: 3.3.4(iso-filecoin@7.4.1)
+        version: 3.3.4(iso-filecoin@7.4.2)
       iso-filecoin:
-        specifier: ^7.4.1
-        version: 7.4.1
+        specifier: ^7.4.2
+        version: 7.4.2
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -202,7 +202,7 @@ importers:
         version: 4.1.0
       iso-filecoin:
         specifier: 7.x
-        version: 7.4.1
+        version: 7.4.2
       semver:
         specifier: ^7.7.2
         version: 7.7.2
@@ -300,7 +300,7 @@ importers:
         version: 4.1.0
       iso-filecoin:
         specifier: 7.x
-        version: 7.4.1
+        version: 7.4.2
       iso-filecoin-synapse:
         specifier: ^0.0.5
         version: 0.0.5(@tanstack/react-query@5.85.0(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.83.1)(@types/react@19.1.10)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(react@19.1.1)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(wagmi@2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76))
@@ -316,9 +316,6 @@ importers:
       zod:
         specifier: ^3.25.0
         version: 3.25.76
-      zod-validation-error:
-        specifier: ^4.0.1
-        version: 4.0.1(zod@3.25.76)
     devDependencies:
       '@metamask/snaps-cli':
         specifier: 8.2.0
@@ -3087,8 +3084,8 @@ packages:
       viem: '>=2.x'
       wagmi: '>=2.x'
 
-  iso-filecoin@7.4.1:
-    resolution: {integrity: sha512-X7Zm0y0YPsrvb/dXoapVVujKU+f8t+uR00wzLl0rJg4iHFimVWOel7fAJ9xKZ/o94t56Qm76J93q95luQHn+bg==}
+  iso-filecoin@7.4.2:
+    resolution: {integrity: sha512-a6FsNfr0pm9OfofD4WDlSrMpRkG59QCKEFRAhItxxVgkY1ukcf2d8ChSNkQn87tON9nTI0FSblXdWGeOkYTB+w==}
 
   iso-kv@3.0.3:
     resolution: {integrity: sha512-NVW7TJGiTbDlfBclLJeGqGLvZhgMu02tPId6ghLEygCVgitp3946TM6HJordcSbyJbD0wRzByilRYK/GY8dKlw==}
@@ -8288,20 +8285,20 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  filsnap-adapter@3.3.4(iso-filecoin@7.4.1):
+  filsnap-adapter@3.3.4(iso-filecoin@7.4.2):
     dependencies:
       iso-base: 4.1.0
-      iso-filecoin: 7.4.1
+      iso-filecoin: 7.4.2
       semver: 7.7.2
 
-  filsnap@1.8.0(@tanstack/react-query@5.85.0(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.83.1)(@types/react@19.1.10)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(bufferutil@4.0.9)(iso-filecoin@7.4.1)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(wagmi@2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76))(zod@3.25.76):
+  filsnap@1.8.0(@tanstack/react-query@5.85.0(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.83.1)(@types/react@19.1.10)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(bufferutil@4.0.9)(iso-filecoin@7.4.2)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(wagmi@2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76))(zod@3.25.76):
     dependencies:
       '@metamask/key-tree': 10.1.1
       '@metamask/snaps-sdk': 6.17.1(webextension-polyfill@0.10.0)
       '@paulmillr/qr': 0.3.0
       dequal: 2.0.3
       iso-base: 4.1.0
-      iso-filecoin: 7.4.1
+      iso-filecoin: 7.4.2
       iso-filecoin-synapse: 0.0.5(@tanstack/react-query@5.85.0(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.83.1)(@types/react@19.1.10)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(react@19.1.1)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(wagmi@2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76))
       iso-ucan: 0.2.1(typescript@5.8.3)(zod@3.25.76)
       merge-options: 3.0.4
@@ -8682,7 +8679,7 @@ snapshots:
       viem: 2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       wagmi: 2.16.3(@tanstack/query-core@5.83.1)(@tanstack/react-query@5.85.0(react@19.1.1))(@types/react@19.1.10)(bufferutil@4.0.9)(immer@9.0.21)(react@19.1.1)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.33.3(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76)
 
-  iso-filecoin@7.4.1:
+  iso-filecoin@7.4.2:
     dependencies:
       '@ipld/dag-cbor': 9.2.4
       '@ledgerhq/errors': 6.23.0
@@ -8695,7 +8692,6 @@ snapshots:
       iso-kv: 3.0.3
       iso-web: 1.1.1
       zod: 3.25.76
-      zod-validation-error: 4.0.1(zod@3.25.76)
 
   iso-kv@3.0.3:
     dependencies:
