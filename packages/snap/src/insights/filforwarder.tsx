@@ -52,6 +52,11 @@ export const handleFilFowarder: TransactionInsightsHandler = (
     return null
   }
 
+  // If no config is provided, don't show any insights.
+  if (!config) {
+    return null
+  }
+
   try {
     if (!transaction.value) {
       return {

@@ -97,9 +97,10 @@
     "@paulmillr/qr": "^0.3.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.1.0",
+    "iso-filecoin-synapse": "^0.0.5",
     "iso-ucan": "^0.2.1",
     "merge-options": "^3.0.4",
-    "viem": "^2.33.2",
+    "viem": "^2.33.3",
     "zod": "^4.0.14",
     "zod-validation-error": "^4.0.1"
   },

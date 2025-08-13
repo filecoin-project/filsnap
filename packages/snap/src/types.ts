@@ -151,7 +151,7 @@ export interface TransactionInsightsProps {
 
 export type TransactionInsightsHandler = (
   props: TransactionInsightsProps,
-  config: SnapConfig
+  config?: SnapConfig
 ) => Promisable<OnTransactionResponse | null>
 
 export interface SignatureInsightsProps {
