@@ -1,8 +1,7 @@
 import { Token, type Value } from 'iso-filecoin/token'
 import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
 import type { Jsonify } from 'type-fest'
-import { fromError, isZodErrorLike } from 'zod-validation-error'
-import type { ZodError } from 'zod/v4'
+import * as z from 'zod/v4'
 import * as Constants from './constants'
 import * as Schemas from './schemas'
 import type {
@@ -71,6 +70,21 @@ export function isObject(
 }
 
 /**
+ * Check if an error is a ZodError
+ *
+ * @param {unknown} err
+ * @returns {err is import('zod').ZodError}
+ */
+export function isZodErrorLike(err: unknown): err is z.ZodError {
+  return (
+    err instanceof Error &&
+    err.name === 'ZodError' &&
+    'issues' in err &&
+    Array.isArray(err.issues)
+  )
+}
+
+/**
  * Serialize an error into a SnapError.
  * If the error is an object, it will be serialized into a JSON object.
  *
@@ -82,7 +96,7 @@ export function serializeError(
   data?: unknown
 ): Jsonify<SnapResponseError> {
   if (isZodErrorLike(data)) {
-    data = fromError(data)
+    data = z.prettifyError(data)
   }
 
   const _data = isObject(data) ? serializeObject(data) : null
@@ -106,14 +120,14 @@ export function serializeError(
  * @param data - Error data
  */
 export function serializeValidationError(
-  err: ZodError
+  err: z.ZodError
 ): Jsonify<SnapResponseError> {
-  const error = fromError(err)
+  const error = z.prettifyError(err)
   return {
     result: null,
     error: {
       message: error.toString(),
-      data: serializeObject({ details: error.details }),
+      data: serializeObject(err.issues),
     },
   }
 }

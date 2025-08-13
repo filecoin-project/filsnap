@@ -101,8 +101,7 @@
     "iso-ucan": "^0.2.1",
     "merge-options": "^3.0.4",
     "viem": "^2.33.3",
-    "zod": "^3.25.0",
-    "zod-validation-error": "^4.0.1"
+    "zod": "^3.25.0"
   },
   "devDependencies": {
     "@metamask/snaps-cli": "8.2.0",
