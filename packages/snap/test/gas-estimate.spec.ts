@@ -118,7 +118,7 @@ test.describe('fil_getGasForMessage', () => {
       throw new Error('Should fail')
     }
     expect(estimate.error.message).toContain(
-      'Validation error: Invalid input at "message.value"'
+      '✖ Invalid input\n  → at message.value'
     )
   })
 })

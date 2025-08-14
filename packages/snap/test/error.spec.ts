@@ -116,9 +116,7 @@ test.describe('API Errors', () => {
       page,
     })
 
-    expect(response.error?.message).toContain(
-      'Validation error: Invalid input at "network"'
-    )
+    expect(response.error?.message).toContain('✖ Invalid input\n  → at network')
   })
 
   test('should throw on invalid derivation path', async ({

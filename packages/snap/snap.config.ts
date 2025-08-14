@@ -15,6 +15,9 @@ const config: SnapConfig = {
   server: {
     port: 8080,
   },
+  stats: {
+    verbose: false,
+  },
 }
 
 export default config

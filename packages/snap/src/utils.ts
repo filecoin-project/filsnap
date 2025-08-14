@@ -73,7 +73,7 @@ export function isObject(
  * Check if an error is a ZodError
  *
  * @param {unknown} err
- * @returns {err is import('zod').ZodError}
+ * @returns {err is import('zod/v4').ZodError}
  */
 export function isZodErrorLike(err: unknown): err is z.ZodError {
   return (

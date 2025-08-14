@@ -237,7 +237,7 @@ test.describe('fil_configure', () => {
     expect(deriveAccountRsp.error).toBeDefined()
 
     expect(deriveAccountRsp.error?.message).toStrictEqual(
-      'Validation error: Number must be greater than or equal to 0'
+      '✖ Number must be greater than or equal to 0'
     )
   })
 
