@@ -38,7 +38,7 @@
   },
   "wireit": {
     "test": {
-      "command": "playwright-test",
+      "command": "playwright-test --runner mocha",
       "dependencies": [
         "../adapter:build"
       ]

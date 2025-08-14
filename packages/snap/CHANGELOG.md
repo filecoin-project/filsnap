@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.8.0...filsnap-v1.8.1) (2025-08-14)
+
+
+### Bug Fixes
+
+* wrap zod changes ([d5379f0](https://github.com/filecoin-project/filsnap/commit/d5379f0cf0763a54c1ec317afd253fcd3bdbf099))
+* zod ([8b4fa6b](https://github.com/filecoin-project/filsnap/commit/8b4fa6b3e7edab639ba19509c058cb20ea4b6fc7))
+* zod ([e33a25b](https://github.com/filecoin-project/filsnap/commit/e33a25bb2d85afada67cd1894afff9c4c69bacf5))
+
 ## [1.8.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.7.0...filsnap-v1.8.0) (2025-08-13)
 
 
