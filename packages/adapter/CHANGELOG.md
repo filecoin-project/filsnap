@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.6](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.5...filsnap-adapter-v3.3.6) (2025-08-19)
+
+
+### Bug Fixes
+
+* update filsnap dependency in adapter package.json ([2e8448b](https://github.com/filecoin-project/filsnap/commit/2e8448b99ebe5bc90a3742d25672ead67ef6c4ab))
+
 ## [3.3.5](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.4...filsnap-adapter-v3.3.5) (2025-08-19)
 
 
