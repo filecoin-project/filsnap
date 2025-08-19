@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.8.1...filsnap-v1.9.0) (2025-08-19)
+
+
+### Features
+
+* update filsnap package configuration and add settings component ([cf3e330](https://github.com/filecoin-project/filsnap/commit/cf3e330e8cc0fdb31f0dd39b5e50188621d62d9b))
+
 ## [1.8.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.8.0...filsnap-v1.8.1) (2025-08-14)
 
 
