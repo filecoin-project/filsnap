@@ -48,8 +48,8 @@
     }
   },
   "dependencies": {
-    "iso-base": "^4.1.0",
     "filsnap": "workspace:*",
+    "iso-base": "^4.1.0",
     "semver": "^7.7.2"
   },
   "devDependencies": {
@@ -61,7 +61,7 @@
     "metamask-testing-tools": "^2.2.6",
     "type-fest": "^4.41.0",
     "typescript": "5.8.3",
-    "viem": "^2.33.3"
+    "viem": "^2.34.0"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
