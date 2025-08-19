@@ -191,6 +191,7 @@ export function configToSnapConfig(conf: Config): SnapConfig {
       decimals: conf.decimals ?? 18,
       symbol: conf.symbol ?? 'FIL',
     },
+    derivationMode: 'native',
   }
 }
 
@@ -207,4 +208,44 @@ export function snapConfigToConfig(conf: SnapConfig): Config {
     symbol: conf.unit?.symbol || 'FIL',
     decimals: conf.unit?.decimals || 18,
   }
+}
+
+/**
+ * Derivation path from chain
+ *
+ * @param network
+ * @param index Account index (default 0)
+ * @param mode Derivation mode (default 'native')
+ */
+export function pathFromNetworkAndMode(
+  network: Network,
+  index = 0,
+  mode: 'native' | 'ledger' = 'native'
+) {
+  if (mode === 'native') {
+    switch (network) {
+      case 'mainnet':
+        return `m/44'/461'/0'/0/${index}`
+
+      case 'testnet':
+        return `m/44'/1'/0'/0/${index}`
+
+      default:
+        throw new Error(`Unknown network: ${network}`)
+    }
+  }
+  if (mode === 'ledger') {
+    switch (network) {
+      case 'mainnet':
+        return `m/44'/461'/${index}'/0/0`
+
+      case 'testnet':
+        return `m/44'/1'/${index}'/0/0`
+
+      default:
+        throw new Error(`Unknown network: ${network}`)
+    }
+  }
+
+  throw new Error(`Unknown mode: ${mode}`)
 }

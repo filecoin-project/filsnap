@@ -37,6 +37,7 @@ test.describe('fil_configure', () => {
         decimals: 18,
         symbol: 'tFIL',
       },
+      derivationMode: 'native',
     })
   })
 
@@ -62,6 +63,7 @@ test.describe('fil_configure', () => {
         decimals: 18,
         symbol: 'FIL',
       },
+      derivationMode: 'native',
     })
   })
 

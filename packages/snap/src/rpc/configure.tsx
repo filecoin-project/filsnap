@@ -267,6 +267,7 @@ export async function filChangeNetwork(
       network: params.network,
       rpc: defaultState.rpc,
       unit: defaultState.unit,
+      derivationMode: defaultState.derivationMode,
     })
   }
 
@@ -318,6 +319,7 @@ export async function filDeriveAccount(
       rpc: internalState.rpc,
       network: internalState.network,
       unit: internalState.unit,
+      derivationMode: internalState.derivationMode,
     }
     const account = await getAccountSafe(snap, newConfig)
     const conf = await ctx.snap.request({

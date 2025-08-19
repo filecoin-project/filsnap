@@ -47,7 +47,7 @@
   ],
   "scripts": {
     "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
-    "serve-static": "sirv . --single --port 8081",
+    "serve-static": "sirv page --single --port 8081",
     "test": "wireit",
     "build": "wireit",
     "serve": "wireit",
@@ -61,7 +61,8 @@
         "src/**/*.tsx",
         "src/**/*.svg",
         "tsconfig.json",
-        "snap.config.ts"
+        "snap.config.ts",
+        "package.json"
       ],
       "output": [
         "dist/snap.js",
@@ -94,12 +95,12 @@
   "dependencies": {
     "@metamask/key-tree": "^10.0.2",
     "@metamask/snaps-sdk": "6.17.1",
-    "@paulmillr/qr": "^0.3.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.1.0",
     "iso-filecoin-synapse": "^0.0.5",
     "iso-ucan": "^0.3.0",
     "merge-options": "^3.0.4",
+    "qr": "^0.5.0",
     "viem": "^2.33.3",
     "zod": "^3.25.0"
   },

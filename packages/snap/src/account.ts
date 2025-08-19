@@ -60,7 +60,7 @@ export async function getAccountSafe(
   snap: SnapsProvider,
   config: SnapConfig
 ): Promise<AccountSafe> {
-  const { derivationPath } = config
+  const { derivationPath, derivationMode } = config
   const { coinType, account, change, addressIndex } =
     parseDerivationPath(derivationPath)
   const isFilecoinMainnet = coinType === 461
@@ -95,5 +95,10 @@ export async function getAccountSafe(
   // @ts-expect-error - deref account
   acc = null
 
-  return { address, pubKey, accountNumber: addressIndex, path: derivationPath }
+  return {
+    address,
+    pubKey,
+    accountNumber: derivationMode === 'ledger' ? account : addressIndex,
+    path: derivationPath,
+  }
 }

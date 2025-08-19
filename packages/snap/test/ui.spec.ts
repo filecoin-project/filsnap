@@ -236,7 +236,7 @@ const homepage = createFixture({
   snap: {
     id: 'local:http://localhost:8080',
   },
-  cacheUserDir: true,
+  cacheUserDir: false,
   devtools: true,
 })
 
@@ -258,15 +258,15 @@ homepage.test.describe('JSX UI Homepage', () => {
       await metamask.page.getByText('Please wait ...').waitFor()
       await networkSelect.waitFor()
 
-      await metamask.page.getByRole('button', { name: 'Send' }).click()
-      await metamask.page
-        .getByPlaceholder('f0, f1, f2, f3, f4 or 0x address')
-        .fill('t1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi')
+      await metamask.page.getByRole('button', { name: 'Receive' }).click()
+      // await metamask.page
+      //   .getByPlaceholder('f0, f1, f2, f3, f4 or 0x address')
+      //   .fill('t1sfizuhpgjqyl4yjydlebncvecf3q2cmeeathzwi')
 
       // await metamask.page
       //   .getByPlaceholder('f0, f1, f2, f3, f4 or 0x address')
       //   .fill('0x7e4ABd63A7C8314Cc28D388303472353D884f292')
-      await metamask.page.getByPlaceholder('FIL').fill('0.00001')
+      // await metamask.page.getByPlaceholder('FIL').fill('0.00001')
       await metamask.page.waitForTimeout(60000000)
     }
   )

@@ -55,6 +55,7 @@ import {
 } from './components/homepage'
 import { onReceive } from './components/homepage-receive'
 import { onSend, onSendConfirm, onSendResult } from './components/homepage-send'
+import { onSaveSettings, onSettings } from './components/homepage-settings'
 import { OnInstall } from './components/on-install'
 import { OnUpdate } from './components/on-update'
 import { handleBaseSignature } from './insights/base-signature'
@@ -263,6 +264,22 @@ export const onUserInput: OnUserInputHandler = async ({
         event.name === HomepageEvents.receive
       ) {
         await onReceive(id, ctx)
+        return
+      }
+
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.settings
+      ) {
+        await onSettings(id, ctx)
+        return
+      }
+
+      if (
+        event.type === UserInputEventType.ButtonClickEvent &&
+        event.name === HomepageEvents.saveSettings
+      ) {
+        await onSaveSettings(id, ctx)
         return
       }
 

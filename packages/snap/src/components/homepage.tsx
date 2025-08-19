@@ -38,6 +38,8 @@ export const HomepageEvents = {
   sendResult: 'homepage_sendResult',
   backToSend: 'homepage_backToSend',
   back: 'homepage_back',
+  settings: 'homepage_settings',
+  saveSettings: 'homepage_saveSettings',
 }
 
 /**
@@ -72,6 +74,9 @@ export const HomePage: SnapComponent<HomePageProps> = ({
         </ButtonSvgIcon>
         <ButtonSvgIcon name={HomepageEvents.receive} icon={Icons.qrCode}>
           Receive
+        </ButtonSvgIcon>
+        <ButtonSvgIcon name={HomepageEvents.settings} icon={Icons.settings}>
+          Settings
         </ButtonSvgIcon>
       </Footer>
       <Divider />
@@ -109,6 +114,14 @@ export async function createHomepage() {
   })
   const balance = await rpc.balance(account.address.toString())
 
+  let addressEth = null
+
+  try {
+    addressEth = (await account.address.to0x({ rpc })).toString()
+  } catch {
+    // ignore
+  }
+
   if (balance.error != null) {
     return {
       ui: (
@@ -134,6 +147,7 @@ export async function createHomepage() {
       balance: balance.result,
       config: config,
       address: account.address.toString(),
+      addressEth: addressEth,
       sendMessage: null,
     } satisfies HomepageContext,
   }

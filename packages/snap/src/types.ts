@@ -139,6 +139,7 @@ export interface HomepageContext extends Record<string, Json> {
   config: SnapConfig
   account: number
   address: string
+  addressEth: string | null
   balance: string
   sendMessage: MessageObj | null
 }

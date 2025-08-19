@@ -84,6 +84,7 @@ export const snapConfig = z.object({
   }),
   network,
   unit: unitConfiguration.optional(),
+  derivationMode: z.enum(['native', 'ledger']),
 })
 
 export const messageStatus = z.object({

@@ -6,7 +6,7 @@ import {
   Section,
   Text,
 } from '@metamask/snaps-sdk/jsx'
-import encodeQR from '@paulmillr/qr'
+import encodeQR from 'qr'
 import * as Icons from '../svg'
 import type { HomepageContext } from '../types'
 import { ButtonSvgIcon } from './button-svg-icon'
@@ -17,8 +17,8 @@ import { Spacer } from './spacer'
 
 export async function onReceive(id: string, context: HomepageContext) {
   const qr = encodeQR(context.address, 'svg').replace(
-    'version="1.1"',
-    'version="1.1" width="200" height="200" style="background-color:white;"'
+    'xmlns="http://www.w3.org/2000/svg"',
+    'xmlns="http://www.w3.org/2000/svg" width="200" height="200" style="background-color:white;"'
   )
 
   await snap.request({
@@ -37,9 +37,15 @@ export async function onReceive(id: string, context: HomepageContext) {
             <Spacer unit={2} />
             <Box direction="horizontal" alignment="center">
               <Heading>Account {context.account.toString()}</Heading>
+              <Text color="alternative">{context.config.derivationPath}</Text>
+              {/* <Text color="alternative">{context.config.network}</Text>
+              <Text color="alternative">
+                {context.config.derivationMode ?? 'sss'}
+              </Text> */}
             </Box>
             <Text color="alternative">Address:</Text>
             <Copyable value={context.address} />
+            <Copyable value={context.addressEth ?? ''} />
           </Section>
           <Footer>
             <ButtonSvgIcon icon={Icons.chevronLeft} name={HomepageEvents.back}>

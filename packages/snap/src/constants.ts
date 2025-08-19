@@ -16,6 +16,7 @@ export const mainnetConfig: SnapConfig = {
     decimals: 18,
     symbol: 'FIL',
   },
+  derivationMode: 'native',
 }
 
 export const testnetConfig: SnapConfig = {
@@ -29,4 +30,5 @@ export const testnetConfig: SnapConfig = {
     decimals: 18,
     symbol: 'tFIL',
   },
+  derivationMode: 'native',
 }
