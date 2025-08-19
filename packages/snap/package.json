@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^10.0.2",
-    "@metamask/snaps-sdk": "6.17.1",
+    "@metamask/snaps-sdk": "9.3.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.1.0",
     "iso-filecoin-synapse": "^0.0.5",
