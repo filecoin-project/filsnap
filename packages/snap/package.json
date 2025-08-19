@@ -101,7 +101,7 @@
     "iso-ucan": "^0.3.0",
     "merge-options": "^3.0.4",
     "qr": "^0.5.0",
-    "viem": "^2.33.3",
+    "viem": "^2.34.0",
     "zod": "^3.25.0"
   },
   "devDependencies": {
