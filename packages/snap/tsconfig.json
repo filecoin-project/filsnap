@@ -3,11 +3,13 @@
   "compilerOptions": {
     "outDir": "dist",
     "jsx": "react-jsxdev",
-    "jsxImportSource": "@metamask/snaps-sdk"
+    "jsxImportSource": "@metamask/snaps-sdk",
+    "types": ["@metamask/snaps-sdk"],         
+    "lib": ["es2022", "dom"],                                      
   },
   "include": ["src", "test", "snap.manifest.json"],
   "exclude": ["node_modules", "dist", "out"],
-  "typedocOptions": {
+   "typedocOptions": {
     "entryPointStrategy": "resolve",
     "entryPoints": ["src/index.tsx"],
     "includeVersion": true,
