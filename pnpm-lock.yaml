@@ -183,8 +183,8 @@ importers:
         specifier: ^19.1.7
         version: 19.1.7(@types/react@19.1.10)
       '@vitejs/plugin-react':
-        specifier: ^5.0.0
-        version: 5.0.1(vite@7.1.3(@types/node@24.3.0)(terser@5.43.1)(yaml@2.8.1))
+        specifier: ^5.0.2
+        version: 5.0.2(vite@7.1.3(@types/node@24.3.0)(terser@5.43.1)(yaml@2.8.1))
       globals:
         specifier: ^16.3.0
         version: 16.3.0
@@ -226,8 +226,8 @@ importers:
         specifier: ^7.7.0
         version: 7.7.0
       metamask-testing-tools:
-        specifier: ^2.2.6
-        version: 2.2.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+        specifier: ^2.2.7
+        version: 2.2.7(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -263,8 +263,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       mocha:
-        specifier: ^11.7.1
-        version: 11.7.1
+        specifier: ^11.7.2
+        version: 11.7.2
       playwright-test:
         specifier: ^14.1.11
         version: 14.1.12
@@ -330,8 +330,8 @@ importers:
         specifier: 19.1.7
         version: 19.1.7(@types/react@19.1.10)
       metamask-testing-tools:
-        specifier: ^2.2.6
-        version: 2.2.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+        specifier: ^2.2.7
+        version: 2.2.7(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       onchange:
         specifier: ^7.1.0
         version: 7.1.0
@@ -953,6 +953,10 @@ packages:
     resolution: {integrity: sha512-pwWHTBntzPE6yBMH9qiXMaslQW2kS7Izw1g+4D8QhGIxNWBt1nz1uavTGcSBUFgO3eMDKe2QPU04xgThqCPv+g==}
     engines: {node: ^18.18 || >=20}
 
+  '@metamask/base-controller@8.2.0':
+    resolution: {integrity: sha512-Wd7W2R1lutAeQsTH5qI2AeICGIXJYCfddVxvrPKDbwhl6pMaD3FgJS27PSCXWu++jKs4ODAXljk+Z0QwnaYNFA==}
+    engines: {node: ^18.18 || >=20}
+
   '@metamask/controller-utils@11.12.0':
     resolution: {integrity: sha512-RrVWfMVV+CgiRMB7a/+pNHccQPHnafoV7naU92zbxgO5rCqsNx93TG/qR05atQVzwwXv6sBIpusrFMJb5hd3hQ==}
     engines: {node: ^18.18 || >=20}
@@ -996,6 +1000,10 @@ packages:
   '@metamask/key-tree@10.1.1':
     resolution: {integrity: sha512-k9/MljlUqXC86hAOp6QGUwNm9ODWuA/YkMxiEwXcChNJgQSYfPzDh+Hp6Agf3g2mLKagMbl2nkH0+4vas+Pnyw==}
     engines: {node: ^18.20 || ^20.17 || >=22}
+
+  '@metamask/messenger@0.1.0':
+    resolution: {integrity: sha512-UqYOFvPb8CvRML26h/ftrwFhiQiB0VENoRnUlM0Tl9QjGh17un2emyxpsib3c2rdzP5U/VskXH2KlzPBtfFLYw==}
+    engines: {node: ^18.18 || >=20}
 
   '@metamask/number-to-bn@1.7.1':
     resolution: {integrity: sha512-qCN+Au4amvcVii2LdOJNndYhdmk5Lk9tlStJhKpZ8tGeYQDJTghqYXJuSUVPHvfl6FUfKY1i1Or2j2EbnEerSQ==}
@@ -1101,6 +1109,10 @@ packages:
     resolution: {integrity: sha512-k7+dFUL9ElFoXM1yHemA4HjZnFZBLt6kH9x+NJ7iTQfEjOOhbzbP2vL0jZM91un8MKAb6ieH53AiE6Pi76rsLQ==}
     engines: {node: ^20 || >=22}
 
+  '@metamask/snaps-utils@11.5.0':
+    resolution: {integrity: sha512-XKYnfj8eXdYmUn8M4rYq+OOp09qIUJ943g9iZWl/hS4tCEx9zbe0LzFs3zYy38QTlDptj6gY7m9Z3+JitH8UGA==}
+    engines: {node: ^20 || >=22}
+
   '@metamask/snaps-webpack-plugin@5.1.0':
     resolution: {integrity: sha512-U4S7f781dGw8qAAbd8+eJ5bowC+/rbNcFCDRVXMX30kKIVsQldgmh7jdwLh6ET9NepZyEoTmRLH4b9usjeJBqA==}
     engines: {node: ^20 || >=22}
@@ -1111,6 +1123,10 @@ packages:
 
   '@metamask/utils@11.4.2':
     resolution: {integrity: sha512-TygCcGmUbhmpxjYMm+mx68kRiJ80jYV54/Aa8gUFBv4cTX7ulX2XZKr8CJoJAw3K3FN5ZvCRmU0IzWZFaonwhA==}
+    engines: {node: ^18.18 || ^20.14 || >=22}
+
+  '@metamask/utils@11.5.0':
+    resolution: {integrity: sha512-fgPTBWyFhGp8VZ5HsWniY5qZIb9DfusRB8ssw8unGIomICCK+cnEcV2xajhpPJ6QPH62y1KyVHF+VbXKrgilLA==}
     engines: {node: ^18.18 || ^20.14 || >=22}
 
   '@metamask/utils@5.0.2':
@@ -1261,8 +1277,8 @@ packages:
   '@reown/appkit@1.7.8':
     resolution: {integrity: sha512-51kTleozhA618T1UvMghkhKfaPcc9JlKwLJ5uV+riHyvSoWPKPRIa5A6M1Wano5puNyW0s3fwywhyqTHSilkaA==}
 
-  '@rolldown/pluginutils@1.0.0-beta.32':
-    resolution: {integrity: sha512-QReCdvxiUZAPkvp1xpAg62IeNzykOFA6syH2CnClif4YmALN1XKpB39XneL80008UbtMShthSVDKmrx05N1q/g==}
+  '@rolldown/pluginutils@1.0.0-beta.34':
+    resolution: {integrity: sha512-LyAREkZHP5pMom7c24meKmJCdhf2hEyvam2q0unr3or9ydwDL+DJ8chTF6Av/RFPb3rH8UFBdMzO5MxTZW97oA==}
 
   '@rollup/pluginutils@4.2.1':
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
@@ -1580,6 +1596,9 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
+
   '@types/minimatch@3.0.5':
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
 
@@ -1615,8 +1634,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@vitejs/plugin-react@5.0.1':
-    resolution: {integrity: sha512-DE4UNaBXwtVoDJ0ccBdLVjFTWL70NRuWNCxEieTI3lrq9ORB9aOCQEKstwDXBl87NvFdbqh/p7eINGyj0BthJA==}
+  '@vitejs/plugin-react@5.0.2':
+    resolution: {integrity: sha512-tmyFgixPZCx2+e6VO9TNITWcCQl8+Nl/E8YbAyPVv85QCc7/A3JrdfG2A8gIzvVhWuzMOVrFW1aReaNxrI6tbw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
@@ -3335,8 +3354,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  metamask-testing-tools@2.2.6:
-    resolution: {integrity: sha512-c4eyfgtOCy3qQhzd59MosqQ78o1EVHfsYxVLpokzqzJul7j8lZhYmCGSaqtg6C4+iHtojnwTuOZ5SYgJt/03Ow==}
+  metamask-testing-tools@2.2.7:
+    resolution: {integrity: sha512-LQyeRz6HkOdfyQRfIL2mBdIXClg17UgG197rmkbJdasUAt1qfVBYNW97TYxeQLTf2F3c6RDRlnvdi5rjtYpMUg==}
     engines: {node: '>=20'}
 
   micro-ftch@0.3.1:
@@ -3407,8 +3426,8 @@ packages:
       typescript:
         optional: true
 
-  mocha@11.7.1:
-    resolution: {integrity: sha512-5EK+Cty6KheMS/YLPPMJC64g5V61gIR25KsRItHw6x4hEKT6Njp1n9LOlH4gpevuwMVS66SXaBBpg+RWZkza4A==}
+  mocha@11.7.2:
+    resolution: {integrity: sha512-lkqVJPmqqG/w5jmmFtiRvtA2jkDyNVUcefFJKb2uyX4dekk8Okgqop3cgbFiaIvj8uCRJVTP5x9dfxGyXm2jvQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
 
@@ -4416,8 +4435,8 @@ packages:
     resolution: {integrity: sha512-erJsJwQ0tKdwuqI0359U8ijkFmfiTcq25JvvzRVc1VP+2son1NJRXhxcAKJmAW3ajM8JSGAfsAXye8g4s+znxA==}
     engines: {node: '>=18'}
 
-  uint8array-extras@1.4.1:
-    resolution: {integrity: sha512-+NWHrac9dvilNgme+gP4YrBSumsaMZP0fNBtXXFIf33RLLKEcBUKaQZ7ULUbS0sBfcjxIZ4V96OTRkCbM7hxpw==}
+  uint8array-extras@1.5.0:
+    resolution: {integrity: sha512-rvKSBiC5zqCCiDZ9kAOszZcDvdAHwwIKJG33Ykj43OKcWsnmcBRL09YTU4nOeHZ8Y2a7l1MgTd08SBe9A8Qj6A==}
     engines: {node: '>=18'}
 
   uint8arrays@3.1.0:
@@ -5406,6 +5425,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@metamask/base-controller@8.2.0':
+    dependencies:
+      '@metamask/messenger': 0.1.0
+      '@metamask/utils': 11.5.0
+      immer: 9.0.21
+    transitivePeerDependencies:
+      - supports-color
+
   '@metamask/controller-utils@11.12.0(@babel/runtime@7.28.3)':
     dependencies:
       '@babel/runtime': 7.28.3
@@ -5493,6 +5520,8 @@ snapshots:
       '@scure/base': 1.2.6
     transitivePeerDependencies:
       - supports-color
+
+  '@metamask/messenger@0.1.0': {}
 
   '@metamask/number-to-bn@1.7.1':
     dependencies:
@@ -5792,6 +5821,38 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
+  '@metamask/snaps-utils@11.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
+    dependencies:
+      '@babel/core': 7.28.3
+      '@babel/types': 7.28.2
+      '@metamask/base-controller': 8.2.0
+      '@metamask/key-tree': 10.1.1
+      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)
+      '@metamask/rpc-errors': 7.0.3
+      '@metamask/slip44': 4.2.0
+      '@metamask/snaps-registry': 3.2.3
+      '@metamask/snaps-sdk': 9.3.0(webextension-polyfill@0.10.0)
+      '@metamask/superstruct': 3.2.1
+      '@metamask/utils': 11.5.0
+      '@noble/hashes': 1.8.0
+      '@scure/base': 1.2.6
+      chalk: 4.1.2
+      cron-parser: 4.9.0
+      fast-deep-equal: 3.1.3
+      fast-json-stable-stringify: 2.1.0
+      fast-xml-parser: 4.5.3
+      luxon: 3.7.1
+      marked: 12.0.2
+      rfdc: 1.4.1
+      semver: 7.7.2
+      ses: 1.14.0
+      validate-npm-package-name: 5.0.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - '@metamask/approval-controller'
+      - supports-color
+      - webextension-polyfill
+
   '@metamask/snaps-webpack-plugin@5.1.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
       '@metamask/snaps-rpc-methods': 13.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
@@ -5817,6 +5878,22 @@ snapshots:
       '@types/debug': 4.1.12
       debug: 4.4.1(supports-color@8.1.1)
       lodash.memoize: 4.1.2
+      pony-cause: 2.1.11
+      semver: 7.7.2
+      uuid: 9.0.1
+    transitivePeerDependencies:
+      - supports-color
+
+  '@metamask/utils@11.5.0':
+    dependencies:
+      '@ethereumjs/tx': 4.2.0
+      '@metamask/superstruct': 3.2.1
+      '@noble/hashes': 1.8.0
+      '@scure/base': 1.2.6
+      '@types/debug': 4.1.12
+      '@types/lodash': 4.17.20
+      debug: 4.4.1(supports-color@8.1.1)
+      lodash: 4.17.21
       pony-cause: 2.1.11
       semver: 7.7.2
       uuid: 9.0.1
@@ -6215,7 +6292,7 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@rolldown/pluginutils@1.0.0-beta.32': {}
+  '@rolldown/pluginutils@1.0.0-beta.34': {}
 
   '@rollup/pluginutils@4.2.1':
     dependencies:
@@ -6511,6 +6588,8 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/lodash@4.17.20': {}
+
   '@types/minimatch@3.0.5': {}
 
   '@types/mocha@10.0.10': {}
@@ -6539,12 +6618,12 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@vitejs/plugin-react@5.0.1(vite@7.1.3(@types/node@24.3.0)(terser@5.43.1)(yaml@2.8.1))':
+  '@vitejs/plugin-react@5.0.2(vite@7.1.3(@types/node@24.3.0)(terser@5.43.1)(yaml@2.8.1))':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.3)
       '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.3)
-      '@rolldown/pluginutils': 1.0.0-beta.32
+      '@rolldown/pluginutils': 1.0.0-beta.34
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
       vite: 7.1.3(@types/node@24.3.0)(terser@5.43.1)(yaml@2.8.1)
@@ -7679,7 +7758,7 @@ snapshots:
       env-paths: 3.0.0
       json-schema-typed: 8.0.1
       semver: 7.7.2
-      uint8array-extras: 1.4.1
+      uint8array-extras: 1.5.0
 
   console-browserify@1.2.0: {}
 
@@ -8964,10 +9043,10 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  metamask-testing-tools@2.2.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0):
+  metamask-testing-tools@2.2.7(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0):
     dependencies:
       '@metamask/providers': 22.1.0(webextension-polyfill@0.10.0)
-      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-utils': 11.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@playwright/test': 1.54.2
       conf: 14.0.0
       eth-rpc-errors: 4.0.3
@@ -9032,7 +9111,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  mocha@11.7.1:
+  mocha@11.7.2:
     dependencies:
       browser-stdout: 1.3.1
       chokidar: 4.0.3
@@ -10135,7 +10214,7 @@ snapshots:
 
   uint8array-extras@0.3.0: {}
 
-  uint8array-extras@1.4.1: {}
+  uint8array-extras@1.5.0: {}
 
   uint8arrays@3.1.0:
     dependencies:

@@ -58,7 +58,7 @@
     "@playwright/test": "^1.54.2",
     "@types/node": "^24.1.0",
     "@types/semver": "^7.7.0",
-    "metamask-testing-tools": "^2.2.6",
+    "metamask-testing-tools": "^2.2.7",
     "type-fest": "^4.41.0",
     "typescript": "5.8.3",
     "viem": "^2.34.0"
