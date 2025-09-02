@@ -75,7 +75,7 @@
     "@types/node": "^24.1.0",
     "tiny-git-rev-sync": "^0.1.0",
     "typescript": "5.8.3",
-    "vite": "^7.1.2",
+    "vite": "^7.1.4",
     "wireit": "^0.14.12"
   },
   "depcheck": {
