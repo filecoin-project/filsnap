@@ -109,7 +109,7 @@
     "@playwright/test": "^1.54.2",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
-    "metamask-testing-tools": "^2.2.7",
+    "metamask-testing-tools": "^2.2.8",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.11",
     "prettier": "^3.6.2",
