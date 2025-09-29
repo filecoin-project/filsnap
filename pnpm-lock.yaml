@@ -217,8 +217,8 @@ importers:
         specifier: 6.17.1
         version: 6.17.1(webextension-polyfill@0.10.0)
       '@playwright/test':
-        specifier: ^1.54.2
-        version: 1.54.2
+        specifier: ^1.55.1
+        version: 1.55.1
       '@types/node':
         specifier: ^24.1.0
         version: 24.3.0
@@ -227,7 +227,7 @@ importers:
         version: 7.7.0
       metamask-testing-tools:
         specifier: ^2.2.7
-        version: 2.2.7(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+        version: 2.2.7(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -319,10 +319,10 @@ importers:
     devDependencies:
       '@metamask/snaps-cli':
         specifier: 8.2.0
-        version: 8.2.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
+        version: 8.2.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)
       '@playwright/test':
-        specifier: ^1.54.2
-        version: 1.54.2
+        specifier: ^1.55.1
+        version: 1.55.1
       '@types/react':
         specifier: 19.1.10
         version: 19.1.10
@@ -331,7 +331,7 @@ importers:
         version: 19.1.7(@types/react@19.1.10)
       metamask-testing-tools:
         specifier: ^2.2.7
-        version: 2.2.7(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+        version: 2.2.7(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       onchange:
         specifier: ^7.1.0
         version: 7.1.0
@@ -462,6 +462,10 @@ packages:
 
   '@babel/runtime@7.28.3':
     resolution: {integrity: sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.28.4':
+    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.2':
@@ -1214,8 +1218,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@playwright/test@1.54.2':
-    resolution: {integrity: sha512-A+znathYxPf+72riFd1r1ovOLqsIIB0jKIoPjyK2kqEIe30/6jF6BC7QNluHuwUmsD2tv1XZVugN8GqfTMOxsA==}
+  '@playwright/test@1.55.1':
+    resolution: {integrity: sha512-IVAh/nOJaw6W9g+RJVlIQJ6gSiER+ae6mKQ5CX1bERzQgbC1VSeBlwdvczT7pxb0GWiyrxH4TGKbMfDb4Sq/ig==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2360,6 +2364,15 @@ packages:
 
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  debug@4.4.3:
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -3744,8 +3757,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright-core@1.54.2:
-    resolution: {integrity: sha512-n5r4HFbMmWsB4twG7tJLDN9gmBUeSPcsBZiWSE4DnYz9mJMAFqr2ID7+eGC9kpEnxExJ1epttwR59LEWCk8mtA==}
+  playwright-core@1.55.1:
+    resolution: {integrity: sha512-Z6Mh9mkwX+zxSlHqdr5AOcJnfp+xUWLCt9uKV18fhzA8eyxUd8NUWzAjxUh55RZKSYwDGX0cfaySdhZJGMoJ+w==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3754,8 +3767,8 @@ packages:
     engines: {node: '>=16.0.0'}
     hasBin: true
 
-  playwright@1.54.2:
-    resolution: {integrity: sha512-Hu/BMoA1NAdRUuulyvQC0pEqZ4vQbGfn8f7wPXcnqQmM+zct9UliKxsIkLNmz/ku7LElUNqmaiv1TG/aL5ACsw==}
+  playwright@1.55.1:
+    resolution: {integrity: sha512-cJW4Xd/G3v5ovXtJJ52MAOclqeac9S/aGGgRzLabuF8TnIb6xHvMzKIa6JmrRzUkeXJgfL1MhukP0NK6l39h3A==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -4345,6 +4358,10 @@ packages:
 
   to-buffer@1.2.1:
     resolution: {integrity: sha512-tB82LpAIWjhLYbqjx3X4zEeHN6M8CiuOEy2JY8SEQVdYRe3CCHOFaqrBW1doLDrfpWhplcW7BL+bO3/6S3pcDQ==}
+    engines: {node: '>= 0.4'}
+
+  to-buffer@1.2.2:
+    resolution: {integrity: sha512-db0E3UJjcFhpDhAF4tLo03oli3pwl3dbnzXOUIlRKrp+ldk/VUxzpWYZENsw2SZiuBjHAk7DfB0VU7NKdpb6sw==}
     engines: {node: '>= 0.4'}
 
   to-regex-range@5.0.1:
@@ -5040,6 +5057,8 @@ snapshots:
 
   '@babel/runtime@7.28.3': {}
 
+  '@babel/runtime@7.28.4': {}
+
   '@babel/template@7.27.2':
     dependencies:
       '@babel/code-frame': 7.27.1
@@ -5433,11 +5452,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@metamask/controller-utils@11.12.0(@babel/runtime@7.28.3)':
+  '@metamask/controller-utils@11.12.0(@babel/runtime@7.28.4)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@metamask/eth-query': 4.0.0
-      '@metamask/ethjs-unit': 0.3.0(@babel/runtime@7.28.3)
+      '@metamask/ethjs-unit': 0.3.0(@babel/runtime@7.28.4)
       '@metamask/utils': 11.4.2
       '@spruceid/siwe-parser': 2.1.0
       '@types/bn.js': 5.2.0
@@ -5463,9 +5482,9 @@ snapshots:
       json-rpc-random-id: 1.0.1
       xtend: 4.0.2
 
-  '@metamask/ethjs-unit@0.3.0(@babel/runtime@7.28.3)':
+  '@metamask/ethjs-unit@0.3.0(@babel/runtime@7.28.4)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@metamask/number-to-bn': 1.7.1
       bn.js: 5.2.2
 
@@ -5537,11 +5556,11 @@ snapshots:
     dependencies:
       bowser: 2.12.0
 
-  '@metamask/permission-controller@11.0.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)':
+  '@metamask/permission-controller@11.0.6(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)':
     dependencies:
       '@metamask/approval-controller': 7.1.3
       '@metamask/base-controller': 8.1.0
-      '@metamask/controller-utils': 11.12.0(@babel/runtime@7.28.3)
+      '@metamask/controller-utils': 11.12.0(@babel/runtime@7.28.4)
       '@metamask/json-rpc-engine': 10.0.3
       '@metamask/rpc-errors': 7.0.3
       '@metamask/utils': 11.4.2
@@ -5682,13 +5701,13 @@ snapshots:
 
   '@metamask/slip44@4.2.0': {}
 
-  '@metamask/snaps-cli@8.2.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)':
+  '@metamask/snaps-cli@8.2.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(webextension-polyfill@0.10.0)':
     dependencies:
-      '@metamask/snaps-rpc-methods': 13.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-rpc-methods': 13.5.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/snaps-sandbox': 1.0.0
       '@metamask/snaps-sdk': 9.3.0(webextension-polyfill@0.10.0)
-      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
-      '@metamask/snaps-webpack-plugin': 5.1.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-webpack-plugin': 5.1.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.4.2
       '@swc/core': 1.11.31
@@ -5749,13 +5768,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@metamask/snaps-rpc-methods@13.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
+  '@metamask/snaps-rpc-methods@13.5.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
       '@metamask/key-tree': 10.1.1
-      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)
+      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.3
       '@metamask/snaps-sdk': 9.3.0(webextension-polyfill@0.10.0)
-      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.4.2
       '@noble/hashes': 1.8.0
@@ -5789,13 +5808,13 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
-  '@metamask/snaps-utils@11.4.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
+  '@metamask/snaps-utils@11.4.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/types': 7.28.2
       '@metamask/base-controller': 8.1.0
       '@metamask/key-tree': 10.1.1
-      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)
+      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.3
       '@metamask/slip44': 4.2.0
       '@metamask/snaps-registry': 3.2.3
@@ -5821,13 +5840,13 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
-  '@metamask/snaps-utils@11.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
+  '@metamask/snaps-utils@11.5.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/types': 7.28.2
       '@metamask/base-controller': 8.2.0
       '@metamask/key-tree': 10.1.1
-      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)
+      '@metamask/permission-controller': 11.0.6(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)
       '@metamask/rpc-errors': 7.0.3
       '@metamask/slip44': 4.2.0
       '@metamask/snaps-registry': 3.2.3
@@ -5853,11 +5872,11 @@ snapshots:
       - supports-color
       - webextension-polyfill
 
-  '@metamask/snaps-webpack-plugin@5.1.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
+  '@metamask/snaps-webpack-plugin@5.1.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)':
     dependencies:
-      '@metamask/snaps-rpc-methods': 13.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-rpc-methods': 13.5.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/snaps-sdk': 9.3.0(webextension-polyfill@0.10.0)
-      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@metamask/snaps-utils': 11.4.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
       '@metamask/utils': 11.4.2
       chalk: 4.1.2
       webpack-sources: 3.3.3
@@ -5904,7 +5923,7 @@ snapshots:
     dependencies:
       '@ethereumjs/tx': 4.2.0
       '@types/debug': 4.1.12
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3
       semver: 7.7.2
       superstruct: 1.0.4
     transitivePeerDependencies:
@@ -5931,7 +5950,7 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
       '@types/debug': 4.1.12
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3
       pony-cause: 2.1.11
       semver: 7.7.2
       uuid: 9.0.1
@@ -5993,9 +6012,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@playwright/test@1.54.2':
+  '@playwright/test@1.55.1':
     dependencies:
-      playwright: 1.54.2
+      playwright: 1.55.1
 
   '@polka/url@0.5.0': {}
 
@@ -6517,7 +6536,7 @@ snapshots:
   '@testing-library/dom@10.4.1':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       dom-accessibility-api: 0.5.16
@@ -7913,6 +7932,10 @@ snapshots:
     optionalDependencies:
       supports-color: 8.1.1
 
+  debug@4.4.3:
+    dependencies:
+      ms: 2.1.3
+
   decamelize@1.2.0: {}
 
   decamelize@4.0.0: {}
@@ -9043,11 +9066,11 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  metamask-testing-tools@2.2.7(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0):
+  metamask-testing-tools@2.2.7(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0):
     dependencies:
       '@metamask/providers': 22.1.0(webextension-polyfill@0.10.0)
-      '@metamask/snaps-utils': 11.5.0(@babel/runtime@7.28.3)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
-      '@playwright/test': 1.54.2
+      '@metamask/snaps-utils': 11.5.0(@babel/runtime@7.28.4)(@metamask/approval-controller@7.1.3)(webextension-polyfill@0.10.0)
+      '@playwright/test': 1.55.1
       conf: 14.0.0
       eth-rpc-errors: 4.0.3
       fflate: 0.8.2
@@ -9480,7 +9503,7 @@ snapshots:
 
   playwright-core@1.54.1: {}
 
-  playwright-core@1.54.2: {}
+  playwright-core@1.55.1: {}
 
   playwright-test@14.1.12:
     dependencies:
@@ -9520,9 +9543,9 @@ snapshots:
     transitivePeerDependencies:
       - monocart-coverage-reports
 
-  playwright@1.54.2:
+  playwright@1.55.1:
     dependencies:
-      playwright-core: 1.54.2
+      playwright-core: 1.55.1
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -9887,7 +9910,7 @@ snapshots:
     dependencies:
       inherits: 2.0.4
       safe-buffer: 5.2.1
-      to-buffer: 1.2.1
+      to-buffer: 1.2.2
 
   shallow-clone@3.0.1:
     dependencies:
@@ -10142,6 +10165,12 @@ snapshots:
       picomatch: 4.0.3
 
   to-buffer@1.2.1:
+    dependencies:
+      isarray: 2.0.5
+      safe-buffer: 5.2.1
+      typed-array-buffer: 1.0.3
+
+  to-buffer@1.2.2:
     dependencies:
       isarray: 2.0.5
       safe-buffer: 5.2.1
