@@ -25,7 +25,7 @@
     "typedoc": "^0.28.8",
     "typedoc-plugin-missing-exports": "^4.0.0",
     "typedoc-plugin-zod": "^1.4.2",
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "wireit": "^0.14.12"
   },
   "simple-git-hooks": {

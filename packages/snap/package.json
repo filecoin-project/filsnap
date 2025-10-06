@@ -115,7 +115,7 @@
     "prettier": "^3.6.2",
     "sirv-cli": "^3.0.1",
     "type-fest": "^4.41.0",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
