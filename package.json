@@ -12,20 +12,20 @@
   "scripts": {
     "fix": "biome check --fix --no-errors-on-unmatched --files-ignore-unknown=true",
     "clean": "rm -rf docs node_modules pnpm-lock.yaml packages/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules,.wireit} examples/*/{pnpm-lock.yaml,coverage,.nyc_output,dist,node_modules,.wireit}",
-    "build": "pnpm -r --if-present run build",
-    "lint": "pnpm -r --if-present run lint",
-    "test": "pnpm -r --if-present run test",
+    "build": "pnpm -r --filter './packages/**' --if-present run build",
+    "lint": "pnpm -r --filter './packages/**' --if-present run lint",
+    "test": "pnpm -r --filter './packages/**' --if-present run test",
     "docs": "typedoc --out docs --plugin typedoc-plugin-missing-exports --plugin typedoc-plugin-zod"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@hugomrdias/configs": "^0.1.9",
+    "@biomejs/biome": "^2.2.6",
+    "@hugomrdias/configs": "^1.1.2",
     "depcheck": "^1.4.7",
     "simple-git-hooks": "^2.13.1",
-    "typedoc": "^0.28.8",
-    "typedoc-plugin-missing-exports": "^4.0.0",
-    "typedoc-plugin-zod": "^1.4.2",
-    "typescript": "5.8.3",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-missing-exports": "^4.1.2",
+    "typedoc-plugin-zod": "^1.4.3",
+    "typescript": "5.9.3",
     "wireit": "^0.14.12"
   },
   "simple-git-hooks": {

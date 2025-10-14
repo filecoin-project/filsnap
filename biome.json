@@ -1,4 +1,13 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
-  "extends": ["@hugomrdias/configs/biome"]
+  "extends": ["@hugomrdias/configs/biome"],
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedKeys": "off"
+      }
+    }
+  }
 }
