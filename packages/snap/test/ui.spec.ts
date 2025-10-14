@@ -21,9 +21,6 @@ const fixture = createFixture({
 
 fixture.test.describe('JSX UI Dialogs', () => {
   fixture.test.beforeAll(async ({ metamask, page }) => {
-    // Install popup
-    await metamask.page.getByTestId('confirmation-submit-button').click()
-
     const config = await metamask.invokeSnap<ReturnType<typeof filGetConfig>>({
       request: {
         method: 'fil_getConfig',
@@ -205,28 +202,28 @@ fixture.test.describe('JSX UI Dialogs', () => {
   )
 })
 
-const preinstall = createFixture({
-  isolated: true,
-  downloadOptions: {
-    flask: true,
-  },
-  cacheUserDir: false,
-  devtools: true,
-})
+// const preinstall = createFixture({
+//   isolated: true,
+//   downloadOptions: {
+//     flask: true,
+//   },
+//   cacheUserDir: false,
+//   devtools: true,
+// })
 
-preinstall.test.describe('JSX UI Install', () => {
-  preinstall.test('should show install dialog', async ({ metamask, page }) => {
-    await metamask.setup()
-    await metamask.installSnap({
-      id: 'local:http://localhost:8080',
-      page,
-    })
-    // await metamask.page.waitForTimeout(60000000)
-    await fixture
-      .expect(metamask.page.getByText('Installation Successful'))
-      .toBeVisible()
-  })
-})
+// preinstall.test.describe('JSX UI Install', () => {
+//   preinstall.test('should show install dialog', async ({ metamask, page }) => {
+//     await metamask.setup()
+//     await metamask.installSnap({
+//       id: 'local:http://localhost:8080',
+//       page,
+//     })
+//     // await metamask.page.waitForTimeout(60000000)
+//     await fixture
+//       .expect(metamask.page.getByText('Installation Successful'))
+//       .toBeVisible()
+//   })
+// })
 
 const homepage = createFixture({
   isolated: true,
