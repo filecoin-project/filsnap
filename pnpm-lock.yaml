@@ -198,7 +198,7 @@ importers:
   packages/adapter:
     dependencies:
       filsnap:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../snap
       iso-base:
         specifier: ^4.2.1
