@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.7](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.6...filsnap-adapter-v3.3.7) (2025-10-14)
+
+
+### Bug Fixes
+
+* exports and nodenext module ([32333c9](https://github.com/filecoin-project/filsnap/commit/32333c94d93c91583d28f59e27425ba2758de661))
+
 ## [3.3.6](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.5...filsnap-adapter-v3.3.6) (2025-08-19)
 
 
