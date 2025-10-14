@@ -1,6 +1,6 @@
-export type { SnapConfig, AccountInfo } from 'filsnap'
-export type * from './types'
+export type { AccountInfo, SnapConfig } from 'filsnap/types'
+export * from './connector.ts'
 
-export { FilsnapAdapter } from './snap'
-export * from './utils'
-export * from './connector'
+export { FilsnapAdapter } from './snap.ts'
+export type * from './types.ts'
+export * from './utils.ts'

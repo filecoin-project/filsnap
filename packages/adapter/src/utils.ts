@@ -1,9 +1,9 @@
 import type { Snap } from '@metamask/snaps-sdk'
-import type { Network } from 'filsnap'
-import satisfies from 'semver/functions/satisfies'
+import type { Network } from 'filsnap/types'
+import satisfies from 'semver/functions/satisfies.js'
 
-import { metamask } from './chains'
-import type { EIP1193Provider, EIP6963AnnounceProviderEvent } from './types'
+import { metamask } from './chains.ts'
+import type { EIP1193Provider, EIP6963AnnounceProviderEvent } from './types.ts'
 
 /**
  * Get the Metamask provider.

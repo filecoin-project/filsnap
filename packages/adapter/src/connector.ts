@@ -1,8 +1,8 @@
 import type { Network } from 'iso-filecoin/types'
-import { metamask } from './chains'
-import { FilsnapAdapter } from './snap'
-import type { EIP1193Provider, ProviderConnectInfo } from './types'
-import { chainIdtoNetwork, checkPermissions, getProvider } from './utils'
+import { metamask } from './chains.ts'
+import { FilsnapAdapter } from './snap.ts'
+import type { EIP1193Provider, ProviderConnectInfo } from './types.ts'
+import { chainIdtoNetwork, checkPermissions, getProvider } from './utils.ts'
 
 type ConnectorOptions = {
   provider: EIP1193Provider

@@ -4,7 +4,7 @@ import type {
   Snap,
   SnapConfig,
   SnapResponse,
-} from 'filsnap'
+} from 'filsnap/types'
 import { base64pad, hex } from 'iso-base/rfc4648'
 import { fromString } from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
@@ -12,8 +12,8 @@ import { Signature } from 'iso-filecoin/signature'
 import type { IAccount, Network } from 'iso-filecoin/types'
 import { getNetworkFromChainId } from 'iso-filecoin/utils'
 import type { SetRequired } from 'type-fest'
-import type { EIP1193Provider } from './types'
-import { getOrInstallSnap, getProvider } from './utils'
+import type { EIP1193Provider } from './types.ts'
+import { getOrInstallSnap, getProvider } from './utils.ts'
 
 export type FilsnapAdapterOptions = {
   /**

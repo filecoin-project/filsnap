@@ -5,8 +5,7 @@ import type {
   Snap,
   SnapMethods,
 } from '@metamask/snaps-sdk'
-import type { FilSnapMethods } from 'filsnap'
-import type { AddEthereumChainParameter, WalletPermission } from 'viem'
+import type { FilSnapMethods } from 'filsnap/types'
 
 /**
  * Snaps Provider request types
@@ -42,20 +41,52 @@ type GetSnapsResult = Record<
  * viem types
  * https://github.com/wevm/viem/blob/main/src/types/eip1193.ts#L1519
  */
+export type AddEthereumChainParameter = {
+  /** A 0x-prefixed hexadecimal string */
+  chainId: string
+  /** The chain name. */
+  chainName: string
+  /** Native currency for the chain. */
+  nativeCurrency?:
+    | {
+        name: string
+        symbol: string
+        decimals: number
+      }
+    | undefined
+  rpcUrls: readonly string[]
+  blockExplorerUrls?: string[] | undefined
+  iconUrls?: string[] | undefined
+}
+
+export type WalletPermissionCaveat = {
+  type: string
+  // biome-ignore lint/suspicious/noExplicitAny: generic type
+  value: any
+}
+
+export type WalletPermission = {
+  caveats: WalletPermissionCaveat[]
+  date: number
+  id: string
+  invoker: `http://${string}` | `https://${string}`
+  parentCapability: 'eth_accounts' | string
+}
+
 export type CustomSnapsMethods = SnapMethods & {
   wallet_getSnaps: [GetSnapsParams, GetSnapsResult]
   wallet_switchEthereumChain: [[{ chainId: string }], null]
   wallet_addEthereumChain: [[AddEthereumChainParameter], null]
   wallet_requestPermissions: [
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: generic type
     [{ eth_accounts: Record<string, any> }],
     WalletPermission[],
   ]
   wallet_revokePermissions: [
     [
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: generic type
       | { eth_accounts: Record<string, any> }
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: generic type
       | { wallet_snap: Record<string, any> },
     ],
     null,
