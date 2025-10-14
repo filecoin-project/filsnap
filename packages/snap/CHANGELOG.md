@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.9.3...filsnap-v1.10.0) (2025-10-14)
+
+
+### Features
+
+* foc insights ([9a1c7d9](https://github.com/filecoin-project/filsnap/commit/9a1c7d98ac71b3d7aa8550b6181ddee766866d59))
+
 ## [1.9.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.9.2...filsnap-v1.9.3) (2025-10-14)
 
 
