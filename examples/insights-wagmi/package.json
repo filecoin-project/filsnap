@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.3",
-    "filsnap-adapter": "^3.3.7",
-    "iso-filecoin": "^7.4.4",
+    "filsnap-adapter": "^3.3.8",
+    "iso-filecoin": "^7.4.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "viem": "~2.38.2",

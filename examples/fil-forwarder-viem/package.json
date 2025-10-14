@@ -15,9 +15,9 @@
     "serve": "vite preview --port 3000"
   },
   "dependencies": {
-    "filsnap-adapter": "^3.3.7",
+    "filsnap-adapter": "^3.3.8",
     "iso-base": "^4.2.1",
-    "iso-filecoin": "^7.4.4",
+    "iso-filecoin": "^7.4.5",
     "viem": "^2.38.2"
   },
   "devDependencies": {
@@ -25,7 +25,7 @@
     "@biomejs/biome": "^2.2.6",
     "@hugomrdias/configs": "^1.1.2",
     "@types/node": "^24.7.2",
-    "filsnap": "^1.9.1",
+    "filsnap": "^1.9.3",
     "typescript": "5.9.3",
     "vite": "^7.1.10"
   }

@@ -55,12 +55,12 @@
     "lint": "tsc --build && biome check --no-errors-on-unmatched --files-ignore-unknown=true",
     "serve-static": "sirv page --single --port 8081",
     "test": "wireit",
-    "build1": "wireit",
+    "build": "wireit",
     "serve": "wireit",
     "watch": "pnpm run serve & SNAP_ENV=test onchange -i -k 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' -- pnpm run test -- --headed -j 1 --timeout 0"
   },
   "wireit": {
-    "build1": {
+    "build": {
       "command": "mm-snap build",
       "files": [
         "src/**/*.ts",
