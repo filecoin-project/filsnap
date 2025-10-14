@@ -64,7 +64,7 @@
     "react-hook-form": "^7.65.0",
     "react-toastify": "^11.0.5",
     "viem": "^2.38.2",
-    "wagmi": "^2.18.0",
+    "wagmi": "^2.18.1",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
