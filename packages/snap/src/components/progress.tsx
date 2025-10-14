@@ -5,7 +5,7 @@ import {
   Spinner,
   Text,
 } from '@metamask/snaps-sdk/jsx'
-import type { HomepageContext } from '../types'
+import type { HomepageContext } from '../types.ts'
 
 type Processprops = {
   waitMessage?: string
@@ -17,7 +17,7 @@ export const Progress: SnapComponent<Processprops> = ({
   return (
     <Box>
       <Section>
-        <Box center direction="vertical" alignment="center">
+        <Box alignment="center" center direction="vertical">
           <Text>{waitMessage}</Text>
           <Spinner />
         </Box>

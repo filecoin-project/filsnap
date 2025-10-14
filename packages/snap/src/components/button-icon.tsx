@@ -22,8 +22,8 @@ export const ButtonIcon: SnapComponent<ButtonIconProps> = ({
   type = 'button',
 }) => {
   return (
-    <Button type={type} name={name}>
-      <Icon name={icon} size="md" color={color} /> &nbsp; {children}
+    <Button name={name} type={type}>
+      <Icon color={color} name={icon} size="md" /> &nbsp; {children}
     </Button>
   )
 }

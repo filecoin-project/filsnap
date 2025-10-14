@@ -1,9 +1,12 @@
 import { base64pad } from 'iso-base/rfc4648'
 import { accountToLotus } from 'iso-filecoin/wallet'
-import { getAccountWithPrivateKey } from '../account'
-import { ExportConfirm, PrivateKeyExport } from '../components/dialog-export'
-import type { SnapContext, SnapResponse } from '../types'
-import { serializeError } from '../utils'
+import { getAccountWithPrivateKey } from '../account.ts'
+import {
+  ExportConfirm,
+  PrivateKeyExport,
+} from '../components/dialog-export.tsx'
+import type { SnapContext, SnapResponse } from '../types.ts'
+import { serializeError } from '../utils.ts'
 
 // Types
 export type ExportPrivateKeyResponse = SnapResponse<boolean>
@@ -37,10 +40,10 @@ export async function exportPrivateKey(
       type: 'confirmation',
       content: (
         <ExportConfirm
+          accountNumber={account.accountNumber}
+          address={account.address.toString()}
           config={config}
           origin={ctx.origin}
-          address={account.address.toString()}
-          accountNumber={account.accountNumber}
         />
       ),
     },
@@ -53,13 +56,13 @@ export async function exportPrivateKey(
         type: 'alert',
         content: (
           <PrivateKeyExport
-            privateKey={base64pad.encode(account.privateKey)}
             lotusPrivateKey={accountToLotus({
               address: account.address,
               privateKey: account.privateKey,
               publicKey: account.pubKey,
               type: 'SECP256K1',
             })}
+            privateKey={base64pad.encode(account.privateKey)}
           />
         ),
       },

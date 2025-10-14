@@ -9,14 +9,14 @@ import {
   sign,
 } from 'iso-filecoin/wallet'
 import { z } from 'zod/v4'
-import { getAccountWithPrivateKey } from '../account'
+import { getAccountWithPrivateKey } from '../account.ts'
 import {
   SignMessageDialog,
   SignTransactionDialog,
-} from '../components/dialog-sign'
-import type { SnapContext, SnapResponse } from '../types'
-import { serializeError, serializeValidationError } from '../utils'
-import type { SignedMessage } from './send-message'
+} from '../components/dialog-sign.tsx'
+import type { SnapContext, SnapResponse } from '../types.ts'
+import { serializeError, serializeValidationError } from '../utils.ts'
+import type { SignedMessage } from './send-message.ts'
 
 // Schemas
 export const signMessageParams = Schemas.messagePartial.omit({
@@ -89,8 +89,8 @@ export async function signMessage(
       content: (
         <SignTransactionDialog
           accountNumber={account.accountNumber}
-          message={message}
           config={config}
+          message={message}
           origin={ctx.origin}
         />
       ),
@@ -147,10 +147,10 @@ export async function signMessageRaw(
       type: 'confirmation',
       content: (
         <SignMessageDialog
-          address={account.address.toString()}
-          origin={ctx.origin}
           accountNumber={account.accountNumber}
+          address={account.address.toString()}
           message={message}
+          origin={ctx.origin}
         />
       ),
     },
@@ -209,10 +209,10 @@ export async function filSign(
       type: 'confirmation',
       content: (
         <SignMessageDialog
-          address={account.address.toString()}
-          origin={ctx.origin}
           accountNumber={account.accountNumber}
+          address={account.address.toString()}
           message={utf8.encode(decodedBytes)}
+          origin={ctx.origin}
         />
       ),
     },
@@ -264,10 +264,10 @@ export async function filPersonalSign(
       type: 'confirmation',
       content: (
         <SignMessageDialog
-          address={account.address.toString()}
-          origin={ctx.origin}
           accountNumber={account.accountNumber}
+          address={account.address.toString()}
           message={utf8.encode(decodedBytes)}
+          origin={ctx.origin}
         />
       ),
     },

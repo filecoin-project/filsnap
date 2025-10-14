@@ -6,7 +6,7 @@ import {
   Text,
 } from '@metamask/snaps-sdk/jsx'
 import iconPartyPopper from '../svg/party-popper.svg'
-import { Header } from './header'
+import { Header } from './header.tsx'
 
 /**
  *  This component is displayed after the snap has been installed. It provides a welcome message and instructions for using the snap.
@@ -15,10 +15,10 @@ export const OnInstall: SnapComponent = () => {
   return (
     <Box>
       <Header
+        alignment="center"
         icon={iconPartyPopper}
         iconColor="success"
         iconSize={24}
-        alignment="center"
       >
         Installation Successful
       </Header>

@@ -3,7 +3,7 @@ import {
   type SnapComponent,
   type StringElement,
 } from '@metamask/snaps-sdk/jsx'
-import { type IconColors, SvgIcon } from './svg-icon'
+import { type IconColors, SvgIcon } from './svg-icon.tsx'
 
 type ButtonSvgIconProps = {
   name: string
@@ -23,13 +23,13 @@ export const ButtonSvgIcon: SnapComponent<ButtonSvgIconProps> = ({
   type = 'button',
 }) => {
   return (
-    <Button type={type} name={name}>
+    <Button name={name} type={type}>
       <SvgIcon
-        icon={icon}
-        color={iconColor}
-        size={iconSize}
         alt={children?.toString()}
+        color={iconColor}
+        icon={icon}
         inline
+        size={iconSize}
       />
       &nbsp; {children}
     </Button>

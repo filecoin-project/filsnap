@@ -7,7 +7,7 @@
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "Jxey/TnElGhvPoSJ+IJhaedYI4wLM20N0snbQzROHYw=",
+    "shasum": "4ckvnR3+luYqks+W6N9sGjl+uWbH4olK6o6tNiBAZYI=",
     "location": {
       "npm": {
         "filePath": "dist/snap.js",
@@ -17,20 +17,11 @@
       }
     }
   },
-  "initialConnections": {
-    "https://filsnap.dev": {},
-    "https://www.glif.io/": {}
-  },
   "initialPermissions": {
     "endowment:page-home": {},
-    "endowment:lifecycle-hooks": {},
     "endowment:network-access": {},
-    "endowment:transaction-insight": {
-      "allowTransactionOrigin": true
-    },
-    "endowment:signature-insight": {
-      "allowSignatureOrigin": true
-    },
+    "endowment:transaction-insight": {},
+    "endowment:signature-insight": {},
     "endowment:rpc": {
       "dapps": true
     },

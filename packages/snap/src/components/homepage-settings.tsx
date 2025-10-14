@@ -8,16 +8,16 @@ import {
   Section,
 } from '@metamask/snaps-sdk/jsx'
 import { z } from 'zod/v4'
-import { INTERNAL_CONFIG } from '../constants'
-import { State } from '../state'
-import * as Icons from '../svg'
-import type { HomepageContext } from '../types'
-import { pathFromNetworkAndMode } from '../utils'
-import { ButtonSvgIcon } from './button-svg-icon'
-import { Footer } from './footer'
-import { Header } from './header'
-import { HomepageEvents, updateHomepage } from './homepage'
-import { updateWithProgress } from './progress'
+import { INTERNAL_CONFIG } from '../constants.ts'
+import { State } from '../state.ts'
+import * as Icons from '../svg/index.tsx'
+import type { HomepageContext } from '../types.ts'
+import { pathFromNetworkAndMode } from '../utils.ts'
+import { ButtonSvgIcon } from './button-svg-icon.tsx'
+import { Footer } from './footer.tsx'
+import { Header } from './header.tsx'
+import { HomepageEvents, updateHomepage } from './homepage.tsx'
+import { updateWithProgress } from './progress.tsx'
 
 export async function onSettings(id: string, context: HomepageContext) {
   await snap.request({
@@ -26,7 +26,7 @@ export async function onSettings(id: string, context: HomepageContext) {
       id,
       ui: (
         <Box>
-          <Header icon={Icons.settings} iconSize={24} alignment="center">
+          <Header alignment="center" icon={Icons.settings} iconSize={24}>
             Settings
           </Header>
           <Form name="settingsForm">
@@ -58,8 +58,8 @@ export async function onSettings(id: string, context: HomepageContext) {
               </ButtonSvgIcon>
               <ButtonSvgIcon
                 icon={Icons.chevronRight}
-                type="submit"
                 name={HomepageEvents.saveSettings}
+                type="submit"
               >
                 Save
               </ButtonSvgIcon>

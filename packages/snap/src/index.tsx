@@ -10,70 +10,61 @@ import {
   UserInputEventType,
 } from '@metamask/snaps-sdk'
 import { hex } from 'iso-base/rfc4648'
-
-import { filGetAccount, getAccountInfo } from './rpc/get-account'
-import type {
-  SignMessageParams,
-  SignMessageRawParams,
-} from './rpc/sign-message'
+import { getAccountSafe } from './account.ts'
+import { updateWithError } from './components/error.tsx'
 import {
-  filPersonalSign,
-  filSign,
-  signMessage,
-  signMessageRaw,
-} from './rpc/sign-message'
-import { State } from './state'
-import type {
-  Config,
-  HomepageContext,
-  Network,
-  SnapConfig,
-  SnapContext,
-} from './types'
-import { configFromNetwork, serializeError } from './utils'
-
-import { getAccountSafe } from './account'
-import { INTERNAL_CONFIG } from './constants'
+  createHomepage,
+  HomepageEvents,
+  onNetworkChange,
+  updateHomepage,
+} from './components/homepage.tsx'
+import { onReceive } from './components/homepage-receive.tsx'
+import {
+  onSend,
+  onSendConfirm,
+  onSendResult,
+} from './components/homepage-send.tsx'
+import { onSaveSettings, onSettings } from './components/homepage-settings.tsx'
+import { OnInstall } from './components/on-install.tsx'
+import { OnUpdate } from './components/on-update.tsx'
+import { INTERNAL_CONFIG } from './constants.ts'
+import { handleBaseSignature } from './insights/base-signature.tsx'
+import { handleFilFowarder } from './insights/filforwarder.tsx'
+import { handleUcanSignature } from './insights/ucan-signature.tsx'
+import { handleUsdfc } from './insights/usdfc.tsx'
 import {
   configure,
   filChangeNetwork,
   filDeriveAccount,
   filGetConfig,
   filSetConfig,
-} from './rpc/configure'
-import { exportPrivateKey } from './rpc/export-private-key'
-import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message'
-import { getBalance } from './rpc/get-balance'
-import { type SignedMessage, sendMessage } from './rpc/send-message'
-
-import { updateWithError } from './components/error'
+} from './rpc/configure.tsx'
+import { exportPrivateKey } from './rpc/export-private-key.tsx'
+import { type EstimateParams, getGasForMessage } from './rpc/gas-for-message.ts'
+import { filGetAccount, getAccountInfo } from './rpc/get-account.ts'
+import { getBalance } from './rpc/get-balance.ts'
+import { type SignedMessage, sendMessage } from './rpc/send-message.ts'
+import type {
+  SignMessageParams,
+  SignMessageRawParams,
+} from './rpc/sign-message.tsx'
 import {
-  HomepageEvents,
-  createHomepage,
-  onNetworkChange,
-  updateHomepage,
-} from './components/homepage'
-import { onReceive } from './components/homepage-receive'
-import { onSend, onSendConfirm, onSendResult } from './components/homepage-send'
-import { onSaveSettings, onSettings } from './components/homepage-settings'
-import { OnInstall } from './components/on-install'
-import { OnUpdate } from './components/on-update'
-import { handleBaseSignature } from './insights/base-signature'
-import { handleFilFowarder } from './insights/filforwarder'
-import { handleUcanSignature } from './insights/ucan-signature'
-import { handleUsdfc } from './insights/usdfc'
-
-export type {
-  AccountInfo,
-  FilSnapMethods,
+  filPersonalSign,
+  filSign,
+  signMessage,
+  signMessageRaw,
+} from './rpc/sign-message.tsx'
+import { State } from './state.ts'
+import type {
+  Config,
+  HomepageContext,
   Network,
   SnapConfig,
-  Snap,
-  SnapError,
-  SnapResponse,
-  SnapResponseError,
-} from './types'
+  SnapContext,
+} from './types.ts'
+import { configFromNetwork, serializeError } from './utils.ts'
 
+// @ts-expect-error - invalid type json
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
@@ -184,36 +175,36 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   }
 }
 
-export const onInstall: OnInstallHandler = async () => {
-  const config = configFromNetwork('mainnet')
-  const state = new State(snap)
-  await state.set(INTERNAL_CONFIG, config)
+// export const onInstall: OnInstallHandler = async () => {
+//   const config = configFromNetwork('mainnet')
+//   const state = new State(snap)
+//   await state.set(INTERNAL_CONFIG, config)
 
-  await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'alert',
-      content: <OnInstall />,
-    },
-  })
-}
+//   await snap.request({
+//     method: 'snap_dialog',
+//     params: {
+//       type: 'alert',
+//       content: <OnInstall />,
+//     },
+//   })
+// }
 
-export const onUpdate: OnUpdateHandler = async () => {
-  const config = configFromNetwork('mainnet')
-  const state = new State(snap)
+// export const onUpdate: OnUpdateHandler = async () => {
+//   const config = configFromNetwork('mainnet')
+//   const state = new State(snap)
 
-  if (!(await state.has(INTERNAL_CONFIG))) {
-    await state.set(INTERNAL_CONFIG, config)
-  }
+//   if (!(await state.has(INTERNAL_CONFIG))) {
+//     await state.set(INTERNAL_CONFIG, config)
+//   }
 
-  await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'alert',
-      content: <OnUpdate />,
-    },
-  })
-}
+//   await snap.request({
+//     method: 'snap_dialog',
+//     params: {
+//       type: 'alert',
+//       content: <OnUpdate />,
+//     },
+//   })
+// }
 
 /**
  * Handle incoming home page requests from the MetaMask clients.
@@ -222,6 +213,13 @@ export const onUpdate: OnUpdateHandler = async () => {
  * @see https://docs.metamask.io/snaps/reference/exports/#onhomepage
  */
 export const onHomePage: OnHomePageHandler = async () => {
+  const config = configFromNetwork('mainnet')
+  const state = new State(snap)
+
+  if (!(await state.has(INTERNAL_CONFIG))) {
+    await state.set(INTERNAL_CONFIG, config)
+  }
+
   const { ui, context } = await createHomepage()
   const interfaceId = await snap.request({
     method: 'snap_createInterface',
@@ -350,19 +348,19 @@ export const onUserInput: OnUserInputHandler = async ({
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
   chainId,
-  transactionOrigin,
 }): Promise<OnTransactionResponse | null> => {
-  if (!transactionOrigin) {
-    return null
-  }
+  const config = configFromNetwork('mainnet')
   const state = new State(snap)
-  const config = await state.get(transactionOrigin)
+
+  if (!(await state.has(INTERNAL_CONFIG))) {
+    await state.set(INTERNAL_CONFIG, config)
+  }
 
   const handlers = [handleFilFowarder, handleUsdfc]
 
   let result = null
   for (const handler of handlers) {
-    result = await handler({ chainId, transaction, transactionOrigin }, config)
+    result = await handler({ chainId, transaction }, config)
     if (result != null) {
       break
     }
@@ -378,21 +376,19 @@ export const onTransaction: OnTransactionHandler = async ({
  * @param params.signatureOrigin - The signature origin.
  * @returns The signature insights or null.
  */
-export const onSignature: OnSignatureHandler = async ({
-  signature,
-  signatureOrigin,
-}) => {
-  if (!signatureOrigin) {
-    return null
-  }
+export const onSignature: OnSignatureHandler = async ({ signature }) => {
+  const config = configFromNetwork('mainnet')
   const state = new State(snap)
-  const config = await state.get(signatureOrigin)
+
+  if (!(await state.has(INTERNAL_CONFIG))) {
+    await state.set(INTERNAL_CONFIG, config)
+  }
 
   const handlers = [handleUcanSignature, handleBaseSignature]
 
   let result = null
   for (const handler of handlers) {
-    result = await handler({ signature, signatureOrigin }, config)
+    result = await handler({ signature }, config)
     if (result != null) {
       break
     }

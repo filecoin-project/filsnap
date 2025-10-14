@@ -7,10 +7,10 @@ import {
   type SnapComponent,
   Text,
 } from '@metamask/snaps-sdk/jsx'
-import * as Icons from '../svg'
-import type { SnapConfig } from '../types'
-import { addressToCaip10, explorerAddressLink, formatFIL } from '../utils'
-import { ListHeader } from './header'
+import * as Icons from '../svg/index.tsx'
+import type { SnapConfig } from '../types.ts'
+import { addressToCaip10, explorerAddressLink, formatFIL } from '../utils.ts'
+import { ListHeader } from './header.tsx'
 
 /**
  * @property config - Snap configuration.

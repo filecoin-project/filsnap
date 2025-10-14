@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
+    "module": "nodenext",
     "jsx": "react-jsxdev",
     "jsxImportSource": "@metamask/snaps-sdk"
   },

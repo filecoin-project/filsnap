@@ -1,9 +1,8 @@
 import { hex } from 'iso-base/rfc4648'
 import { RPC } from 'iso-filecoin/rpc'
-import type { Jsonify } from 'type-fest'
-import { getAccountSafe } from '../account'
-import type { AccountInfo, SnapContext, SnapResponse } from '../types'
-import { serializeError } from '../utils'
+import { getAccountSafe } from '../account.ts'
+import type { AccountInfo, SnapContext, SnapResponse } from '../types.ts'
+import { serializeError } from '../utils.ts'
 
 // Types
 export type GetAccountInfoResponse = SnapResponse<AccountInfo>
@@ -16,7 +15,7 @@ export type GetAccountInfoResponse = SnapResponse<AccountInfo>
  */
 export async function getAccountInfo(
   ctx: SnapContext
-): Promise<Jsonify<GetAccountInfoResponse>> {
+): Promise<GetAccountInfoResponse> {
   const config = await ctx.state.get(ctx.origin)
 
   if (config == null) {
@@ -64,7 +63,7 @@ export interface IAccountSerialized {
  */
 export async function filGetAccount(
   ctx: SnapContext
-): Promise<SnapResponse<Jsonify<IAccountSerialized>>> {
+): Promise<SnapResponse<IAccountSerialized>> {
   const config = await ctx.state.get(ctx.origin)
 
   if (config == null) {

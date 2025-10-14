@@ -1,12 +1,10 @@
-import { Schemas } from 'iso-filecoin/message'
-import type { Jsonify } from 'type-fest'
-import { z } from 'zod/v4'
-
 import * as Address from 'iso-filecoin/address'
+import { Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
-import { getAccountSafe } from '../account'
-import type { SnapContext, SnapResponse } from '../types'
-import { serializeError, serializeValidationError } from '../utils'
+import { z } from 'zod/v4'
+import { getAccountSafe } from '../account.ts'
+import type { SnapContext, SnapResponse } from '../types.ts'
+import { serializeError, serializeValidationError } from '../utils.ts'
 
 // Default max fee in attoFIL (0.1 FIL)
 const DEFAULT_MAX_FEE = '100000000000000000'
@@ -56,7 +54,7 @@ export type GasForMessageResponse = SnapResponse<MessageGasEstimate>
 export async function getGasForMessage(
   ctx: SnapContext,
   params: EstimateParams
-): Promise<Jsonify<GasForMessageResponse>> {
+): Promise<GasForMessageResponse> {
   const { state } = ctx
   const config = await state.get(ctx.origin)
   if (config == null) {

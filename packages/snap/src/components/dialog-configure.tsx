@@ -8,15 +8,14 @@ import {
   type SnapComponent,
   Text,
 } from '@metamask/snaps-sdk/jsx'
-import iconConnect from '../svg/connect.svg'
-import iconWallet from '../svg/wallet.svg'
-
 import * as Chains from 'iso-filecoin/chains'
+import iconConnect from '../svg/connect.svg'
 import iconSettings from '../svg/settings.svg'
-import type { SnapConfig } from '../types'
-import { addressToCaip10, explorerAddressLink } from '../utils'
-import { Header, ListHeader } from './header'
-import { Spacer } from './spacer'
+import iconWallet from '../svg/wallet.svg'
+import type { SnapConfig } from '../types.ts'
+import { addressToCaip10, explorerAddressLink } from '../utils.ts'
+import { Header, ListHeader } from './header.tsx'
+import { Spacer } from './spacer.tsx'
 
 type ConfigureProps = {
   origin: string
@@ -37,7 +36,7 @@ export const Configure: SnapComponent<ConfigureProps> = ({
         Connection Request
       </Header>
       <Section>
-        <Box direction="horizontal" alignment="center">
+        <Box alignment="center" direction="horizontal">
           <Text color="alternative">This site is requesting access to:</Text>
         </Box>
         <ListHeader icon={iconWallet} tooltip="Account to be accessed">

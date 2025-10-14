@@ -1,11 +1,11 @@
 import { createFixture } from 'metamask-testing-tools'
-import type { filGetConfig } from '../src/rpc/configure'
-import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
+import type { filGetConfig } from '../src/rpc/configure.ts'
+import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key.ts'
 import type {
   SignMessageRawRequest,
   SignMessageRequest,
   SignMessageResponse,
-} from '../src/rpc/sign-message'
+} from '../src/rpc/sign-message.ts'
 
 const fixture = createFixture({
   isolated: false,

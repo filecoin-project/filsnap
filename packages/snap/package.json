@@ -30,6 +30,9 @@
     "./filforwarder": {
       "types": "./dist/src/filforwarder.d.ts",
       "default": "./dist/src/filforwarder.js"
+    },
+    "./types": {
+      "types": "./dist/src/types.d.ts"
     }
   },
   "main": "dist/src/index.js",
@@ -37,6 +40,9 @@
     "*": {
       "filforwarder": [
         "./dist/src/filforwarder"
+      ],
+      "types": [
+        "./dist/src/types"
       ]
     }
   },
@@ -96,29 +102,27 @@
     "@metamask/key-tree": "^10.0.2",
     "@metamask/snaps-sdk": "6.17.1",
     "dequal": "^2.0.3",
-    "iso-base": "^4.1.0",
-    "iso-filecoin-synapse": "^0.0.5",
-    "iso-ucan": "^0.3.0",
+    "iso-base": "^4.2.1",
     "merge-options": "^3.0.4",
-    "qr": "^0.5.0",
-    "viem": "^2.34.0",
-    "zod": "^3.25.0"
+    "iso-filecoin": "7.x"
   },
   "devDependencies": {
-    "@metamask/snaps-cli": "8.2.0",
-    "@playwright/test": "^1.54.2",
-    "@types/react": "19.1.10",
-    "@types/react-dom": "19.1.7",
+    "@metamask/snaps-cli": "8.3.0",
+    "@playwright/test": "^1.56.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "metamask-testing-tools": "^2.2.8",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.11",
     "prettier": "^3.6.2",
     "sirv-cli": "^3.0.1",
-    "type-fest": "^4.41.0",
-    "typescript": "5.8.3"
-  },
-  "peerDependencies": {
-    "iso-filecoin": "7.x"
+    "type-fest": "^5.1.0",
+    "typescript": "5.9.3",
+    "qr": "^0.5.2",
+    "zod": "^3.25.0",
+    "viem": "^2.38.2",
+    "iso-filecoin-synapse": "^0.0.5",
+    "iso-ucan": "^0.4.1"
   },
   "publishConfig": {
     "provenance": true

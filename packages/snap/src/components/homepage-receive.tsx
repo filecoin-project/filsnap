@@ -7,13 +7,13 @@ import {
   Text,
 } from '@metamask/snaps-sdk/jsx'
 import encodeQR from 'qr'
-import * as Icons from '../svg'
-import type { HomepageContext } from '../types'
-import { ButtonSvgIcon } from './button-svg-icon'
-import { Footer } from './footer'
-import { Header } from './header'
-import { HomepageEvents } from './homepage'
-import { Spacer } from './spacer'
+import * as Icons from '../svg/index.tsx'
+import type { HomepageContext } from '../types.ts'
+import { ButtonSvgIcon } from './button-svg-icon.tsx'
+import { Footer } from './footer.tsx'
+import { Header } from './header.tsx'
+import { HomepageEvents } from './homepage.tsx'
+import { Spacer } from './spacer.tsx'
 
 export async function onReceive(id: string, context: HomepageContext) {
   const qr = encodeQR(context.address, 'svg').replace(
@@ -27,15 +27,15 @@ export async function onReceive(id: string, context: HomepageContext) {
       id,
       ui: (
         <Box>
-          <Header icon={Icons.qrCode} iconSize={24} alignment="center">
+          <Header alignment="center" icon={Icons.qrCode} iconSize={24}>
             Receive ⨎
           </Header>
           <Section>
-            <Box direction="horizontal" alignment="center">
+            <Box alignment="center" direction="horizontal">
               <Image src={qr} />
             </Box>
             <Spacer unit={2} />
-            <Box direction="horizontal" alignment="center">
+            <Box alignment="center" direction="horizontal">
               <Heading>Account {context.account.toString()}</Heading>
               <Text color="alternative">{context.config.derivationPath}</Text>
               {/* <Text color="alternative">{context.config.network}</Text>

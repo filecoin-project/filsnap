@@ -5,18 +5,18 @@ import {
   type SnapComponent,
   Text,
 } from '@metamask/snaps-sdk/jsx'
-import json from '../../snap.manifest.json'
+import json from '../../snap.manifest.json' with { type: 'json' }
 import iconPartyPopper from '../svg/party-popper.svg'
-import { Header } from './header'
+import { Header } from './header.tsx'
 
 export const OnUpdate: SnapComponent = () => {
   return (
     <Box>
       <Header
+        alignment="center"
         icon={iconPartyPopper}
         iconColor="success"
         iconSize={24}
-        alignment="center"
       >
         Update Successful
       </Header>

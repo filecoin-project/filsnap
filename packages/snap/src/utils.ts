@@ -1,16 +1,10 @@
 import { Token, type Value } from 'iso-filecoin/token'
 import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
-import type { Jsonify } from 'type-fest'
+import type { JsonValue } from 'type-fest'
 import * as z from 'zod/v4'
-import * as Constants from './constants'
-import * as Schemas from './schemas'
-import type {
-  Config,
-  Json,
-  Network,
-  SnapConfig,
-  SnapResponseError,
-} from './types'
+import * as Constants from './constants.ts'
+import * as Schemas from './schemas.ts'
+import type { Config, Network, SnapConfig, SnapResponseError } from './types.ts'
 
 /**
  * Get default configuration by network name
@@ -38,11 +32,11 @@ export function configFromNetwork(networkName?: Network): SnapConfig {
  * @param object - The object in question.
  * @returns An object containing all the JSON-serializable properties.
  */
-export function serializeObject(object: unknown): Record<string, Json> {
+export function serializeObject(object: unknown): Record<string, JsonValue> {
   if (!isObject(object)) {
     return {}
   }
-  return Object.getOwnPropertyNames(object).reduce<Record<string, Json>>(
+  return Object.getOwnPropertyNames(object).reduce<Record<string, JsonValue>>(
     (acc, key) => {
       const value = object[key]
       const r = Schemas.json.safeParse(value)
@@ -91,10 +85,7 @@ export function isZodErrorLike(err: unknown): err is z.ZodError {
  * @param msg - Error message
  * @param data - Error data
  */
-export function serializeError(
-  msg: string,
-  data?: unknown
-): Jsonify<SnapResponseError> {
+export function serializeError(msg: string, data?: unknown): SnapResponseError {
   if (isZodErrorLike(data)) {
     data = z.prettifyError(data)
   }
@@ -119,9 +110,7 @@ export function serializeError(
  * @param msg - Error message
  * @param data - Error data
  */
-export function serializeValidationError(
-  err: z.ZodError
-): Jsonify<SnapResponseError> {
+export function serializeValidationError(err: z.ZodError): SnapResponseError {
   const error = z.prettifyError(err)
   return {
     result: null,

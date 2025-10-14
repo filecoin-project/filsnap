@@ -19,7 +19,7 @@ export const Footer: SnapComponent<FooterProps> = ({
 }) => {
   return (
     <Section>
-      <Box direction={direction} alignment={alignment}>
+      <Box alignment={alignment} direction={direction}>
         {children}
       </Box>
     </Section>

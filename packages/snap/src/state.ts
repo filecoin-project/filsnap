@@ -1,5 +1,5 @@
 import type { SnapsProvider } from '@metamask/snaps-sdk'
-import type { SnapConfig } from './types'
+import type { SnapConfig } from './types.ts'
 
 export class State {
   snap: SnapsProvider

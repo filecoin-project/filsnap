@@ -7,7 +7,7 @@ import type {
 } from '@metamask/snaps-sdk'
 import type { IAddress, MessageObj } from 'iso-filecoin/types'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
-import type { Promisable } from 'type-fest'
+import type { JsonValue, Promisable } from 'type-fest'
 import type { z } from 'zod/v4'
 import type {
   configure,
@@ -15,23 +15,23 @@ import type {
   filDeriveAccount,
   filGetConfig,
   filSetConfig,
-} from './rpc/configure'
-import type { exportPrivateKey } from './rpc/export-private-key'
-import type { getGasForMessage } from './rpc/gas-for-message'
-import type { filGetAccount, getAccountInfo } from './rpc/get-account'
-import type { getBalance } from './rpc/get-balance'
-import type { sendMessage } from './rpc/send-message'
+} from './rpc/configure.tsx'
+import type { exportPrivateKey } from './rpc/export-private-key.ts'
+import type { getGasForMessage } from './rpc/gas-for-message.ts'
+import type { filGetAccount, getAccountInfo } from './rpc/get-account.ts'
+import type { getBalance } from './rpc/get-balance.ts'
+import type { sendMessage } from './rpc/send-message.ts'
 import type {
   filPersonalSign,
   filSign,
   signMessage,
   signMessageRaw,
-} from './rpc/sign-message'
-import type { config, literal, messageStatus, snapConfig } from './schemas'
-import type { State } from './state'
+} from './rpc/sign-message.tsx'
+import type { config, literal, messageStatus, snapConfig } from './schemas.ts'
+import type { State } from './state.ts'
 
+export type { InterfaceContext, Snap } from '@metamask/snaps-sdk'
 export type { MessageObj, Network } from 'iso-filecoin/types'
-export type { Snap, InterfaceContext } from '@metamask/snaps-sdk'
 
 // Schema types
 export type Literal = z.infer<typeof literal>
@@ -67,7 +67,7 @@ export interface AccountInfo {
 }
 
 export type SnapErrorData =
-  | Json
+  | JsonValue
   | {
       [key: string]: unknown
       cause: unknown
@@ -147,7 +147,6 @@ export interface HomepageContext extends Record<string, Json> {
 export interface TransactionInsightsProps {
   transaction: Transaction
   chainId: `${string}:${string}`
-  transactionOrigin?: string
 }
 
 export type TransactionInsightsHandler = (
@@ -157,7 +156,6 @@ export type TransactionInsightsHandler = (
 
 export interface SignatureInsightsProps {
   signature: Signature
-  signatureOrigin?: string
 }
 
 export type SignatureInsightsHandler = (

@@ -25,28 +25,27 @@ import { Token } from 'iso-filecoin/token'
 import { signMessage as filSignMessage } from 'iso-filecoin/wallet'
 import type { Jsonify } from 'type-fest'
 import { z } from 'zod/v4'
-import { getAccountWithPrivateKey } from '../account'
+import { getAccountWithPrivateKey } from '../account.ts'
 import iconFilecoin from '../svg/filecoin-logo.svg'
-import type { HomepageContext, MessageObj, SnapConfig } from '../types'
+import * as Icons from '../svg/index.tsx'
+import iconSettings from '../svg/settings.svg'
+import iconArrowUpRight from '../svg/square-arrow-up-right.svg'
+import type { HomepageContext, MessageObj, SnapConfig } from '../types.ts'
 import {
   addressToCaip10,
   explorerAddressLink,
   formatFIL,
   formatFILShort,
-} from '../utils'
-
-import * as Icons from '../svg'
-import iconSettings from '../svg/settings.svg'
-import iconArrowUpRight from '../svg/square-arrow-up-right.svg'
-import { ButtonIcon } from './button-icon'
-import { ButtonSvgIcon } from './button-svg-icon'
-import { updateWithError } from './error'
-import { Footer } from './footer'
-import { Header, ListHeader } from './header'
-import { HomepageEvents } from './homepage'
-import { updateWithProgress } from './progress'
-import { Spacer } from './spacer'
-import { SvgIcon } from './svg-icon'
+} from '../utils.ts'
+import { ButtonIcon } from './button-icon.tsx'
+import { ButtonSvgIcon } from './button-svg-icon.tsx'
+import { updateWithError } from './error.tsx'
+import { Footer } from './footer.tsx'
+import { Header, ListHeader } from './header.tsx'
+import { HomepageEvents } from './homepage.tsx'
+import { updateWithProgress } from './progress.tsx'
+import { Spacer } from './spacer.tsx'
+import { SvgIcon } from './svg-icon.tsx'
 
 type SendReviewProps = {
   account: string
@@ -67,14 +66,14 @@ export const SendReview: SnapComponent<SendReviewProps> = ({
   return (
     <Section>
       {showTitle && (
-        <Box direction="horizontal" alignment="center">
+        <Box alignment="center" direction="horizontal">
           <Text color="alternative">
             This site is requesting a signature for:
           </Text>
         </Box>
       )}
       <Box direction="horizontal">
-        <SvgIcon icon={iconArrowUpRight} color="alternative" />
+        <SvgIcon color="alternative" icon={iconArrowUpRight} />
         <Tooltip content="Transaction to sign">
           <Text color="default">
             <Bold>Transaction</Bold>
@@ -107,7 +106,7 @@ export const SendReview: SnapComponent<SendReviewProps> = ({
       <Divider />
       <Spacer unit={1} />
       <Box direction="horizontal">
-        <SvgIcon icon={iconSettings} color="alternative" />
+        <SvgIcon color="alternative" icon={iconSettings} />
         <Tooltip content="Transaction details">
           <Text color="default">
             <Bold>Details</Bold>
@@ -153,15 +152,16 @@ export async function onSend(
       context,
       ui: (
         <Box>
-          <Header icon={Icons.send} iconSize={24} alignment="center">
+          <Header alignment="center" icon={Icons.send} iconSize={24}>
             Send ⨎
           </Header>
           <Form name="sendForm">
             <Section>
-              <Field label="From" error={errors.from?.join(', ')}>
+              <Field error={errors.from?.join(', ')} label="From">
                 <Selector name="from" title="Select an account">
                   <SelectorOption value={`${address}:${account}`}>
                     <Card
+                      description={`Account ${account}`}
                       image={iconFilecoin}
                       title={
                         <Address
@@ -169,20 +169,19 @@ export async function onSend(
                           avatar={false}
                         />
                       }
-                      description={`Account ${account}`}
                       value={formatFILShort(balance, config)}
                     />
                   </SelectorOption>
                 </Selector>
               </Field>
-              <Field label="To" error={errors.to?.join(', ')}>
+              <Field error={errors.to?.join(', ')} label="To">
                 <Input
                   name="to"
                   placeholder="f0, f1, f2, f3, f4 or 0x address"
                   type="text"
                 />
               </Field>
-              <Field label="Amount" error={errors.amount?.join(', ')}>
+              <Field error={errors.amount?.join(', ')} label="Amount">
                 <Input name="amount" placeholder="FIL" type="number" />
               </Field>
             </Section>
@@ -196,8 +195,8 @@ export async function onSend(
               </ButtonSvgIcon>
               <ButtonSvgIcon
                 icon={Icons.chevronRight}
-                type="submit"
                 name={HomepageEvents.sendConfirm}
+                type="submit"
               >
                 Continue
               </ButtonSvgIcon>
@@ -328,7 +327,7 @@ export async function onSendConfirm(id: string, context: HomepageContext) {
       },
       ui: (
         <Box>
-          <Header icon={Icons.eye} iconSize={24} alignment="center">
+          <Header alignment="center" icon={Icons.eye} iconSize={24}>
             Transaction Review
           </Header>
           <SendReview
@@ -398,10 +397,10 @@ export async function onSendResult(id: string, context: HomepageContext) {
       ui: (
         <Box>
           <Header
-            icon={Icons.partyPopper}
-            iconSize={24}
-            iconColor="success"
             alignment="center"
+            icon={Icons.partyPopper}
+            iconColor="success"
+            iconSize={24}
           >
             Transaction Sent
           </Header>

@@ -9,7 +9,7 @@ import {
   type TextChildren,
   Tooltip,
 } from '@metamask/snaps-sdk/jsx'
-import { type IconColors, SvgIcon } from './svg-icon'
+import { type IconColors, SvgIcon } from './svg-icon.tsx'
 
 type HeaderProps = {
   direction?: 'horizontal' | 'vertical'
@@ -33,10 +33,10 @@ export const Header: SnapComponent<HeaderProps> = ({
   sub,
 }) => {
   return (
-    <Section direction={direction} alignment={alignment}>
-      {icon ? <SvgIcon icon={icon} size={iconSize} color={iconColor} /> : null}
+    <Section alignment={alignment} direction={direction}>
+      {icon ? <SvgIcon color={iconColor} icon={icon} size={iconSize} /> : null}
       <Text color="alternative">&nbsp</Text>
-      <Box direction="vertical" alignment="center">
+      <Box alignment="center" direction="vertical">
         <Box direction="horizontal">
           <Heading size={size}>{children}</Heading>
         </Box>
@@ -65,7 +65,7 @@ export const ListHeader: SnapComponent<ListHeaderProps> = ({
   return (
     <Box direction="vertical">
       <Box direction="horizontal">
-        <SvgIcon icon={icon} color="alternative" />
+        <SvgIcon color="alternative" icon={icon} />
         {tooltip ? (
           <Tooltip content={tooltip}>
             <Text color="default">
@@ -102,7 +102,7 @@ export const ListHeader2: SnapComponent<ListHeaderProps2> = ({
   return (
     <Box direction="vertical">
       <Box direction="horizontal">
-        <SvgIcon icon={icon} color="alternative" />
+        <SvgIcon color="alternative" icon={icon} />
         {tooltip ? (
           <Tooltip content={tooltip}>
             <Text color="default">

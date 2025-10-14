@@ -1,11 +1,10 @@
 import * as Address from 'iso-filecoin/address'
 import { Token } from 'iso-filecoin/token'
-import { type Hex, fromHex } from 'viem'
-import { decodeFunctionData } from 'viem'
-import { ErrorBox } from '../components/error'
-import { Insights } from '../components/insights'
-import { filForwarderMetadata } from '../filforwarder'
-import type { TransactionInsightsHandler } from '../types'
+import { decodeFunctionData, fromHex, type Hex } from 'viem'
+import { ErrorBox } from '../components/error.tsx'
+import { Insights } from '../components/insights.tsx'
+import { filForwarderMetadata } from '../filforwarder.ts'
+import type { TransactionInsightsHandler } from '../types.ts'
 
 /**
  * Chain matches
@@ -93,16 +92,16 @@ export const handleFilFowarder: TransactionInsightsHandler = (
     return {
       content: (
         <Insights
-          config={config}
-          amount={transferAmount.toFIL().toString()}
           address={recipient.toString()}
+          amount={transferAmount.toFIL().toString()}
+          config={config}
         />
       ),
     }
   } catch (error) {
     const err = error as Error
     return {
-      content: <ErrorBox name={err.name} message={err.message} />,
+      content: <ErrorBox message={err.message} name={err.name} />,
     }
   }
 }

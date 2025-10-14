@@ -1,4 +1,4 @@
-import type { SnapConfig } from './types'
+import type { SnapConfig } from './types.ts'
 
 export const SNAP_ID =
   process.env.SNAP_ENV === 'test'

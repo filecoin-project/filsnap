@@ -1,8 +1,8 @@
 import { Box, type SnapComponent, Text, Tooltip } from '@metamask/snaps-sdk/jsx'
 import iconFilecoin from '../svg/filecoin-logo.svg'
-import type { SnapConfig } from '../types'
-import { formatFIL } from '../utils'
-import { SvgIcon } from './svg-icon'
+import type { SnapConfig } from '../types.ts'
+import { formatFIL } from '../utils.ts'
+import { SvgIcon } from './svg-icon.tsx'
 
 type HomePageProps = {
   balance: string
@@ -12,7 +12,7 @@ type HomePageProps = {
 export const Balance: SnapComponent<HomePageProps> = ({ balance, config }) => {
   return (
     <Box direction="horizontal">
-      <SvgIcon icon={iconFilecoin} alt="Filecoin" />
+      <SvgIcon alt="Filecoin" icon={iconFilecoin} />
       <Tooltip content={<Text>{formatFIL(balance, config)}</Text>}>
         <Text>
           {formatFIL(balance, {

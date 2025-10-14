@@ -17,12 +17,12 @@ import iconSend from '../svg/send.svg'
 import iconSignature from '../svg/signature.svg'
 import iconText from '../svg/text.svg'
 import iconWallet from '../svg/wallet.svg'
-import type { SnapConfig } from '../types'
-import { addressToCaip10, explorerAddressLink } from '../utils'
-import { Header } from './header'
-import { SendReview } from './homepage-send'
-import { Spacer } from './spacer'
-import { SvgIcon } from './svg-icon'
+import type { SnapConfig } from '../types.ts'
+import { addressToCaip10, explorerAddressLink } from '../utils.ts'
+import { Header } from './header.tsx'
+import { SendReview } from './homepage-send.tsx'
+import { Spacer } from './spacer.tsx'
+import { SvgIcon } from './svg-icon.tsx'
 
 type SignTransactionDialogProps = {
   origin?: string
@@ -40,9 +40,9 @@ export const SignTransactionDialog: SnapComponent<
         Transaction Request
       </Header>
       <SendReview
-        message={message}
-        config={config}
         account={accountNumber.toString()}
+        config={config}
+        message={message}
       />
     </Box>
   )
@@ -67,13 +67,13 @@ export const SignMessageDialog: SnapComponent<SignMessageDialogProps> = ({
         Signature Request
       </Header>
       <Section>
-        <Box direction="horizontal" alignment="center">
+        <Box alignment="center" direction="horizontal">
           <Text color="alternative">
             This site is requesting a signature for:
           </Text>
         </Box>
         <Box direction="horizontal">
-          <SvgIcon icon={iconText} color="alternative" />
+          <SvgIcon color="alternative" icon={iconText} />
           <Tooltip content="Message to sign">
             <Text color="default">
               <Bold>Message</Bold>
@@ -85,7 +85,7 @@ export const SignMessageDialog: SnapComponent<SignMessageDialogProps> = ({
         <Divider />
         <Spacer unit={1} />
         <Box direction="horizontal">
-          <SvgIcon icon={iconWallet} color="alternative" />
+          <SvgIcon color="alternative" icon={iconWallet} />
           <Tooltip content="Account used to sign the message">
             <Text color="default">
               <Bold>Account</Bold>

@@ -53,11 +53,11 @@ export const SvgIcon: SnapComponent<HomePageProps> = ({
   icon = icon.replace(/stroke="([^"]+)"/, `stroke="${colorHex}"`)
 
   if (inline) {
-    return <Image src={icon} alt={alt} />
+    return <Image alt={alt} src={icon} />
   }
   return (
     <Box direction="horizontal">
-      <Image src={icon} alt={alt} />
+      <Image alt={alt} src={icon} />
     </Box>
   )
 }
@@ -87,6 +87,6 @@ export const FilecoinIcon: SnapComponent<FilecoinIconProps> = ({
   inline = false,
 }) => {
   return (
-    <SvgIcon icon={iconFilecoin} alt="Filecoin" size={size} inline={inline} />
+    <SvgIcon alt="Filecoin" icon={iconFilecoin} inline={inline} size={size} />
   )
 }

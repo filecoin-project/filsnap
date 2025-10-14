@@ -1,10 +1,10 @@
 import { Box, Copyable, Divider, Row, Text } from '@metamask/snaps-sdk/jsx'
 import { hex } from 'iso-base/rfc4648'
 import { decodeSignaturePayload, isDelegationPayload } from 'iso-ucan/envelope'
-import { ListHeader } from '../components/header'
-import * as Icons from '../svg'
-import type { SignatureInsightsHandler } from '../types'
-import { serializeObject } from '../utils'
+import { ListHeader } from '../components/header.tsx'
+import * as Icons from '../svg/index.tsx'
+import type { SignatureInsightsHandler } from '../types.ts'
+import { serializeObject } from '../utils.ts'
 
 /**
  * Handles the Ucan signature insights.
@@ -17,7 +17,7 @@ export const handleUcanSignature: SignatureInsightsHandler = (
   props,
   _config
 ) => {
-  const { signature, signatureOrigin } = props
+  const { signature } = props
 
   if (signature.signatureMethod !== 'personal_sign') {
     return null
@@ -46,8 +46,8 @@ export const handleUcanSignature: SignatureInsightsHandler = (
         <Box>
           <ListHeader
             icon={Icons.wallet}
-            tooltip={`Requested by ${signatureOrigin}`}
-            subtitle={`Requested by ${signatureOrigin ?? 'unknown'}`}
+            subtitle="Ucan signature request"
+            tooltip="Ucan signature request"
           >
             UCAN {title} Signature
           </ListHeader>

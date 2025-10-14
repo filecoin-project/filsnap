@@ -6,24 +6,24 @@ import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
 import merge from 'merge-options'
 import type { Jsonify } from 'type-fest'
 import { z } from 'zod/v4'
-import { getAccountSafe } from '../account'
-import { Configure } from '../components/dialog-configure'
-import { config, snapConfig } from '../schemas'
+import { getAccountSafe } from '../account.ts'
+import { Configure } from '../components/dialog-configure.tsx'
+import { config, snapConfig } from '../schemas.ts'
 import type {
   Config,
   Network,
   SnapConfig,
   SnapContext,
   SnapResponse,
-} from '../types'
+} from '../types.ts'
 import {
   configFromNetwork,
   configToSnapConfig,
   serializeError,
   serializeValidationError,
   snapConfigToConfig,
-} from '../utils'
-import { type IAccountSerialized, filGetAccount } from './get-account'
+} from '../utils.ts'
+import { filGetAccount, type IAccountSerialized } from './get-account.ts'
 
 // Types
 export type ConfigureParams = Partial<SnapConfig>

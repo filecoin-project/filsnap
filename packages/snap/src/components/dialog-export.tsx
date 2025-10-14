@@ -11,9 +11,9 @@ import {
 import iconDownload from '../svg/download.svg'
 import iconKey from '../svg/key.svg'
 import iconWallet from '../svg/wallet.svg'
-import type { SnapConfig } from '../types'
-import { addressToCaip10, explorerAddressLink } from '../utils'
-import { Header, ListHeader } from './header'
+import type { SnapConfig } from '../types.ts'
+import { addressToCaip10, explorerAddressLink } from '../utils.ts'
+import { Header, ListHeader } from './header.tsx'
 
 type ExportConfirmProps = {
   address: string
@@ -34,7 +34,7 @@ export const ExportConfirm: SnapComponent<ExportConfirmProps> = ({
         Private Key Export Request
       </Header>
       <Section>
-        <Box direction="horizontal" alignment="center">
+        <Box alignment="center" direction="horizontal">
           <Text color="alternative">
             This site is requesting a private key export for:
           </Text>
@@ -73,7 +73,7 @@ export const PrivateKeyExport: SnapComponent<PrivateKeyExportProps> = ({
         Private Key
       </Header>
       <Section>
-        <Box direction="horizontal" alignment="center">
+        <Box alignment="center" direction="horizontal">
           <Text color="alternative">
             Warning: Anyone with your private keys can steal any assets held in
             your account. Do not share this with anyone.
@@ -81,9 +81,9 @@ export const PrivateKeyExport: SnapComponent<PrivateKeyExportProps> = ({
         </Box>
 
         <Text color="alternative"> Raw base64 encoded private key:</Text>
-        <Copyable value={privateKey} sensitive />
+        <Copyable sensitive value={privateKey} />
         <Text color="alternative"> Lotus hex encoded private key:</Text>
-        <Copyable value={lotusPrivateKey} sensitive />
+        <Copyable sensitive value={lotusPrivateKey} />
       </Section>
     </Box>
   )

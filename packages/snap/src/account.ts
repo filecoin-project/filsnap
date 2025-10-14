@@ -2,7 +2,7 @@ import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 import type { SnapsProvider } from '@metamask/snaps-sdk'
 import { parseDerivationPath } from 'iso-filecoin/utils'
 import { accountFromPrivateKey } from 'iso-filecoin/wallet'
-import type { AccountPrivate, AccountSafe, SnapConfig } from './types'
+import type { AccountPrivate, AccountSafe, SnapConfig } from './types.ts'
 
 /**
  * Return derived Account from seed with private key.

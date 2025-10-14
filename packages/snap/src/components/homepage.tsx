@@ -11,17 +11,17 @@ import {
   Text,
 } from '@metamask/snaps-sdk/jsx'
 import { RPC } from 'iso-filecoin/rpc'
-import { getAccountSafe } from '../account'
-import { INTERNAL_CONFIG, mainnetConfig, testnetConfig } from '../constants'
-import { State } from '../state'
-import * as Icons from '../svg'
-import type { HomepageContext, Network, SnapConfig } from '../types'
-import { Balance } from './balance'
-import { ButtonSvgIcon } from './button-svg-icon'
-import { ErrorBox } from './error'
-import { Footer } from './footer'
-import { Header } from './header'
-import { updateWithProgress } from './progress'
+import { getAccountSafe } from '../account.ts'
+import { INTERNAL_CONFIG, mainnetConfig, testnetConfig } from '../constants.ts'
+import { State } from '../state.ts'
+import * as Icons from '../svg/index.tsx'
+import type { HomepageContext, Network, SnapConfig } from '../types.ts'
+import { Balance } from './balance.tsx'
+import { ButtonSvgIcon } from './button-svg-icon.tsx'
+import { ErrorBox } from './error.tsx'
+import { Footer } from './footer.tsx'
+import { Header } from './header.tsx'
+import { updateWithProgress } from './progress.tsx'
 
 type HomePageProps = {
   address: string
@@ -53,7 +53,7 @@ export const HomePage: SnapComponent<HomePageProps> = ({
 }) => {
   return (
     <Box>
-      <Header icon={Icons.wallet} iconSize={24} alignment="center">
+      <Header alignment="center" icon={Icons.wallet} iconSize={24}>
         Account {accountNumber.toString()}
       </Header>
 
@@ -69,13 +69,13 @@ export const HomePage: SnapComponent<HomePageProps> = ({
         <Balance balance={balance} config={config} />
       </Section>
       <Footer>
-        <ButtonSvgIcon name={HomepageEvents.send} icon={Icons.send}>
+        <ButtonSvgIcon icon={Icons.send} name={HomepageEvents.send}>
           Send
         </ButtonSvgIcon>
-        <ButtonSvgIcon name={HomepageEvents.receive} icon={Icons.qrCode}>
+        <ButtonSvgIcon icon={Icons.qrCode} name={HomepageEvents.receive}>
           Receive
         </ButtonSvgIcon>
-        <ButtonSvgIcon name={HomepageEvents.settings} icon={Icons.settings}>
+        <ButtonSvgIcon icon={Icons.settings} name={HomepageEvents.settings}>
           Settings
         </ButtonSvgIcon>
       </Footer>
@@ -99,8 +99,8 @@ export async function createHomepage() {
     return {
       ui: (
         <ErrorBox
-          name={'Internal Error'}
           message="Internal config not found!"
+          name={'Internal Error'}
         />
       ),
     }
@@ -126,8 +126,8 @@ export async function createHomepage() {
     return {
       ui: (
         <ErrorBox
-          name={'Error calling RPC for balance'}
           message={balance.error.message}
+          name={'Error calling RPC for balance'}
         />
       ),
     }
@@ -136,8 +136,8 @@ export async function createHomepage() {
   return {
     ui: (
       <HomePage
-        address={account.address.toString()}
         accountNumber={account.accountNumber}
+        address={account.address.toString()}
         balance={balance.result}
         config={config}
       />

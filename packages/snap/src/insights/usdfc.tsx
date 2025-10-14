@@ -1,13 +1,18 @@
 import { Address, Box, Link, Row, Text } from '@metamask/snaps-sdk/jsx'
 import { formatBalance } from 'iso-filecoin-synapse'
 import { calibration, mainnet } from 'iso-filecoin-synapse/chains'
-import { type Hex, isAddressEqual } from 'viem'
-import { type Address as ViemAddress, decodeFunctionData, erc20Abi } from 'viem'
-import { ErrorBox } from '../components/error'
-import { ListHeader2 } from '../components/header'
-import { FilecoinIcon } from '../components/svg-icon'
-import * as Icons from '../svg'
-import type { TransactionInsightsHandler } from '../types'
+import {
+  decodeFunctionData,
+  erc20Abi,
+  type Hex,
+  isAddressEqual,
+  type Address as ViemAddress,
+} from 'viem'
+import { ErrorBox } from '../components/error.tsx'
+import { ListHeader2 } from '../components/header.tsx'
+import { FilecoinIcon } from '../components/svg-icon.tsx'
+import * as Icons from '../svg/index.tsx'
+import type { TransactionInsightsHandler } from '../types.ts'
 
 /**
  * Chain matches
@@ -63,12 +68,12 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
         <Box>
           <ListHeader2
             icon={Icons.wallet}
-            tooltip="ERC20 Approval Parameters"
             subtitle={
               <Text color="alternative" size="sm">
                 Approve Filecoin Pay as spender of your USDFC balance.
               </Text>
             }
+            tooltip="ERC20 Approval Parameters"
           >
             USDFC Spender Approval
           </ListHeader2>
@@ -87,11 +92,11 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
           <Box direction="vertical">
             <Box direction="horizontal">
               <FilecoinIcon />
-              <Text size="sm" color="muted">
+              <Text color="muted" size="sm">
                 Filecoin Pay
               </Text>
             </Box>
-            <Text size="sm" color="muted">
+            <Text color="muted" size="sm">
               Review{' '}
               <Link href="https://github.com/FilOzone/filecoin-pay">
                 source
@@ -111,7 +116,7 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
   } catch (error) {
     const err = error as Error
     return {
-      content: <ErrorBox name={err.name} message={err.message} />,
+      content: <ErrorBox message={err.message} name={err.name} />,
     }
   }
 }

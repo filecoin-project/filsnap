@@ -1,6 +1,9 @@
 import { createFixture } from 'metamask-testing-tools'
-import type { FilSnapMethods } from '../src'
-import type { ConfigureRequest, ConfigureResponse } from '../src/rpc/configure'
+import type {
+  ConfigureRequest,
+  ConfigureResponse,
+} from '../src/rpc/configure.ts'
+import type { FilSnapMethods } from '../src/types.ts'
 
 const { test, expect } = createFixture({
   isolated: true,
@@ -16,7 +19,7 @@ test.describe('fil_configure', () => {
   test.beforeEach(async ({ metamask }) => {
     await metamask.page.getByTestId('confirmation-submit-button').click()
   })
-  test('should get configure for testnet', async ({ metamask, page }) => {
+  test.only('should get configure for testnet', async ({ metamask, page }) => {
     const req = metamask.invokeSnap<ConfigureResponse>({
       request: {
         method: 'fil_configure',

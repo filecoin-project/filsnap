@@ -1,5 +1,5 @@
 import { createFixture } from 'metamask-testing-tools'
-import type { GetAddressResponse, GetPublicResponse } from '../src/types'
+import type { GetAddressResponse, GetPublicResponse } from '../src/types.ts'
 
 const { test, expect } = createFixture({
   isolated: false,

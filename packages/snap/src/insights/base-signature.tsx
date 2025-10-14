@@ -1,10 +1,10 @@
 import { Address, Box, Link, Row } from '@metamask/snaps-sdk/jsx'
 import { fromEthAddress } from 'iso-filecoin/address'
 import { RPC } from 'iso-filecoin/rpc'
-import { ListHeader } from '../components/header'
-import * as Icons from '../svg'
-import type { SignatureInsightsHandler } from '../types'
-import { addressToCaip10, explorerAddressLink } from '../utils'
+import { ListHeader } from '../components/header.tsx'
+import * as Icons from '../svg/index.tsx'
+import type { SignatureInsightsHandler } from '../types.ts'
+import { addressToCaip10, explorerAddressLink } from '../utils.ts'
 
 /**
  * Handles the base signature insights.

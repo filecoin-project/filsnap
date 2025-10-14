@@ -3,19 +3,19 @@ import { utf8 } from 'iso-base/utf8'
 import { Signature } from 'iso-filecoin/signature'
 import * as Wallet from 'iso-filecoin/wallet'
 import { createFixture } from 'metamask-testing-tools'
-import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key'
-import type { GetBalanceResponse } from '../src/rpc/get-balance'
+import type { ExportPrivateKeyResponse } from '../src/rpc/export-private-key.ts'
+import type { GetBalanceResponse } from '../src/rpc/get-balance.ts'
 import type {
   SendMessageRequest,
   SendMessageResponse,
-} from '../src/rpc/send-message'
+} from '../src/rpc/send-message.ts'
 import type {
   SignMessageRawRequest,
   SignMessageRawResponse,
   SignMessageRequest,
   SignMessageResponse,
-} from '../src/rpc/sign-message'
-import type { GetAddressResponse, GetPublicResponse } from '../src/types'
+} from '../src/rpc/sign-message.ts'
+import type { GetAddressResponse, GetPublicResponse } from '../src/types.ts'
 
 const { test, expect } = createFixture({
   isolated: false,

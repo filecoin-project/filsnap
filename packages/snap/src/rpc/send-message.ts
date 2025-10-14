@@ -2,8 +2,8 @@ import { base64pad } from 'iso-base/rfc4648'
 import { Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
 import { z } from 'zod/v4'
-import type { MessageStatus, SnapContext, SnapResponse } from '../types'
-import { serializeError } from '../utils'
+import type { MessageStatus, SnapContext, SnapResponse } from '../types.ts'
+import { serializeError } from '../utils.ts'
 
 // Schemas
 export const signedMessage = z.object({
