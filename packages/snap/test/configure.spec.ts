@@ -16,9 +16,6 @@ const { test, expect } = createFixture({
 })
 
 test.describe('fil_configure', () => {
-  test.beforeEach(async ({ metamask }) => {
-    await metamask.page.getByTestId('confirmation-submit-button').click()
-  })
   test('should get configure for testnet', async ({ metamask, page }) => {
     const req = metamask.invokeSnap<ConfigureResponse>({
       request: {
