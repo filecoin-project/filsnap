@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.9.0...filsnap-v1.9.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* fix dependencies and add types entrypoint ([e475269](https://github.com/filecoin-project/filsnap/commit/e475269afabf03c7c048e9ec4c6ab241e77559f3))
+
 ## [1.9.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.8.1...filsnap-v1.9.0) (2025-08-19)
 
 
