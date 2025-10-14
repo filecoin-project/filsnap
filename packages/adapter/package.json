@@ -65,7 +65,7 @@
     }
   },
   "dependencies": {
-    "filsnap": "workspace:*",
+    "filsnap": "workspace:^",
     "iso-base": "^4.2.1",
     "semver": "^7.7.3"
   },
