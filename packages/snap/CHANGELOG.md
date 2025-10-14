@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.9.1...filsnap-v1.9.2) (2025-10-14)
+
+
+### Bug Fixes
+
+* iso-filecoin peer again ([b70b299](https://github.com/filecoin-project/filsnap/commit/b70b299711dccaf17da9e753d2710b61aed33121))
+
 ## [1.9.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.9.0...filsnap-v1.9.1) (2025-10-14)
 
 
