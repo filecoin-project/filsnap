@@ -110,7 +110,7 @@
     "@playwright/test": "^1.56.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "iso-filecoin-synapse": "^0.0.5",
+    "iso-filecoin-synapse": "^0.0.6",
     "iso-ucan": "^0.4.1",
     "metamask-testing-tools": "^2.2.8",
     "onchange": "^7.1.0",

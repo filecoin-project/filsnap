@@ -1,9 +1,9 @@
 import { Address, Box, Link, Row, Text } from '@metamask/snaps-sdk/jsx'
 import { formatBalance } from 'iso-filecoin-synapse'
 import { calibration, mainnet } from 'iso-filecoin-synapse/chains'
+import type { Chain } from 'iso-filecoin-synapse/types'
 import {
   decodeFunctionData,
-  erc20Abi,
   type Hex,
   isAddressEqual,
   type Address as ViemAddress,
@@ -14,30 +14,14 @@ import { FilecoinIcon } from '../components/svg-icon.tsx'
 import * as Icons from '../svg/index.tsx'
 import type { TransactionInsightsHandler } from '../types.ts'
 
-/**
- * Chain matches
- *
- * @param chainId - The chain ID
- */
-function chainMatches(chainId: string): boolean {
-  return ['eip155:314159', 'eip155:314'].includes(chainId)
-}
-
-/**
- * Contract address matches
- *
- * @param transactionTo - The transaction to address
- */
-function contractAddressMatches(
-  transactionTo: ViemAddress | undefined
-): boolean {
-  if (!transactionTo) {
-    return false
+function caipToChain(caip: string): Chain | undefined {
+  if (caip === 'eip155:314159') {
+    return calibration
   }
-  return (
-    isAddressEqual(transactionTo, mainnet.contracts.usdfc.address) ||
-    isAddressEqual(transactionTo, calibration.contracts.usdfc.address)
-  )
+  if (caip === 'eip155:314') {
+    return mainnet
+  }
+  return undefined
 }
 
 /**
@@ -50,18 +34,36 @@ function contractAddressMatches(
 export const handleUsdfc: TransactionInsightsHandler = (props) => {
   const { chainId, transaction } = props
 
+  const chain = caipToChain(chainId)
+
+  if (!chain) {
+    return null
+  }
+
   if (
-    !chainMatches(chainId) ||
-    !contractAddressMatches(transaction.to as ViemAddress)
+    !isAddressEqual(
+      transaction.to as ViemAddress,
+      chain.contracts.payments.address
+    )
   ) {
     return null
   }
 
   try {
     const callData = decodeFunctionData({
-      abi: erc20Abi,
+      abi: chain.contracts.payments.abi,
       data: transaction.data as Hex,
     })
+
+    if (callData.functionName !== 'depositWithPermitAndApproveOperator') {
+      return null
+    }
+
+    console.log(
+      '🚀 ~ handleUsdfc ~ callData:',
+      callData.functionName,
+      callData.args
+    )
 
     return {
       content: (
@@ -70,24 +72,31 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
             icon={Icons.wallet}
             subtitle={
               <Text color="alternative" size="sm">
-                Approve Filecoin Pay as spender of your USDFC balance.
+                Deposit USDFC to Filecoin Pay account and approve Storage
+                Service.
               </Text>
             }
-            tooltip="ERC20 Approval Parameters"
           >
-            USDFC Spender Approval
+            Deposit Request
           </ListHeader2>
-          <Row label="Spender" tooltip="Filecoin Pay Address">
+          <Row label="Recipient" tooltip="Filecoin Pay">
             <Link
-              href={`https://beryx.io/fil/calibration/address/${callData.args[0] as ViemAddress}`}
+              href={`${chain.blockExplorers?.default.url}/address/${transaction.to as ViemAddress}`}
             >
-              <Address address={callData.args[0] as ViemAddress} />
+              <Address address={transaction.to as ViemAddress} />
             </Link>
           </Row>
-          <Row label="Amount" tooltip="Amount of USDFC Filecoin Pay can spend">
+          <Row label="Amount" tooltip="Amount of USDFC to deposit">
             <Text>
-              {formatBalance({ value: callData.args[1] as bigint })} USDFC
+              {formatBalance({ value: BigInt(callData.args[2]) })} USDFC
             </Text>
+          </Row>
+          <Row label="Service" tooltip="Filecoin Warm Storage Service">
+            <Link
+              href={`${chain.blockExplorers?.default.url}/address/${callData.args[7] as ViemAddress}`}
+            >
+              <Address address={callData.args[7] as ViemAddress} />
+            </Link>
           </Row>
           <Box direction="vertical">
             <Box direction="horizontal">
@@ -103,7 +112,7 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
               </Link>{' '}
               and onchain{' '}
               <Link
-                href={`https://beryx.io/fil/calibration/address/${callData.args[0] as ViemAddress}`}
+                href={`${chain.blockExplorers?.default.url}/address/${transaction.to as ViemAddress}`}
               >
                 deployment
               </Link>{' '}

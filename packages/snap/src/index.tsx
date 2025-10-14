@@ -1,11 +1,9 @@
 import {
   type OnHomePageHandler,
-  type OnInstallHandler,
   type OnRpcRequestHandler,
   type OnSignatureHandler,
   type OnTransactionHandler,
   type OnTransactionResponse,
-  type OnUpdateHandler,
   type OnUserInputHandler,
   UserInputEventType,
 } from '@metamask/snaps-sdk'
@@ -25,11 +23,10 @@ import {
   onSendResult,
 } from './components/homepage-send.tsx'
 import { onSaveSettings, onSettings } from './components/homepage-settings.tsx'
-import { OnInstall } from './components/on-install.tsx'
-import { OnUpdate } from './components/on-update.tsx'
 import { INTERNAL_CONFIG } from './constants.ts'
 import { handleBaseSignature } from './insights/base-signature.tsx'
 import { handleFilFowarder } from './insights/filforwarder.tsx'
+import { handleSynapseDepositPermit } from './insights/synapse/deposit-permit.tsx'
 import { handleUcanSignature } from './insights/ucan-signature.tsx'
 import { handleUsdfc } from './insights/usdfc.tsx'
 import {
@@ -384,7 +381,11 @@ export const onSignature: OnSignatureHandler = async ({ signature }) => {
     await state.set(INTERNAL_CONFIG, config)
   }
 
-  const handlers = [handleUcanSignature, handleBaseSignature]
+  const handlers = [
+    // handleUcanSignature,
+    // handleBaseSignature,
+    handleSynapseDepositPermit,
+  ]
 
   let result = null
   for (const handler of handlers) {
