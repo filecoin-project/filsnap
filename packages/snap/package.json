@@ -103,7 +103,6 @@
     "@metamask/snaps-sdk": "6.17.1",
     "dequal": "^2.0.3",
     "iso-base": "^4.2.1",
-    "iso-filecoin": "~7.4.4",
     "merge-options": "^3.0.4"
   },
   "devDependencies": {
@@ -123,6 +122,9 @@
     "typescript": "5.9.3",
     "viem": "^2.38.2",
     "zod": "^3.25.0"
+  },
+  "peerDependencies": {
+    "iso-filecoin": "7.x"
   },
   "publishConfig": {
     "provenance": true
