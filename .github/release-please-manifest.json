@@ -1,5 +1,5 @@
 {
   "packages/snap": "1.9.2",
-  "packages/adapter": "3.3.7",
+  "packages/adapter": "3.3.8",
   "packages/adapter-react": "2.0.5"
 }
