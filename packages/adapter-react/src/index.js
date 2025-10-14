@@ -1,7 +1,7 @@
 import {
-  FilsnapAdapter,
   chainIdtoNetwork,
   createConnector,
+  FilsnapAdapter,
   getProvider,
 } from 'filsnap-adapter'
 import * as React from 'react'

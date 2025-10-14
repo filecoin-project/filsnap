@@ -1,14 +1,14 @@
-import assert from 'assert'
 import { cleanup, renderHook, waitFor } from '@testing-library/react'
+import assert from 'assert'
 import { FilsnapProvider, useFilsnap } from '../src/index.js'
 
 beforeEach(() => {
   cleanup()
 })
-// @ts-ignore
+// @ts-expect-error
 const wrapper = ({ children }) => FilsnapProvider({ children })
 
-it('should return the initial context', async () => {
+it('should return the initial context', () => {
   const { result } = renderHook(() => useFilsnap(), { wrapper })
 
   assert.strictEqual(result.current.isLoading, true)
