@@ -18,15 +18,15 @@
     "filsnap-adapter": "^3.3.8",
     "iso-base": "^4.2.1",
     "iso-filecoin": "^7.4.5",
-    "viem": "^2.38.2"
+    "viem": "^2.38.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.4",
+    "@babel/core": "^7.28.5",
     "@biomejs/biome": "^2.2.6",
     "@hugomrdias/configs": "^1.1.2",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.9.2",
     "filsnap": "^1.9.3",
     "typescript": "5.9.3",
-    "vite": "^7.1.10"
+    "vite": "^7.1.12"
   }
 }

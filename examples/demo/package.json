@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@acab/reset.css": "^0.11.0",
-    "@tanstack/react-query": "^5.90.3",
+    "@tanstack/react-query": "^5.90.5",
     "clsx": "^2.1.0",
     "dns-over-http-resolver": "^3.0.16",
     "filsnap": "workspace:*",
@@ -63,19 +63,19 @@
     "preact": "^10.27.2",
     "react-hook-form": "^7.65.0",
     "react-toastify": "^11.0.5",
-    "viem": "^2.38.2",
-    "wagmi": "^2.18.1",
+    "viem": "^2.38.5",
+    "wagmi": "^2.19.1",
     "water.css": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.4",
+    "@babel/core": "^7.28.5",
     "@biomejs/biome": "^2.2.6",
     "@hugomrdias/configs": "^1.1.2",
     "@preact/preset-vite": "^2.10.2",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.9.2",
     "tiny-git-rev-sync": "^0.1.0",
     "typescript": "5.9.3",
-    "vite": "^7.1.10",
+    "vite": "^7.1.12",
     "wireit": "^0.14.12"
   },
   "depcheck": {

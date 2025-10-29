@@ -107,12 +107,12 @@
   },
   "devDependencies": {
     "@metamask/snaps-cli": "8.3.0",
-    "@playwright/test": "^1.56.0",
+    "@playwright/test": "^1.56.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "iso-filecoin-synapse": "^0.0.6",
     "iso-ucan": "^0.4.1",
-    "metamask-testing-tools": "^2.2.8",
+    "metamask-testing-tools": "^2.2.9",
     "onchange": "^7.1.0",
     "playwright-test": "^14.1.11",
     "prettier": "^3.6.2",
@@ -120,7 +120,7 @@
     "sirv-cli": "^3.0.1",
     "type-fest": "^5.1.0",
     "typescript": "5.9.3",
-    "viem": "^2.38.2",
+    "viem": "^2.38.5",
     "zod": "^3.25.0"
   },
   "peerDependencies": {
