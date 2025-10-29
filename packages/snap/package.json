@@ -121,7 +121,7 @@
     "type-fest": "^5.1.0",
     "typescript": "5.9.3",
     "viem": "^2.38.5",
-    "zod": "^3.25.0"
+    "zod": "^4.1.12"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
