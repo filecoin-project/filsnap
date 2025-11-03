@@ -61,7 +61,7 @@
     "iso-base": "^4.2.1",
     "iso-filecoin": "^7.4.5",
     "preact": "^10.27.2",
-    "react-hook-form": "^7.65.0",
+    "react-hook-form": "^7.66.0",
     "react-toastify": "^11.0.5",
     "viem": "^2.38.5",
     "wagmi": "^2.19.1",
