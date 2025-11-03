@@ -76,7 +76,7 @@
     "@types/node": "^24.9.2",
     "@types/semver": "^7.7.1",
     "metamask-testing-tools": "^2.2.9",
-    "type-fest": "^5.1.0",
+    "type-fest": "^5.2.0",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
