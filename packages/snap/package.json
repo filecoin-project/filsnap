@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "@metamask/key-tree": "^10.0.2",
-    "@metamask/snaps-sdk": "10.1.0",
+    "@metamask/snaps-sdk": "10.0.0",
     "dequal": "^2.0.3",
     "iso-base": "^4.2.1",
     "merge-options": "^3.0.4"
