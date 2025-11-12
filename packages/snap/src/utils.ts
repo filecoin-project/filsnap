@@ -1,7 +1,7 @@
 import { Token, type Value } from 'iso-filecoin/token'
 import { parseDerivationPath, pathFromNetwork } from 'iso-filecoin/utils'
 import type { JsonValue } from 'type-fest'
-import * as z from 'zod/v4'
+import * as z from 'zod'
 import * as Constants from './constants.ts'
 import * as Schemas from './schemas.ts'
 import type { Config, Network, SnapConfig, SnapResponseError } from './types.ts'
