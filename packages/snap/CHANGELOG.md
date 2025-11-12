@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.0...filsnap-v1.10.1) (2025-11-12)
+
+
+### Bug Fixes
+
+* change zod import ([e21c957](https://github.com/filecoin-project/filsnap/commit/e21c9571c9a430474b28f18f93d12026d6217d80))
+* zod ([4d6730a](https://github.com/filecoin-project/filsnap/commit/4d6730a61b9249d1fca8b4c4b3786d64d8b61a13))
+
 ## [1.10.0](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.9.3...filsnap-v1.10.0) (2025-10-14)
 
 
