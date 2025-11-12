@@ -8,7 +8,7 @@ import type {
 import type { IAddress, MessageObj } from 'iso-filecoin/types'
 import type { accountFromPrivateKey } from 'iso-filecoin/wallet'
 import type { JsonValue, Promisable } from 'type-fest'
-import type { z } from 'zod/v4'
+import type { z } from 'zod'
 import type {
   configure,
   filChangeNetwork,

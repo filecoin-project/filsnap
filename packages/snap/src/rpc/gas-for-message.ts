@@ -1,7 +1,7 @@
 import * as Address from 'iso-filecoin/address'
 import { Schemas } from 'iso-filecoin/message'
 import { RPC } from 'iso-filecoin/rpc'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import { getAccountSafe } from '../account.ts'
 import type { SnapContext, SnapResponse } from '../types.ts'
 import { serializeError, serializeValidationError } from '../utils.ts'

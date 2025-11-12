@@ -8,7 +8,6 @@ export const Spacer: SnapComponent<HomePageProps> = ({ unit = 1 }) => {
   return (
     <Box>
       {Array.from({ length: unit }, (_, i) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: skip
         <Text key={`spacer${i}`}> </Text>
       ))}
     </Box>

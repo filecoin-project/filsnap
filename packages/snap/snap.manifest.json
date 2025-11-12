@@ -1,5 +1,5 @@
 {
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "Enhances MetaMask with native Filecoin address support (e.g. f1 addresses). (Not needed for the Filecoin EVM.)",
   "proposedName": "Filecoin Wallet",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/filecoin-project/filsnap.git"
   },
   "source": {
-    "shasum": "r7eUoDbbOuCk86A1NKXP9aUUOx/CmiVYpVsE+kM4ENA=",
+    "shasum": "M559cVVt7J7WJKRjP+PAXbW03Yb4ZJok4mziTbMI5bw=",
     "location": {
       "npm": {
         "filePath": "dist/snap.js",
@@ -36,6 +36,6 @@
     ],
     "snap_manageState": {}
   },
-  "platformVersion": "6.17.1",
+  "platformVersion": "10.1.0",
   "manifestVersion": "0.1"
 }

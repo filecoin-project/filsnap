@@ -1,6 +1,6 @@
 import { Schemas } from 'iso-filecoin/message'
 import { parseDerivationPath } from 'iso-filecoin/utils'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import type { Network } from './types.ts'
 
 const alphabet =

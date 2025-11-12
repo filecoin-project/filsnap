@@ -7,7 +7,7 @@ import {
   Option,
   Section,
 } from '@metamask/snaps-sdk/jsx'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import { INTERNAL_CONFIG } from '../constants.ts'
 import { State } from '../state.ts'
 import * as Icons from '../svg/index.tsx'
