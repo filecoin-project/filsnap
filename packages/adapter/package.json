@@ -65,18 +65,17 @@
     }
   },
   "dependencies": {
-    "filsnap": "workspace:^",
     "iso-base": "^4.2.1",
     "semver": "^7.7.3"
   },
   "devDependencies": {
-    "@metamask/approval-controller": "^8.0.0",
-    "@metamask/snaps-sdk": "6.17.1",
+    "@metamask/snaps-sdk": "10.1.0",
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.1",
     "@types/semver": "^7.7.1",
+    "filsnap": "workspace:^",
     "metamask-testing-tools": "^2.2.9",
-    "type-fest": "^5.1.0",
+    "type-fest": "^5.2.0",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
@@ -96,9 +95,7 @@
     "ignores": [
       "@types/*",
       "assert",
-      "@metamask/snaps-cli",
-      "playwright-test",
-      "@metamask/approval-controller"
+      "playwright-test"
     ]
   }
 }
