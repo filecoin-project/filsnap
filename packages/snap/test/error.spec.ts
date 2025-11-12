@@ -119,7 +119,9 @@ test.describe('API Errors', () => {
       page,
     })
 
-    expect(response.error?.message).toContain('✖ Invalid input\n  → at network')
+    expect(response.error?.message).toContain(
+      '✖ Invalid option: expected one of "mainnet"|"testnet"\n  → at network'
+    )
   })
 
   test('should throw on invalid derivation path', async ({

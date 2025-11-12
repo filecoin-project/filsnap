@@ -59,12 +59,6 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
       return null
     }
 
-    console.log(
-      '🚀 ~ handleUsdfc ~ callData:',
-      callData.functionName,
-      callData.args
-    )
-
     return {
       content: (
         <Box>

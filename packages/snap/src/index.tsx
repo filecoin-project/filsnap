@@ -24,10 +24,8 @@ import {
 } from './components/homepage-send.tsx'
 import { onSaveSettings, onSettings } from './components/homepage-settings.tsx'
 import { INTERNAL_CONFIG } from './constants.ts'
-import { handleBaseSignature } from './insights/base-signature.tsx'
 import { handleFilFowarder } from './insights/filforwarder.tsx'
 import { handleSynapseDepositPermit } from './insights/synapse/deposit-permit.tsx'
-import { handleUcanSignature } from './insights/ucan-signature.tsx'
 import { handleUsdfc } from './insights/usdfc.tsx'
 import {
   configure,
