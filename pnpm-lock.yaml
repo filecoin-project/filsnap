@@ -208,8 +208,8 @@ importers:
         version: 7.7.3
     devDependencies:
       '@metamask/snaps-sdk':
-        specifier: 10.1.0
-        version: 10.1.0(webextension-polyfill@0.10.0)
+        specifier: 10.0.0
+        version: 10.0.0(webextension-polyfill@0.10.0)
       '@playwright/test':
         specifier: ^1.56.1
         version: 1.56.1
@@ -1110,10 +1110,6 @@ packages:
 
   '@metamask/snaps-sdk@10.0.0':
     resolution: {integrity: sha512-asVlDged6oKncXVRensZZHJew82pm8Pc9O927cqHAc+5YrK2Qkll+VW/EU+jt2LVV3Xsl8Vhi3hKEy8q8L+vsQ==}
-    engines: {node: ^20 || >=22}
-
-  '@metamask/snaps-sdk@10.1.0':
-    resolution: {integrity: sha512-h8O1+9msBw3HZbKoXht7R7BnqC3bcmnL5kj7ySSjrLDfsIOFmjaT9kH/q8/pxAr1SgNHsAhkv+PfGLlUsDvfEg==}
     engines: {node: ^20 || >=22}
 
   '@metamask/snaps-sdk@6.17.1':
@@ -6449,7 +6445,7 @@ snapshots:
       '@metamask/key-tree': 10.1.1
       '@metamask/permission-controller': 11.1.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)
       '@metamask/rpc-errors': 7.0.3
-      '@metamask/snaps-sdk': 10.1.0(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 10.0.0(webextension-polyfill@0.10.0)
       '@metamask/snaps-utils': 11.6.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.8.1
@@ -6463,17 +6459,6 @@ snapshots:
   '@metamask/snaps-sandbox@1.0.0': {}
 
   '@metamask/snaps-sdk@10.0.0(webextension-polyfill@0.10.0)':
-    dependencies:
-      '@metamask/key-tree': 10.1.1
-      '@metamask/providers': 22.1.1(webextension-polyfill@0.10.0)
-      '@metamask/rpc-errors': 7.0.3
-      '@metamask/superstruct': 3.2.1
-      '@metamask/utils': 11.8.1
-    transitivePeerDependencies:
-      - supports-color
-      - webextension-polyfill
-
-  '@metamask/snaps-sdk@10.1.0(webextension-polyfill@0.10.0)':
     dependencies:
       '@metamask/key-tree': 10.1.1
       '@metamask/providers': 22.1.1(webextension-polyfill@0.10.0)
@@ -6516,7 +6501,7 @@ snapshots:
       '@metamask/rpc-errors': 7.0.3
       '@metamask/slip44': 4.3.0
       '@metamask/snaps-registry': 3.3.0
-      '@metamask/snaps-sdk': 10.1.0(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 10.0.0(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.8.1
       '@noble/hashes': 1.8.0
@@ -6541,7 +6526,7 @@ snapshots:
   '@metamask/snaps-webpack-plugin@5.1.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)':
     dependencies:
       '@metamask/snaps-rpc-methods': 13.5.3(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)
-      '@metamask/snaps-sdk': 10.1.0(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 10.0.0(webextension-polyfill@0.10.0)
       '@metamask/snaps-utils': 11.6.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)
       '@metamask/utils': 11.8.1
       chalk: 4.1.2
