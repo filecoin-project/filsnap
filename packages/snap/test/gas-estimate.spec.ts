@@ -117,7 +117,7 @@ test.describe('fil_getGasForMessage', () => {
       throw new Error('Should fail')
     }
     expect(estimate.error.message).toContain(
-      '✖ Invalid input\n  → at message.value'
+      '✖ Invalid input: expected string, received number\n  → at message.value'
     )
   })
 })

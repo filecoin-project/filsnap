@@ -165,7 +165,9 @@ test.describe('filsnap testnet', () => {
       page,
     })
 
-    expect(error?.message).toContain('✖ Invalid input\n  → at message')
+    expect(error?.message).toContain(
+      '✖ Invalid input: expected string, received number\n  → at message'
+    )
   })
 
   test('should sign message', async ({ metamask, page }) => {
