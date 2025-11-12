@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.10](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.9...filsnap-adapter-v3.3.10) (2025-11-12)
+
+
+### Bug Fixes
+
+* downgrade snap sdk ([c0b6c11](https://github.com/filecoin-project/filsnap/commit/c0b6c1147e328b34662eb18816376caf10c3b6fd))
+
 ## [3.3.9](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-v3.3.8...filsnap-adapter-v3.3.9) (2025-11-12)
 
 
