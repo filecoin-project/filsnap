@@ -208,8 +208,8 @@ importers:
         version: 7.7.3
     devDependencies:
       '@metamask/snaps-sdk':
-        specifier: 10.0.0
-        version: 10.0.0(webextension-polyfill@0.10.0)
+        specifier: 10.1.0
+        version: 10.1.0(webextension-polyfill@0.10.0)
       '@playwright/test':
         specifier: ^1.56.1
         version: 1.56.1
@@ -281,8 +281,8 @@ importers:
         specifier: ^10.0.2
         version: 10.1.1
       '@metamask/snaps-sdk':
-        specifier: 10.0.0
-        version: 10.0.0(webextension-polyfill@0.10.0)
+        specifier: 10.1.0
+        version: 10.1.0(webextension-polyfill@0.10.0)
       dequal:
         specifier: ^2.0.3
         version: 2.0.3
@@ -1108,8 +1108,8 @@ packages:
     resolution: {integrity: sha512-0I3zHtBqnCIBSIV6D5HtOgWhSA+jiK05oIhusnCG09aJfqYecDk8RBKCVpoeQroCX1AhiA1n5APbaSfdzflnCA==}
     engines: {node: ^18.16 || >=20}
 
-  '@metamask/snaps-sdk@10.0.0':
-    resolution: {integrity: sha512-asVlDged6oKncXVRensZZHJew82pm8Pc9O927cqHAc+5YrK2Qkll+VW/EU+jt2LVV3Xsl8Vhi3hKEy8q8L+vsQ==}
+  '@metamask/snaps-sdk@10.1.0':
+    resolution: {integrity: sha512-h8O1+9msBw3HZbKoXht7R7BnqC3bcmnL5kj7ySSjrLDfsIOFmjaT9kH/q8/pxAr1SgNHsAhkv+PfGLlUsDvfEg==}
     engines: {node: ^20 || >=22}
 
   '@metamask/snaps-sdk@6.17.1':
@@ -2000,6 +2000,7 @@ packages:
 
   '@walletconnect/ethereum-provider@2.21.1':
     resolution: {integrity: sha512-SSlIG6QEVxClgl1s0LMk4xr2wg4eT3Zn/Hb81IocyqNSGfXpjtawWxKxiC5/9Z95f1INyBD6MctJbL/R1oBwIw==}
+    deprecated: 'Reliability and performance improvements. See: https://github.com/WalletConnect/walletconnect-monorepo/releases'
 
   '@walletconnect/events@1.0.1':
     resolution: {integrity: sha512-NPTqaoi0oPBVNuLv7qPaJazmGHs5JGyO8eEAk5VGKmJzDR7AHzD4k6ilox5kxk1iwiOnFopBOOMLs86Oa76HpQ==}
@@ -6445,7 +6446,7 @@ snapshots:
       '@metamask/key-tree': 10.1.1
       '@metamask/permission-controller': 11.1.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)
       '@metamask/rpc-errors': 7.0.3
-      '@metamask/snaps-sdk': 10.0.0(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 10.1.0(webextension-polyfill@0.10.0)
       '@metamask/snaps-utils': 11.6.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.8.1
@@ -6458,7 +6459,7 @@ snapshots:
 
   '@metamask/snaps-sandbox@1.0.0': {}
 
-  '@metamask/snaps-sdk@10.0.0(webextension-polyfill@0.10.0)':
+  '@metamask/snaps-sdk@10.1.0(webextension-polyfill@0.10.0)':
     dependencies:
       '@metamask/key-tree': 10.1.1
       '@metamask/providers': 22.1.1(webextension-polyfill@0.10.0)
@@ -6501,7 +6502,7 @@ snapshots:
       '@metamask/rpc-errors': 7.0.3
       '@metamask/slip44': 4.3.0
       '@metamask/snaps-registry': 3.3.0
-      '@metamask/snaps-sdk': 10.0.0(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 10.1.0(webextension-polyfill@0.10.0)
       '@metamask/superstruct': 3.2.1
       '@metamask/utils': 11.8.1
       '@noble/hashes': 1.8.0
@@ -6526,7 +6527,7 @@ snapshots:
   '@metamask/snaps-webpack-plugin@5.1.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)':
     dependencies:
       '@metamask/snaps-rpc-methods': 13.5.3(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)
-      '@metamask/snaps-sdk': 10.0.0(webextension-polyfill@0.10.0)
+      '@metamask/snaps-sdk': 10.1.0(webextension-polyfill@0.10.0)
       '@metamask/snaps-utils': 11.6.1(@babel/runtime@7.28.4)(@metamask/approval-controller@8.0.0)(webextension-polyfill@0.10.0)
       '@metamask/utils': 11.8.1
       chalk: 4.1.2
@@ -6573,7 +6574,7 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
       '@types/debug': 4.1.12
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       pony-cause: 2.1.11
       semver: 7.7.3
       uuid: 9.0.1
@@ -6587,7 +6588,7 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
       '@types/debug': 4.1.12
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       pony-cause: 2.1.11
       semver: 7.7.3
       uuid: 9.0.1
@@ -7772,7 +7773,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.4
       '@noble/curves': 1.9.7
-      '@noble/hashes': 1.4.0
+      '@noble/hashes': 1.8.0
       '@solana/buffer-layout': 4.0.1
       '@solana/codecs-numbers': 2.3.0(typescript@5.9.3)
       agentkeepalive: 4.6.0
@@ -11357,10 +11358,10 @@ snapshots:
   ox@0.6.7(typescript@5.9.3)(zod@3.25.76):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
-      '@noble/curves': 1.8.1
-      '@noble/hashes': 1.7.1
-      '@scure/bip32': 1.6.2
-      '@scure/bip39': 1.5.4
+      '@noble/curves': 1.9.7
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
       abitype: 1.0.8(typescript@5.9.3)(zod@3.25.76)
       eventemitter3: 5.0.1
     optionalDependencies:
@@ -11371,10 +11372,10 @@ snapshots:
   ox@0.6.7(typescript@5.9.3)(zod@4.1.12):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
-      '@noble/curves': 1.8.1
-      '@noble/hashes': 1.7.1
-      '@scure/bip32': 1.6.2
-      '@scure/bip39': 1.5.4
+      '@noble/curves': 1.9.7
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
       abitype: 1.0.8(typescript@5.9.3)(zod@4.1.12)
       eventemitter3: 5.0.1
     optionalDependencies:
