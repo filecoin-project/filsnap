@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.1...filsnap-v1.10.2) (2025-11-12)
+
+
+### Bug Fixes
+
+* downgrade snap sdk ([d498bf1](https://github.com/filecoin-project/filsnap/commit/d498bf13bfccce3452d713944ff0310535d84fff))
+
 ## [1.10.1](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.0...filsnap-v1.10.1) (2025-11-12)
 
 
