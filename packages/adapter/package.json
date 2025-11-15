@@ -74,7 +74,7 @@
     "@types/node": "^24.10.1",
     "@types/semver": "^7.7.1",
     "filsnap": "workspace:^",
-    "metamask-testing-tools": "^2.2.9",
+    "metamask-testing-tools": "^2.2.10",
     "type-fest": "^5.2.0",
     "typescript": "5.9.3"
   },
