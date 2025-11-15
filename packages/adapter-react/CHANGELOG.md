@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.5...filsnap-adapter-react-v2.0.6) (2025-11-15)
+
+
+### Bug Fixes
+
+* zod ([4d6730a](https://github.com/filecoin-project/filsnap/commit/4d6730a61b9249d1fca8b4c4b3786d64d8b61a13))
+
 ## [2.0.5](https://github.com/filecoin-project/filsnap/compare/filsnap-adapter-react-v2.0.4...filsnap-adapter-react-v2.0.5) (2025-08-14)
 
 
