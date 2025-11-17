@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
-    "@biomejs/biome": "^2.3.5",
+    "@biomejs/biome": "^2.3.6",
     "@hugomrdias/configs": "^1.1.2",
     "@types/node": "^24.10.1",
     "filsnap": "^1.10.2",
