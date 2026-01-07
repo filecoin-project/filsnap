@@ -60,7 +60,7 @@
     "filsnap-adapter-react": "workspace:*",
     "iso-base": "^4.2.1",
     "iso-filecoin": "^7.4.7",
-    "preact": "^10.27.2",
+    "preact": "^10.27.3",
     "react-hook-form": "^7.66.0",
     "react-toastify": "^11.0.5",
     "viem": "^2.39.0",

@@ -59,7 +59,7 @@
     "assert": "^2.1.0",
     "mocha": "^11.7.5",
     "playwright-test": "^14.1.11",
-    "preact": "^10.27.2",
+    "preact": "^10.27.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "typescript": "5.9.3"
