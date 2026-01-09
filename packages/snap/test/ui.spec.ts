@@ -72,20 +72,20 @@ fixture.test.describe('JSX UI Dialogs', () => {
 
     // await metamask.page.waitForTimeout(60000000)
     await fixture
-      .expect(metamask.page.getByText('Connection Request'))
+      .expect(metamask.sidepanel.getByText('Connection Request'))
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText('from http://localhost:8081'))
+      .expect(metamask.sidepanel.getByText('from http://localhost:8081'))
       .toBeVisible()
 
     await fixture
-      .expect(metamask.page.getByText('t1pc2ap...eelna'))
+      .expect(metamask.sidepanel.getByText('t1pc2ap...eelna'))
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText(decimals.toString()))
+      .expect(metamask.sidepanel.getByText(decimals.toString()))
       .toBeVisible()
 
-    await metamask.page.getByTestId('confirmation-submit-button').click()
+    await metamask.sidepanel.getByTestId('confirmation-submit-button').click()
     await req
   })
 
@@ -109,23 +109,23 @@ fixture.test.describe('JSX UI Dialogs', () => {
 
     // await metamask.page.waitForTimeout(60000000)
     await fixture
-      .expect(metamask.page.getByText('Transaction Request'))
+      .expect(metamask.sidepanel.getByText('Transaction Request'))
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText('from http://localhost:8081'))
+      .expect(metamask.sidepanel.getByText('from http://localhost:8081'))
       .toBeVisible()
     await fixture
       .expect(
-        metamask.page.getByText('This site is requesting a signature for:')
+        metamask.sidepanel.getByText('This site is requesting a signature for:')
       )
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText('t1pc2ap...eelna'))
+      .expect(metamask.sidepanel.getByText('t1pc2ap...eelna'))
       .toBeVisible()
     await fixture
-      .expect(metamask.page.getByText('t1sfizu...thzwi'))
+      .expect(metamask.sidepanel.getByText('t1sfizu...thzwi'))
       .toBeVisible()
-    await metamask.page.getByTestId('confirmation-submit-button').click()
+    await metamask.sidepanel.getByTestId('confirmation-submit-button').click()
     await sign
   })
 
@@ -147,14 +147,14 @@ fixture.test.describe('JSX UI Dialogs', () => {
       })
 
       await fixture
-        .expect(metamask.page.getByText('Signature Request'))
+        .expect(metamask.sidepanel.getByText('Signature Request'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('from http://localhost:8081'))
+        .expect(metamask.sidepanel.getByText('from http://localhost:8081'))
         .toBeVisible()
-      await fixture.expect(metamask.page.getByText('0x1234')).toBeVisible()
+      await fixture.expect(metamask.sidepanel.getByText('0x1234')).toBeVisible()
 
-      await metamask.page.getByTestId('confirmation-submit-button').click()
+      await metamask.sidepanel.getByTestId('confirmation-submit-button').click()
       await req
       // await metamask.page.waitForTimeout(60000000)
     }
@@ -174,28 +174,30 @@ fixture.test.describe('JSX UI Dialogs', () => {
         return url.hash.includes('confirmation')
       })
       await fixture
-        .expect(metamask.page.getByText('Private Key Export Request'))
+        .expect(metamask.sidepanel.getByText('Private Key Export Request'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('from http://localhost:8081'))
+        .expect(metamask.sidepanel.getByText('from http://localhost:8081'))
         .toBeVisible()
-      await fixture.expect(metamask.page.getByText('Account 0')).toBeVisible()
+      await fixture
+        .expect(metamask.sidepanel.getByText('Account 0'))
+        .toBeVisible()
 
-      await metamask.page.getByTestId('confirmation-submit-button').click()
+      await metamask.sidepanel.getByTestId('confirmation-submit-button').click()
 
       await metamask.waitForDialog((url) => {
         return url.hash.includes('confirmation')
       })
       await fixture
-        .expect(metamask.page.getByText('Never disclose this key'))
+        .expect(metamask.sidepanel.getByText('Never disclose this key'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('Raw base64 encoded private key'))
+        .expect(metamask.sidepanel.getByText('Raw base64 encoded private key'))
         .toBeVisible()
       await fixture
-        .expect(metamask.page.getByText('Lotus hex encoded private key'))
+        .expect(metamask.sidepanel.getByText('Lotus hex encoded private key'))
         .toBeVisible()
-      await metamask.page.getByTestId('confirmation-submit-button').click()
+      await metamask.sidepanel.getByTestId('confirmation-submit-button').click()
       // await metamask.page.waitForTimeout(60000000)
       await req
     }
