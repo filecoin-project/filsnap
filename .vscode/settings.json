@@ -24,5 +24,6 @@
     "*.svg": "html",
     "**/wrangler.json": "jsonc",
     "biome.json": "jsonc"
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

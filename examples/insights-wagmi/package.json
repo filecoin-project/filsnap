@@ -15,16 +15,16 @@
     "iso-filecoin": "^7.4.7",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "viem": "~2.44.0",
+    "viem": "~2.48.4",
     "wagmi": "^3.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.11",
-    "@types/react": "^19.2.7",
+    "@biomejs/biome": "^2.4.14",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.2",
+    "@vitejs/plugin-react": "^6.0.1",
     "globals": "^17.0.0",
-    "typescript": "~5.9.3",
-    "vite": "^7.3.1"
+    "typescript": "~6.0.3",
+    "vite": "^8.0.10"
   }
 }
