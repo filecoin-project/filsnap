@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.2...filsnap-v1.10.3) (2026-04-20)
+
+
+### Bug Fixes
+
+* renable ucan insights ([73fdf29](https://github.com/filecoin-project/filsnap/commit/73fdf298ffb67788f939c8bff3a9a3483b595002))
+
 ## [1.10.2](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.1...filsnap-v1.10.2) (2025-11-12)
 
 

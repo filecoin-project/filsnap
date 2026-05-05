@@ -26,6 +26,7 @@ import { onSaveSettings, onSettings } from './components/homepage-settings.tsx'
 import { INTERNAL_CONFIG } from './constants.ts'
 import { handleFilFowarder } from './insights/filforwarder.tsx'
 import { handleSynapseDepositPermit } from './insights/synapse/deposit-permit.tsx'
+import { handleUcanSignature } from './insights/ucan-signature.tsx'
 import { handleUsdfc } from './insights/usdfc.tsx'
 import {
   configure,
@@ -380,7 +381,7 @@ export const onSignature: OnSignatureHandler = async ({ signature }) => {
   }
 
   const handlers = [
-    // handleUcanSignature,
+    handleUcanSignature,
     // handleBaseSignature,
     handleSynapseDepositPermit,
   ]

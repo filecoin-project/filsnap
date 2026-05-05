@@ -1,7 +1,7 @@
+import type { Chain } from '@filoz/synapse-core/chains'
+import { calibration, mainnet } from '@filoz/synapse-core/chains'
+import { formatBalance } from '@filoz/synapse-core/utils'
 import { Address, Box, Link, Row, Text } from '@metamask/snaps-sdk/jsx'
-import { formatBalance } from 'iso-filecoin-synapse'
-import { calibration, mainnet } from 'iso-filecoin-synapse/chains'
-import type { Chain } from 'iso-filecoin-synapse/types'
 import {
   decodeFunctionData,
   type Hex,

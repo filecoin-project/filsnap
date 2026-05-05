@@ -39,8 +39,6 @@ export const handleUcanSignature: SignatureInsightsHandler = (
       title = 'Invocation'
     }
 
-    // console.log('🚀 ~ handleUcanSignature ~ payload:', decoded.payload.nbf)
-
     return {
       content: (
         <Box>
