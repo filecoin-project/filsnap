@@ -100,6 +100,7 @@ export const handleUcanSignature: SignatureInsightsHandler = (
       ),
     }
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: error handling
     console.error(error)
     return null
   }

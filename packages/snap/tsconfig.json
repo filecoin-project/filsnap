@@ -12,7 +12,6 @@
     "entryPointStrategy": "resolve",
     "entryPoints": ["src/index.tsx"],
     "includeVersion": true,
-    "internalModule": "<internal>",
     "excludeExternals": true
   }
 }
