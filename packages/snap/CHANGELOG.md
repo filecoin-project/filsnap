@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.4](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.3...filsnap-v1.10.4) (2026-05-05)
+
+
+### Bug Fixes
+
+* update contract references from payments to filecoinPay in usdfc and deposit-permit insights ([f09ece8](https://github.com/filecoin-project/filsnap/commit/f09ece8e86863872765266035d017476302f6632))
+* update dependencies in package.json, adjust shasum in manifest, and refactor SVG exports ([6199e7a](https://github.com/filecoin-project/filsnap/commit/6199e7a5057c313817520e0d7b690f89b5a40fb6))
+
 ## [1.10.3](https://github.com/filecoin-project/filsnap/compare/filsnap-v1.10.2...filsnap-v1.10.3) (2026-04-20)
 
 
