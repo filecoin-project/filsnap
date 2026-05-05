@@ -28,7 +28,7 @@ export type Method<
 /**
  * Patched GetSnapsResult
  */
-type GetSnapsResult = Record<
+export type GetSnapsResult = Record<
   string,
   | {
       error: JsonRpcError

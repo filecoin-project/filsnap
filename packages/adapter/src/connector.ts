@@ -4,7 +4,7 @@ import { FilsnapAdapter } from './snap.ts'
 import type { EIP1193Provider, ProviderConnectInfo } from './types.ts'
 import { chainIdtoNetwork, checkPermissions, getProvider } from './utils.ts'
 
-type ConnectorOptions = {
+export type ConnectorOptions = {
   provider: EIP1193Provider
   onAccountsChanged?: (accounts: string[]) => void
   onChainChanged?: (network?: Network) => void
@@ -203,7 +203,7 @@ export async function syncWithProvider({
     }
   }
 
-  if (!provider || !provider.isMetaMask) {
+  if (!provider?.isMetaMask) {
     return
   }
 

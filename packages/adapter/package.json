@@ -76,7 +76,7 @@
     "filsnap": "workspace:^",
     "metamask-testing-tools": "^2.3.0",
     "type-fest": "^5.3.1",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "peerDependencies": {
     "iso-filecoin": "7.x"
