@@ -1,14 +1,30 @@
 packages:
   - packages/*
   - examples/*
-onlyBuiltDependencies:
-  - '@biomejs/biome'
-  - esbuild
-  - simple-git-hooks
-ignoredBuiltDependencies:
-  - '@swc/core'
-  - bufferutil
-  - keccak
-  - utf-8-validate
-# 10080 minutes is 7 days
+
+allowBuilds:
+  '@biomejs/biome': true
+  '@swc/core': true
+  esbuild: true
+  'simple-git-hooks': true
+
+blockExoticSubdeps: true
+
 minimumReleaseAge: 10080
+
+minimumReleaseAgeExclude:
+  - '@biomejs/biome'
+  - '@biomejs/cli-darwin-arm64'
+  - '@biomejs/cli-darwin-x64'
+  - '@biomejs/cli-linux-x64-musl'
+  - '@biomejs/cli-linux-x64'
+  - '@biomejs/cli-linux-arm64-musl'
+  - '@biomejs/cli-win32-x64'
+  - '@biomejs/cli-win32-arm64'
+  - '@biomejs/cli-linux-arm64'
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver@6.3.1
+  - chokidar@4.0.3
+  - '@swc/core@1.11.31'

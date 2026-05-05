@@ -9,7 +9,8 @@
 - Send and receive FIL from native and FEVM addresses.
 - Sign Filecoin messages and arbitrary data.
 - Send Filecoin messages and estimate gas fees.
-- Filecoin insights for FEVM transaction/signature requests.
+- Filecoin insights for FEVM transaction/signature requests and [Filecoin Onchain Cloud](https://filecoin.cloud/) operations.
+- UCAN signature insights for EIP191 signers using [iso-ucan](https://github.com/filecoin-project/iso-ucan).
 
 ## Resources
 
@@ -28,6 +29,7 @@
 - [`insights-wagmi`](https://github.com/filecoin-project/filsnap/tree/master/examples/insights-wagmi) - Wagmi example using filsnap-adapter to enable transaction insights for smart contract calls.
 - [`fil-forwarder-viem`](https://github.com/filecoin-project/filsnap/tree/master/examples/fil-forwarder-viem) - [Viem](https://viem.sh/) example to send FIL using FilForwarder contract.
 - [Fund Ring](https://github.com/FundRing/fundring/tree/main/src/routes/filfund) - Svelte dapp [dapp](https://fundring.fission.app/) that using filsnap to fund projects with Filecoin.
+- [UCAN signature insights](https://github.com/hugomrdias/iso-repo/tree/main/examples/eip191) - Example using iso-ucan to enable UCAN signature insights for EIP191 signers.
 
 Clone any example in the `/examples` folder on StackBlitz using:
 
