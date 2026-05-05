@@ -146,6 +146,8 @@ export function FilsnapProvider({
   /**
    * Handle chain changes effect
    */
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: effect dependencies are intentional
   React.useEffect(() => {
     /**
      * Handle chain changes
