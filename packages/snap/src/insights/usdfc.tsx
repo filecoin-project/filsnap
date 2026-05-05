@@ -43,7 +43,7 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
   if (
     !isAddressEqual(
       transaction.to as ViemAddress,
-      chain.contracts.payments.address
+      chain.contracts.filecoinPay.address
     )
   ) {
     return null
@@ -51,7 +51,7 @@ export const handleUsdfc: TransactionInsightsHandler = (props) => {
 
   try {
     const callData = decodeFunctionData({
-      abi: chain.contracts.payments.abi,
+      abi: chain.contracts.filecoinPay.abi,
       data: transaction.data as Hex,
     })
 

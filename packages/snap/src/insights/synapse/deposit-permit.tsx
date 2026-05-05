@@ -30,7 +30,7 @@ function shouldSkip(signature: Signature): boolean {
     return false
   }
 
-  if (message.spender !== chain.contracts.payments.address) {
+  if (message.spender !== chain.contracts.filecoinPay.address) {
     return false
   }
 
