@@ -101,7 +101,7 @@
   "dependencies": {
     "@filoz/synapse-core": "^0.4.1",
     "@metamask/key-tree": "^10.0.2",
-    "@metamask/snaps-sdk": "10.0.0",
+    "@metamask/snaps-sdk": "11.1.1",
     "dequal": "^2.0.3",
     "iso-base": "^4.3.0",
     "merge-options": "^3.0.4"
