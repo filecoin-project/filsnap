@@ -37,7 +37,7 @@ jobs:
       - run: pnpm -r --filter filsnap exec depcheck
       - run: pnpm -r --filter filsnap run test
         id: tests
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: playwright-report
